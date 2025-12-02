@@ -120,7 +120,7 @@ export default function Home() {
       </nav>
 
       {/* --- Main Hero Container --- */}
-      <main className="max-w-[1400px] mx-auto px-4 md:px-6 pb-12">
+      <main className="max-w-[1400px] h-screen mx-auto px-4 md:px-6 pb-12">
         <motion.div 
           initial={{ scale: 0.9, opacity: 0, y: 40 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
