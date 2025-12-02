@@ -1,0 +1,16 @@
+{
+  "name": "card",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/rareui/cards/card.tsx",
+      "content": "import React from 'react'\r\n\r\nexport const Card = () => {\r\n  return (\r\n    <div className='flex items-center justify-center'>\r\n        <div className=\"w-[400] h-[400] bg-pink-400\">\r\n            <h2>This i Test Card</h2>\r\n        </div>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:ui",
+      "target": "components/rareui/cards/card.tsx"
+    }
+  ]
+}

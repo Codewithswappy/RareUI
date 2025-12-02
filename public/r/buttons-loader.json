@@ -1,0 +1,16 @@
+{
+  "name": "buttons-loader",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/rareui/buttons/loader.tsx",
+      "content": "\"use client\"\r\n\r\nimport React from 'react';\r\n\r\nconst Loader = () => {\r\n  return (\r\n    <div className=\"relative rounded-full\" style={{\r\n      transform: 'scale(0.5)',\r\n    }}>\r\n      <div className=\"absolute top-1 left-0 w-[100px] h-[100px] rounded-full\" style={{\r\n        boxShadow: 'inset 0 10px 10px 0 rgba(34,197,94,0.5), inset 0 -10px 10px 0 rgba(34,197,94,0.9)'\r\n      }} />\r\n      \r\n      <svg width={100} height={100} viewBox=\"0 0 100 100\" className=\"absolute\">\r\n        <defs>\r\n          <mask id=\"clipping\">\r\n           \r\n            <polygon points=\"50,25 75,75 25,75\" fill=\"white\" className=\"blur-[7px] origin-[50%_50%] animate-[rotation_2s_linear_infinite_reverse]\" />\r\n            <polygon points=\"35,35 65,35 50,65\" fill=\"white\" className=\"blur-[7px] origin-[50%_60%] animate-[rotation_2s_linear_infinite] [animation-delay:-0.67s]\" />\r\n            <polygon points=\"35,35 65,35 50,65\" fill=\"white\" className=\"blur-[7px] origin-[40%_40%] animate-[rotation_2s_linear_infinite_reverse]\" />\r\n            <polygon points=\"35,35 65,35 50,65\" fill=\"white\" className=\"blur-[7px] origin-[40%_40%] animate-[rotation_2s_linear_infinite_reverse] [animation-delay:-1s]\" />\r\n            <polygon points=\"35,35 65,35 50,65\" fill=\"white\" className=\"blur-[7px] origin-[60%_40%] animate-[rotation_2s_linear_infinite]\" />\r\n            <polygon points=\"35,35 65,35 50,65\" fill=\"white\" className=\"blur-[7px] origin-[60%_40%] animate-[rotation_2s_linear_infinite] [animation-delay:-1.33s]\" />\r\n          </mask>\r\n        </defs>\r\n      </svg>\r\n      \r\n      <div className=\"w-[100px] h-[100px]\" style={{\r\n        background: '#22c55e',\r\n        mask: 'url(#clipping)',\r\n        WebkitMask: 'url(#clipping)'\r\n      }} />\r\n      \r\n      <style jsx>{`\r\n        @keyframes rotation {\r\n          0% { transform: rotate(0deg); }\r\n          100% { transform: rotate(360deg); }\r\n        }\r\n      `}</style>\r\n    </div>\r\n  );\r\n}\r\n\r\nexport default Loader;\r\n",
+      "type": "registry:ui",
+      "target": "components/rareui/buttons/loader.tsx"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+---
+title: Add Utilities
+description: Commonly used utilities for using RareUI
+---
+
+## Install dependencies
+
+```bash
+npm i motion clsx tailwind-merge
+```
+
+---
+
+## Add util file
+
+Create a `lib/utils.ts` file with the cn utility function:
+
+```ts
+import { ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+ 
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+```
+
+---
+
+## Next.js 15 and React 19 Framer Motion Fix
+
+If you're using Next.js 15 and React 19, you'll need to make the following changes in order to use framer motion (which is now motion), since framer motion is not compatible with React 19 yet.
+
+### Using framer-motion
+
+```json
+{
+  "dependencies": {
+    "framer-motion": "^12.0.0-alpha.1",
+    "next": "15.0.3",
+    "react": "19.0.0-rc-66855b96-20241106",
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "tailwind-merge": "^2.5.5"
+  },
+  "overrides": {
+    "framer-motion": {
+      "react": "19.0.0-rc-66855b96-20241106",
+      "react-dom": "19.0.0-rc-66855b96-20241106"
+    }
+  }
+}
+```
+
+### Using motion (recommended)
+
+If you're using motion instead of framer-motion, you can make the following changes:
+
+```json
+{
+  "dependencies": {
+    "motion": "^12.0.0-alpha.1",
+    "next": "15.0.3",
+    "react": "19.0.0-rc-66855b96-20241106",
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "tailwind-merge": "^2.5.5"
+  },
+  "overrides": {
+    "motion": {
+      "react": "19.0.0-rc-66855b96-20241106",
+      "react-dom": "19.0.0-rc-66855b96-20241106"
+    }
+  }
+}
+```
+
+> **Note**: The `overrides` field ensures that motion/framer-motion uses the correct React version to avoid compatibility issues.

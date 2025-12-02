@@ -1,0 +1,13 @@
+{
+  "name": "@rareui",
+  "components": [
+    "btn-01",
+    "glass-shimmer-button",
+    "loader",
+    "neumorphism3DButton",
+    "card",
+    "card2",
+    "modal",
+    "search-context"
+  ]
+}

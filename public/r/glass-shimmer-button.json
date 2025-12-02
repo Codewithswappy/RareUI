@@ -1,0 +1,16 @@
+{
+  "name": "glass-shimmer-button",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/rareui/buttons/glass-shimmer-button.tsx",
+      "content": "\"use client\"\r\n\r\nimport type React from \"react\"\r\n\r\nimport { useState } from \"react\"\r\n\r\ninterface GlassShimmerButtonProps {\r\n  children: React.ReactNode\r\n  onClick?: () => void\r\n}\r\n\r\nexport function GlassShimmerButton({ children, onClick }: GlassShimmerButtonProps) {\r\n  const [isHovered, setIsHovered] = useState(false)\r\n\r\n  return (\r\n    <button\r\n      onClick={onClick}\r\n      onMouseEnter={() => setIsHovered(true)}\r\n      onMouseLeave={() => setIsHovered(false)}\r\n      className=\"relative inline-block px-5 py-2.5 text-base font-medium text-black bg-black border border-neutral-400 rounded overflow-hidden transition-all duration-300 ease-in-out cursor-pointer\"\r\n    >\r\n      <div\r\n        className=\"absolute inset-0 pointer-events-none\"\r\n        style={{\r\n          background: \"white\",\r\n          transform: isHovered\r\n            ? \"perspective(5px) rotateX(0deg) rotateY(0deg)\"\r\n            : \"perspective(5px) rotateX(2deg) rotateY(2deg)\",\r\n          transition: \"transform 0.3s ease-out\",\r\n        }}\r\n      />\r\n\r\n      {/* Text content */}\r\n      <span className=\"relative z-10\">Hover Me</span>\r\n    </button>\r\n  )\r\n}\r\n",
+      "type": "registry:ui",
+      "target": "components/rareui/buttons/glass-shimmer-button.tsx"
+    }
+  ]
+}

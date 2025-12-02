@@ -1,0 +1,75 @@
+export const sidebarData = [
+  {
+    "title": "Follow for updates",
+    "items": [
+      {
+        "title": "Twitter @swappy",
+        "href": "/"
+      }
+    ]
+  },
+  {
+    "title": "Installation",
+    "items": [
+      {
+        "title": "Install Next.js",
+        "href": "/docs/installation/install-nextjs"
+      },
+      {
+        "title": "Install Tailwind CSS",
+        "href": "/docs/installation/install-tailwind"
+      },
+      {
+        "title": "Add utilities",
+        "href": "/docs/installation/add-utilities"
+      },
+      {
+        "title": "CLI",
+        "href": "/docs/installation/cli"
+      }
+    ]
+  },
+  {
+    "title": "Buttons",
+    "items": [
+      {
+        "title": "Btn 01",
+        "href": "/docs/components/buttons/btn-01"
+      },
+      {
+        "title": "Glass Shimmer Button",
+        "href": "/docs/components/buttons/glass-shimmer-button"
+      },
+      {
+        "title": "Loader",
+        "href": "/docs/components/buttons/loader"
+      },
+      {
+        "title": "Neumorphism3DButton",
+        "href": "/docs/components/buttons/neumorphism3DButton"
+      }
+    ]
+  },
+  {
+    "title": "Cards",
+    "items": [
+      {
+        "title": "Card",
+        "href": "/docs/components/cards/card"
+      },
+      {
+        "title": "Card2",
+        "href": "/docs/components/cards/card2"
+      }
+    ]
+  },
+  {
+    "title": "Overlays",
+    "items": [
+      {
+        "title": "Modal",
+        "href": "/docs/components/overlays/modal"
+      }
+    ]
+  }
+];

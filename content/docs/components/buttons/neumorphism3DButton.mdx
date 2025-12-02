@@ -1,0 +1,116 @@
+---
+title: "Btn 01"
+description: "Auto-generated documentation for the Btn 01 component."
+---
+
+import {Neumorphism3DButton} from "@/components/rareui/buttons/neumorphism3DButton";
+import { Preview } from "@/components/mdx/preview";
+
+<Preview 
+  cliCommand="npx shadcn@latest add neumorphism3DButton"
+  code={`"use client"
+
+import React from "react"
+
+interface Neumorphism3DButtonProps {
+  children?: React.ReactNode
+  onClick?: () => void
+  disabled?: boolean
+}
+
+export const Neumorphism3DButton = ({ children = "Click Me", onClick, disabled }: Neumorphism3DButtonProps) => {
+  const [isActive, setIsActive] = React.useState(false)
+
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      onMouseDown={() => setIsActive(true)}
+      onMouseUp={() => setIsActive(false)}
+      onMouseLeave={() => setIsActive(false)}
+      className="relative rounded-full cursor-pointer outline-none transition-all duration-300 -webkit-tap-highlight-color-transparent"
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.75)",
+        boxShadow: \`
+          -0.15em -0.15em 0.15em -0.075em rgba(5, 5, 5, 0.25),
+          0.0375em 0.0375em 0.0675em 0 rgba(5, 5, 5, 0.1)
+        \`,
+      }}
+    >
+      <div
+        className="absolute inset-0 rounded-full pointer-events-none"
+        style={{
+          zIndex: 0,
+          width: "calc(100% + 0.3em)",
+          height: "calc(100% + 0.3em)",
+          top: "-0.15em",
+          left: "-0.15em",
+          background: "linear-gradient(-135deg, rgba(5, 5, 5, 0.5), transparent 20%, transparent 100%)",
+          filter: "blur(0.0125em)",
+          opacity: 0.25,
+          mixBlendMode: "multiply",
+        }}
+      />
+      <div
+        className="relative rounded-full transition-all duration-300"
+        style={{
+          zIndex: 1,
+          boxShadow: isActive
+            ? "0 0 0 0 rgba(5, 5, 5, 1), 0 0 0 0 rgba(5, 5, 5, 0.5), 0 0 0 0 rgba(5, 5, 5, 0.25)"
+            : "0 0.05em 0.05em -0.01em rgba(5, 5, 5, 1), 0 0.01em 0.01em -0.01em rgba(5, 5, 5, 0.5), 0.15em 0.3em 0.1em -0.01em rgba(5, 5, 5, 0.25)",
+        }}
+      >
+        <div
+          className="relative rounded-full px-8 py-4 transition-all duration-250 overflow-hidden"
+          style={{
+            zIndex: 1,
+            background: "linear-gradient(135deg, rgba(230, 230, 230, 1), rgba(180, 180, 180, 1))",
+            clipPath: isActive ? "inset(1px 1px 1px 1px round 100em)" : "inset(0 0 0 0 round 100em)",
+            transform: isActive ? "scale(0.975)" : "scale(1)",
+            boxShadow: isActive
+              ? \`
+                0.1em 0.15em 0.05em 0 inset rgba(5, 5, 5, 0.75),
+                -0.025em -0.03em 0.05em 0.025em inset rgba(5, 5, 5, 0.5),
+                0.25em 0.25em 0.2em 0 inset rgba(5, 5, 5, 0.5),
+                0 0 0.05em 0.5em inset rgba(255, 255, 255, 0.15),
+                0 0 0 0 inset rgba(255, 255, 255, 1),
+                0.12em 0.12em 0.12em inset rgba(255, 255, 255, 0.25),
+                -0.075em -0.12em 0.2em 0.1em inset rgba(5, 5, 5, 0.25)
+              \`
+              : \`
+                0 0 0 0 inset rgba(5, 5, 5, 0.1),
+                -0.05em -0.05em 0.05em 0 inset rgba(5, 5, 5, 0.25),
+                0 0 0 0 inset rgba(5, 5, 5, 0.1),
+                0 0 0.05em 0.2em inset rgba(255, 255, 255, 0.25),
+                0.025em 0.05em 0.1em 0 inset rgba(255, 255, 255, 1),
+                0.12em 0.12em 0.12em inset rgba(255, 255, 255, 0.25),
+                -0.075em -0.25em 0.25em 0.1em inset rgba(5, 5, 5, 0.25)
+              \`,
+          }}
+        >
+          <span
+            className="relative block font-medium text-sm tracking-tight select-none transition-transform duration-250"
+            style={{
+              zIndex: 4,
+              color: "transparent",
+              backgroundImage: "linear-gradient(135deg, rgba(25, 25, 25, 1), rgba(75, 75, 75, 1))",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              transform: isActive ? "scale(0.975)" : "scale(1)",
+              textShadow: "rgba(0, 0, 0, 0.1) 0 0 0.1em",
+            }}
+          >
+            {children}
+          </span>
+        </div>
+      </div>
+    </button>
+  )
+}`}
+>
+  <Neumorphism3DButton />
+</Preview>
+
+
+
+

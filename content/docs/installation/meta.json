@@ -1,0 +1,4 @@
+{
+  "title": "Installation",
+  "pages": ["install-nextjs", "install-tailwind", "add-utilities", "cli"]
+}

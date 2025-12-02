@@ -1,0 +1,16 @@
+{
+  "name": "buttons-btn-01",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/rareui/buttons/btn-01.tsx",
+      "content": "import React from 'react'\r\n\r\nexport const Btn01 = () => {\r\n  return (\r\n    <div className='flex items-center justify-center'>\r\n        <button className='bg-green-300 text-black rounded-2xl hover:bg-green-800 hover:text-white px-6 py-2'>\r\n            Hello \r\n        </button>\r\n    </div>\r\n  )\r\n}\r\n",
+      "type": "registry:ui",
+      "target": "components/rareui/buttons/btn-01.tsx"
+    }
+  ]
+}
