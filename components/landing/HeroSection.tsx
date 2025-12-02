@@ -267,12 +267,13 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 0.8 }}
                 className="flex items-center gap-6"
               >
-                <LiquidButton 
+                 <Link href="/docs"><LiquidButton 
                   text="Browse Components" 
                   backgroundColor={isDark ? "bg-white" : "bg-black"}
                   textColor={isDark ? "text-black" : "text-white"}
                   className="!p-0" // Override padding wrapper
-                />
+                /></Link>
+                
               </motion.div>
 
             </div>
