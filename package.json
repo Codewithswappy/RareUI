@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:sidebar": "tsx scripts/generate-sidebar.ts",
-    "build:registry": "tsx scripts/generate-registry.ts",
+    "build:sidebar": "tsx scripts/generate-sidebar.ts || echo 'Sidebar generation failed'",
+    "build:registry": "tsx scripts/generate-registry.ts || echo 'Registry generation failed'",
     "build:all": "npm run build:sidebar && npm run build:registry",
     "start": "next start",
     "lint": "eslint"

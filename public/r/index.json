@@ -3,10 +3,12 @@
   "components": [
     "btn-01",
     "glass-shimmer-button",
+    "LiquidButton",
     "loader",
     "neumorphism3DButton",
     "card",
     "card2",
+    "Card3D",
     "modal",
     "search-context"
   ]
