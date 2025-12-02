@@ -120,12 +120,12 @@ export default function Home() {
       </nav>
 
       {/* --- Main Hero Container --- */}
-      <main className="max-w-[1400px] h-screen mx-auto px-4 md:px-6 pb-12">
+      <main className="max-w-[1400px]  mx-auto px-4 md:px-6 pb-12">
         <motion.div 
           initial={{ scale: 0.9, opacity: 0, y: 40 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className={`rounded-[2.5rem] overflow-hidden min-h-[500px] lg:min-h-[650px] relative transition-colors duration-300 ${
+          className={`rounded-[2.5rem] overflow-hidden min-h-[600px] lg:min-h-[650px] relative transition-colors duration-300 ${
           isDark ? 'bg-neutral-800' : 'bg-[#E5E5E5]'
         }`}>
           
