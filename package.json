@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack",
-    "build": "next build --webpack",
+    "dev": "next dev",
+    "build": "next build",
     "build:sidebar": "tsx scripts/generate-sidebar.ts",
     "build:registry": "tsx scripts/generate-registry.ts",
     "build:all": "npm run build:sidebar && npm run build:registry",
