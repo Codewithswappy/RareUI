@@ -4,9 +4,10 @@ import path from 'path';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { component: string[] } }
+  { params }: { params: Promise<{ component: string[] }> }
 ) {
-  const name = params.component.join('/');
+  const { component } = await params;
+  const name = component.join('/');
   const file = path.join(process.cwd(), 'public/r', `${name}.json`);
 
   if (!fs.existsSync(file)) {
