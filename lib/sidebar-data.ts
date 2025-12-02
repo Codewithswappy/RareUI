@@ -41,6 +41,10 @@ export const sidebarData = [
         "href": "/docs/components/buttons/glass-shimmer-button"
       },
       {
+        "title": "Liquid Button",
+        "href": "/docs/components/buttons/liquid-button"
+      },
+      {
         "title": "Loader",
         "href": "/docs/components/buttons/loader"
       },

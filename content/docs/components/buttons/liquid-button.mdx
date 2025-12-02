@@ -1,0 +1,184 @@
+---
+title: Liquid Button
+description: A button with a liquid gooey effect and floating drops.
+---
+
+import LiquidButton from "@/components/rareui/buttons/LiquidButton";
+import { Preview } from "@/components/mdx/preview";
+
+## Preview
+
+<Preview
+  cliCommand="npx shadcn@latest add @rareui/liquid-button"
+  code={`'use client'
+
+import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from 'motion/react'
+import { clsx, type ClassValue } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+import { useRef } from 'react'
+
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
+export default function LiquidButton({
+  text = "Hover me",
+  className,
+  backgroundColor = "bg-neutral-50",
+  textColor = "text-neutral-950"
+}: {
+  text?: string
+  className?: string
+  backgroundColor?: string
+  textColor?: string
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+  const mouseX = useMotionValue(0)
+  const springX = useSpring(mouseX, { stiffness: 300, damping: 30 })
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!ref.current) return
+    const rect = ref.current.getBoundingClientRect()
+    const x = e.clientX - rect.left - rect.width / 2
+    mouseX.set(x)
+  }
+
+  const handleMouseLeave = () => {
+    mouseX.set(0)
+  }
+
+  return (
+    <div
+      ref={ref}
+      className={cn("relative inline-block p-4", className)}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* SVG Filter for the Gooey Effect */}
+      <svg className="absolute w-0 h-0">
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+            <feColorMatrix
+              in="blur"
+              mode="matrix"
+              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+              result="goo"
+            />
+            <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+          </filter>
+        </defs>
+      </svg>
+
+      {/* Container with the filter applied */}
+      <motion.div
+        className="relative z-10 inline-block"
+        style={{ filter: 'url(#goo)' }}
+        whileHover="hover"
+        initial="initial"
+      >
+        {/* The Main Button */}
+        <motion.button
+          className={cn(
+            "relative z-20 px-8 py-2 md:px-8 md:py-2 font-bold rounded-lg text-base md:text-xl outline-none overflow-hidden tracking-wide cursor-pointer",
+            backgroundColor,
+            textColor
+          )}
+          variants={{
+            hover: { scale: 1.02 },
+            initial: { scale: 1 }
+          }}
+          transition={{ type: "spring", stiffness: 300, damping: 15 }}
+        >
+            <span className="relative z-10">{text}</span>
+          <div className="absolute inset-0 rounded-full bg-transparent opacity-50" />
+        </motion.button>
+
+        {/* Drops */}
+        <Drop left="10%" size="w-3 h-3 md:w-4 md:h-4" delay={0.1} duration={2.1} mouseX={springX} backgroundColor={backgroundColor} />
+        <Drop left="20%" size="w-4 h-4 md:w-5 md:h-5" delay={0} duration={2} mouseX={springX} backgroundColor={backgroundColor} />
+        <Drop left="30%" size="w-2 h-2 md:w-3 md:h-3" delay={0.6} duration={2.5} mouseX={springX} backgroundColor={backgroundColor} />
+        <Drop left="40%" size="w-5 h-5 md:w-6 md:h-6" delay={0.8} duration={2.4} mouseX={springX} backgroundColor={backgroundColor} />
+        <Drop left="50%" size="w-3 h-3 md:w-4 md:h-4" delay={0.4} duration={1.8} mouseX={springX} backgroundColor={backgroundColor} />
+        <Drop left="55%" size="w-2 h-2 md:w-3 md:h-3" delay={1.5} duration={2.7} mouseX={springX} backgroundColor={backgroundColor} />
+        <Drop left="65%" size="w-6 h-6 md:w-7 md:h-7" delay={1.2} duration={2.6} mouseX={springX} backgroundColor={backgroundColor} />
+        <Drop left="75%" size="w-3 h-3 md:w-4 md:h-4" delay={0.9} duration={2.3} mouseX={springX} backgroundColor={backgroundColor} />
+        <Drop left="80%" size="w-4 h-4 md:w-5 md:h-5" delay={0.2} duration={2.2} mouseX={springX} backgroundColor={backgroundColor} />
+        <Drop left="90%" size="w-3 h-3 md:w-4 md:h-4" delay={0.5} duration={2.8} mouseX={springX} backgroundColor={backgroundColor} />
+
+      </motion.div>
+    </div>
+  )
+}
+
+function Drop({
+    left,
+    size,
+    delay,
+    duration,
+    mouseX,
+    backgroundColor
+}: {
+    left: string,
+    size: string,
+    delay: number,
+    duration: number,
+    mouseX: MotionValue,
+    backgroundColor: string
+}) {
+    // Randomize the movement factor slightly based on duration to give depth
+    const factor = duration * 10
+    const x = useTransform(mouseX, [-200, 200], [-factor, factor])
+
+    return (
+        <motion.div
+          className={cn("absolute bottom-4 rounded-full -z-10 will-change-transform", size, backgroundColor)}
+          style={{ left, x }}
+          variants={{
+            initial: { y: 0, scale: 1, opacity: 1 },
+            hover: {
+              y: [0, 20, 140],
+              scale: [1, 1.1, 0],
+              opacity: 1,
+              transition: {
+                duration: duration,
+                repeat: Infinity,
+                ease: ["easeIn", "easeIn"],
+                times: [0, 0.3, 1], // 0-30%: Form/Hang, 30-100%: Fall
+                delay: delay
+              }
+            }
+          }}
+        />
+    )
+}
+`}>
+  <div className="flex items-center justify-center h-40">
+    <LiquidButton text="Hover me" />
+  </div>
+</Preview>
+
+## Usage
+
+```tsx
+import LiquidButton from "@/components/rareui/buttons/LiquidButton";
+
+export default function App() {
+  return (
+    <LiquidButton
+      text="Hover me"
+      backgroundColor="bg-blue-500"
+      textColor="text-white"
+    />
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | `"Hover me"` | The text to display inside the button. |
+| `className` | `string` | `-` | Additional CSS classes to apply to the container. |
+| `backgroundColor` | `string` | `"bg-neutral-50"` | Tailwind class for the background color. |
+| `textColor` | `string` | `"text-neutral-950"` | Tailwind class for the text color. |
