@@ -2,10 +2,20 @@
 
 import Link from "next/link";
 import { sidebarData } from "@/lib/sidebar-data";
-import { Btn01 } from "@/components/rareui/buttons/btn-01";
+import LiquidButton from "@/components/rareui/buttons/LiquidButton";
+import SoftButton from "@/components/rareui/buttons/SoftButton";
+import { GlassShimmerButton } from "@/components/rareui/buttons/glass-shimmer-button";
+import Loader from "@/components/rareui/buttons/loader";
+import { Neumorphism3DButton } from "@/components/rareui/buttons/neumorphism3DButton";
+import ParticleCard from "@/components/rareui/cards/ParticleCard";
 
 const componentMap: Record<string, any> = {
-  "/docs/components/buttons/btn-01": Btn01,
+  "/docs/components/buttons/glass-shimmer-button": () => <GlassShimmerButton>Shimmer</GlassShimmerButton>,
+  "/docs/components/buttons/liquid-button": () => <LiquidButton text="Liquid" backgroundColor="bg-neutral-900 dark:bg-neutral-100" textColor="text-white dark:text-black" />,
+  "/docs/components/buttons/loader": Loader,
+  "/docs/components/buttons/neumorphism3DButton": () => <Neumorphism3DButton>3D Button</Neumorphism3DButton>,
+  "/docs/components/buttons/soft-button": SoftButton,
+  "/docs/components/cards/particle-card": () => <div className="scale-[0.4] origin-center"><ParticleCard /></div>,
 };
 
 export function ComponentsGrid() {
@@ -25,7 +35,7 @@ export function ComponentsGrid() {
               return (
                 <div key={itemIndex}>
                   <Link href={item.href} className="block border border-border rounded-md overflow-hidden hover:border-primary/50 transition-colors no-underline">
-                    <div className="aspect-square bg-card flex items-center justify-center p-4 pointer-events-none">
+                    <div className="aspect-square bg-card flex items-center justify-center p-4">
                       {Component ? <Component /> : <div className="text-muted-foreground">Preview</div>}
                     </div>
                   </Link>

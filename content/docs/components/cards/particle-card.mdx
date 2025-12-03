@@ -1,0 +1,97 @@
+---
+title: Particle Card
+description: A card component with an interactive particle explosion effect on hover.
+---
+
+import { Preview } from "@/components/mdx/preview";
+import ParticleCard from "@/components/rareui/cards/ParticleCard";
+
+<Preview
+  code={`'use client'
+
+import { useMemo, useState, useRef, useEffect } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
+import { clsx, type ClassValue } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
+interface ParticleData {
+  x: number
+  y: number
+  posX: number
+  posY: number
+  randX: number
+  randY: number
+  rotate: number
+  scale: number
+  delay: number
+  blur: number
+}
+
+interface ParticleCardProps {
+  name?: string
+  role?: string
+  bio?: string
+  img?: string
+  tags?: string[]
+  cols?: number
+  rows?: number
+}
+
+const Particle = ({
+  p,
+  active,
+  img,
+  cols,
+  rows,
+}: {
+  p: ParticleData
+  active: boolean
+  img: string
+            "absolute bottom-0 left-0 right-0 p-8 transition-all duration-500 transform",
+            active ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
+          )}>
+            <h2 className="text-3xl font-bold text-white mb-1">{name}</h2>
+            <p className="text-white/90 font-medium">{role}</p>
+          </div>
+
+          {/* Particle Grid */}
+          <div className="absolute inset-0 w-full h-full overflow-hidden">
+            {particles.map((p, i) => (
+              <Particle
+                key={i}
+                p={p}
+                active={active}
+                img={img}
+                cols={cols}
+                rows={rows}
+              />
+            ))}
+          </div>
+        </div>
+
+      </motion.div>
+    </div>
+  )
+}`}
+  cliCommand="npx rareui add particle-card"
+>
+  <div className="[&_img]:m-0 [&_img]:p-0 [&_img]:block [&_h3]:m-0 [&_p]:m-0 [&_button]:block [&_button]:visible">
+    <ParticleCard />
+  </div>
+</Preview>
+
+## Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `name` | `string` | `"Sam Jenkins"` | The name displayed on the card. |
+| `role` | `string` | `"Product Designer"` | The role or title displayed. |
+| `bio` | `string` | `...` | The biography text. |
+| `img` | `string` | `Unsplash URL` | The URL of the background image. |
+| `tags` | `string[]` | `['UI/UX', ...]` | An array of tags to display. |
+| `cols` | `number` | `20` | Number of columns for the particle grid. |
+| `rows` | `number` | `24` | Number of rows for the particle grid. |

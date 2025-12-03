@@ -284,7 +284,7 @@ Ensure it's fully functional, responsive, and matches the original design exactl
       {/* Content Container */}
       <div className="rounded-xl border border-border backdrop-blur-sm overflow-hidden w-full bg-white dark:bg-card">
         {activeTab === "preview" ? (
-          <div className="relative flex w-full items-center justify-center p-8 sm:p-12 md:p-16 min-h-[300px] overflow-x-auto  dark:bg-transparent">
+          <div className="relative flex w-full items-center justify-center p-8 sm:p-12 md:p-16 min-h-[300px] overflow-x-auto bg-neutral-100 dark:bg-neutral-900">
             {children}
           </div>
         ) : (

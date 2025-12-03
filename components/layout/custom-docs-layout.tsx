@@ -67,7 +67,7 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
               <Image
                 src="/RareUI_Logo.svg"
                 alt="RareUI"
-                className="h-16 w-auto"
+                className="h-16 w-auto invert dark:invert-0"
                 width={80}
                 height={80}
               />

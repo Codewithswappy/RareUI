@@ -1,15 +1,12 @@
 ---
 title: Liquid Button
-description: A button with a liquid gooey effect and floating drops.
+description: A button with a liquid gooey effect on hover.
 ---
 
 import LiquidButton from "@/components/rareui/buttons/LiquidButton";
 import { Preview } from "@/components/mdx/preview";
 
-## Preview
-
 <Preview
-  cliCommand="npx shadcn@latest add @rareui/liquid-button"
   code={`'use client'
 
 import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from 'motion/react'
@@ -21,12 +18,12 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export default function LiquidButton({
+export default function LiquidButton({ 
   text = "Hover me",
   className,
   backgroundColor = "bg-neutral-50",
   textColor = "text-neutral-950"
-}: {
+}: { 
   text?: string
   className?: string
   backgroundColor?: string
@@ -47,8 +44,10 @@ export default function LiquidButton({
     mouseX.set(0)
   }
 
+
+
   return (
-    <div
+    <div 
       ref={ref}
       className={cn("relative inline-block p-4", className)}
       onMouseMove={handleMouseMove}
@@ -59,11 +58,11 @@ export default function LiquidButton({
         <defs>
           <filter id="goo">
             <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-            <feColorMatrix
-              in="blur"
-              mode="matrix"
-              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
-              result="goo"
+            <feColorMatrix 
+              in="blur" 
+              mode="matrix" 
+              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" 
+              result="goo" 
             />
             <feComposite in="SourceGraphic" in2="goo" operator="atop" />
           </filter>
@@ -71,8 +70,8 @@ export default function LiquidButton({
       </svg>
 
       {/* Container with the filter applied */}
-      <motion.div
-        className="relative z-10 inline-block"
+      <motion.div 
+        className="relative z-10 inline-block" 
         style={{ filter: 'url(#goo)' }}
         whileHover="hover"
         initial="initial"
@@ -105,23 +104,23 @@ export default function LiquidButton({
         <Drop left="75%" size="w-3 h-3 md:w-4 md:h-4" delay={0.9} duration={2.3} mouseX={springX} backgroundColor={backgroundColor} />
         <Drop left="80%" size="w-4 h-4 md:w-5 md:h-5" delay={0.2} duration={2.2} mouseX={springX} backgroundColor={backgroundColor} />
         <Drop left="90%" size="w-3 h-3 md:w-4 md:h-4" delay={0.5} duration={2.8} mouseX={springX} backgroundColor={backgroundColor} />
-
+        
       </motion.div>
     </div>
   )
 }
 
-function Drop({
-    left,
-    size,
-    delay,
+function Drop({ 
+    left, 
+    size, 
+    delay, 
     duration,
     mouseX,
     backgroundColor
-}: {
-    left: string,
-    size: string,
-    delay: number,
+}: { 
+    left: string, 
+    size: string, 
+    delay: number, 
     duration: number,
     mouseX: MotionValue,
     backgroundColor: string
@@ -136,49 +135,32 @@ function Drop({
           style={{ left, x }}
           variants={{
             initial: { y: 0, scale: 1, opacity: 1 },
-            hover: {
-              y: [0, 20, 140],
-              scale: [1, 1.1, 0],
+            hover: { 
+              y: [0, 20, 140], 
+              scale: [1, 1.1, 0], 
               opacity: 1,
-              transition: {
-                duration: duration,
-                repeat: Infinity,
-                ease: ["easeIn", "easeIn"],
+              transition: { 
+                duration: duration, 
+                repeat: Infinity, 
+                ease: ["easeIn", "easeIn"], 
                 times: [0, 0.3, 1], // 0-30%: Form/Hang, 30-100%: Fall
-                delay: delay
-              }
+                delay: delay 
+              } 
             }
           }}
         />
     )
-}
-`}>
-  <div className="flex items-center justify-center h-40">
-    <LiquidButton text="Hover me" />
-  </div>
+}`}
+  cliCommand="npx rareui add liquid-button"
+>
+  <LiquidButton />
 </Preview>
-
-## Usage
-
-```tsx
-import LiquidButton from "@/components/rareui/buttons/LiquidButton";
-
-export default function App() {
-  return (
-    <LiquidButton
-      text="Hover me"
-      backgroundColor="bg-blue-500"
-      textColor="text-white"
-    />
-  );
-}
-```
 
 ## Props
 
 | Prop | Type | Default | Description |
-| --- | --- | --- | --- |
+| :--- | :--- | :--- | :--- |
 | `text` | `string` | `"Hover me"` | The text to display inside the button. |
-| `className` | `string` | `-` | Additional CSS classes to apply to the container. |
+| `className` | `string` | `-` | Additional CSS classes for the container. |
 | `backgroundColor` | `string` | `"bg-neutral-50"` | Tailwind class for the background color. |
 | `textColor` | `string` | `"text-neutral-950"` | Tailwind class for the text color. |

@@ -1,13 +1,12 @@
 ---
-title: "Btn 01"
-description: "Auto-generated documentation for the Btn 01 component."
+title: Neumorphism 3D Button
+description: A 3D neumorphic button with realistic shadows and press effects.
 ---
 
-import {Neumorphism3DButton} from "@/components/rareui/buttons/neumorphism3DButton";
 import { Preview } from "@/components/mdx/preview";
+import { Neumorphism3DButton } from "@/components/rareui/buttons/neumorphism3DButton";
 
-<Preview 
-  cliCommand="npx shadcn@latest add neumorphism3DButton"
+<Preview
   code={`"use client"
 
 import React from "react"
@@ -37,6 +36,7 @@ export const Neumorphism3DButton = ({ children = "Click Me", onClick, disabled }
         \`,
       }}
     >
+      {/* Pseudo-element ::after effect */}
       <div
         className="absolute inset-0 rounded-full pointer-events-none"
         style={{
@@ -51,6 +51,8 @@ export const Neumorphism3DButton = ({ children = "Click Me", onClick, disabled }
           mixBlendMode: "multiply",
         }}
       />
+
+      {/* Button outer wrapper */}
       <div
         className="relative rounded-full transition-all duration-300"
         style={{
@@ -60,8 +62,9 @@ export const Neumorphism3DButton = ({ children = "Click Me", onClick, disabled }
             : "0 0.05em 0.05em -0.01em rgba(5, 5, 5, 1), 0 0.01em 0.01em -0.01em rgba(5, 5, 5, 0.5), 0.15em 0.3em 0.1em -0.01em rgba(5, 5, 5, 0.25)",
         }}
       >
+        {/* Button inner wrapper */}
         <div
-          className="relative rounded-full px-8 py-4 transition-all duration-250 overflow-hidden"
+          className="relative rounded-full px-6 py-4 transition-all duration-250 overflow-hidden"
           style={{
             zIndex: 1,
             background: "linear-gradient(135deg, rgba(230, 230, 230, 1), rgba(180, 180, 180, 1))",
@@ -88,8 +91,9 @@ export const Neumorphism3DButton = ({ children = "Click Me", onClick, disabled }
               \`,
           }}
         >
+          {/* Text with gradient clip */}
           <span
-            className="relative block font-medium text-sm tracking-tight select-none transition-transform duration-250"
+            className="relative rounded-full  block font-medium text-sm tracking-tight select-none transition-transform duration-250"
             style={{
               zIndex: 4,
               color: "transparent",
@@ -107,10 +111,15 @@ export const Neumorphism3DButton = ({ children = "Click Me", onClick, disabled }
     </button>
   )
 }`}
+  cliCommand="npx rareui add neumorphism-3d-button"
 >
-  <Neumorphism3DButton />
+  <Neumorphism3DButton>Click Me</Neumorphism3DButton>
 </Preview>
 
+## Props
 
-
-
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `children` | `React.ReactNode` | `"Click Me"` | The content to display inside the button. |
+| `onClick` | `() => void` | `-` | Callback function when the button is clicked. |
+| `disabled` | `boolean` | `false` | Whether the button is disabled. |

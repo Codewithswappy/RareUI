@@ -1,12 +1,66 @@
 ---
 title: CLI
-description: RareUI command line interface
+description: Use the CLI to add components to your project.
 ---
 
-# CLI
+The RareUI CLI is the fastest way to add components to your project. It handles dependencies, configuration, and placement for you.
 
-Use the RareUI CLI to quickly add components to your project.
+## Init
+
+Run the `init` command to initialize RareUI in your project. This will create a `components.json` file and configure your project for the best experience.
 
 ```bash
-npx rareui-cli add button
+npx rareui init
 ```
+
+## Add
+
+Use the `add` command to add components to your project. This command downloads the component code and places it in your `components` directory, installing any necessary dependencies automatically.
+
+```bash
+npx rareui add [component]
+```
+
+### Examples
+
+Add a single component:
+
+```bash
+npx rareui add particle-card
+```
+
+Add multiple components at once:
+
+```bash
+npx rareui add particle-card liquid-button
+```
+
+View the list of available components:
+
+```bash
+npx rareui add
+```
+
+## Options
+
+| Option | Description |
+| :--- | :--- |
+| `-y`, `--yes` | Skip confirmation prompt. |
+| `-o`, `--overwrite` | Overwrite existing files. |
+| `-c`, `--cwd <cwd>` | The working directory. |
+| `-p`, `--path <path>` | The path to install the component to. |
+| `-h`, `--help` | Display help for command. |
+
+## FAQ
+
+<details>
+<summary>Does it work with other frameworks?</summary>
+
+Currently, the CLI is optimized for Next.js and React projects using Tailwind CSS. Support for other frameworks is planned.
+</details>
+
+<details>
+<summary>Can I use it without the CLI?</summary>
+
+Yes! You can manually copy and paste the code from the documentation into your project. The CLI just automates this process.
+</details>

@@ -33,10 +33,6 @@
     "title": "Buttons",
     "items": [
       {
-        "title": "Btn 01",
-        "href": "/docs/components/buttons/btn-01"
-      },
-      {
         "title": "Glass Shimmer Button",
         "href": "/docs/components/buttons/glass-shimmer-button"
       },
@@ -51,6 +47,10 @@
       {
         "title": "Neumorphism3DButton",
         "href": "/docs/components/buttons/neumorphism3DButton"
+      },
+      {
+        "title": "Soft Button",
+        "href": "/docs/components/buttons/soft-button"
       }
     ]
   },
@@ -58,21 +58,8 @@
     "title": "Cards",
     "items": [
       {
-        "title": "Card",
-        "href": "/docs/components/cards/card"
-      },
-      {
-        "title": "Card2",
-        "href": "/docs/components/cards/card2"
-      }
-    ]
-  },
-  {
-    "title": "Overlays",
-    "items": [
-      {
-        "title": "Modal",
-        "href": "/docs/components/overlays/modal"
+        "title": "Particle Card",
+        "href": "/docs/components/cards/particle-card"
       }
     ]
   }

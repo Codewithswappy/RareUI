@@ -2,7 +2,7 @@
 
 import { useSearchContext } from '@/components/rareui/search-context';
 import { useEffect } from 'react';
-import Loader from '../rareui/buttons/loader';
+
 
 export function CustomSearchBar() {
   const { enabled, setOpenSearch } = useSearchContext();
@@ -23,19 +23,29 @@ export function CustomSearchBar() {
   return (
     <button
       onClick={() => setOpenSearch(true)}
-      className="relative inline-flex items-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent text-muted-foreground hover:text-accent-foreground px-3 py-2 justify-start rounded-full text-sm font-normal shadow-none h-10 w-64"
+      className="relative inline-flex items-center gap-2 whitespace-nowrap transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 dark:border-neutral-800 bg-neutral-100/50 dark:bg-neutral-900/50 hover:bg-neutral-200/50 dark:hover:bg-neutral-800/50 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-200 px-4 py-2 justify-start rounded-xl text-sm font-normal shadow-sm hover:shadow-md h-10 w-64 backdrop-blur-md group"
       type="button"
     >
-      <div className="w-6 h-6 flex items-center justify-center">
-        <div className="scale-[0.5]">
-          <Loader />
-        </div>
-      </div>
-      <span className="hidden lg:inline-flex">Search Components</span>
-      <span className="inline-flex lg:hidden">Search...</span>
-      {/* <kbd className="pointer-events-none absolute right-[0.3rem] top-1/2 -translate-y-1/2 flex h-7 select-none items-center gap-1 rounded border border-[--border] bg-[--muted] px-1.5 font-mono text-[10px] font-medium opacity-100">
-        <span className="text-xs leading-none">⌘</span>K
-      </kbd> */}
+      <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        width="24" 
+        height="24" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
+        className="w-4 h-4 text-neutral-500 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors"
+      >
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.3-4.3" />
+      </svg>
+      <span className="hidden lg:inline-flex opacity-80 group-hover:opacity-100 transition-opacity">Search Components...</span>
+      <span className="inline-flex lg:hidden opacity-80 group-hover:opacity-100 transition-opacity">Search...</span>
+      <kbd className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 hidden h-5 select-none items-center gap-1 rounded border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-1.5 font-mono text-[10px] font-medium text-neutral-500 dark:text-neutral-400 opacity-100 sm:flex shadow-sm">
+        <span className="text-xs">⌘</span>K
+      </kbd>
     </button>
   );
 }

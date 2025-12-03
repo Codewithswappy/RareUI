@@ -1,12 +1,12 @@
 ---
-title: "Glass Shimmer Button"
-description: "Auto-generated documentation for the Btn 01 component."
+title: Glass Shimmer Button
+description: A button with a glassmorphism effect and shimmer animation on hover.
 ---
 
-import {GlassShimmerButton} from "@/components/rareui/buttons/glass-shimmer-button";
 import { Preview } from "@/components/mdx/preview";
+import { GlassShimmerButton } from "@/components/rareui/buttons/glass-shimmer-button";
 
-<Preview  cliCommand="npx shadcn@latest add glass-shimmer-button"
+<Preview
   code={`"use client"
 
 import type React from "react"
@@ -26,7 +26,7 @@ export function GlassShimmerButton({ children, onClick }: GlassShimmerButtonProp
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative inline-block px-5 py-2.5 text-base font-medium text-white bg-black border border-blue-500 rounded overflow-hidden transition-all duration-300"
+      className="relative inline-block px-5 py-2.5 text-base font-medium text-black bg-black border border-neutral-400 rounded overflow-hidden transition-all duration-300 ease-in-out cursor-pointer"
     >
       <div
         className="absolute inset-0 pointer-events-none"
@@ -40,14 +40,18 @@ export function GlassShimmerButton({ children, onClick }: GlassShimmerButtonProp
       />
 
       {/* Text content */}
-      <span className="relative z-10">{children}</span>
+      <span className="relative z-10">Hover Me</span>
     </button>
   )
 }`}
+  cliCommand="npx rareui add glass-shimmer-button"
 >
-  <GlassShimmerButton>Click Me</GlassShimmerButton>
+  <GlassShimmerButton>Hover Me</GlassShimmerButton>
 </Preview>
 
+## Props
 
-
-
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `children` | `React.ReactNode` | `-` | The content to display inside the button. |
+| `onClick` | `() => void` | `-` | Callback function when the button is clicked. |
