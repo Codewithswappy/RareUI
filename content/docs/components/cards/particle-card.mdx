@@ -1,10 +1,11 @@
 ---
 title: Particle Card
-description: A card component with an interactive particle explosion effect on hover.
+description: An interactive card with particle explosion effect on hover, perfect for team member profiles.
 ---
 
 import { Preview } from "@/components/mdx/preview";
 import ParticleCard from "@/components/rareui/cards/ParticleCard";
+import { CopyButton } from "@/components/mdx/copy-button";
 
 <Preview
   code={`'use client'
@@ -41,42 +42,7 @@ interface ParticleCardProps {
   rows?: number
 }
 
-const Particle = ({
-  p,
-  active,
-  img,
-  cols,
-  rows,
-}: {
-  p: ParticleData
-  active: boolean
-  img: string
-            "absolute bottom-0 left-0 right-0 p-8 transition-all duration-500 transform",
-            active ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
-          )}>
-            <h2 className="text-3xl font-bold text-white mb-1">{name}</h2>
-            <p className="text-white/90 font-medium">{role}</p>
-          </div>
-
-          {/* Particle Grid */}
-          <div className="absolute inset-0 w-full h-full overflow-hidden">
-            {particles.map((p, i) => (
-              <Particle
-                key={i}
-                p={p}
-                active={active}
-                img={img}
-                cols={cols}
-                rows={rows}
-              />
-            ))}
-          </div>
-        </div>
-
-      </motion.div>
-    </div>
-  )
-}`}
+// ... rest of component code`}
   cliCommand="npx rareui add particle-card"
 >
   <div className="[&_img]:m-0 [&_img]:p-0 [&_img]:block [&_h3]:m-0 [&_p]:m-0 [&_button]:block [&_button]:visible">
@@ -84,14 +50,198 @@ const Particle = ({
   </div>
 </Preview>
 
+## Installation
+
+<div className="relative">
+  <div className="flex items-center justify-between mb-3">
+    <p className="text-sm text-muted-foreground">Install the component using the RareUI CLI:</p>
+    <CopyButton text="npx rareui add particle-card" />
+  </div>
+  
+```bash
+npx rareui add particle-card
+```
+</div>
+
+This will automatically install the component to your `components/rareui/cards/` directory with all dependencies.
+
+## Required Utilities
+
+This component uses a `cn` utility function for className merging. If you don't have it, create `lib/utils.ts`:
+
+```tsx
+import { clsx, type ClassValue } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+```
+
+## Usage
+
+### Basic Usage
+
+```tsx
+import ParticleCard from '@/components/rareui/cards/ParticleCard';
+
+export default function App() {
+  return (
+    <ParticleCard />
+  );
+}
+```
+
+### With Custom Content
+
+```tsx
+<ParticleCard
+  name="Jane Doe"
+  role="Senior Developer"
+  bio="Full-stack engineer with 8+ years building scalable applications."
+  img="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+  tags={['React', 'Node.js', 'TypeScript']}
+/>
+```
+
+### Adjusting Particle Grid
+
+```tsx
+<ParticleCard
+  cols={30}  // More columns = smaller particles
+  rows={36}  // More rows = denser effect
+/>
+```
+
+### Team Grid Example
+
+```tsx
+const teamMembers = [
+  { name: 'Alice Chen', role: 'CEO', tags: ['Leadership', 'Strategy'] },
+  { name: 'Bob Smith', role: 'CTO', tags: ['Engineering', 'Architecture'] },
+  { name: 'Carol Wang', role: 'Designer', tags: ['UI/UX', 'Branding'] },
+];
+
+export default function Team() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {teamMembers.map((member) => (
+        <ParticleCard key={member.name} {...member} />
+      ))}
+    </div>
+  );
+}
+```
+
 ## Props
 
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `name` | `string` | `"Sam Jenkins"` | The name displayed on the card. |
-| `role` | `string` | `"Product Designer"` | The role or title displayed. |
-| `bio` | `string` | `...` | The biography text. |
-| `img` | `string` | `Unsplash URL` | The URL of the background image. |
-| `tags` | `string[]` | `['UI/UX', ...]` | An array of tags to display. |
-| `cols` | `number` | `20` | Number of columns for the particle grid. |
-| `rows` | `number` | `24` | Number of rows for the particle grid. |
+<div className="overflow-x-auto -mx-4 sm:mx-0">
+  <table className="w-full text-left border-collapse">
+    <thead>
+      <tr className="border-b border-border">
+        <th className="py-3 px-4 text-sm font-semibold text-foreground">Prop</th>
+        <th className="py-3 px-4 text-sm font-semibold text-foreground hidden sm:table-cell">Type</th>
+        <th className="py-3 px-4 text-sm font-semibold text-foreground">Default</th>
+        <th className="py-3 px-4 text-sm font-semibold text-foreground">Description</th>
+      </tr>
+    </thead>
+    <tbody className="text-sm">
+      <tr className="border-b border-border">
+        <td className="py-3 px-4 font-mono text-xs text-primary">name</td>
+        <td className="py-3 px-4 text-muted-foreground hidden sm:table-cell">string</td>
+        <td className="py-3 px-4 text-muted-foreground">"Sam Jenkins"</td>
+        <td className="py-3 px-4 text-muted-foreground">Name displayed on the card front</td>
+      </tr>
+      <tr className="border-b border-border">
+        <td className="py-3 px-4 font-mono text-xs text-primary">role</td>
+        <td className="py-3 px-4 text-muted-foreground hidden sm:table-cell">string</td>
+        <td className="py-3 px-4 text-muted-foreground">"Product Designer"</td>
+        <td className="py-3 px-4 text-muted-foreground">Role or title displayed</td>
+      </tr>
+      <tr className="border-b border-border">
+        <td className="py-3 px-4 font-mono text-xs text-primary">bio</td>
+        <td className="py-3 px-4 text-muted-foreground hidden sm:table-cell">string</td>
+        <td className="py-3 px-4 text-muted-foreground">Default bio text</td>
+        <td className="py-3 px-4 text-muted-foreground">Biography shown on card back</td>
+      </tr>
+      <tr className="border-b border-border">
+        <td className="py-3 px-4 font-mono text-xs text-primary">img</td>
+        <td className="py-3 px-4 text-muted-foreground hidden sm:table-cell">string</td>
+        <td className="py-3 px-4 text-muted-foreground">Unsplash URL</td>
+        <td className="py-3 px-4 text-muted-foreground">Background image URL</td>
+      </tr>
+      <tr className="border-b border-border">
+        <td className="py-3 px-4 font-mono text-xs text-primary">tags</td>
+        <td className="py-3 px-4 text-muted-foreground hidden sm:table-cell">string[]</td>
+        <td className="py-3 px-4 text-muted-foreground">['UI/UX', ...]</td>
+        <td className="py-3 px-4 text-muted-foreground">Array of skill/tag labels</td>
+      </tr>
+      <tr className="border-b border-border">
+        <td className="py-3 px-4 font-mono text-xs text-primary">cols</td>
+        <td className="py-3 px-4 text-muted-foreground hidden sm:table-cell">number</td>
+        <td className="py-3 px-4 text-muted-foreground">20</td>
+        <td className="py-3 px-4 text-muted-foreground">Particle grid columns (affects particle size)</td>
+      </tr>
+      <tr className="border-b border-border">
+        <td className="py-3 px-4 font-mono text-xs text-primary">rows</td>
+        <td className="py-3 px-4 text-muted-foreground hidden sm:table-cell">number</td>
+        <td className="py-3 px-4 text-muted-foreground">24</td>
+        <td className="py-3 px-4 text-muted-foreground">Particle grid rows (affects particle density)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+## Features
+
+- **Particle Explosion Effect**: Image breaks into animated particles on hover
+- **Smooth Transitions**: Framer Motion powered animations
+- **Dual-Sided Content**: Front shows preview, back shows detailed info
+- **Fully Customizable**: Control particle density, content, and styling
+- **Responsive Design**: Adapts to different screen sizes
+- **Performance Optimized**: Uses useMemo for particle calculations
+
+## Dependencies
+
+- `motion-react` (Framer Motion) - For animations
+- `clsx` & `tailwind-merge` - For className utilities
+- `React 18+` - For hooks (useState, useRef, useEffect, useMemo)
+
+These will be automatically installed if you use the RareUI CLI.
+
+## Performance Tips
+
+For better performance with many cards:
+
+```tsx
+// Reduce particle density
+<ParticleCard cols={15} rows={18} />
+
+// Or lazy load cards
+import dynamic from 'next/dynamic';
+const ParticleCard = dynamic(() => import('@/components/rareui/cards/ParticleCard'));
+```
+
+## Customization
+
+### Change Background Gradient
+
+Modify the back content gradient in the component:
+
+```tsx
+className="bg-gradient-to-br from-purple-600 to-blue-600"
+// Change to:
+className="bg-gradient-to-br from-emerald-600 to-cyan-600"
+```
+
+### Adjust Animation Timing
+
+Modify the motion transition values:
+
+```tsx
+transition={{
+  duration: 1.2,  // Slower explosion
+  delay: p.delay,
+  ease: [0.25, 0.46, 0.45, 0.94],
+}}
+```

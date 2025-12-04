@@ -121,6 +121,38 @@
   pre code span {
     background: transparent !important;
   }
+  
+  /* Prevent prose from affecting component previews - only reset spacing, not typography */
+  .prose .not-prose {
+    max-width: none !important;
+  }
+  
+  .prose .not-prose > * {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Premium Profile Card - 3D Effects & Animations */
+  .perspective-1000 { 
+    perspective: 1000px; 
+  }
+  
+  .preserve-3d { 
+    transform-style: preserve-3d; 
+  }
+  
+  .backface-hidden { 
+    backface-visibility: hidden; 
+  }
+  
+  @keyframes borderSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  .animate-border-spin {
+    animation: borderSpin 4s linear infinite;
+  }
 }
 
 /* Custom scrollbar for main content */

@@ -10,7 +10,7 @@ const PUBLIC_OUTPUT = path.resolve(process.cwd(), "public/sidebar.json");
 const STATIC_SECTIONS = [
   {
     title: "Follow for updates",
-    items: [{ title: "Twitter @swappy", href: "/" }],
+    items: [{ title: "Twitter @heyyswap", href: "https://x.com/heyyswap" }],
   },
   {
     title: "Installation",

@@ -1,10 +1,11 @@
 ---
 title: Loader
-description: A geometric loader animation using SVG polygons.
+description: A geometric loader animation using SVG polygons with smooth rotation effects.
 ---
 
 import { Preview } from "@/components/mdx/preview";
 import Loader from "@/components/rareui/buttons/loader";
+import { CopyButton } from "@/components/mdx/copy-button";
 
 <Preview
   code={`"use client"
@@ -56,4 +57,69 @@ export default Loader;`}
   <Loader />
 </Preview>
 
+## Installation
 
+<div className="relative">
+  <div className="flex items-center justify-between mb-3">
+    <p className="text-sm text-muted-foreground">Install the component using the RareUI CLI:</p>
+    <CopyButton text="npx rareui add loader" />
+  </div>
+  
+```bash
+npx rareui add loader
+```
+</div>
+
+This will automatically install the component to your `components/rareui/buttons/` directory.
+
+## Usage
+
+<div className="relative">
+  <div className="flex items-center justify-end mb-2">
+    <CopyButton text="import Loader from '@/components/rareui/buttons/loader';\n\nexport default function App() {\n  return (\n    <Loader />\n  );\n}" />
+  </div>
+
+```tsx
+import Loader from '@/components/rareui/buttons/loader';
+
+export default function App() {
+  return (
+    <Loader />
+  );
+}
+```
+</div>
+
+## Features
+
+- **Geometric Animation**: Multiple rotating polygons create a mesmerizing effect
+- **SVG Masking**: Uses SVG masks for clean, scalable animations
+- **Smooth Rotation**: Staggered animation delays for fluid motion
+- **Green Theme**: Built with green-500 color, easily customizable
+- **Lightweight**: Pure CSS and SVG, no dependencies
+
+## Customization
+
+### Change Color
+
+Replace the green color with your own:
+
+```tsx
+<div style={{ background: '#your-color' }} />
+```
+
+### Adjust Size
+
+Modify the `transform: scale()` value:
+
+```tsx
+<div style={{ transform: 'scale(0.75)' }}> {/* Larger */}
+```
+
+### Animation Speed
+
+Change the animation duration in the polygon classes:
+
+```tsx
+animate-[rotation_1s_linear_infinite] {/* Faster */}
+```

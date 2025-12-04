@@ -3,8 +3,8 @@ export const sidebarData = [
     "title": "Follow for updates",
     "items": [
       {
-        "title": "Twitter @swappy",
-        "href": "/"
+        "title": "Twitter @heyyswap",
+        "href": "https://x.com/heyyswap"
       }
     ]
   },

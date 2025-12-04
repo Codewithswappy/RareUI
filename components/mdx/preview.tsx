@@ -190,7 +190,7 @@ Ensure it's fully functional, responsive, and matches the original design exactl
   };
 
   return (
-    <div className={cn("my-6 w-full overflow-hidden", className)}>
+    <div className={cn("my-6 w-full", className)}>
       {/* Toast Notification */}
       {showToast && (
         <div className="fixed bottom-4 right-8 z-50 animate-in slide-in-from-top-2">
@@ -282,9 +282,9 @@ Ensure it's fully functional, responsive, and matches the original design exactl
       )}
 
       {/* Content Container */}
-      <div className="rounded-xl border border-border backdrop-blur-sm overflow-hidden w-full bg-white dark:bg-card">
+      <div className="rounded-xl border border-border backdrop-blur-sm w-full bg-white dark:bg-card not-prose">
         {activeTab === "preview" ? (
-          <div className="relative flex w-full items-center justify-center p-8 sm:p-12 md:p-16 min-h-[300px] overflow-x-auto bg-neutral-100 dark:bg-neutral-900">
+          <div className="relative flex w-full items-center justify-center p-4 sm:p-8 md:p-10 min-h-[350px] bg-neutral-100 dark:bg-neutral-900 rounded-xl overflow-visible not-prose">
             {children}
           </div>
         ) : (
