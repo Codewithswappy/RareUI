@@ -147,7 +147,7 @@ export default function ParticleCard({
     <div className="flex items-center justify-center p-8 min-h-[400px]">
       <motion.div
         className={cn(
-          "relative w-[330px] h-[450px] rounded-lg bg-white shadow-2xl overflow-hidden cursor-pointer",
+          "relative w-[330px] h-[450px] rounded-lg bg-card shadow-2xl overflow-hidden cursor-pointer",
           "group select-none"
         )}
         initial={false}
@@ -159,7 +159,7 @@ export default function ParticleCard({
       >
         
         {/* --- Background Content (Revealed on Hover) --- */}
-        <div className="absolute inset-0 flex flex-col p-6 pt-4 pb-6 bg-gradient-to-br from-neutral-50 to-neutral-300 z-0">
+        <div className="absolute inset-0 flex flex-col p-6 pt-4 pb-6 bg-gradient-to-br from-background to-muted z-0">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -167,23 +167,23 @@ export default function ParticleCard({
             className="flex flex-col gap-3 h-full"
           >
             <div>
-              <h3 className="text-2xl font-bold text-slate-900 m-0">{name}</h3>
-              <p className="text-slate-600 font-medium m-0">{role}</p>
+              <h3 className="text-2xl font-bold text-foreground m-0">{name}</h3>
+              <p className="text-muted-foreground font-medium m-0">{role}</p>
             </div>
             
-            <p className="text-slate-500 leading-relaxed text-sm flex-1 m-0">
+            <p className="text-muted-foreground leading-relaxed text-sm flex-1 m-0">
               {bio}
             </p>
 
             <div className="flex flex-wrap gap-2">
               {tags.map((tag, i) => (
-                <span key={i} className="px-3 py-1 text-xs font-semibold text-neutral-900 bg-white/80 rounded-md border border-neutral-300 hover:bg-white duration-400">
+                <span key={i} className="px-3 py-1 text-xs font-semibold text-foreground bg-background/80 rounded-md border border-border hover:bg-background duration-400">
                   {tag}
                 </span>
               ))}
             </div>
 
-            <button className="mt-3 w-full py-3 !bg-neutral-900 text-white rounded-xl font-semibold text-sm hover:!bg-neutral-950 transition-all !flex !items-center !justify-center gap-2 group/btn duration-300 cursor-pointer shadow-lg !border-0">
+            <button className="mt-3 w-full py-3 !bg-primary text-primary-foreground rounded-xl font-semibold text-sm hover:!bg-primary/90 transition-all !flex !items-center !justify-center gap-2 group/btn duration-300 cursor-pointer shadow-lg !border-0">
               View Profile
               <svg className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

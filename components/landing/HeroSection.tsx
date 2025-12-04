@@ -6,15 +6,23 @@ import Link from "next/link"
 import Image from "next/image"
 import { useSearchContext } from '@/components/rareui/search-context'
 import { useState, useEffect } from 'react'
+import { useTheme } from 'next-themes'
 
 export default function HeroSection() {
   const { setOpenSearch } = useSearchContext();
-  const [isDark, setIsDark] = useState(false);
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted && (theme === 'dark' || resolvedTheme === 'dark');
 
   // Toggle theme
   const toggleTheme = () => {
-    setIsDark(!isDark);
+    setTheme(isDark ? "light" : "dark");
   };
 
   // Lock body scroll when menu is open
@@ -26,12 +34,10 @@ export default function HeroSection() {
     }
   }, [isMenuOpen]);
 
+  if (!mounted) return null;
+
   return (
-    <div className={`min-h-screen font-sans transition-colors duration-300 ${
-      isDark 
-        ? 'bg-neutral-900 text-neutral-100 selection:bg-cyan-700' 
-        : 'bg-white text-neutral-900 selection:bg-cyan-50'
-    }`}>
+    <div className="min-h-screen font-sans transition-colors duration-300 bg-background text-foreground selection:bg-primary/20">
       
       {/* --- Navbar --- */}
       <nav className="max-w-7xl mx-auto px-6 py-6 h-16 flex items-center justify-between relative z-50">
@@ -43,31 +49,21 @@ export default function HeroSection() {
                alt="RareUI Logo" 
                width={72} 
                height={72}
-               className={`object-contain transition-all duration-300 ${
-                 isDark 
-                   ? 'opacity-90' 
-                   : 'invert opacity-95'
-               }`}
+               className="object-contain transition-all duration-300 dark:opacity-90 dark:invert-0 invert opacity-95"
              />
            </div>
         </div>
 
         {/* Desktop Links */}
-        <div className={`hidden md:flex items-center gap-8 text-sm font-medium transition-colors ${
-          isDark ? 'text-neutral-400' : 'text-neutral-500'
-        }`}>
+        <div className="hidden md:flex items-center gap-8 text-sm font-medium transition-colors text-muted-foreground">
           {['Docs', 'Components', 'Templates', 'Pricing'].map((item) => (
             <Link 
               key={item}
               href={item === 'Components' ? '/docs' : '#'} 
-              className={`relative group transition-all duration-200 hover:scale-105 ${
-                isDark ? 'hover:text-neutral-100' : 'hover:text-neutral-900'
-              }`}
+              className="relative group transition-all duration-200 hover:scale-105 hover:text-foreground"
             >
               {item}
-              <span className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full ${
-                isDark ? 'bg-neutral-100' : 'bg-neutral-900'
-              }`} />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full bg-foreground" />
             </Link>
           ))}
         </div>
@@ -79,38 +75,24 @@ export default function HeroSection() {
              onClick={() => setOpenSearch(true)}
            >
              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-               <svg className={`w-4 h-4 transition-colors ${
-                 isDark 
-                   ? 'text-neutral-500 group-hover:text-neutral-300' 
-                   : 'text-neutral-400 group-hover:text-neutral-600'
-               }`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               <svg className="w-4 h-4 transition-colors text-muted-foreground group-hover:text-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                </svg>
              </div>
              <input 
                type="text" 
                placeholder="Search components..." 
-               className={`pl-10 pr-12 py-2 text-sm border-transparent rounded-lg w-64 transition-all outline-none cursor-pointer ${
-                 isDark
-                   ? 'bg-neutral-800 hover:bg-neutral-700 hover:border-neutral-600 placeholder:text-neutral-500 text-neutral-100'
-                   : 'bg-neutral-100 hover:bg-white hover:border-neutral-200 placeholder:text-neutral-400'
-               }`}
+               className="pl-10 pr-12 py-2 text-sm border-transparent rounded-lg w-64 transition-all outline-none cursor-pointer bg-muted/50 hover:bg-muted hover:border-border placeholder:text-muted-foreground text-foreground"
                readOnly
              />
              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                <span className={`text-[10px] font-medium border rounded px-1.5 py-0.5 ${
-                  isDark
-                    ? 'text-neutral-400 border-neutral-600 bg-neutral-800'
-                    : 'text-neutral-400 border-neutral-200 bg-white'
-                }`}>⌘K</span>
+                <span className="text-[10px] font-medium border rounded px-1.5 py-0.5 text-muted-foreground border-border bg-background">⌘K</span>
              </div>
            </div>
 
            {/* Mobile Search Icon */}
            <button 
-             className={`sm:hidden p-2 rounded-lg transition-colors ${
-               isDark ? 'text-neutral-400 hover:bg-neutral-800' : 'text-neutral-600 hover:bg-neutral-100'
-             }`}
+             className="sm:hidden p-2 rounded-lg transition-colors text-muted-foreground hover:bg-accent"
              onClick={() => setOpenSearch(true)}
            >
              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -121,11 +103,7 @@ export default function HeroSection() {
            {/* Theme Toggle Button */}
            <button
              onClick={toggleTheme}
-             className={`p-2 rounded-lg transition-all duration-300 ${
-               isDark
-                 ? 'bg-neutral-800 hover:bg-neutral-700 text-yellow-400'
-                 : 'bg-neutral-100 hover:bg-neutral-200 text-neutral-700'
-             }`}
+             className="p-2 rounded-lg transition-all duration-300 bg-muted hover:bg-accent text-foreground"
              aria-label="Toggle theme"
            >
              {isDark ? (
@@ -168,9 +146,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className={`fixed inset-0 z-40 pt-28 px-6 ${
-              isDark ? 'bg-neutral-900/95 backdrop-blur-xl' : 'bg-white/95 backdrop-blur-xl'
-            }`}
+            className="fixed inset-0 z-40 pt-28 px-6 bg-background/95 backdrop-blur-xl"
           >
             <div className="flex flex-col gap-6 text-3xl font-bold tracking-tight">
               {['Docs', 'Components', 'Templates', 'Pricing'].map((item, i) => (
@@ -183,9 +159,7 @@ export default function HeroSection() {
                   <Link 
                     href={item === 'Components' ? '/docs' : '#'}
                     onClick={() => setIsMenuOpen(false)}
-                    className={`block py-2 transition-colors ${
-                      isDark ? 'text-neutral-100 hover:text-neutral-400' : 'text-neutral-900 hover:text-neutral-600'
-                    }`}
+                    className="block py-2 transition-colors text-foreground hover:text-muted-foreground"
                   >
                     {item}
                   </Link>
@@ -202,9 +176,8 @@ export default function HeroSection() {
           initial={{ scale: 0.95, opacity: 0, y: 40 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className={`rounded-[2.5rem] overflow-hidden min-h-[500px] md:min-h-[600px] lg:min-h-[650px] relative transition-colors duration-300 ${
-          isDark ? 'bg-neutral-800' : 'bg-[#E5E5E5]'
-        }`}>
+          className="rounded-[2.5rem] overflow-hidden min-h-[500px] md:min-h-[600px] lg:min-h-[650px] relative transition-colors duration-300 bg-muted"
+        >
           
           <div className="h-full flex flex-col items-center justify-center text-center py-20 md:py-0">
             
@@ -220,16 +193,10 @@ export default function HeroSection() {
               >
                 {/* Blinking Dot */}
                 <div className="relative flex items-center justify-center">
-                  <div className={`absolute w-3 h-3 rounded-full animate-ping opacity-75 transition-colors ${
-                    isDark ? 'bg-white' : 'bg-black'
-                  }`}></div>
-                  <div className={`relative w-2 h-2 rounded-full transition-colors ${
-                    isDark ? 'bg-white' : 'bg-black'
-                  }`}></div>
+                  <div className="absolute w-3 h-3 rounded-full animate-ping opacity-75 transition-colors bg-foreground"></div>
+                  <div className="relative w-2 h-2 rounded-full transition-colors bg-foreground"></div>
                 </div>
-                <p className={`text-xs md:text-sm font-medium transition-colors ${
-                  isDark ? 'text-neutral-300' : 'text-neutral-700'
-                }`}>New Component</p>
+                <p className="text-xs md:text-sm font-medium transition-colors text-muted-foreground">New Component</p>
               </motion.div>
 
               {/* Headline */}
@@ -240,9 +207,7 @@ export default function HeroSection() {
                 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[0.95] md:leading-[0.9] font-serif mb-6 md:mb-8 tracking-tight text-center"
               >
                 Build Interfaces<br />
-                That Feel <span className={`italic font-serif transition-colors ${
-                  isDark ? 'text-neutral-500' : 'text-neutral-400'
-                }`}>Rare</span>
+                That Feel <span className="italic font-serif transition-colors text-muted-foreground">Rare</span>
               </motion.h1>
 
               {/* Description */}
@@ -250,9 +215,7 @@ export default function HeroSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
-                className={`text-base md:text-xl mb-8 max-w-xl md:max-w-2xl leading-relaxed transition-colors px-4 ${
-                  isDark ? 'text-neutral-300' : 'text-neutral-600'
-                }`}
+                className="text-base md:text-xl mb-8 max-w-xl md:max-w-2xl leading-relaxed transition-colors px-4 text-muted-foreground"
               >
                 A collection of premium, motion-rich components designed to make your next project stand out. Copy, paste, and ship.
               </motion.p>
@@ -262,19 +225,13 @@ export default function HeroSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.7 }}
-                className={`flex flex-wrap items-center justify-center gap-3 mb-10 pt-6 border-t w-full max-w-lg md:max-w-2xl transition-colors ${
-                  isDark ? 'border-neutral-600/50' : 'border-neutral-300/50'
-                }`}
+                className="flex flex-wrap items-center justify-center gap-3 mb-10 pt-6 border-t w-full max-w-lg md:max-w-2xl transition-colors border-border"
               >
-                <p className={`text-xs font-medium transition-colors mr-1 ${
-                  isDark ? 'text-neutral-400' : 'text-neutral-500'
-                }`}>Built with:</p>
+                <p className="text-xs font-medium transition-colors mr-1 text-muted-foreground">Built with:</p>
                 
                 {/* React Icon */}
                 <div 
-                  className={`p-2 rounded-lg transition-all hover:scale-110 cursor-pointer group relative ${
-                    isDark ? 'bg-neutral-700 hover:bg-neutral-600' : 'bg-neutral-100 hover:bg-neutral-200'
-                  }`}
+                  className="p-2 rounded-lg transition-all hover:scale-110 cursor-pointer group relative bg-background hover:bg-accent"
                   title="React"
                 >
                   <svg className="w-5 h-5 text-[#61DAFB]" viewBox="0 0 24 24" fill="currentColor">
@@ -284,23 +241,17 @@ export default function HeroSection() {
 
                 {/* Next.js Icon */}
                 <div 
-                  className={`p-2 rounded-lg transition-all hover:scale-110 cursor-pointer group relative ${
-                    isDark ? 'bg-neutral-700 hover:bg-neutral-600' : 'bg-neutral-100 hover:bg-neutral-200'
-                  }`}
+                  className="p-2 rounded-lg transition-all hover:scale-110 cursor-pointer group relative bg-background hover:bg-accent"
                   title="Next.js"
                 >
-                  <svg className={`w-5 h-5 ${
-                    isDark ? 'text-white' : 'text-black'
-                  }`} viewBox="0 0 24 24" fill="currentColor">
+                  <svg className="w-5 h-5 text-foreground" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M11.572 0c-.176 0-.31.001-.358.007a19.76 19.76 0 0 1-.364.033C7.443.346 4.25 2.185 2.228 5.012a11.875 11.875 0 0 0-2.119 5.243c-.096.659-.108.854-.108 1.747s.012 1.089.108 1.748c.652 4.506 3.86 8.292 8.209 9.695.779.25 1.6.422 2.534.525.363.04 1.935.04 2.299 0 1.611-.178 2.977-.577 4.323-1.264.207-.106.247-.134.219-.158-.02-.013-.9-1.193-1.955-2.62l-1.919-2.592-2.404-3.558a338.739 338.739 0 0 0-2.422-3.556c-.009-.002-.018 1.579-.023 3.51-.007 3.38-.01 3.515-.052 3.595a.426.426 0 0 1-.206.214c-.075.037-.14.044-.495.044H7.81l-.108-.068a.438.438 0 0 1-.157-.171l-.05-.106.006-4.703.007-4.705.072-.092a.645.645 0 0 1 .174-.143c.096-.047.134-.051.54-.051.478 0 .558.018.682.154.035.038 1.337 1.999 2.895 4.361a10760.433 10760.433 0 0 0 4.735 7.17l1.9 2.879.096-.063a12.317 12.317 0 0 0 2.466-2.163 11.944 11.944 0 0 0 2.824-6.134c.096-.66.108-.854.108-1.748 0-.893-.012-1.088-.108-1.747-.652-4.506-3.859-8.292-8.208-9.695a12.597 12.597 0 0 0-2.499-.523A33.119 33.119 0 0 0 11.573 0zm4.069 7.217c.347 0 .408.005.486.047a.473.473 0 0 1 .237.277c.018.06.023 1.365.018 4.304l-.006 4.218-.744-1.14-.746-1.14v-3.066c0-1.982.01-3.097.023-3.15a.478.478 0 0 1 .233-.296c.096-.05.13-.054.5-.054z"/>
                   </svg>
                 </div>
 
                 {/* Tailwind CSS Icon */}
                 <div 
-                  className={`p-2 rounded-lg transition-all hover:scale-110 cursor-pointer group relative ${
-                    isDark ? 'bg-neutral-700 hover:bg-neutral-600' : 'bg-neutral-100 hover:bg-neutral-200'
-                  }`}
+                  className="p-2 rounded-lg transition-all hover:scale-110 cursor-pointer group relative bg-background hover:bg-accent"
                   title="Tailwind CSS"
                 >
                   <svg className="w-5 h-5 text-[#06B6D4]" viewBox="0 0 24 24" fill="currentColor">
@@ -310,9 +261,7 @@ export default function HeroSection() {
 
                 {/* Motion Icon */}
                 <div 
-                  className={`p-2 rounded-lg transition-all hover:scale-110 cursor-pointer group relative ${
-                    isDark ? 'bg-neutral-700 hover:bg-neutral-600' : 'bg-neutral-100 hover:bg-neutral-200'
-                  }`}
+                  className="p-2 rounded-lg transition-all hover:scale-110 cursor-pointer group relative bg-background hover:bg-accent"
                   title="Motion"
                 >
                   <svg className="w-5 h-5 text-[#FF0080]" viewBox="0 0 24 24" fill="currentColor">
@@ -330,8 +279,8 @@ export default function HeroSection() {
               >
                  <Link href="/docs"><LiquidButton 
                   text="Browse Components" 
-                  backgroundColor={isDark ? "bg-white" : "bg-black"}
-                  textColor={isDark ? "text-black" : "text-white"}
+                  backgroundColor="bg-foreground"
+                  textColor="text-background"
                   className="!p-0" // Override padding wrapper
                 /></Link>
                 

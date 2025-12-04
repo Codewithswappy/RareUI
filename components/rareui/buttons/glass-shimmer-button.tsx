@@ -17,7 +17,7 @@ export function GlassShimmerButton({ children, onClick }: GlassShimmerButtonProp
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative inline-block px-5 py-2.5 text-base font-medium text-black bg-black border border-neutral-400 rounded overflow-hidden transition-all duration-300 ease-in-out cursor-pointer"
+      className="relative inline-block px-5 py-2.5 text-base font-medium text-primary-foreground bg-primary border border-input rounded overflow-hidden transition-all duration-300 ease-in-out cursor-pointer"
     >
       <div
         className="absolute inset-0 pointer-events-none"

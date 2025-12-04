@@ -12,7 +12,7 @@ const SoftButton = () => {
           
           /* Base Styles */
           bg-transparent
-          text-[#ff0000]
+          text-destructive
           tracking-[1px]
           rounded-[30px]
           z-10
@@ -28,7 +28,7 @@ const SoftButton = () => {
              2. -4px -4px... Gray (Top-Left Shadow)
              3. Inset -4px -4px... White (Inner Top-Left Highlight)
              4. Inset 4px 4px... Black (Inner Bottom-Right Shadow)
-
+             
              Dark Mode Shadow (dark: prefix):
              1. 4px 4px... Faint White (Bottom-Right Highlight, opacity reduced to 0.05)
              2. -4px -4px... Deep Black (Top-Left Shadow, opacity 0.5)
@@ -43,12 +43,12 @@ const SoftButton = () => {
           transition-all duration-[600ms]
           
           /* Hover States */
-          group-hover:bg-[#ff0000]
-          group-hover:text-white
+          group-hover:bg-destructive
+          group-hover:text-destructive-foreground
           group-hover:tracking-[4px]
           
           /* Dark Mode Hover Adjustment (Optional: keeps the red vibrant) */
-          dark:group-hover:shadow-[0_0_15px_rgba(255,0,0,0.5)]
+          dark:group-hover:shadow-[0_0_15px_hsl(var(--destructive)/0.5)]
         "
       >
         Delete

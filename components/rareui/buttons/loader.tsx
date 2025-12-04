@@ -7,8 +7,8 @@ const Loader = () => {
     <div className="relative rounded-full" style={{
       transform: 'scale(0.5)',
     }}>
-      <div className="absolute top-1 left-0 w-[100px] h-[100px] rounded-full" style={{
-        boxShadow: 'inset 0 10px 10px 0 rgba(34,197,94,0.5), inset 0 -10px 10px 0 rgba(34,197,94,0.9)'
+      <div className="absolute top-1 left-0 w-[100px] h-[100px] rounded-full bg-primary/20 dark:bg-primary/10" style={{
+        boxShadow: 'inset 0 10px 10px 0 hsl(var(--primary)/0.5), inset 0 -10px 10px 0 hsl(var(--primary)/0.9)'
       }} />
       
       <svg width={100} height={100} viewBox="0 0 100 100" className="absolute">
@@ -25,8 +25,7 @@ const Loader = () => {
         </defs>
       </svg>
       
-      <div className="w-[100px] h-[100px]" style={{
-        background: '#22c55e',
+      <div className="w-[100px] h-[100px] bg-primary" style={{
         mask: 'url(#clipping)',
         WebkitMask: 'url(#clipping)'
       }} />

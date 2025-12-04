@@ -23,22 +23,57 @@ npx rareui add [component]
 
 ### Examples
 
-Add a single component:
+Add a single component (supports both PascalCase and kebab-case):
 
 ```bash
 npx rareui add particle-card
+npx rareui add LiquidButton
 ```
 
 Add multiple components at once:
 
 ```bash
-npx rareui add particle-card liquid-button
+npx rareui add particle-card liquid-button soft-button
+```
+
+Install all available components:
+
+```bash
+npx rareui add .
 ```
 
 View the list of available components:
 
 ```bash
 npx rareui add
+```
+
+## Diff
+
+Check for updates to your installed components and update them if needed.
+
+```bash
+npx rareui diff
+```
+
+### Examples
+
+Check all installed components for updates:
+
+```bash
+npx rareui diff
+```
+
+Check a specific component:
+
+```bash
+npx rareui diff liquid-button
+```
+
+Update without confirmation:
+
+```bash
+npx rareui diff -y
 ```
 
 ## Options
@@ -63,4 +98,41 @@ Currently, the CLI is optimized for Next.js and React projects using Tailwind CS
 <summary>Can I use it without the CLI?</summary>
 
 Yes! You can manually copy and paste the code from the documentation into your project. The CLI just automates this process.
+</details>
+
+<details>
+<summary>Can I use both kebab-case and PascalCase for component names?</summary>
+
+Yes! The CLI supports both formats:
+- `npx rareui add liquid-button` (kebab-case)
+- `npx rareui add LiquidButton` (PascalCase)
+
+Both will install the same component. Use whichever format you prefer!
+</details>
+
+<details>
+<summary>How do I know if my components need updates?</summary>
+
+Run the `diff` command to check for updates:
+
+```bash
+npx rareui diff
+```
+
+This will show you which components have updates available and what changed.
+</details>
+
+<details>
+<summary>Where are components installed?</summary>
+
+Components are installed to `components/rareui/` in your project directory. For example:
+- Buttons: `components/rareui/buttons/`
+- Cards: `components/rareui/cards/`
+- Loaders: `components/rareui/loaders/`
+</details>
+
+<details>
+<summary>What if I want to customize a component?</summary>
+
+All components are installed as source code in your project, so you can customize them freely! Just edit the files in `components/rareui/` after installation.
 </details>

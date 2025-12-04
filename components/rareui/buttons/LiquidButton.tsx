@@ -12,8 +12,8 @@ function cn(...inputs: ClassValue[]) {
 export default function LiquidButton({ 
   text = "Hover me",
   className,
-  backgroundColor = "bg-neutral-50",
-  textColor = "text-neutral-950"
+  backgroundColor = "bg-black dark:bg-white",
+  textColor = "text-white dark:text-black"
 }: { 
   text?: string
   className?: string
