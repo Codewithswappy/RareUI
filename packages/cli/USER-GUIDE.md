@@ -251,7 +251,7 @@ npx rareui diff --help
 ```
 
 ### Documentation
-Visit: https://rare-ui.vercel.app/docs
+Visit: https://rareui.in/docs
 
 ### Issues
 Report bugs: https://github.com/yourusername/rareui/issues
@@ -320,7 +320,7 @@ npx rareui diff
 ## 📊 Version Information
 
 - **Current Version:** 0.1.1
-- **Registry:** https://rare-ui.vercel.app/r
+- **Registry:** https://rareui.in/r
 - **Package:** https://www.npmjs.com/package/rareui
 
 ---

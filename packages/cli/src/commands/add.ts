@@ -4,7 +4,7 @@ import * as p from '@clack/prompts'
 import chalk from 'chalk'
 import { execa } from 'execa'
 
-const REGISTRY_URL = 'https://rare-ui.vercel.app/r'
+const REGISTRY_URL = 'https://rareui.in/r'
 
 interface AddOptions {
     yes?: boolean
