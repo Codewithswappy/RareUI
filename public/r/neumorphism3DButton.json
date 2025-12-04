@@ -3,7 +3,8 @@
   "type": "registry:ui",
   "dependencies": [
     "react",
-    "@types/react"
+    "@types/react",
+    "typescript"
   ],
   "registryDependencies": [],
   "files": [

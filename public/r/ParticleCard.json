@@ -6,7 +6,8 @@
     "motion",
     "clsx",
     "tailwind-merge",
-    "@types/react"
+    "@types/react",
+    "typescript"
   ],
   "registryDependencies": [],
   "files": [

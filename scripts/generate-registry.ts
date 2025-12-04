@@ -40,7 +40,7 @@ function extractDeps(content: string): string[] {
 }
 
 // Add TypeScript type packages for dependencies that need them
-function addTypePackages(dependencies: string[]): string[] {
+function addTypePackages(dependencies: string[], isTypeScriptFile: boolean): string[] {
   const allDeps = [...dependencies];
 
   dependencies.forEach(dep => {
@@ -48,6 +48,11 @@ function addTypePackages(dependencies: string[]): string[] {
       allDeps.push(TYPE_PACKAGES_MAP[dep]);
     }
   });
+
+  // Always add TypeScript for .tsx/.ts files
+  if (isTypeScriptFile && !allDeps.includes('typescript')) {
+    allDeps.push('typescript');
+  }
 
   return allDeps;
 }
@@ -74,7 +79,8 @@ function scanDir(dir: string, category = ''): RegistryComponent[] {
       const relativePath = path.relative(path.join(process.cwd(), 'components'), fullPath).replace(/\\/g, '/');
 
       const baseDeps = extractDeps(content);
-      const allDeps = addTypePackages(baseDeps);
+      const allDeps = addTypePackages(baseDeps, true); // true because it's a .tsx/.ts file
+
 
       results.push({
         name: name,
