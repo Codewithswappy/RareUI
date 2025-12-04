@@ -22,10 +22,21 @@ function extractDeps(content: string): string[] {
   const regex = /from\s+['"]([^'"@][^'"]*)['"]/g;
   let match;
   while ((match = regex.exec(content)) !== null) {
-    if (!match[1].startsWith('.')) deps.add(match[1]);
+    if (!match[1].startsWith('.')) {
+      // Extract only the package name (before the first slash)
+      // e.g., 'motion/react' -> 'motion', 'package/subpath' -> 'package'
+      const packageName = match[1].split('/')[0];
+      deps.add(packageName);
+    }
   }
   return Array.from(deps);
 }
+
+// Components to exclude from registry (internal use only)
+const EXCLUDED_COMPONENTS = [
+  'modal',           // Command palette - internal use only
+  'search-context'   // Search context - internal use only
+];
 
 function scanDir(dir: string, category = ''): RegistryComponent[] {
   const results: RegistryComponent[] = [];
@@ -65,7 +76,11 @@ function generate() {
     fs.mkdirSync(registryDir, { recursive: true });
   }
 
-  const components = scanDir(componentsDir);
+  const allComponents = scanDir(componentsDir);
+
+  // Filter out excluded components
+  const components = allComponents.filter(comp => !EXCLUDED_COMPONENTS.includes(comp.name));
+  const excludedCount = allComponents.length - components.length;
 
   // Write individual component files
   components.forEach(comp => {
@@ -86,6 +101,11 @@ function generate() {
 
   console.log(`✅ Generated registry for ${components.length} components`);
   components.forEach(c => console.log(`   - @rareui/${c.name}`));
+
+  if (excludedCount > 0) {
+    console.log(`\n⚠️  Excluded ${excludedCount} internal component(s):`);
+    EXCLUDED_COMPONENTS.forEach(name => console.log(`   - ${name} (internal use only)`));
+  }
 }
 
 generate();

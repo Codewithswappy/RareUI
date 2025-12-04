@@ -25,7 +25,6 @@ async function init() {
     }
   }
   const config = {
-    $schema: "https://ui.shadcn.com/schema.json",
     style: "new-york",
     rsc: true,
     tsx: true,
@@ -411,7 +410,7 @@ async function diff(component, options) {
 // src/index.ts
 import chalk4 from "chalk";
 var program = new Command();
-program.name("rareui").description(chalk4.bold("CLI for adding RareUI components to your project")).version("0.1.1").addHelpText("after", `
+program.name("rareui").description(chalk4.bold("CLI for adding RareUI components to your project")).version("0.1.2").addHelpText("after", `
 ${chalk4.bold("Examples:")}
   ${chalk4.dim("Initialize RareUI in your project")}
   ${chalk4.cyan("$ npx rareui init")}

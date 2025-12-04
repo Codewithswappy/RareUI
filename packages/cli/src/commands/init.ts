@@ -27,7 +27,6 @@ export async function init() {
 
     // Create components.json
     const config = {
-        $schema: 'https://ui.shadcn.com/schema.json',
         style: 'new-york',
         rsc: true,
         tsx: true,

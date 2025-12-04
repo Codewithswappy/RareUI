@@ -3,7 +3,7 @@
   "type": "registry:ui",
   "dependencies": [
     "react",
-    "motion/react",
+    "motion",
     "clsx",
     "tailwind-merge"
   ],

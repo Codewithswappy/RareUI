@@ -2,7 +2,7 @@
   "name": "LiquidButton",
   "type": "registry:ui",
   "dependencies": [
-    "motion/react",
+    "motion",
     "clsx",
     "tailwind-merge",
     "react"

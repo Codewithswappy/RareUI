@@ -6,8 +6,6 @@
     "loader",
     "neumorphism3DButton",
     "SoftButton",
-    "ParticleCard",
-    "modal",
-    "search-context"
+    "ParticleCard"
   ]
 }
