@@ -59,7 +59,12 @@ export default function HeroSection() {
           {['Docs', 'Components', 'Templates', 'Pricing'].map((item) => (
             <Link 
               key={item}
-              href={item === 'Components' ? '/docs' : '#'} 
+              href={
+                item === 'Docs' ? '/docs/installation/cli' :
+                item === 'Components' ? '/docs' : 
+                item === 'Templates' ? '/templates' :
+                item === 'Pricing' ? '/pricing' : '#'
+              } 
               className="relative group transition-all duration-200 hover:scale-105 hover:text-foreground"
             >
               {item}
@@ -157,7 +162,12 @@ export default function HeroSection() {
                   transition={{ delay: i * 0.1 + 0.1 }}
                 >
                   <Link 
-                    href={item === 'Components' ? '/docs' : '#'}
+                    href={
+                      item === 'Docs' ? '/docs/installation/cli' :
+                      item === 'Components' ? '/docs' : 
+                      item === 'Templates' ? '/templates' :
+                      item === 'Pricing' ? '/pricing' : '#'
+                    }
                     onClick={() => setIsMenuOpen(false)}
                     className="block py-2 transition-colors text-foreground hover:text-muted-foreground"
                   >
@@ -281,7 +291,7 @@ export default function HeroSection() {
                   text="Browse Components" 
                   backgroundColor="bg-foreground"
                   textColor="text-background"
-                  className="!p-0" // Override padding wrapper
+                  className="p-0!" // Override padding wrapper
                 /></Link>
                 
               </motion.div>

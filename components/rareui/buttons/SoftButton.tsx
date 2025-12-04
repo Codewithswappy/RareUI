@@ -1,9 +1,22 @@
 import React from 'react';
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
-const SoftButton = () => {
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+interface SoftButtonProps extends React.HTMLAttributes<HTMLDivElement> {
+  children?: React.ReactNode;
+}
+
+const SoftButton = ({ children = 'Button', className, ...props }: SoftButtonProps) => {
   return (
     // Outer Wrapper
-    <div className="group relative top-0 left-0 m-0 flex h-[50px] w-[160px] cursor-pointer items-center justify-center">
+    <div 
+      className={cn("group relative top-0 left-0 m-0 flex h-[50px] w-[160px] cursor-pointer items-center justify-center", className)}
+      {...props}
+    >
       
       {/* Inner Div */}
       <div
@@ -12,10 +25,11 @@ const SoftButton = () => {
           
           /* Base Styles */
           bg-transparent
-          text-destructive
+          text-foreground
           tracking-[1px]
           rounded-[30px]
           z-10
+          font-medium
           
           /* Borders */
           border-t border-b border-white/10 dark:border-black/20
@@ -43,15 +57,15 @@ const SoftButton = () => {
           transition-all duration-[600ms]
           
           /* Hover States */
-          group-hover:bg-destructive
-          group-hover:text-destructive-foreground
-          group-hover:tracking-[4px]
+          group-hover:bg-primary
+          group-hover:text-primary-foreground
+          group-hover:tracking-[2px]
           
-          /* Dark Mode Hover Adjustment (Optional: keeps the red vibrant) */
-          dark:group-hover:shadow-[0_0_15px_hsl(var(--destructive)/0.5)]
+          /* Dark Mode Hover Adjustment */
+          dark:group-hover:shadow-[0_0_15px_hsl(var(--primary)/0.5)]
         "
       >
-        Delete
+        {children}
       </div>
     </div>
   );

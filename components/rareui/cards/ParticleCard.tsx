@@ -159,7 +159,7 @@ export default function ParticleCard({
       >
         
         {/* --- Background Content (Revealed on Hover) --- */}
-        <div className="absolute inset-0 flex flex-col p-6 pt-4 pb-6 bg-gradient-to-br from-background to-muted z-0">
+        <div className="absolute inset-0 flex flex-col p-6 pt-4 pb-6 bg-linear-to-br from-background to-muted z-0">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -183,7 +183,7 @@ export default function ParticleCard({
               ))}
             </div>
 
-            <button className="mt-3 w-full py-3 !bg-primary text-primary-foreground rounded-xl font-semibold text-sm hover:!bg-primary/90 transition-all !flex !items-center !justify-center gap-2 group/btn duration-300 cursor-pointer shadow-lg !border-0">
+            <button className="mt-3 w-full py-3 bg-primary! text-primary-foreground rounded-xl font-semibold text-sm hover:bg-primary/90! transition-all flex! items-center! justify-center! gap-2 group/btn duration-300 cursor-pointer shadow-lg border-0!">
               View Profile
               <svg className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -207,7 +207,7 @@ export default function ParticleCard({
           {/* Overlay Gradient for text readability (fades out) */}
           <div 
             className={cn(
-              "absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent transition-opacity duration-500",
+              "absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent transition-opacity duration-500",
               active ? "opacity-0" : "opacity-100"
             )} 
           />

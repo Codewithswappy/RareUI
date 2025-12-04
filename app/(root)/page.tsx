@@ -1,10 +1,11 @@
 import HeroSection from '@/components/landing/HeroSection';
+import Footer from '@/components/landing/Footer';
 
 export default function Home() {
   return (
-    <main>
+    <main className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <HeroSection />   
-      {/* Rest of your content */}
+      {/* <Footer /> */}
     </main>
   );
 }
