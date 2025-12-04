@@ -51,6 +51,10 @@ export const sidebarData = [
       {
         "title": "Soft Button",
         "href": "/docs/components/buttons/soft-button"
+      },
+      {
+        "title": "Upgrade Button",
+        "href": "/docs/components/buttons/upgrade-button"
       }
     ]
   },
@@ -60,6 +64,10 @@ export const sidebarData = [
       {
         "title": "Particle Card",
         "href": "/docs/components/cards/particle-card"
+      },
+      {
+        "title": "Premium Profile Card",
+        "href": "/docs/components/cards/premium-profile-card"
       }
     ]
   }

@@ -1,0 +1,48 @@
+"use client";
+
+import React from "react";
+
+export const UpgradeButton = () => {
+  return (
+    <button
+      className="
+        group
+        w-fit
+        flex items-center gap-[0.4rem]
+        px-10 py-[1.2em]
+        cursor-pointer
+        font-bold
+        rounded-[30px]
+        text-black
+        border-none
+        
+        /* Gradient Background */
+        bg-[linear-gradient(15deg,#ddff00,#b8d100,#93a300,#6e7500,#ddff00,#b8d100,#93a300,#6e7500)]
+        bg-[length:300%]
+        bg-left
+        
+        /* Shadows */
+        [text-shadow:2px_2px_3px_rgba(221,255,0,0.3)]
+        shadow-[0_30px_10px_-20px_rgba(221,255,0,0.2)]
+        
+        /* Transitions */
+        transition-[background,color] duration-300 ease-out
+        
+        /* Hover States */
+        hover:bg-[length:320%]
+        hover:bg-right
+      "
+    >
+      <svg
+        viewBox="0 0 36 24"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-[23px] fill-black transition-all duration-300 ease-out group-hover:fill-black"
+      >
+        <path d="m18 0 8 12 10-8-4 20H4L0 4l10 8 8-12z"></path>
+      </svg>
+      Premium
+    </button>
+  );
+};
+
+export default UpgradeButton;

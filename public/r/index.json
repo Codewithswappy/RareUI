@@ -6,6 +6,8 @@
     "loader",
     "neumorphism3DButton",
     "SoftButton",
-    "ParticleCard"
+    "upgrade-button",
+    "ParticleCard",
+    "premiumProfileCard"
   ]
 }
