@@ -178,13 +178,27 @@ export async function add(components: string[], options: AddOptions) {
 
             p.log.success(`Added ${chalk.cyan(componentName)} → ${chalk.dim(component.files[0].target)}`)
 
+
             // Install dependencies
             if (component.dependencies && component.dependencies.length > 0) {
                 const s2 = p.spinner()
                 s2.start('Installing dependencies')
 
                 try {
-                    await execa('npm', ['install', ...component.dependencies], { cwd })
+                    // Separate runtime deps from type definitions
+                    const runtimeDeps = component.dependencies.filter(dep => !dep.startsWith('@types/'))
+                    const typeDeps = component.dependencies.filter(dep => dep.startsWith('@types/'))
+
+                    // Install runtime dependencies
+                    if (runtimeDeps.length > 0) {
+                        await execa('npm', ['install', ...runtimeDeps], { cwd })
+                    }
+
+                    // Install type definitions as dev dependencies
+                    if (typeDeps.length > 0) {
+                        await execa('npm', ['install', '--save-dev', ...typeDeps], { cwd })
+                    }
+
                     s2.stop('Dependencies installed')
                 } catch (error) {
                     s2.stop('Failed to install dependencies')

@@ -2,7 +2,8 @@
   "name": "neumorphism3DButton",
   "type": "registry:ui",
   "dependencies": [
-    "react"
+    "react",
+    "@types/react"
   ],
   "registryDependencies": [],
   "files": [

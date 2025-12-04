@@ -17,6 +17,13 @@ interface RegistryComponent {
   }>;
 }
 
+// Map of packages that need @types/* packages
+const TYPE_PACKAGES_MAP: Record<string, string> = {
+  'react': '@types/react',
+  'react-dom': '@types/react-dom',
+  'node': '@types/node',
+};
+
 function extractDeps(content: string): string[] {
   const deps = new Set<string>();
   const regex = /from\s+['"]([^'"@][^'"]*)['"]/g;
@@ -30,6 +37,19 @@ function extractDeps(content: string): string[] {
     }
   }
   return Array.from(deps);
+}
+
+// Add TypeScript type packages for dependencies that need them
+function addTypePackages(dependencies: string[]): string[] {
+  const allDeps = [...dependencies];
+
+  dependencies.forEach(dep => {
+    if (TYPE_PACKAGES_MAP[dep] && !allDeps.includes(TYPE_PACKAGES_MAP[dep])) {
+      allDeps.push(TYPE_PACKAGES_MAP[dep]);
+    }
+  });
+
+  return allDeps;
 }
 
 // Components to exclude from registry (internal use only)
@@ -53,10 +73,13 @@ function scanDir(dir: string, category = ''): RegistryComponent[] {
       const name = item.replace(/\.(tsx|ts)$/, '');
       const relativePath = path.relative(path.join(process.cwd(), 'components'), fullPath).replace(/\\/g, '/');
 
+      const baseDeps = extractDeps(content);
+      const allDeps = addTypePackages(baseDeps);
+
       results.push({
         name: name,
         type: 'registry:ui',
-        dependencies: extractDeps(content),
+        dependencies: allDeps,
         registryDependencies: [],
         files: [{
           path: `components/${relativePath}`,

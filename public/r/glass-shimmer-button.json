@@ -2,7 +2,8 @@
   "name": "glass-shimmer-button",
   "type": "registry:ui",
   "dependencies": [
-    "react"
+    "react",
+    "@types/react"
   ],
   "registryDependencies": [],
   "files": [

@@ -176,7 +176,14 @@ Do you want to overwrite them?`,
         const s22 = p2.spinner();
         s22.start("Installing dependencies");
         try {
-          await execa("npm", ["install", ...component.dependencies], { cwd });
+          const runtimeDeps = component.dependencies.filter((dep) => !dep.startsWith("@types/"));
+          const typeDeps = component.dependencies.filter((dep) => dep.startsWith("@types/"));
+          if (runtimeDeps.length > 0) {
+            await execa("npm", ["install", ...runtimeDeps], { cwd });
+          }
+          if (typeDeps.length > 0) {
+            await execa("npm", ["install", "--save-dev", ...typeDeps], { cwd });
+          }
           s22.stop("Dependencies installed");
         } catch (error) {
           s22.stop("Failed to install dependencies");
