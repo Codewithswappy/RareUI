@@ -48,7 +48,7 @@ export function ComponentsGrid() {
                 <div key={itemIndex}>
                   <Link 
                     href={item.href} 
-                    className="block border border-border rounded-md overflow-hidden hover:border-primary/50 transition-colors no-underline hover:shadow-lg"
+                    className="block border border-border rounded-md overflow-hidden hover:border-neutral-100/50  transition-all ease-linear duration-500 no-underline hover:shadow-lg"
                   >
                     <div className="aspect-square bg-neutral-50 dark:bg-neutral-900 flex items-center justify-center p-4 overflow-hidden">
                       {Component ? <Component /> : <div className="text-muted-foreground text-sm">Preview</div>}

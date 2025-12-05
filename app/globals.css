@@ -153,11 +153,16 @@
   .animate-border-spin {
     animation: borderSpin 4s linear infinite;
   }
+  
+  @keyframes shrink {
+    from { transform: scaleX(1); }
+    to { transform: scaleX(0); }
+  }
 }
 
 /* Custom scrollbar for main content */
 main::-webkit-scrollbar {
-  width: 6px !important;
+  width: 4px !important;
 }
 
 main::-webkit-scrollbar-track {
@@ -165,19 +170,19 @@ main::-webkit-scrollbar-track {
 }
 
 main::-webkit-scrollbar-thumb {
-  background: hsl(var(--border)) !important;
+  background: transparent !important;
   border-radius: 4px !important;
   min-height: 40px !important;
 }
 
 main::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground)) !important;
+  background: hsl(var(--border) / 0.4) !important;
 }
 
 /* Custom scrollbar for sidebar */
 aside::-webkit-scrollbar,
 aside > div::-webkit-scrollbar {
-  width: 6px !important;
+  width: 4px !important;
 }
 
 aside::-webkit-scrollbar-track,
@@ -187,19 +192,19 @@ aside > div::-webkit-scrollbar-track {
 
 aside::-webkit-scrollbar-thumb,
 aside > div::-webkit-scrollbar-thumb {
-  background: hsl(var(--border)) !important;
+  background: transparent !important;
   border-radius: 3px !important;
   min-height: 40px !important;
 }
 
 aside::-webkit-scrollbar-thumb:hover,
 aside > div::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground)) !important;
+  background: hsl(var(--border) / 0.4) !important;
 }
 
 /* Global scrollbar */
 *::-webkit-scrollbar {
-  width: 6px !important;
+  width: 4px !important;
 }
 
 *::-webkit-scrollbar-track {
@@ -207,15 +212,15 @@ aside > div::-webkit-scrollbar-thumb:hover {
 }
 
 *::-webkit-scrollbar-thumb {
-  background: hsl(var(--border)) !important;
+  background: transparent !important;
   border-radius: 3px !important;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground)) !important;
+  background: hsl(var(--border) / 0.4) !important;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: hsl(var(--border)) transparent;
+  scrollbar-color: transparent transparent;
 }

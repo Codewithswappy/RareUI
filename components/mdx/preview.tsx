@@ -191,18 +191,56 @@ Ensure it's fully functional, responsive, and matches the original design exactl
 
   return (
     <div className={cn("my-6 w-full", className)}>
-      {/* Toast Notification */}
+      {/* Premium Toast Notification */}
       {showToast && (
-        <div className="fixed bottom-4 right-8 z-50 animate-in slide-in-from-top-2">
-          <div className="bg-popover border border-border rounded-md shadow-lg p-4 max-w-md">
-            <div className="flex items-start gap-3">
-              <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-              <div>
-                <p className="text-sm font-medium text-popover-foreground">Prompt copied for {toastPlatform}!</p>
-                <p className="text-xs text-muted-foreground mt-0.5">Paste this in {toastPlatform} to get the same output</p>
+        <div className="fixed bottom-6 right-6 z-50 animate-in slide-in-from-bottom-4 duration-500">
+          <div className="group relative bg-gradient-to-br from-background/95 via-background/90 to-background/95 border border-border/50 rounded-2xl shadow-2xl backdrop-blur-xl p-5 max-w-sm overflow-hidden">
+            {/* Gradient Border Effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-neutral-500/20 via-neutral-300/10 to-neutral-100/20 rounded-2xl opacity-50 group-hover:opacity-70 transition-opacity duration-300" />
+            
+            {/* Shimmer Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
+            
+            {/* Content */}
+            <div className="relative flex items-start gap-4">
+              {/* Animated Success Icon */}
+              <div className="relative flex-shrink-0">
+                {/* Pulsing Background */}
+                <div className="absolute inset-0 bg-neutral-500/20 rounded-full animate-ping" />
+                <div className="absolute inset-0 bg-gradient-to-br from-neutral-400 to-neutral-600 rounded-full opacity-20 blur-md" />
+                
+                {/* Icon Container */}
+                <div className="relative bg-gradient-to-br from-neutral-50 to-neutral-100 rounded-full p-2 shadow-lg shadow-white/30">
+                  <svg className="w-5 h-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
               </div>
+              
+              {/* Text Content */}
+              <div className="flex-1 pt-0.5">
+                <p className="text-sm font-semibold text-foreground bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">
+                  Prompt copied for {toastPlatform}!
+                </p>
+                <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">
+                  Paste this in <span className="font-medium text-foreground/70">{toastPlatform}</span> to get the same output
+                </p>
+              </div>
+              
+              {/* Close Button */}
+              <button
+                onClick={() => setShowToast(false)}
+                className="flex-shrink-0 text-muted-foreground hover:text-foreground transition-colors rounded-lg p-1 hover:bg-accent/50"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            {/* Progress Bar */}
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-neutral-200/20 via-nutral-200/20 to-neutral-100/20 rounded-b-2xl overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-neutral-500 via-neutral-500 to-neutral-500 animate-[shrink_2s_linear_forwards] origin-left" />
             </div>
           </div>
         </div>
