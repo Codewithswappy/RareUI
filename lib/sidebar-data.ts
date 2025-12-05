@@ -1,13 +1,5 @@
 export const sidebarData = [
-  {
-    "title": "Follow for updates",
-    "items": [
-      {
-        "title": "Twitter @heyyswap",
-        "href": "https://x.com/heyyswap"
-      }
-    ]
-  },
+
   {
     "title": "Installation",
     "items": [

@@ -24,14 +24,14 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/yourusername/rareui.git",
+        "url": "https://github.com/Codewithswappy/rareui.git",
         "directory": "packages/cli"
     },
     "homepage": "https://rareui.in",
     "bugs": {
-        "url": "https://github.com/yourusername/rareui/issues"
+        "url": "https://github.com/Codewithswappy/rareui/issues"
     },
-    "author": "Your Name",
+    "author": "Swappy",
     "license": "MIT",
     "dependencies": {
         "@clack/prompts": "^0.7.0",

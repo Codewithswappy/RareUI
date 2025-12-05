@@ -153,7 +153,7 @@ export default function RootLayout({
               "url": "https://rareui.in",
               "sameAs": [
                 "https://x.com/heyyswap",
-                "https://github.com/yourusername/rareui"
+                "https://github.com/Codewithswappy"
               ]
             })
           }}

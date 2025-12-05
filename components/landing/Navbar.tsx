@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link"
+import { TransitionLink } from '@/components/ui/TransitionLink'
 import Image from "next/image"
 import { useSearchContext } from '@/components/rareui/search-context'
 import { useState, useEffect } from 'react'
@@ -39,8 +40,42 @@ export default function Navbar() {
 
   const isDark = mounted && (theme === 'dark' || resolvedTheme === 'dark');
 
-  const toggleTheme = () => {
-    setTheme(isDark ? "light" : "dark");
+  const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // If view transitions are not supported, just switch theme
+    if (!document.startViewTransition) {
+      setTheme(isDark ? "light" : "dark");
+      return;
+    }
+
+    const x = e.clientX;
+    const y = e.clientY;
+    
+    const endRadius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = document.startViewTransition(() => {
+         setTheme(isDark ? "light" : "dark");
+    });
+    
+    transition.ready.then(() => {
+        const clipPath = [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${endRadius}px at ${x}px ${y}px)`,
+        ];
+        
+        document.documentElement.animate(
+            {
+                clipPath: clipPath,
+            },
+            {
+                duration: 750, // Smoother and slightly slower
+                easing: "ease-in-out",
+                pseudoElement: "::view-transition-new(root)",
+            }
+        );
+    });
   };
 
   return (
@@ -59,8 +94,14 @@ export default function Navbar() {
           {/* Left Side: Logo + Links */}
           <div className="flex items-center gap-8">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 z-50">
-              <div className="relative w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+            <TransitionLink href="/" className="flex items-center gap-3 z-50">
+              <motion.div 
+                className="relative w-8 h-8 md:w-10 md:h-10 flex items-center justify-center"
+                whileHover={{ 
+                  rotate: [0, -10, 10, -10, 10, 0],
+                  transition: { duration: 0.5 }
+                }}
+              >
                 <Image 
                   src="/RareUI_Logo.svg"
                   alt="RareUI Logo" 
@@ -68,8 +109,8 @@ export default function Navbar() {
                   height={40}
                   className={`object-contain transition-all duration-300 brightness-0 ${isDark ? 'invert' : ''}`}
                 />
-              </div>
-            </Link>
+              </motion.div>
+            </TransitionLink>
 
             {/* Desktop Navigation Links */}
             <div className="hidden md:flex items-center gap-6">
@@ -77,9 +118,10 @@ export default function Navbar() {
                 { name: 'Home', href: '/' },
                 { name: 'Docs', href: '/docs/installation/cli' },
                 { name: 'Components', href: '/docs' },
+                { name: 'Templates', href: '/templates' },
                 { name: 'Pricing', href: '/pricing' }
               ].map((item) => (
-                <Link 
+                <TransitionLink 
                   key={item.name}
                   href={item.href}
                   className={`text-sm font-medium transition-all duration-400 hover:-translate-y-0.5 ease-in-out ${
@@ -87,7 +129,7 @@ export default function Navbar() {
                   }`}
                 >
                   {item.name}
-                </Link>
+                </TransitionLink>
               ))}
             </div>
           </div>
@@ -95,6 +137,21 @@ export default function Navbar() {
           {/* Right Side: Search + Actions */}
           <div className="flex items-center gap-2">
             
+            {/* Twitter Icon */}
+            <a 
+              href="https://x.com/heyyswap" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className={`p-2 rounded-full transition-colors hidden md:block ${
+                isDark ? 'hover:bg-white/10 text-gray-300' : 'hover:bg-black/5 text-gray-600'
+              }`}
+              aria-label="Twitter Profile"
+            >
+               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+               </svg>
+            </a>
+
             {/* Search Bar (Desktop) - Smooth Transition */}
             <div 
                className={`relative group hidden lg:flex items-center justify-end transition-all duration-500 ease-in-out ${isScrolled ? 'w-10' : 'w-64'}`}
@@ -105,7 +162,7 @@ export default function Navbar() {
                  className={`
                    relative flex items-center gap-2 whitespace-nowrap transition-all duration-500 overflow-hidden
                    border border-border bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground 
-                   px-4 py-2 justify-start rounded-xl text-sm font-normal shadow-sm hover:shadow-md h-10 w-full backdrop-blur-md
+                   px-4 py-2 justify-start rounded-xl text-sm font-normal shadow-sm hover:shadow-md cursor-pointer h-10 w-full backdrop-blur-md
                    ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}
                  `}
                  type="button"
@@ -135,7 +192,7 @@ export default function Navbar() {
                {/* Icon on Right (Visible ONLY when Scrolled) */}
                <button 
                   onClick={() => setOpenSearch(true)}
-                  className={`absolute right-0 p-2.5 rounded-full z-20 transition-all duration-300 ${
+                  className={`absolute right-0 p-2.5 cursor-pointer rounded-full z-20 transition-all duration-300 ${
                     isDark ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-black'
                   } ${isScrolled ? 'opacity-100 scale-100' : 'opacity-0 scale-75 pointer-events-none'}`}
                >
@@ -165,11 +222,11 @@ export default function Navbar() {
               }`}
             >
               {isDark ? (
-                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                 <svg className="w-5 h-5 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                  </svg>
                ) : (
-                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                 <svg className="w-5 h-5 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                  </svg>
                )}
@@ -205,6 +262,7 @@ export default function Navbar() {
               {[
                 { name: 'Home', href: '/' },
                 { name: 'Components', href: '/docs' },
+                { name: 'Templates', href: '/templates' },
                 { name: 'Pricing', href: '/pricing' }
               ].map((item, i) => (
                 <motion.div
@@ -213,13 +271,13 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1 + 0.1 }}
                 >
-                  <Link 
+                  <TransitionLink 
                     href={item.href}
                     onClick={() => setIsMenuOpen(false)}
                     className="block py-2 transition-colors text-foreground hover:text-muted-foreground"
                   >
                     {item.name}
-                  </Link>
+                  </TransitionLink>
                 </motion.div>
               ))}
               
@@ -230,11 +288,11 @@ export default function Navbar() {
                 transition={{ delay: 0.4 }}
                 className="mt-4"
               >
-                <Link href="/docs/installation/cli" onClick={() => setIsMenuOpen(false)}>
+                <TransitionLink href="/docs/installation/cli" onClick={() => setIsMenuOpen(false)}>
                   <button className="w-full cursor-pointer rounded-lg bg-foreground px-6 py-3 font-semibold tracking-wide text-background shadow-lg hover:opacity-90 transition-opacity">
                     Get Started
                   </button>
-                </Link>
+                </TransitionLink>
               </motion.div>
             </div>
           </motion.div>

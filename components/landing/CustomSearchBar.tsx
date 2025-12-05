@@ -23,7 +23,7 @@ export function CustomSearchBar() {
   return (
     <button
       onClick={() => setOpenSearch(true)}
-      className="relative inline-flex items-center gap-2 whitespace-nowrap transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-border bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground px-4 py-2 justify-start rounded-xl text-sm font-normal shadow-sm hover:shadow-md h-10 w-64 backdrop-blur-md group"
+      className="relative inline-flex items-center gap-2 whitespace-nowrap transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-border bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground px-4 py-2 justify-start rounded-xl text-sm font-normal shadow-sm hover:shadow-md h-10 w-64 backdrop-blur-md group cursor-pointer"
       type="button"
     >
       <svg 

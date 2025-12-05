@@ -16,7 +16,7 @@ export function ThemeToggle() {
   if (!mounted) {
     return (
       <button
-        className="p-2 rounded-lg hover:bg-accent transition-colors"
+        className="p-2 rounded-lg hover:bg-accent transition-colors cursor-pointer"
         aria-label="Toggle theme"
         disabled
       >
@@ -28,20 +28,56 @@ export function ThemeToggle() {
   // Use resolvedTheme to get the actual theme (handles "system" theme)
   const isDark = resolvedTheme === "dark";
 
-  const toggleTheme = () => {
-    if (theme === "system") {
-      // If system, toggle to the opposite of current resolved theme
-      setTheme(isDark ? "light" : "dark");
-    } else {
-      // Toggle between light and dark
-      setTheme(isDark ? "light" : "dark");
+  const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // If view transitions are not supported, just switch theme
+    if (!document.startViewTransition) {
+      if (theme === "system") {
+        setTheme(isDark ? "light" : "dark");
+      } else {
+        setTheme(isDark ? "light" : "dark");
+      }
+      return;
     }
+
+    const x = e.clientX;
+    const y = e.clientY;
+    
+    const endRadius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = document.startViewTransition(() => {
+       if (theme === "system") {
+         setTheme(isDark ? "light" : "dark");
+       } else {
+         setTheme(isDark ? "light" : "dark");
+       }
+    });
+
+    transition.ready.then(() => {
+        const clipPath = [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${endRadius}px at ${x}px ${y}px)`,
+        ];
+        
+        document.documentElement.animate(
+            {
+                clipPath: clipPath,
+            },
+            {
+                duration: 750,
+                easing: "ease-in-out",
+                pseudoElement: "::view-transition-new(root)",
+            }
+        );
+    });
   };
 
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-lg hover:bg-accent transition-colors"
+      className="p-2 rounded-lg hover:bg-accent transition-colors cursor-pointer"
       aria-label="Toggle theme"
     >
       {isDark ? (

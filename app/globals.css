@@ -224,3 +224,18 @@ aside > div::-webkit-scrollbar-thumb:hover {
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
 }
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Ensure the new view is always on top for the expanding circle effect */
+::view-transition-new(root) {
+  z-index: 2147483646;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}

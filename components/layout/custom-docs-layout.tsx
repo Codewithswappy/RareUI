@@ -2,11 +2,13 @@
 
 import { ReactNode, useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { TransitionLink } from "@/components/ui/TransitionLink";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { CustomSearchBar } from "@/components/landing/CustomSearchBar";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { DraggableTwitterBadge } from "@/components/layout/draggable-twitter-badge";
+import { motion } from "motion/react";
 
 interface SidebarItem {
   title: string;
@@ -64,33 +66,41 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
                 <span className={cn("absolute left-0 w-full h-0.5 bg-foreground transition-all duration-300 ease-in-out rounded-full", isOpen ? "top-1.5 -rotate-45" : "top-3")} />
               </div>
             </button>
-            <Link href="/" className="hidden md:block">
-              <Image
-                src="/RareUI_Logo.svg"
-                alt="RareUI"
-                className="h-16 w-auto invert dark:invert-0"
-                width={80}
-                height={80}
-              />
-            </Link>
-            <Link
+            <TransitionLink href="/" className="hidden md:block">
+              <motion.div
+                className="relative"
+                whileHover={{ 
+                  rotate: [0, -10, 10, -10, 10, 0],
+                  transition: { duration: 0.5 }
+                }}
+              >
+                <Image
+                  src="/RareUI_Logo.svg"
+                  alt="RareUI"
+                  className="h-16 w-auto invert dark:invert-0"
+                  width={80}
+                  height={80}
+                />
+              </motion.div>
+            </TransitionLink>
+            <TransitionLink
               href="/docs"
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-200 hover:scale-105 active:scale-95 hidden md:block"
             >
               Components
-            </Link>
-            <Link
+            </TransitionLink>
+            <TransitionLink
               href="/templates"
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-200 hover:scale-105 active:scale-95 hidden md:block"
             >
               Templates
-            </Link>
-            <Link
+            </TransitionLink>
+            <TransitionLink
               href="/pricing"
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-200 hover:scale-105 active:scale-95 hidden md:block"
             >
               Pricing
-            </Link>
+            </TransitionLink>
           </div>
 
           {/* Right: Search & Theme */}
@@ -150,13 +160,13 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
                           {linkContent}
                         </a>
                       ) : (
-                        <Link
+                        <TransitionLink
                           key={itemIndex}
                           href={item.href}
                           onClick={() => setIsOpen(false)}
                         >
                           {linkContent}
-                        </Link>
+                        </TransitionLink>
                       );
                     })}
                   </div>
@@ -182,6 +192,9 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
           onTouchMove={(e) => e.preventDefault()}
         />
       )}
+      
+      {/* Draggable Twitter Badge */}
+      <DraggableTwitterBadge />
     </div>
   );
 }
