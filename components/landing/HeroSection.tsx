@@ -138,10 +138,10 @@ export default function HeroSection() {
              initial={{ opacity: 0, scale: 0.95 }}
              animate={{ opacity: 1, scale: 1 }}
              transition={{ duration: 1, delay: 0.2 }}
-             className="relative w-full aspect-square md:aspect-[2/3] lg:aspect-square bg-background rounded-lg overflow-hidden flex items-center justify-center p-0 lg:p-0"
+             className="relative w-full min-h-[500px] md:min-h-0 md:aspect-[2/3] lg:aspect-square bg-background rounded-lg overflow-hidden flex items-center justify-center p-2 lg:p-0"
           >
              {/* Premium Profile Card */}
-             <div className="relative z-10 scale-90 sm:scale-100">
+             <div className="relative z-10 scale-[0.85] sm:scale-100">
                 <PremiumProfileCard />
              </div>
 
