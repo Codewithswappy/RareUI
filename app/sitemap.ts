@@ -1,36 +1,58 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    return [
+    const baseUrl = 'https://rareui.in'
+
+    // Main pages with high priority
+    const mainPages = [
         {
-            url: 'https://rareui.in',
+            url: baseUrl,
             lastModified: new Date(),
-            changeFrequency: 'yearly',
+            changeFrequency: 'daily' as const,
             priority: 1,
         },
         {
-            url: 'https://rareui.in/docs',
+            url: `${baseUrl}/docs`,
             lastModified: new Date(),
-            changeFrequency: 'weekly',
+            changeFrequency: 'daily' as const,
+            priority: 0.9,
+        },
+        {
+            url: `${baseUrl}/docs/installation/cli`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly' as const,
+            priority: 0.9,
+        },
+        {
+            url: `${baseUrl}/templates`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly' as const,
             priority: 0.8,
         },
         {
-            url: 'https://rareui.in/components',
+            url: `${baseUrl}/pricing`,
             lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.8,
-        },
-        {
-            url: 'https://rareui.in/templates',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: 'https://rareui.in/pricing',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
+            changeFrequency: 'monthly' as const,
+            priority: 0.7,
         },
     ]
+
+    // All component pages for better indexing
+    const componentPages = [
+        '/docs/components/buttons/glass-shimmer-button',
+        '/docs/components/buttons/liquid-button',
+        '/docs/components/buttons/loader',
+        '/docs/components/buttons/neumorphism3DButton',
+        '/docs/components/buttons/soft-button',
+        '/docs/components/buttons/upgrade-button',
+        '/docs/components/cards/particle-card',
+        '/docs/components/cards/premium-profile-card',
+    ].map((path) => ({
+        url: `${baseUrl}${path}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.8,
+    }))
+
+    return [...mainPages, ...componentPages]
 }

@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin
+
+# Sitemaps
+Sitemap: https://rareui.in/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 0
+
+# Google bot specific rules
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+
+# Bing bot
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
