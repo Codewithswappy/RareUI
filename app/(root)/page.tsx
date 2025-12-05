@@ -1,6 +1,10 @@
 import dynamic from 'next/dynamic';
 import HeroSection from '@/components/landing/HeroSection';
 
+const HowItWorks = dynamic(() => import('@/components/landing/HowItWorks'), {
+  loading: () => <div className="h-[500px] w-full bg-background" />,
+});
+
 const FeatureSection = dynamic(() => import('@/components/landing/FeatureSection'), {
   loading: () => <div className="h-[600px] w-full bg-background" />, // Simple placeholder to prevent layout shift
 });
@@ -13,6 +17,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <HeroSection />
+      <HowItWorks />
       <FeatureSection />   
       <Footer />
     </main> 

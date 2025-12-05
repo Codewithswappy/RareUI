@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useDragControls } from "motion/react";
-import { useEffect, useRef } from "react";
+import { motion } from "motion/react";
+import { useRef } from "react";
 
 export function DraggableTwitterBadge() {
   const constraintsRef = useRef(null);
