@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { RootProvider } from "fumadocs-ui/provider";
 import { ThemeProvider } from "next-themes";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -66,10 +67,17 @@ export const metadata: Metadata = {
     description: "100+ free, beautifully designed React components. Built with Tailwind CSS & Framer Motion. Open source, copy-paste ready, and production-ready.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-imagebalck.png",
         width: 1200,
         height: 630,
         alt: "RareUI - Free React UI Components Library",
+        type: "image/png",
+      },
+      {
+        url: "/og-imagewhite.png",
+        width: 1200,
+        height: 630,
+        alt: "RareUI - Free React UI Components Library (Light)",
         type: "image/png",
       }
     ],
@@ -80,7 +88,7 @@ export const metadata: Metadata = {
     creator: "@heyyswap",
     title: "RareUI - Free Open Source React UI Components",
     description: "100+ free, beautiful React components built with Tailwind CSS. Open source and copy-paste ready.",
-    images: ["/og-image.png"],
+    images: ["/og-imagebalck.png", "/og-imagewhite.png"],
   },
   alternates: {
     canonical: "https://rareui.in",
@@ -89,16 +97,13 @@ export const metadata: Metadata = {
   classification: "UI Component Library",
   icons: {
     icon: [
+      { url: '/favicon.png', type: 'image/png' },
       { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
     apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/favicon.png', sizes: '180x180', type: 'image/png' },
     ],
-    other: [
-      { rel: 'mask-icon', url: '/favicon.ico' },
-    ],
+    shortcut: '/favicon.png',
   },
   manifest: '/site.webmanifest',
 };
@@ -113,8 +118,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="icon" href="/favicon.png" type="image/png" />
         <link rel="canonical" href="https://rareui.in" />
         <meta name="theme-color" content="#000000" />
+        {/* Google Site Verification - Replace with your actual verification code */}
+        <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || ""} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -158,6 +166,10 @@ export default function RootLayout({
             })
           }}
         />
+        {/* Google Analytics */}
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <GoogleAnalytics GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+        )}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
