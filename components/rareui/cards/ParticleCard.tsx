@@ -65,9 +65,9 @@ const Particle = ({
     opacity: active ? 0 : 1, 
     // Remove artifacts when inactive
     boxShadow: active ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
-    borderRadius: active ? '4px' : '0', 
-    width: `100.5%`, // Slight overlap to prevent sub-pixel gaps
-    height: `100.5%`,
+    borderRadius: active ? 4 : 0, 
+    width: '100.5%', // Slight overlap to prevent sub-pixel gaps
+    height: '100.5%',
     willChange: 'transform, opacity',
     position: 'absolute',
     top: 0,

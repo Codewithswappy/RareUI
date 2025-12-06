@@ -107,6 +107,8 @@ export default function Navbar() {
                   alt="RareUI Logo" 
                   width={40} 
                   height={40}
+                  priority
+                  fetchPriority="high"
                   className={`object-contain transition-all duration-300 brightness-0 ${isDark ? 'invert' : ''}`}
                 />
               </motion.div>
