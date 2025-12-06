@@ -41,7 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const componentPages = [
         '/docs/components/buttons/glass-shimmer-button',
         '/docs/components/buttons/liquid-button',
-        '/docs/components/buttons/loader',
+
         '/docs/components/buttons/neumorphism3DButton',
         '/docs/components/buttons/soft-button',
         '/docs/components/buttons/upgrade-button',

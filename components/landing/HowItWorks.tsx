@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 import { Check, Terminal, Search, Code, Palette, Zap } from "lucide-react";
+import SkewOnScroll from "@/components/ui/SkewOnScroll";
 
 // Custom hook for mouse position (if needed for individual card glow, but user asked for "flow around cards border")
 // We will use a simpler CSS approach for the flowing border using a moving gradient on the parent container's mask or border image.
@@ -31,17 +32,20 @@ export default function HowItWorks() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16 space-y-4">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-sm font-semibold tracking-wide text-primary uppercase"
-          >
-            How It Works
-          </motion.h2>
+          <SkewOnScroll>
+            <motion.h2 
+                initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-sm font-semibold tracking-wide text-primary uppercase"
+            >
+                How It Works
+            </motion.h2>
+          </SkewOnScroll>
           
           <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground max-w-3xl mx-auto leading-tight">
+            <SkewOnScroll className="inline-block">
              {["Built", "for", "developers."].map((word, i) => (
                 <motion.span
                   key={i}
@@ -54,30 +58,32 @@ export default function HowItWorks() {
                   {word}
                 </motion.span>
              ))}
+            </SkewOnScroll>
              <br className="hidden md:block" />
-             {["Designed", "for", "speed."].map((word, i) => (
+             <SkewOnScroll className="inline-block">
                 <motion.span
-                  key={`line2-${i}`}
-                  initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + (i * 0.1), duration: 0.5 }}
-                  className="inline-block mr-2"
+                    initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                    whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3, duration: 0.5 }}
+                    className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-600 to-neutral-400 dark:from-neutral-600 dark:to-neutral-500"
                 >
-                  {word}
+                    Designed for speed.
                 </motion.span>
-             ))}
+             </SkewOnScroll>
           </h3>
 
-          <motion.p 
-            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="text-lg text-muted-foreground max-w-2xl mx-auto"
-          >
-            Stop reinventing the wheel. From copy-paste to CLI installation, our workflow streamlines your UI development so you can focus on building features.
-          </motion.p>
+          <SkewOnScroll>
+            <motion.p 
+                initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="text-lg text-muted-foreground max-w-2xl mx-auto"
+            >
+                Stop reinventing the wheel. From copy-paste to CLI installation, our workflow streamlines your UI development so you can focus on building features.
+            </motion.p>
+          </SkewOnScroll>
         </div>
 
         {/* Glowing Grid Container */}
@@ -117,6 +123,7 @@ export default function HowItWorks() {
                 }}
                 className="group relative bg-background dark:bg-background p-8 md:p-10 h-[320px] md:h-[350px] transition-colors duration-300"
               >
+                 <CardBeam />
                  <div className="relative z-10 h-full flex flex-col justify-between">
                    <div className="space-y-4">
                     <div className="flex items-start gap-4">
@@ -220,6 +227,7 @@ export default function HowItWorks() {
                 }}
                 className="group relative bg-background dark:bg-background p-8 md:p-10 h-[320px] md:h-[350px] transition-colors duration-300"
               >
+                 <CardBeam />
                  <div className="relative z-10 h-full flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-start gap-4">
@@ -292,6 +300,7 @@ export default function HowItWorks() {
                  }}
                  className="group relative bg-background dark:bg-background p-8 md:p-10 h-[320px] md:h-[350px] transition-colors duration-300"
                >
+                 <CardBeam />
                  <div className="relative z-10 h-full flex flex-col justify-between">
                    <div className="space-y-4">
                     <div className="flex items-start gap-4">
@@ -363,6 +372,7 @@ export default function HowItWorks() {
                  }}
                  className="group relative bg-background dark:bg-background p-8 md:p-10 h-[320px] md:h-[350px] transition-colors duration-300"
               >
+                 <CardBeam />
                  <div className="relative z-10 h-full flex flex-col justify-between">
                    <div className="space-y-4">
                     <div className="flex items-start gap-4">
@@ -451,6 +461,7 @@ export default function HowItWorks() {
                 }}
                 className="group relative bg-background dark:bg-background p-8 md:p-12 transition-colors duration-300 md:col-span-2"
              >
+                 <CardBeam />
                  <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
                     <div className="space-y-4 max-w-md">
                          <div className="flex items-start gap-4">
@@ -624,4 +635,43 @@ export default function HowItWorks() {
       </div>
     </section>
   );
+}
+
+function CardBeam() {
+    return (
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-[1]">
+            <div className="absolute inset-0 w-full h-full opacity-[0.2] dark:opacity-[0.15]">
+                 <svg className="w-full h-full" width="100%" height="100%" preserveAspectRatio="none">
+                     <rect width="100%" height="100%" fill="none" rx="0" ry="0" vectorEffect="non-scaling-stroke" stroke="currentColor" strokeWidth="1" className="text-neutral-300 dark:text-neutral-700" />
+                 </svg>
+            </div>
+            <motion.div 
+                className="absolute inset-0 w-full h-full"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+            >
+                <svg className="w-full h-full" width="100%" height="100%" preserveAspectRatio="none">
+                    <motion.rect 
+                        width="100%" 
+                        height="100%" 
+                        fill="none" 
+                        rx="0" 
+                        ry="0" 
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        vectorEffect="non-scaling-stroke"
+                        className="text-orange-500 dark:text-blue-500" // Warm/Bright in light, Blue/Cool in dark
+                        strokeDasharray="150 400%" // Length of beam relative to perimeter roughly
+                        animate={{ strokeDashoffset: [0, -1000] }} // Move it
+                        transition={{
+                            duration: 5,
+                            repeat: Infinity,
+                            ease: "linear"
+                        }}
+                    />
+                </svg>
+            </motion.div>
+        </div>
+    );
 }

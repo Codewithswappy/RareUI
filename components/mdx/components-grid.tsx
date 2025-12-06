@@ -5,7 +5,7 @@ import { sidebarData } from "@/lib/sidebar-data";
 import LiquidButton from "@/components/rareui/buttons/LiquidButton";
 import SoftButton from "@/components/rareui/buttons/SoftButton";
 import { GlassShimmerButton } from "@/components/rareui/buttons/glass-shimmer-button";
-import Loader from "@/components/rareui/buttons/loader";
+
 import { Neumorphism3DButton } from "@/components/rareui/buttons/neumorphism3DButton";
 import UpgradeButton from "@/components/rareui/buttons/upgrade-button";
 import ParticleCard from "@/components/rareui/cards/ParticleCard";
@@ -14,7 +14,7 @@ import PremiumProfileCard from "@/components/rareui/cards/premiumProfileCard";
 const componentMap: Record<string, any> = {
   "/docs/components/buttons/glass-shimmer-button": () => <GlassShimmerButton>Shimmer</GlassShimmerButton>,
   "/docs/components/buttons/liquid-button": () => <LiquidButton text="Liquid" backgroundColor="bg-neutral-900 dark:bg-neutral-100" textColor="text-white dark:text-black" />,
-  "/docs/components/buttons/loader": Loader,
+
   "/docs/components/buttons/neumorphism3DButton": () => <Neumorphism3DButton>3D Button</Neumorphism3DButton>,
   "/docs/components/buttons/soft-button": SoftButton,
   "/docs/components/buttons/upgrade-button": UpgradeButton,

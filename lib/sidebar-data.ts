@@ -1,5 +1,13 @@
 export const sidebarData = [
-
+  {
+    "title": "Follow for updates",
+    "items": [
+      {
+        "title": "Twitter @heyyswap",
+        "href": "https://x.com/heyyswap"
+      }
+    ]
+  },
   {
     "title": "Installation",
     "items": [
@@ -31,10 +39,6 @@ export const sidebarData = [
       {
         "title": "Liquid Button",
         "href": "/docs/components/buttons/liquid-button"
-      },
-      {
-        "title": "Loader",
-        "href": "/docs/components/buttons/loader"
       },
       {
         "title": "Neumorphism3DButton",

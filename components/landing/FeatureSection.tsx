@@ -1,5 +1,7 @@
 "use client";
 
+import SkewOnScroll from "@/components/ui/SkewOnScroll";
+
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "motion/react";
 import { 
@@ -515,7 +517,7 @@ export default function FeatureSection() {
             // Calculate control points for S-curve
             // Alternate direction of curve based on index to create "noodle" waviness
             const midY = (current.y + next.y) / 2;
-            const curveAmplitude = isMobile() ? 50 : 150; // Wiggle amount
+            const curveAmplitude = isMobile() ? 0 : 150; // Straight line on mobile, Wiggle on desktop
             const direction = i % 2 === 0 ? 1 : -1;
             
             const cp1x = current.x + (curveAmplitude * direction);
@@ -561,23 +563,43 @@ export default function FeatureSection() {
        <div className="max-w-[1400px] mx-auto relative z-10">
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-24 md:mb-32">
-              <motion.div
-                 initial={{ opacity: 0, y: 20 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 viewport={{ once: true }}
-                 className="inline-flex items-center gap-2 px-3 py-1 text-md font-medium text-black uppercase mb-4"
-              >
-                 <span>Core Capabilities</span>
-              </motion.div>
-              <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-5 ">
-                  Everything you need.
-                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-neutral-400 pb-2.5">
-                      Nothing you don't.
-                  </span>
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-xl mx-auto">
-                  Built for modern applications that demand performance, aesthetics, and accessibility.
-              </p>
+              <SkewOnScroll>
+                  <motion.div
+                     initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                     whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                     viewport={{ once: true }}
+                     className="inline-flex items-center gap-2 px-3 py-1 text-md font-medium text-black dark:text-white uppercase mb-4"
+                  >
+                     <span>Core Capabilities</span>
+                  </motion.div>
+              </SkewOnScroll>
+              
+              <SkewOnScroll>
+                  <motion.h2 
+                      initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.1 }}
+                      className="text-4xl md:text-6xl font-bold tracking-tight mb-5 "
+                  >
+                      Everything you need.
+                      <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-neutral-400 pb-2.5">
+                          Nothing you don't.
+                      </span>
+                  </motion.h2>
+              </SkewOnScroll>
+
+              <SkewOnScroll>
+                  <motion.p 
+                      initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                      className="text-xl text-muted-foreground max-w-xl mx-auto"
+                  >
+                      Built for modern applications that demand performance, aesthetics, and accessibility.
+                  </motion.p>
+              </SkewOnScroll>
           </div>
 
           {/* Features List (Timeline Layout) */}
@@ -639,8 +661,8 @@ function FeatureRow({ feature, index }: { feature: any, index: number }) {
             "relative flex flex-col lg:flex-row items-center gap-12 lg:gap-24 z-10 min-h-[60vh] md:min-h-screen", // Increased height
             !isEven && "lg:flex-row-reverse"
         )}>
-            {/* Center Connector Dot (Desktop Only) */}
-            <div id={`dot-${index}`} className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full items-center justify-center z-10">
+            {/* Center Connector Dot (Desktop and Mobile) */}
+            <div id={`dot-${index}`} className="flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full items-center justify-center z-10">
                 {/* Base Dot */}
                 <div className="w-4 h-4 bg-neutral-200 dark:bg-neutral-800 rounded-full border border-neutral-300 dark:border-neutral-700 absolute inset-0" />
                 

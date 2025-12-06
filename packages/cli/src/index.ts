@@ -20,7 +20,7 @@ ${chalk.bold('Examples:')}
   ${chalk.cyan('$ npx rareui add liquid-button')}
 
   ${chalk.dim('Add multiple components')}
-  ${chalk.cyan('$ npx rareui add particle-card soft-button loader')}
+  ${chalk.cyan('$ npx rareui add particle-card soft-button')}
 
   ${chalk.dim('Install all components')}
   ${chalk.cyan('$ npx rareui add .')}
@@ -65,7 +65,7 @@ ${chalk.bold('Examples:')}
   ${chalk.cyan('$ npx rareui add liquid-button')}
 
   ${chalk.dim('Add multiple components')}
-  ${chalk.cyan('$ npx rareui add particle-card soft-button loader')}
+  ${chalk.cyan('$ npx rareui add particle-card soft-button')}
 
   ${chalk.dim('Install all available components')}
   ${chalk.cyan('$ npx rareui add .')}

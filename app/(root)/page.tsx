@@ -9,6 +9,10 @@ const FeatureSection = dynamic(() => import('@/components/landing/FeatureSection
   loading: () => <div className="h-[600px] w-full bg-background" />, // Simple placeholder to prevent layout shift
 });
 
+const CTASection = dynamic(() => import('@/components/landing/CTASection'), {
+  loading: () => <div className="h-[400px] w-full bg-background" />
+});
+
 const Footer = dynamic(() => import('@/components/landing/Footer'), {
     loading: () => <div className="h-20 w-full bg-background" />
 });
@@ -19,6 +23,7 @@ export default function Home() {
       <HeroSection />
       <HowItWorks />
       <FeatureSection />   
+      <CTASection />
       <Footer />
     </main> 
   );

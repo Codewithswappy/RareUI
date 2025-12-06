@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'motion/react'
+import SkewOnScroll from "@/components/ui/SkewOnScroll";
 
 export default function Footer() {
   return (
@@ -24,7 +25,17 @@ export default function Footer() {
                     className="object-contain transition-transform duration-500 group-hover/brand:scale-110 group-hover/brand:rotate-12 brightness-0 dark:invert"
                   />
                 </div>
-                <span className="text-xl font-bold tracking-tight group-hover/brand:text-foreground/80 transition-colors">RareUI</span>
+                <SkewOnScroll>
+                    <motion.span 
+                        initial={{ opacity: 0, filter: "blur(5px)" }}
+                        whileInView={{ opacity: 1, filter: "blur(0px)" }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                        className="text-xl font-bold tracking-tight group-hover/brand:text-foreground/80 transition-colors"
+                    >
+                        RareUI
+                    </motion.span>
+                </SkewOnScroll>
               </Link>
               <p className="text-muted-foreground max-w-sm text-base leading-relaxed">
                 RareUI empowers developers to build premium, motion-rich interfaces with ease. Transform your raw ideas into compelling visuals.
@@ -105,22 +116,24 @@ export default function Footer() {
 
         {/* Big Faded Text - Animated */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full text-center pointer-events-none select-none overflow-hidden leading-none z-0">
-          <motion.h1 
-            className="text-[18vw] font-bold tracking-tighter text-foreground scale-125 translate-y-[20%] opacity-10 blur-[2px] dark:opacity-20"
-            style={{ maskImage: 'linear-gradient(to bottom, black 30%, transparent 100%)' }}
-            animate={{ 
-              opacity: [0.1, 0.15, 0.1],
-              scale: [1.25, 1.28, 1.25],
-              filter: ['blur(2px)', 'blur(4px)', 'blur(2px)']
-            }}
-            transition={{ 
-              duration: 8, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
-            }}
-          >
-             RareUI
-          </motion.h1>
+          <SkewOnScroll skewAmount={5}>
+            <motion.h1 
+                className="text-[18vw] font-bold tracking-tighter text-foreground scale-125 translate-y-[20%] opacity-10 blur-[2px] dark:opacity-20"
+                style={{ maskImage: 'linear-gradient(to bottom, black 30%, transparent 100%)' }}
+                animate={{ 
+                opacity: [0.1, 0.15, 0.1],
+                scale: [1.25, 1.28, 1.25],
+                filter: ['blur(2px)', 'blur(4px)', 'blur(2px)']
+                }}
+                transition={{ 
+                duration: 8, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+                }}
+            >
+                RareUI
+            </motion.h1>
+          </SkewOnScroll>
         </div>
 
       </div>

@@ -3,7 +3,6 @@
   "components": [
     "glass-shimmer-button",
     "LiquidButton",
-    "loader",
     "neumorphism3DButton",
     "SoftButton",
     "upgrade-button",

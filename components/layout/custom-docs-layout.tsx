@@ -125,13 +125,14 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
           <div className="h-full flex flex-col bg-background/95 backdrop-blur-xl border-r border-border">
             <div className="flex-1 overflow-y-auto p-4 space-y-6">
               
-              {/* Mobile Main Nav Links */}
+                  {/* Mobile Main Nav Links */}
               <div className="md:hidden space-y-2 pb-6 border-b border-border">
                 <h3 className="px-2 py-1 text-sm font-semibold text-foreground/90">
                   Menu
                 </h3>
                 <div className="space-y-1">
                    {[
+                     { title: "Home", href: "/" },
                      { title: "Components", href: "/docs" },
                      { title: "Templates", href: "/templates" },
                      { title: "Pricing", href: "/pricing" }
@@ -232,7 +233,9 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
       )}
       
       {/* Draggable Twitter Badge */}
-      <DraggableTwitterBadge />
+      <div className="hidden md:block">
+        <DraggableTwitterBadge />
+      </div>
     </div>
   );
 }
