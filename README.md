@@ -365,16 +365,16 @@ Special thanks to the open-source community! 🙌
 <tr>
 <td>
 
-**Q1 2025**
+**Till Feb 2026**
 - [ ] 50+ New Components
 - [ ] CLI Improvements
 - [ ] Component Playground
-- [ ] Video Tutorials
+- [ ] Color and Theme Customization
 
 </td>
 <td>
 
-**Q2 2025**
+**Till Mar 2026**
 - [ ] 100+ Components
 - [ ] Figma Plugin
 - [ ] VS Code Extension
