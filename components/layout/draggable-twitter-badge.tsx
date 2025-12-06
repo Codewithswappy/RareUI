@@ -36,7 +36,7 @@ export function DraggableTwitterBadge() {
         whileHover={{ scale: 1.05, cursor: "grab" }}
         whileTap={{ scale: 0.95, cursor: "grabbing" }}
         whileDrag={{ cursor: "grabbing" }}
-        className="fixed top-24 left-0 right-0 mx-auto w-fit z-[101] hidden md:flex"
+        className="fixed top-24 left-0 right-0 mx-auto w-fit z-[101] flex"
       >
         <a 
            href="https://x.com/heyyswap" 
@@ -51,12 +51,12 @@ export function DraggableTwitterBadge() {
                e.stopPropagation();
              }
            }}
-           className="flex items-center gap-2 px-4 py-2 bg-background/80 backdrop-blur-md border border-border rounded-full shadow-lg hover:shadow-xl transition-all group select-none"
+           className="flex items-center gap-2 p-3 md:px-4 md:py-2 bg-background/80 backdrop-blur-md border border-border rounded-full shadow-lg hover:shadow-xl transition-all group select-none"
         >
           <div className="text-foreground group-hover:text-primary transition-colors">
             {xIcon}
           </div>
-          <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors pr-1">
+          <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors pr-1 hidden md:block">
             @heyyswap
           </span>
         </a>

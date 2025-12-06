@@ -122,8 +122,37 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
             "top-14 md:top-0"
           )}
         >
-          <div className="h-full overflow-y-auto bg-background/40 backdrop-blur-xl border-r border-border">
-            <div className="p-4 space-y-6">
+          <div className="h-full flex flex-col bg-background/95 backdrop-blur-xl border-r border-border">
+            <div className="flex-1 overflow-y-auto p-4 space-y-6">
+              
+              {/* Mobile Main Nav Links */}
+              <div className="md:hidden space-y-2 pb-6 border-b border-border">
+                <h3 className="px-2 py-1 text-sm font-semibold text-foreground/90">
+                  Menu
+                </h3>
+                <div className="space-y-1">
+                   {[
+                     { title: "Components", href: "/docs" },
+                     { title: "Templates", href: "/templates" },
+                     { title: "Pricing", href: "/pricing" }
+                   ].map((item) => (
+                      <TransitionLink
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setIsOpen(false)}
+                        className={cn(
+                          "group flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-all duration-300 ease-out relative overflow-hidden",
+                          pathname === item.href
+                            ? "text-foreground font-medium bg-accent/50 shadow-sm"
+                            : "text-muted-foreground hover:text-foreground hover:bg-accent/30 hover:pl-4"
+                        )}
+                      >
+                         {item.title}
+                      </TransitionLink>
+                   ))}
+                </div>
+              </div>
+
               {sidebar.map((section, index) => (
                 <div key={index} className="space-y-2">
                   <h3 className="px-2 py-1 text-sm font-semibold text-foreground/90">
@@ -172,6 +201,15 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Mobile Social Footer */}
+            <div className="p-4 border-t border-border md:hidden bg-muted/10">
+                <div className="flex items-center justify-center gap-6">
+                    <a href="https://x.com/heyyswap" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                        <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                    </a>
+                </div>
             </div>
           </div>
         </aside>

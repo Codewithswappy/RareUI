@@ -256,11 +256,12 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed inset-0 z-40 pt-28 px-6 bg-background/95 backdrop-blur-xl"
+            className="fixed inset-0 z-40 pt-28 px-6 bg-background/95 backdrop-blur-xl flex flex-col"
           >
-            <div className="flex flex-col gap-6 text-3xl font-bold tracking-tight">
+            <div className="flex flex-col gap-6 text-3xl font-bold tracking-tight flex-1">
               {[
                 { name: 'Home', href: '/' },
+                { name: 'Docs', href: '/docs/installation/cli' },
                 { name: 'Components', href: '/docs' },
                 { name: 'Templates', href: '/templates' },
                 { name: 'Pricing', href: '/pricing' }
@@ -281,20 +282,26 @@ export default function Navbar() {
                 </motion.div>
               ))}
               
-              {/* CTA in Mobile Menu */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 }}
-                className="mt-4"
-              >
-                <TransitionLink href="/docs/installation/cli" onClick={() => setIsMenuOpen(false)}>
-                  <button className="w-full cursor-pointer rounded-lg bg-foreground px-6 py-3 font-semibold tracking-wide text-background shadow-lg hover:opacity-90 transition-opacity">
-                    Get Started
-                  </button>
-                </TransitionLink>
-              </motion.div>
             </div>
+
+            {/* Socials in Bottom */}
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="py-8 border-t border-border flex justify-center gap-6"
+            >
+                <a 
+                  href="https://x.com/heyyswap" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-3 bg-muted/50 rounded-full text-foreground hover:bg-muted transition-colors"
+                >
+                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                   </svg>
+                </a>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

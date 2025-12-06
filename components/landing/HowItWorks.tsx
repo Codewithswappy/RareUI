@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 import { Check, Terminal, Search, Code, Palette, Zap } from "lucide-react";
 
@@ -9,12 +9,21 @@ import { Check, Terminal, Search, Code, Palette, Zap } from "lucide-react";
 
 export default function HowItWorks() {
   const [terminalStep, setTerminalStep] = useState(0);
+  const [deploymentStep, setDeploymentStep] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const termInterval = setInterval(() => {
       setTerminalStep((prev) => prev + 1);
-    }, 4000); // Restart every 4 seconds
-    return () => clearInterval(interval);
+    }, 4000);
+
+    const deployInterval = setInterval(() => {
+      setDeploymentStep((prev) => prev + 1);
+    }, 1500); // Faster cycle for deployment card
+
+    return () => {
+      clearInterval(termInterval);
+      clearInterval(deployInterval);
+    };
   }, []);
 
   return (
@@ -72,20 +81,22 @@ export default function HowItWorks() {
         </div>
 
         {/* Glowing Grid Container */}
-        <div className="relative p-[1px] overflow-hidden bg-neutral-200 dark:bg-neutral-800">
+        <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="relative p-[1px] overflow-hidden bg-neutral-200 dark:bg-neutral-800"
+        >
             {/* Animated Gradient Border Layer */}
-            <div className="absolute inset-0 z-0">
-                 {/* Spinner 1 */}
-                 <div className="absolute inset-[-50%] animate-[spin_6s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_290deg,black_360deg)] dark:bg-[conic-gradient(from_0deg,transparent_0_290deg,white_360deg)] opacity-40 mix-blend-color-dodge dark:mix-blend-normal" />
-                 {/* Spinner 2 (Offset) */}
-                 <div className="absolute inset-[-50%] animate-[spin_6s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_290deg,black_360deg)] dark:bg-[conic-gradient(from_0deg,transparent_0_290deg,white_360deg)] opacity-40 mix-blend-color-dodge dark:mix-blend-normal [animation-delay:-3s]" />
-            </div>
+            {/* Animated Gradient Border Layer - REMOVED for cleaner look */}
+            <div className="absolute inset-0 z-0 bg-neutral-200 dark:bg-neutral-800" />
 
              {/* Inner Grid Content */}
              <motion.div 
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true }}
                 variants={{
                     hidden: { opacity: 0 },
                     visible: {
@@ -119,27 +130,83 @@ export default function HowItWorks() {
                     </div>
                   </div>
 
-                   {/* Visual: Component Gallery (Interactive) */}
+                   {/* Visual: Dynamic Component Search (Interactive) */}
                    <div className="mt-6 space-y-3 group-hover:translate-y-[-5px] transition-transform duration-500">
-                      {/* Search Bar Mock */}
+                      {/* Dynamic Search Bar */}
                       <div className="bg-muted/30 border border-border/50 rounded-lg p-2.5 flex items-center gap-2">
                            <Search className="w-3.5 h-3.5 text-muted-foreground" />
-                           <div className="h-1.5 w-24 bg-muted-foreground/20 rounded-full" />
+                           <div className="h-4 w-32 relative overflow-hidden">
+                               <AnimatePresence mode="wait">
+                                   <motion.div
+                                       key={terminalStep % 3}
+                                       initial={{ y: 20, opacity: 0 }}
+                                       animate={{ y: 0, opacity: 1 }}
+                                       exit={{ y: -20, opacity: 0 }}
+                                       transition={{ duration: 0.3 }}
+                                       className="text-[10px] text-muted-foreground font-medium flex items-center h-full"
+                                   >
+                                       {['Button', 'Switch', 'Profile Card'][terminalStep % 3]}
+                                   </motion.div>
+                               </AnimatePresence>
+                           </div>
                       </div>
-                      {/* Mock Gallery */}
-                      <div className="grid grid-cols-2 gap-2.5">
-                           <motion.div whileHover={{ scale: 1.02 }} className="h-14 rounded-md bg-primary/5 border border-primary/10 flex items-center justify-center">
-                               <div className="h-5 w-10 bg-primary/20 rounded-sm" />
-                           </motion.div>
-                           <motion.div whileHover={{ scale: 1.02 }} className="h-14 rounded-md bg-muted/5 border border-border/50 flex items-center justify-center">
-                                <div className="h-5 w-5 rounded-full bg-muted-foreground/20" />
-                           </motion.div>
-                           <motion.div whileHover={{ scale: 1.02 }} className="h-14 rounded-md bg-muted/5 border border-border/50 flex items-center justify-center">
-                                <div className="h-1.5 w-12 bg-muted-foreground/20 rounded-full" />
-                           </motion.div>
-                           <motion.div whileHover={{ scale: 1.02 }} className="h-14 rounded-md bg-blue-500/5 border border-blue-500/10 flex items-center justify-center">
-                                <div className="h-4 w-4 rounded-sm border md-blue-200 bg-blue-500/20" />
-                           </motion.div>
+                      
+                      {/* Component Showcase Stage */}
+                      <div className="h-32 rounded-lg bg-muted/20 border border-border/30 flex items-center justify-center relative overflow-hidden">
+                           <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] pointer-events-none" />
+                           <AnimatePresence mode="wait">
+                               {/* State 0: Button */}
+                               {(terminalStep % 3 === 0) && (
+                                   <motion.div
+                                       key="button"
+                                       initial={{ scale: 0.8, opacity: 0 }}
+                                       animate={{ scale: 1, opacity: 1 }}
+                                       exit={{ scale: 0.8, opacity: 0 }}
+                                       transition={{ type: "spring", bounce: 0.5 }}
+                                   >
+                                       <button className="px-5 py-2 rounded-lg bg-gradient-to-r from-neutral-800 to-neutral-900 text-white text-xs font-semibold shadow-lg shadow-neutral-500/20 active:scale-95 transition-transform">
+                                           Click me
+                                       </button>
+                                   </motion.div>
+                               )}
+
+                               {/* State 1: Switch */}
+                               {(terminalStep % 3 === 1) && (
+                                   <motion.div
+                                       key="switch"
+                                       initial={{ scale: 0.8, opacity: 0 }}
+                                       animate={{ scale: 1, opacity: 1 }}
+                                       exit={{ scale: 0.8, opacity: 0 }}
+                                       transition={{ type: "spring", bounce: 0.5 }}
+                                       className="flex items-center gap-3"
+                                   >
+                                       <div className="w-12 h-7 rounded-full bg-green-500 p-1 flex justify-end shadow-inner">
+                                            <motion.div 
+                                                layoutId="switch-thumb"
+                                                className="w-5 h-5 rounded-full bg-white shadow-sm" 
+                                            />
+                                       </div>
+                                   </motion.div>
+                               )}
+
+                               {/* State 2: Profile Card */}
+                               {(terminalStep % 3 === 2) && (
+                                   <motion.div
+                                       key="card"
+                                       initial={{ scale: 0.8, opacity: 0, rotate: -5 }}
+                                       animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                                       exit={{ scale: 0.8, opacity: 0, rotate: 5 }}
+                                       transition={{ type: "spring", bounce: 0.5 }}
+                                       className="w-40 p-3 rounded-xl bg-background border border-border shadow-xl flex items-center gap-3"
+                                   >
+                                       <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500" />
+                                       <div className="space-y-1">
+                                           <div className="h-1.5 w-16 bg-muted-foreground/30 rounded-full" />
+                                           <div className="h-1.5 w-10 bg-muted-foreground/10 rounded-full" />
+                                       </div>
+                                   </motion.div>
+                               )}
+                           </AnimatePresence>
                       </div>
                    </div>
                 </div>
@@ -310,77 +377,67 @@ export default function HowItWorks() {
                   </div>
 
                    {/* Visual: Live Code Customization (Interactive) */}
-                   <div className="mt-8 flex flex-col gap-4 group-hover:-translate-y-1 transition-transform duration-300" key={terminalStep}>
+                   <div className="mt-8 flex flex-col gap-4 group-hover:-translate-y-1 transition-transform duration-300">
                         {/* Live Code Block */}
                         <div className="bg-muted dark:bg-neutral-950 rounded-md p-3 font-mono text-[10px] shadow-sm border border-border/10 relative overflow-hidden flex flex-col gap-0.5">
-                             <div className="text-blue-600 dark:text-blue-400">&lt;Button</div>
-                             <div className="flex">
-                                 <motion.span 
-                                     initial={{ width: 0, opacity: 0 }}
-                                     animate={{ width: "auto", opacity: 1 }}
-                                     transition={{ duration: 0.6, ease: "linear", delay: 0.5 }}
-                                     className="text-amber-600 dark:text-yellow-400 overflow-hidden whitespace-nowrap pl-4"
-                                 >
-                                      size="lg"
-                                 </motion.span>
+                             <div className="flex items-center gap-1.5 text-blue-600 dark:text-blue-400">
+                               <span>&lt;Card</span>
+                               <span className="text-purple-600 dark:text-purple-400">variant</span>
+                               <span>=</span>
+                               <span className="relative">
+                                 <span className="text-amber-600 dark:text-yellow-400">"
+                                   <AnimatePresence mode="wait">
+                                     <motion.span
+                                       key={terminalStep % 3}
+                                       initial={{ opacity: 0, y: 5 }}
+                                       animate={{ opacity: 1, y: 0 }}
+                                       exit={{ opacity: 0, y: -5 }}
+                                       className="inline-block"
+                                     >
+                                       {['classic', 'glass', 'neon'][terminalStep % 3]}
+                                     </motion.span>
+                                   </AnimatePresence>
+                                 "</span>
+                               </span>
+                               <span>/&gt;</span>
                              </div>
-                             <div className="flex">
-                                 <motion.span 
-                                     initial={{ width: 0, opacity: 0 }}
-                                     animate={{ width: "auto", opacity: 1 }}
-                                     transition={{ duration: 0.8, ease: "linear", delay: 1.5 }}
-                                     className="text-amber-600 dark:text-yellow-400 overflow-hidden whitespace-nowrap pl-4"
-                                 >
-                                      className="bg-blue-600"
-                                 </motion.span>
-                             </div>
-                             <div className="text-blue-600 dark:text-blue-400">/&gt;</div>
                         </div>
 
                         {/* Live Preview */}
-                        <div className="flex items-center justify-center p-6 min-h-[80px]">
-                            <motion.button
-                                initial={{ 
-                                    scale: 1,
-                                    backgroundColor: "hsl(var(--primary))",
-                                }}
-                                animate={{ 
-                                    scale: [1, 1.2, 1.2],
-                                    backgroundColor: ["hsl(var(--primary))", "hsl(var(--primary))", "#2563eb"], // blue-600
-                                }}
-                                transition={{ 
-                                    duration: 2.5,
-                                    times: [0, 0.4, 1] // 0->1.1s (scale), 1.1->END (color)? No.
-                                    // Complex timing:
-                                    // 0-0.5s: Wait
-                                    // 0.5-1.1s: Scale (typing size="lg")
-                                    // 1.1-1.5s: Wait
-                                    // 1.5-2.3s: Color (typing class)
-                                }}
-                            >
-                                {/* We need separate animate props for cleaner control or use keyframes with calculated times */}
-                                {/* Let's use separate motion value changes or simpler sequence */}
-                            </motion.button>
-                             <motion.button
-                                initial={{ 
-                                    scale: 1, 
-                                    backgroundColor: "hsl(var(--primary))",
-                                    color: "hsl(var(--primary-foreground))"
-                                }}
-                                animate={{ 
-                                    scale: 1.2,
-                                    backgroundColor: "#2563eb",
-                                    color: "#ffffff"
-                                }}
-                                transition={{
-                                    scale: { delay: 1.1, duration: 0.2 },
-                                    backgroundColor: { delay: 2.3, duration: 0.2 },
-                                    color: { delay: 2.3, duration: 0.2 }
-                                }}
-                                className="px-4 py-2 rounded-md text-sm font-medium shadow-sm border border-transparent"
-                            >
-                                Button
-                            </motion.button>
+                        <div className="flex items-center justify-center p-4 min-h-[100px] relative">
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={terminalStep % 3}
+                                    initial={{ opacity: 0, scale: 0.9, rotateX: -10 }}
+                                    animate={{ 
+                                        opacity: 1, 
+                                        scale: 1, 
+                                        rotateX: 0,
+                                        borderColor: (terminalStep % 3 === 2) ? "var(--primary)" : "",
+                                        boxShadow: (terminalStep % 3 === 2) ? "0 0 20px -5px hsl(var(--primary))" : ""
+                                    }}
+                                    exit={{ opacity: 0, scale: 0.95, rotateX: 10 }}
+                                    transition={{ duration: 0.4 }}
+                                    className={`
+                                        w-24 h-16 rounded-xl flex items-center justify-center
+                                        ${(terminalStep % 3 === 0) ? 'border-2 border-dashed border-muted-foreground/30 bg-muted/20' : ''}
+                                        ${(terminalStep % 3 === 1) ? 'bg-white/10 dark:bg-white/5 backdrop-blur-lg border border-white/20 shadow-sm' : ''}
+                                        ${(terminalStep % 3 === 2) ? 'bg-background border border-primary text-primary' : ''}
+                                    `}
+                                >
+                                    <div className={`
+                                        w-8 h-8 rounded-full flex items-center justify-center
+                                        ${(terminalStep % 3 === 0) ? 'bg-muted-foreground/20' : ''}
+                                        ${(terminalStep % 3 === 1) ? 'bg-white/20' : ''}
+                                        ${(terminalStep % 3 === 2) ? 'bg-primary/20' : ''}
+                                    `}>
+                                        <Palette className="w-4 h-4 opacity-70" />
+                                    </div>
+                                </motion.div>
+                            </AnimatePresence>
+                            
+                            {/* Reflection/Glow for visual flair */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none" />
                         </div>
                    </div>
                 </div>
@@ -407,51 +464,163 @@ export default function HowItWorks() {
                         </div>
                     </div>
 
-                    {/* Visual: Checklist Window (Interactive) */}
-                    <div className="relative w-full max-w-md ml-auto group/checklist">
+                    {/* Visual: Deployment & Performance Dashboard (Interactive) */}
+                    <div className="relative w-full max-w-md ml-auto group/checklist h-full flex items-center">
                         <motion.div 
-                            whileHover={{ y: -5, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.1)" }}
-                            className="bg-background border border-border/60 rounded-lg shadow-sm overflow-hidden transition-all duration-300"
+                            whileHover={{ y: -5, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
+                            className="w-full bg-background border border-border/60 rounded-xl shadow-lg overflow-hidden transition-all duration-300"
                         >
-                            <div className="flex items-center gap-2 px-4 py-2 border-b border-border/60 bg-muted/10">
+                            {/* Browser Header */}
+                            <div className="flex items-center gap-2 px-4 py-3 border-b border-border/60 bg-muted/20">
                                 <div className="flex gap-1.5 opacity-50">
-                                    <div className="w-2 h-2 rounded-full bg-foreground" />
-                                    <div className="w-2 h-2 rounded-full bg-foreground" />
+                                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                                    <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
                                 </div>
-                                <div className="flex-1 flex justify-center">
-                                     <div className="w-32 h-1.5 bg-border/40 rounded-full" />
+                                <div className="flex-1 flex justify-center ml-2">
+                                     <div className="px-3 py-1 bg-background/50 rounded-md border border-border/20 flex items-center gap-2 max-w-[180px] w-full">
+                                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                                        <div className="h-1.5 w-full bg-muted-foreground/10 rounded-full" />
+                                     </div>
                                 </div>
                             </div>
-                            <div className="p-6 space-y-4">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center shrink-0">
-                                        <Check className="w-3.5 h-3.5 text-white" />
-                                    </div>
-                                    <div>
-                                        <div className="text-sm font-semibold">All checks have passed</div>
-                                        <div className="text-[10px] text-muted-foreground">7 successful checks</div>
-                                    </div>
-                                </div>
-                                
-                                <div className="grid grid-cols-2 gap-x-4 gap-y-2 pl-9">
-                                    {['Accessibility Ready', 'Type Safe', 'SSR Optimized', 'Lightweight'].map((check, i) => (
-                                        <motion.div 
-                                            key={check}
-                                            whileHover={{ x: 2, color: "var(--primary)" }}
-                                            className="flex items-center gap-2 cursor-default transition-colors"
+
+                            {/* Dashboard Content */}
+                            <div className="p-6 h-[180px] flex flex-col justify-center relative bg-gradient-to-b from-background to-muted/20">
+                                <AnimatePresence mode="wait">
+                                    {/* State 0: Building */}
+                                    {(deploymentStep % 4 === 0) && (
+                                        <motion.div
+                                            key="building"
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -10 }}
+                                            transition={{ duration: 0.2 }}
+                                            className="flex flex-col items-center gap-4 py-2 w-full"
                                         >
-                                            <Check className="w-3 h-3 text-green-500" />
-                                            <span className="text-[11px] font-medium text-muted-foreground">{check}</span>
+                                            <div className="relative w-14 h-14">
+                                                <div className="absolute inset-0 rounded-full border-4 border-muted/30" />
+                                                <div className="absolute inset-0 rounded-full border-4 border-t-amber-500 border-r-amber-500/50 border-b-transparent border-l-transparent animate-spin" />
+                                                <div className="absolute inset-0 flex items-center justify-center">
+                                                    <div className="w-8 h-8 bg-amber-500/10 rounded-full flex items-center justify-center">
+                                                        <Zap className="w-4 h-4 text-amber-500 fill-amber-500" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="space-y-1.5 text-center w-full max-w-[200px]">
+                                                <div className="text-sm font-semibold text-foreground">Building Project...</div>
+                                                <div className="flex flex-col gap-1">
+                                                    <div className="h-1.5 w-full bg-muted/50 rounded-full overflow-hidden">
+                                                        <motion.div 
+                                                            initial={{ x: "-100%" }}
+                                                            animate={{ x: "100%" }}
+                                                            transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
+                                                            className="h-full w-1/2 bg-amber-500/50 rounded-full"
+                                                        />
+                                                    </div>
+                                                    <div className="text-[10px] text-muted-foreground font-mono">
+                                                        Compiling modules (142/405)
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </motion.div>
-                                    ))}
-                                </div>
+                                    )}
+
+                                    {/* State 1: Optimizing */}
+                                    {(deploymentStep % 4 === 1) && (
+                                        <motion.div
+                                            key="optimizing"
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -10 }}
+                                            transition={{ duration: 0.2 }}
+                                            className="flex flex-col items-center gap-5 w-full px-8 py-2"
+                                        >
+                                            <div className="w-full space-y-3">
+                                                <div className="flex justify-between items-end">
+                                                    <div className="flex items-center gap-2">
+                                                        <div className="w-3 h-3 rounded-full bg-blue-500/20 flex items-center justify-center animate-pulse">
+                                                            <div className="w-2 h-2 rounded-full bg-blue-500" />
+                                                        </div>
+                                                        <span className="text-sm font-medium">Optimizing Assets</span>
+                                                    </div>
+                                                    <span className="text-xs font-mono text-muted-foreground">85%</span>
+                                                </div>
+                                                <div className="h-2 w-full bg-muted/40 rounded-full overflow-hidden p-[1px]">
+                                                    <motion.div 
+                                                        initial={{ width: "0%" }}
+                                                        animate={{ width: "85%" }}
+                                                        transition={{ duration: 0.8, ease: "circOut" }}
+                                                        className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.3)]" 
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="grid grid-cols-3 gap-3 w-full">
+                                                {[1,2,3].map(i => (
+                                                    <div key={i} className="h-10 bg-background border border-neutral-200/20 rounded-md shadow-sm flex items-center justify-center px-1 gap-2">
+                                                        <div className="w-3 h-3 rounded-full bg-neutral-500/20" />
+                                                        <div className="w-10 h-2 bg-neutral-500/20 rounded-sm" />
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </motion.div>
+                                    )}
+
+                                    {/* State 2: Deployed */}
+                                    {(deploymentStep % 4 >= 2) && (
+                                        <motion.div
+                                            key="deployed"
+                                            initial={{ opacity: 0, scale: 0.95 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            exit={{ opacity: 0, scale: 1.05 }}
+                                            transition={{ duration: 0.3 }}
+                                            className="w-full"
+                                        >
+                                            <div className="flex items-center justify-between mb-5 p-3 rounded-lg border border-green-500/10">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-8 h-8 rounded-full flex items-center justify-center">
+                                                        <Check className="w-4 h-4 text-green-600 dark:text-green-400" />
+                                                    </div>
+                                                    <div>
+                                                        <div className="text-sm font-bold text-foreground">Deployed</div>
+                                                        <div className="text-[10px] text-muted-foreground flex items-center gap-1">
+                                                            <span className="w-1.5 h-1.5 rounded-full" />
+                                                            rareui.com
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button className="px-3 py-1 rounded-full bg-background text-foreground text-[10px] font-medium border border-border hover:bg-muted/50 transition-colors shadow-sm">
+                                                    Visit
+                                                </button>
+                                            </div>
+
+                                            {/* Lighthouse Scores */}
+                                            <div className="grid grid-cols-4 gap-2">
+                                                {['Performance', 'Accessibility', 'Best Practices', 'SEO'].map((label, i) => (
+                                                    <motion.div 
+                                                        key={label}
+                                                        initial={{ opacity: 0, y: 10 }}
+                                                        animate={{ opacity: 1, y: 0 }}
+                                                        transition={{ delay: i * 0.1 }}
+                                                        className="group/score flex flex-col items-center gap-1.5 p-2 rounded-lg bg-background border border-border/50 shadow-sm hover:border-green-500/30 transition-colors"
+                                                    >
+                                                        <div className="text-sm font-black text-black dark:text-white flex items-center justify-center w-8 h-8 rounded-full">
+                                                            100
+                                                        </div>
+                                                        <div className="text-[8px] text-muted-foreground text-center font-medium leading-tight">{label}</div>
+                                                    </motion.div>
+                                                ))}
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </div>
                         </motion.div>
                     </div>
                  </div>
               </motion.div>
              </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
