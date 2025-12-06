@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "motion/react";
 import { 
   MoonStar, 
   Layers, 
@@ -431,6 +431,8 @@ function GlobalThemeVisual() {
     );
 }
 
+
+
 const features = [
   {
     id: "animations",
@@ -463,6 +465,91 @@ const features = [
 ];
 
 export default function FeatureSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [pathD, setPathD] = useState("");
+  const [svgDimensions, setSvgDimensions] = useState({ width: 0, height: 0 });
+
+  const { scrollYProgress } = useScroll({
+      target: containerRef,
+      offset: ["start center", "end end"]
+  });
+
+  // Calculate path on mount and resize
+  useEffect(() => {
+    const updatePath = () => {
+        if (!containerRef.current) return;
+        const containerRect = containerRef.current.getBoundingClientRect();
+        const width = containerRect.width;
+        
+        // Find all dots
+        const dots = features.map((_, i) => {
+            const el = document.getElementById(`dot-${i}`);
+            if (!el) return null;
+            const rect = el.getBoundingClientRect();
+            return {
+                x: rect.left - containerRect.left + rect.width / 2,
+                y: rect.top - containerRect.top + rect.height / 2
+            };
+        }).filter(Boolean) as { x: number, y: number }[];
+
+        if (dots.length === 0) return;
+
+        // Build Path
+        // Start from top center (or slightly above/before first dot)
+        const startX = width / 2;
+        const startY = 0;
+        
+        let d = `M ${startX} ${startY}`;
+
+        // Connect to first dot with a simple curve
+        // d += ` L ${dots[0].x} ${dots[0].y}`; // Simple line to start
+        
+        // Or curve to first dot
+        d += ` Q ${startX} ${dots[0].y / 2} ${dots[0].x} ${dots[0].y}`;
+
+        // Connect rest of the dots with Bezier curves
+        for (let i = 0; i < dots.length - 1; i++) {
+            const current = dots[i];
+            const next = dots[i+1];
+            
+            // Calculate control points for S-curve
+            // Alternate direction of curve based on index to create "noodle" waviness
+            const midY = (current.y + next.y) / 2;
+            const curveAmplitude = isMobile() ? 50 : 150; // Wiggle amount
+            const direction = i % 2 === 0 ? 1 : -1;
+            
+            const cp1x = current.x + (curveAmplitude * direction);
+            const cp1y = midY;
+            
+            // Simple Quadratic or Cubic? Let's use Cubic S-curve (smooth)
+            // C control1x control1y, control2x control2y, endx endy
+            d += ` C ${cp1x} ${current.y + (next.y - current.y)*0.2}, ${cp1x} ${next.y - (next.y - current.y)*0.2}, ${next.x} ${next.y}`;
+        }
+        
+         // Extend past last dot
+         const lastDot = dots[dots.length - 1];
+         d += ` L ${lastDot.x} ${containerRect.height}`;
+
+        setPathD(d);
+        setSvgDimensions({ width: containerRect.width, height: containerRect.height });
+    };
+
+    // Helper to check mobile roughly
+    const isMobile = () => window.innerWidth < 768;
+
+    updatePath();
+    window.addEventListener('resize', updatePath);
+    // Also update after a short delay to ensure layout is settled
+    const timeout = setTimeout(updatePath, 500);
+    
+    return () => {
+        window.removeEventListener('resize', updatePath);
+        clearTimeout(timeout);
+    };
+  }, []);
+
+  const pathLength = useSpring(scrollYProgress, { stiffness: 500, damping: 90 });
+
   return (
     <section className="bg-background relative pt-20 pb-32 px-4 md:px-8 overflow-hidden">
        {/* Ambient Background */}
@@ -472,7 +559,6 @@ export default function FeatureSection() {
        </div>
 
        <div className="max-w-[1400px] mx-auto relative z-10">
-          
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-24 md:mb-32">
               <motion.div
@@ -494,13 +580,40 @@ export default function FeatureSection() {
               </p>
           </div>
 
-          {/* Features List (Zig-Zag Layout) */}
-          <div className="flex flex-col gap-24 md:gap-40">
+          {/* Features List (Timeline Layout) */}
+          <div ref={containerRef} className="relative flex flex-col gap-40 md:gap-64 pb-64">
+              
+              {/* Dynamic SVG Noodle Beam */}
+              <div className="absolute inset-0 pointer-events-none z-0">
+                  <svg 
+                    width={svgDimensions.width} 
+                    height={svgDimensions.height} 
+                    viewBox={`0 0 ${svgDimensions.width} ${svgDimensions.height}`}
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                      <path 
+                        d={pathD} 
+                        className="stroke-neutral-200 dark:stroke-neutral-800"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      />
+                      <motion.path 
+                        d={pathD}
+                        className="stroke-orange-500 dark:stroke-blue-500"
+                        strokeWidth="4"
+                        strokeLinecap="round"
+                        fill="none"
+                        style={{ pathLength }}
+                      />
+                  </svg>
+              </div>
+
               {features.map((feature, index) => (
                   <FeatureRow 
                      key={feature.id} 
                      feature={feature} 
-                     index={index} 
+                     index={index}
                   />
               ))}
           </div>
@@ -511,12 +624,33 @@ export default function FeatureSection() {
 
 function FeatureRow({ feature, index }: { feature: any, index: number }) {
     const isEven = index % 2 === 0;
+    const ref = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: ref,
+        offset: ["start end", "end start"]
+    });
+    
+    // Transform specifically for "glowing" when centered
+    const opacity = useTransform(scrollYProgress, [0.4, 0.5, 0.6], [0, 1, 0]);
+    const scale = useTransform(scrollYProgress, [0.4, 0.5, 0.6], [1, 1.5, 1]);
 
     return (
-        <div className={cn(
-            "flex flex-col lg:flex-row items-center gap-12 lg:gap-24",
+        <div ref={ref} className={cn(
+            "relative flex flex-col lg:flex-row items-center gap-12 lg:gap-24 z-10 min-h-[60vh] md:min-h-screen", // Increased height
             !isEven && "lg:flex-row-reverse"
         )}>
+            {/* Center Connector Dot (Desktop Only) */}
+            <div id={`dot-${index}`} className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full items-center justify-center z-10">
+                {/* Base Dot */}
+                <div className="w-4 h-4 bg-neutral-200 dark:bg-neutral-800 rounded-full border border-neutral-300 dark:border-neutral-700 absolute inset-0" />
+                
+                {/* Glowing Active State */}
+                <motion.div 
+                    style={{ opacity, scale }}
+                    className="w-6 h-6 bg-orange-500 dark:bg-blue-500 rounded-full shadow-[0_0_20px_rgba(249,115,22,0.6)] dark:shadow-[0_0_20px_rgba(59,130,246,0.6)] absolute"
+                />
+            </div>
+
             {/* Text Content */}
             <motion.div 
                initial={{ opacity: 0, x: isEven ? -50 : 50 }}
@@ -525,11 +659,11 @@ function FeatureRow({ feature, index }: { feature: any, index: number }) {
                transition={{ duration: 0.8, ease: "easeOut" }}
                className="flex-1 w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left"
             >
-                 <h3 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
+                 <h3 className="text-3xl md:text-5xl font-bold mb-6 text-foreground leading-tight">
                      {feature.title}
                  </h3>
                  
-                 <p className="text-lg text-muted-foreground leading-relaxed max-w-md text-pretty">
+                 <p className="text-xl text-muted-foreground leading-relaxed max-w-lg text-pretty">
                      {feature.description}
                  </p>
             </motion.div>
@@ -538,11 +672,13 @@ function FeatureRow({ feature, index }: { feature: any, index: number }) {
             <motion.div 
                initial={{ opacity: 0, scale: 0.8 }}
                whileInView={{ opacity: 1, scale: 1 }}
-               viewport={{ once: true, margin: "-100px" }}
+               viewport={{ once: true, margin: "-100px" }} // Trigger earlier
                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-               className="flex-1 w-full lg:w-1/2 flex items-center justify-center"
+               className="flex-1 w-full lg:w-1/2 flex items-center justify-center p-4 w-full h-full"
             >
-                <feature.visual />
+                <div className="w-full max-w-md md:max-w-full aspect-square md:aspect-[4/3]">
+                    <feature.visual />
+                </div>
             </motion.div>
         </div>
     )
