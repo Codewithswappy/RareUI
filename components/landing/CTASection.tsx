@@ -75,7 +75,7 @@ export default function CTASection() {
                         <motion.button 
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="group relative w-full sm:w-auto inline-flex items-center justify-center h-12 px-8 text-base font-semibold text-background bg-foreground rounded-lg overflow-hidden cursor-pointer transition-all shadow-lg hover:shadow-xl hover:shadow-orange-100/20"
+                            className="group relative w-full sm:w-auto inline-flex items-center justify-center h-12 px-8 text-base font-semibold text-background bg-foreground rounded-lg overflow-hidden cursor-pointer transition-all shadow-sm hover:shadow-md hover:shadow-orange-100/20"
                         >
                              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-orange-300 to-orange-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                              <div className="relative flex items-center gap-2">

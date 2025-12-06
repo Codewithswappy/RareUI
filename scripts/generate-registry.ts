@@ -131,10 +131,7 @@ function generate() {
   console.log(`✅ Generated registry for ${components.length} components`);
   components.forEach(c => console.log(`   - @rareui/${c.name}`));
 
-  if (excludedCount > 0) {
-    console.log(`\n⚠️  Excluded ${excludedCount} internal component(s):`);
-    EXCLUDED_COMPONENTS.forEach(name => console.log(`   - ${name} (internal use only)`));
-  }
+  // Excluded components silently filtered (modal, search-context)
 }
 
 generate();
