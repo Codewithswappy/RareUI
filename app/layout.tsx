@@ -67,14 +67,14 @@ export const metadata: Metadata = {
     description: "100+ free, beautifully designed React components. Built with Tailwind CSS & Framer Motion. Open source, copy-paste ready, and production-ready.",
     images: [
       {
-        url: "/og-imagebalck.png",
+        url: "/og-imagebalck.png?v=1",
         width: 1200,
         height: 630,
         alt: "RareUI - Free React UI Components Library",
         type: "image/png",
       },
       {
-        url: "/og-imagewhite.png",
+        url: "/og-imagewhite.png?v=1",
         width: 1200,
         height: 630,
         alt: "RareUI - Free React UI Components Library (Light)",
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
     creator: "@heyyswap",
     title: "RareUI - Free Open Source React UI Components",
     description: "100+ free, beautiful React components built with Tailwind CSS. Open source and copy-paste ready.",
-    images: ["/og-imagebalck.png", "/og-imagewhite.png"],
+    images: ["/og-imagebalck.png?v=1", "/og-imagewhite.png?v=1"],
   },
   alternates: {
     canonical: "https://rareui.in",
