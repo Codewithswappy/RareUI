@@ -605,8 +605,8 @@ export default function FeatureSection() {
           {/* Features List (Timeline Layout) */}
           <div ref={containerRef} className="relative flex flex-col gap-40 md:gap-64 pb-64">
               
-              {/* Dynamic SVG Noodle Beam */}
-              <div className="absolute inset-0 pointer-events-none z-0">
+              {/* Dynamic SVG Noodle Beam - Hidden on Mobile */}
+              <div className="absolute inset-0 pointer-events-none z-0 hidden md:block">
                   <svg 
                     width={svgDimensions.width} 
                     height={svgDimensions.height} 
@@ -661,8 +661,8 @@ function FeatureRow({ feature, index }: { feature: any, index: number }) {
             "relative flex flex-col lg:flex-row items-center gap-12 lg:gap-24 z-10 min-h-[60vh] md:min-h-screen", // Increased height
             !isEven && "lg:flex-row-reverse"
         )}>
-            {/* Center Connector Dot (Desktop and Mobile) */}
-            <div id={`dot-${index}`} className="flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full items-center justify-center z-10">
+            {/* Center Connector Dot - Hidden on Mobile */}
+            <div id={`dot-${index}`} className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full items-center justify-center z-10">
                 {/* Base Dot */}
                 <div className="w-4 h-4 bg-neutral-200 dark:bg-neutral-800 rounded-full border border-neutral-300 dark:border-neutral-700 absolute inset-0" />
                 
