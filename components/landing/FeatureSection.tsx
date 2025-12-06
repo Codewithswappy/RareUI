@@ -517,7 +517,7 @@ export default function FeatureSection() {
             // Calculate control points for S-curve
             // Alternate direction of curve based on index to create "noodle" waviness
             const midY = (current.y + next.y) / 2;
-            const curveAmplitude = isMobile() ? 0 : 150; // Straight line on mobile, Wiggle on desktop
+            const curveAmplitude = isMobile() ? width * 0.45 : 150; // Curve on mobile too, nearing the edges
             const direction = i % 2 === 0 ? 1 : -1;
             
             const cp1x = current.x + (curveAmplitude * direction);
