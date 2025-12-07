@@ -8,10 +8,10 @@ const PUBLIC_OUTPUT = path.resolve(process.cwd(), "public/sidebar.json");
 
 // Custom ordered static sections
 const STATIC_SECTIONS = [
-  {
-    title: "Follow for updates",
-    items: [{ title: "Twitter @heyyswap", href: "https://x.com/heyyswap" }],
-  },
+  // {
+  //   title: "Follow for updates",
+  //   items: [{ title: "Twitter @heyyswap", href: "https://x.com/heyyswap" }],
+  // },
   {
     title: "Installation",
     items: [
