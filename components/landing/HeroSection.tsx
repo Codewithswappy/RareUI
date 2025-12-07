@@ -57,7 +57,7 @@ export default function HeroSection() {
       </div>
 
       {/* --- Main Hero Container --- */}
-      <main className="max-w-[1400px] mx-auto px-4 md:px-8 pt-32 pb-10 mt-10">
+      <main className="max-w-[1400px] w-[80%] mx-auto pt-32 pb-10 mt-10">
         <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
           
           {/* Content */}
