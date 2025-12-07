@@ -164,7 +164,7 @@ export default function HowItWorks() {
                    {/* Visual: Dynamic Component Search (Interactive) */}
                    <div className="mt-6 space-y-3 group-hover:translate-y-[-5px] transition-transform duration-500">
                       {/* Dynamic Search Bar */}
-                      <div className="bg-muted/30 border border-border/50 rounded-lg p-2.5 flex items-center gap-2">
+                      <div className="bg-muted/30 border border-border/50 rounded-lg p-2.5 flex items-center gap-1">
                            <Search className="w-3.5 h-3.5 text-muted-foreground" />
                            <div className="h-4 w-32 relative overflow-hidden">
                                <AnimatePresence mode="wait">
@@ -183,7 +183,7 @@ export default function HowItWorks() {
                       </div>
                       
                       {/* Component Showcase Stage */}
-                      <div className="h-32 rounded-lg bg-muted/20 border border-border/30 flex items-center justify-center relative overflow-hidden">
+                      <div className="h-28 rounded-lg bg-muted/20 border border-border/30 flex items-center justify-center relative overflow-hidden">
                            <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] pointer-events-none" />
                            <AnimatePresence mode="wait">
                                {/* State 0: Button */}
