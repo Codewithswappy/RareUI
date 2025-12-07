@@ -374,7 +374,7 @@ Special thanks to the open-source community! 🙌
 </td>
 <td>
 
-**Till Mar 2026**
+**Till May 2026**
 - [ ] 100+ Components
 - [ ] Figma Plugin
 - [ ] VS Code Extension
