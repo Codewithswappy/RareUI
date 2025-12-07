@@ -145,7 +145,7 @@ export default function HowItWorks() {
                     hidden: { opacity: 0, y: 20 },
                     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
                 }}
-                className="group relative bg-background dark:bg-background p-8 md:p-10 h-[320px] md:h-[350px] transition-colors duration-300"
+                className="group relative bg-background dark:bg-background p-8 md:p-10 h-auto md:h-[350px] transition-colors duration-300"
               >
                  <CardBeam />
                  <div className="relative z-10 h-full flex flex-col justify-between">
@@ -162,7 +162,7 @@ export default function HowItWorks() {
                   </div>
 
                    {/* Visual: Dynamic Component Search (Interactive) */}
-                   <div className="mt-6 space-y-3 group-hover:translate-y-[-5px] transition-transform duration-500">
+                   <div className="mt-4 space-y-3 group-hover:translate-y-[-5px] transition-transform duration-500">
                       {/* Dynamic Search Bar */}
                       <div className="bg-muted/30 border border-border/50 rounded-lg p-2.5 flex items-center gap-1">
                            <Search className="w-3.5 h-3.5 text-muted-foreground" />
