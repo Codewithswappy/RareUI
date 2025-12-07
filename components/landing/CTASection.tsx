@@ -9,16 +9,28 @@ import { MoveRight, BookOpen, Layers } from "lucide-react";
 export default function CTASection() {
     return (
         <section className="relative py-24 md:py-32 px-4 md:px-8 overflow-hidden bg-background">
-             {/* Ambient Background Effects */}
-             <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                 {/* Top Center Glow */}
-                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-primary/10 rounded-full blur-[100px] opacity-60" />
-                 {/* Bottom Right Subtle */}
-                 <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px]" />
-                 {/* Grid Pattern Overlay (Optional, keeping it clean for now) */}
-             </div>
+             {/* --- Background Grid & Lines --- */}
+           <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0">
+        <svg className="absolute inset-0 w-full h-full opacity-[0.4] dark:opacity-[0.6]" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="cta-grid-pattern" width="80" height="80" patternUnits="userSpaceOnUse">
+              <path d="M 80 0 L 0 0 0 80" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-neutral-300 dark:text-neutral-500"/>
+            </pattern>
+          </defs>
+          {/* Base Grid */}
+          <rect x="10%" y="0" width="80%" height="100%" fill="url(#cta-grid-pattern)" />
+          
+          {/* Vertical Lines */}
+          <line x1="10%" y1="0" x2="10%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+          <line x1="90%" y1="0" x2="90%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+          
+          {/* Horizontal Lines */}
+          <line x1="0" y1="0%" x2="100%" y2="0%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+          <line x1="0" y1="91%" x2="100%" y2="91%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+        </svg>
+      </div>
 
-             <div className="max-w-4xl mx-auto relative z-10 text-center">
+             <div className="max-w-4xl w-[80%] mx-auto relative z-10 text-center">
                  {/* Badge/Label */}
                  <SkewOnScroll>
                      <motion.div
@@ -77,7 +89,7 @@ export default function CTASection() {
                             whileTap={{ scale: 0.95 }}
                             className="group relative w-full sm:w-auto inline-flex items-center justify-center h-12 px-8 text-base font-semibold text-background bg-foreground rounded-lg overflow-hidden cursor-pointer transition-all shadow-sm hover:shadow-md hover:shadow-orange-100/20"
                         >
-                             <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-orange-300 to-orange-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                             <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-orange-200 to-orange-400 opacity-0 group-hover:opacity-100 dark:group-hover:opacity-0 group-hover:text-white transition-opacity duration-400 ease-linear" />
                              <div className="relative flex items-center gap-2">
                                 <Layers className="w-5 h-5" />
                                 <span>Browse Components</span>

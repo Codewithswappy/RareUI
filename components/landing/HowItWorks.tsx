@@ -29,7 +29,30 @@ export default function HowItWorks() {
 
   return (
     <section className="py-12 px-4 md:px-8 bg-background relative overflow-hidden">
-      <div className="max-w-6xl mx-auto">
+        {/* Ambient Background - Subtle */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+
+        {/* --- Background Grid & Lines --- */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0">
+            <svg className="absolute inset-0 w-full h-full opacity-[0.4] dark:opacity-[0.6]" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="how-grid-pattern" width="80" height="80" patternUnits="userSpaceOnUse">
+                <path d="M 80 0 L 0 0 0 80" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-neutral-300 dark:text-neutral-500"/>
+                </pattern>
+            </defs>
+            {/* Base Grid - Constrained to vertical lines */}
+            <rect x="10%" y="0" width="80%" height="100%" fill="url(#how-grid-pattern)" />
+            
+            {/* Vertical Lines */}
+            <line x1="10%" y1="0" x2="10%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+            <line x1="90%" y1="0" x2="90%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+            
+            {/* Horizontal Lines */}
+            <line x1="0" y1="0" x2="100%" y2="0" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+            <line x1="0" y1="100%" x2="100%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+            </svg>
+        </div>
+      <div className="max-w-[1400px] w-[80%] mx-auto">
         {/* Header */}
         <div className="text-center mb-16 space-y-4">
           <SkewOnScroll>
@@ -66,7 +89,7 @@ export default function HowItWorks() {
                     whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3, duration: 0.5 }}
-                    className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-600 to-neutral-400 dark:from-neutral-600 dark:to-neutral-500"
+                    className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-950 to-neutral-500 dark:from-neutral-100 dark:to-neutral-500"
                 >
                     Designed for speed.
                 </motion.span>
@@ -92,11 +115,12 @@ export default function HowItWorks() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
-            className="relative p-[1px] overflow-hidden bg-neutral-200 dark:bg-neutral-800"
+            className="relative overflow-hidden"
         >
-            {/* Animated Gradient Border Layer */}
-            {/* Animated Gradient Border Layer - REMOVED for cleaner look */}
-            <div className="absolute inset-0 z-0 bg-neutral-200 dark:bg-neutral-800" />
+            {/* Edge Masks */}
+            {/* <div className="absolute left-0 top-0 bottom-0 w-10 md:w-10 bg-gradient-to-r from-background to-transparent z-20 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-10 md:w-10 bg-gradient-to-l from-background to-transparent z-20 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-full h-10 md:h-10 bg-gradient-to-t from-background to-transparent z-20 pointer-events-none" /> */}
 
              {/* Inner Grid Content */}
              <motion.div 
@@ -112,7 +136,7 @@ export default function HowItWorks() {
                         }
                     }
                 }}
-                className="relative z-10 bg-transparent grid grid-cols-1 md:grid-cols-3 gap-px overflow-hidden"
+                className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-2 overflow-hidden"
              >
               
               {/* Card 1: Browse Components */}
@@ -370,7 +394,7 @@ export default function HowItWorks() {
                     hidden: { opacity: 0, y: 20 },
                     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
                  }}
-                 className="group relative bg-background dark:bg-background p-8 md:p-10 h-[320px] md:h-[350px] transition-colors duration-300"
+                 className="group relative bg-background dark:bg-background p-8 md:p-10 h-[300px] md:h-[340px] transition-colors duration-300"
               >
                  <CardBeam />
                  <div className="relative z-10 h-full flex flex-col justify-between">
@@ -639,39 +663,25 @@ export default function HowItWorks() {
 
 function CardBeam() {
     return (
-        <div className="absolute inset-0 pointer-events-none overflow-hidden z-[1]">
-            <div className="absolute inset-0 w-full h-full opacity-[0.2] dark:opacity-[0.15]">
-                 <svg className="w-full h-full" width="100%" height="100%" preserveAspectRatio="none">
-                     <rect width="100%" height="100%" fill="none" rx="0" ry="0" vectorEffect="non-scaling-stroke" stroke="currentColor" strokeWidth="1" className="text-neutral-300 dark:text-neutral-700" />
-                 </svg>
-            </div>
-            <motion.div 
-                className="absolute inset-0 w-full h-full"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-            >
-                <svg className="w-full h-full" width="100%" height="100%" preserveAspectRatio="none">
-                    <motion.rect 
-                        width="100%" 
-                        height="100%" 
-                        fill="none" 
-                        rx="0" 
-                        ry="0" 
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        vectorEffect="non-scaling-stroke"
-                        className="text-orange-500 dark:text-blue-500" // Warm/Bright in light, Blue/Cool in dark
-                        strokeDasharray="150 400%" // Length of beam relative to perimeter roughly
-                        animate={{ strokeDashoffset: [0, -1000] }} // Move it
-                        transition={{
-                            duration: 5,
-                            repeat: Infinity,
-                            ease: "linear"
-                        }}
-                    />
-                </svg>
-            </motion.div>
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-[1] select-none">
+            <svg className="absolute inset-0 w-full h-full opacity-[0.4] dark:opacity-[0.6]" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="card-grid-pattern" width="60" height="60" patternUnits="userSpaceOnUse">
+                        <path d="M 60 0 L 0 0 0 60" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-neutral-300 dark:text-neutral-500"/>
+                    </pattern>
+                </defs>
+                {/* Base Grid */}
+                <rect width="100%" height="100%" fill="url(#card-grid-pattern)" />
+                
+                {/* Border Lines (Inner) */}
+                <rect width="100%" height="100%" fill="none" rx="0" ry="0" stroke="currentColor" strokeWidth="2" className="text-neutral-500 dark:text-neutral-500" strokeDasharray="4 4" />
+                
+                {/* Dashed Cross Lines */}
+                {/* <line x1="15%" y1="0" x2="15%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+                <line x1="85%" y1="0" x2="85%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+                <line x1="0" y1="20%" x2="100%" y2="20%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+                <line x1="0" y1="80%" x2="100%" y2="80%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/> */}
+            </svg>
         </div>
     );
 }

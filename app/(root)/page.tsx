@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import HeroSection from '@/components/landing/HeroSection';
+import WaterFlow from '@/components/rareui/shaders/waterFlow';
 
 const HowItWorks = dynamic(() => import('@/components/landing/HowItWorks'), {
   loading: () => <div className="h-[500px] w-full bg-background" />,
@@ -25,6 +26,7 @@ export default function Home() {
       <FeatureSection />   
       <CTASection />
       <Footer />
+      {/* <WaterFlow /> */}
     </main> 
   );
 }

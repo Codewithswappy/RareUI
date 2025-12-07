@@ -8,8 +8,28 @@ export default function Footer() {
   return (
     <footer className="w-full bg-background pt-12 px-4 md:px-8 relative overflow-hidden">
       
+      {/* --- Background Grid & Lines --- */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
+          <svg className="absolute inset-0 w-full h-full opacity-[0.4] dark:opacity-[0.6]" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+              <pattern id="footer-grid-pattern" width="80" height="80" patternUnits="userSpaceOnUse">
+              <path d="M 80 0 L 0 0 0 80" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-neutral-300 dark:text-neutral-500"/>
+              </pattern>
+          </defs>
+          {/* Base Grid - Constrained to vertical lines */}
+          <rect x="10%" y="0" width="80%" height="100%" fill="url(#footer-grid-pattern)" />
+          
+          {/* Vertical Lines */}
+          <line x1="10%" y1="0" x2="10%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+          <line x1="90%" y1="0" x2="90%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+           {/* Horizontal Lines */}
+          <line x1="0" y1="0" x2="100%" y2="0" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+          <line x1="0" y1="100%" x2="100%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+          </svg>
+      </div>
+
       {/* Footer Card */}
-      <div className="max-w-[1400px] mx-auto bg-secondary/20 border border-border/50 border-b-0 rounded-t-[2.5rem] overflow-hidden relative backdrop-blur-sm group/footer">
+      <div className="max-w-[1400px] w-[80%] mx-auto bg-secondary/20 border border-border/50 border-b-0 rounded-t-[2.5rem] overflow-hidden relative backdrop-blur-sm group/footer">
         
         {/* Main Content */}
         <div className="p-8 md:p-12 lg:p-16 relative z-10">
@@ -114,27 +134,28 @@ export default function Footer() {
         </div>
 
         {/* Big Faded Text - Animated */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full text-center pointer-events-none select-none overflow-hidden leading-none z-0">
-          <SkewOnScroll skewAmount={5}>
-            <motion.h1 
-                className="text-[18vw] font-bold tracking-tighter text-foreground scale-125 translate-y-[20%] opacity-10 blur-[2px] dark:opacity-20"
-                style={{ maskImage: 'linear-gradient(to bottom, black 30%, transparent 100%)' }}
-                animate={{ 
-                opacity: [0.1, 0.15, 0.1],
-                scale: [1.25, 1.28, 1.25],
-                filter: ['blur(2px)', 'blur(4px)', 'blur(2px)']
-                }}
-                transition={{ 
-                duration: 8, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
-                }}
-            >
-                RareUI
-            </motion.h1>
-          </SkewOnScroll>
-        </div>
+      </div>
 
+      {/* Big Faded Text - Animated */}
+      <div className="absolute bottom-[-10%] left-1/2 -translate-x-1/2 w-full text-center pointer-events-none select-none overflow-hidden leading-none z-0">
+        <SkewOnScroll skewAmount={5}>
+          <motion.h1 
+              className="text-[25vw] md:text-[20vw] font-bold tracking-tighter text-foreground scale-125 blur-[2px]"
+              style={{ maskImage: 'linear-gradient(to bottom, black 30%, transparent 100%)' }}
+              animate={{ 
+              opacity: [0.1, 0.3, 0.1],
+              scale: [1, 1.05, 1],
+              filter: ['blur(2px)', 'blur(4px)', 'blur(2px)']
+              }}
+              transition={{ 
+              duration: 8, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+              }}
+          >
+              RareUI
+          </motion.h1>
+        </SkewOnScroll>
       </div>
     </footer>
   )

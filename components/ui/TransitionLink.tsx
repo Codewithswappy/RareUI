@@ -44,7 +44,7 @@ export const TransitionLink = ({
   };
 
   return (
-    <Link onClick={handleTransition} href={href} {...props}>
+    <Link {...props} href={href} onClick={handleTransition}>
       {children}
     </Link>
   );

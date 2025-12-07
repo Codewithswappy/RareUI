@@ -40,17 +40,36 @@ function AnimationVisual() {
             label: "Music",
             sub: "Playing",
             renderExpanded: () => (
-                <div className="flex flex-col h-full justify-end">
-                     <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-indigo-500/20 to-transparent" />
-                     <div className="w-full aspect-square bg-neutral-900 rounded-2xl mb-4 shadow-2xl flex items-center justify-center relative overflow-hidden group">
-                        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=300&auto=format&fit=crop')] bg-cover bg-center opacity-80" />
-                        <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center z-10"><svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                <div className="flex flex-col h-full justify-end relative z-10">
+                     <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-indigo-500/10 to-transparent pointer-events-none" />
+                     
+                     {/* Album Art Skeleton */}
+                     <div className="w-full aspect-square bg-neutral-100 dark:bg-neutral-700/50 rounded-2xl mb-4 shadow-sm flex items-center justify-center relative overflow-hidden group">
+                        <div className="absolute inset-0 bg-neutral-200 dark:bg-neutral-700 animate-pulse" />
+                        <div className="w-12 h-12 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center z-10 shadow-lg">
+                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" className="text-white"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
                      </div>
-                     <div className="space-y-1 mb-4">
-                        <div className="text-xl font-bold dark:text-white">Midnight City</div>
-                        <div className="text-sm text-neutral-500">M83 • Hurry Up, We're Dreaming</div>
+
+                     {/* Text Skeletons */}
+                     <div className="space-y-2 mb-5">
+                        <div className="h-4 w-3/4 bg-neutral-200 dark:bg-neutral-700 rounded-md animate-pulse" />
+                        <div className="h-3 w-1/2 bg-neutral-100 dark:bg-neutral-800 rounded-md animate-pulse delay-75" />
                      </div>
-                     <div className="bg-neutral-100 dark:bg-neutral-700 h-1 rounded-full overflow-hidden"><div className="w-2/3 h-full bg-indigo-500" /></div>
+
+                     {/* Progress Bar */}
+                     <div className="flex items-center gap-3">
+                        <div className="text-[10px] font-mono text-neutral-400">1:20</div>
+                        <div className="flex-1 bg-neutral-100 dark:bg-neutral-700 h-1.5 rounded-full overflow-hidden">
+                            <motion.div 
+                                initial={{ width: "0%" }}
+                                animate={{ width: "60%" }}
+                                transition={{ duration: 1.5, ease: "easeInOut" }}
+                                className="h-full bg-indigo-500 rounded-full" 
+                            />
+                        </div>
+                        <div className="text-[10px] font-mono text-neutral-400">3:45</div>
+                     </div>
                 </div>
             )
         },
@@ -61,25 +80,46 @@ function AnimationVisual() {
             label: "Wi-Fi",
             sub: "Connected",
             renderExpanded: () => (
-                <div className="flex flex-col h-full justify-between pt-8">
-                    <div className="text-center">
-                        <div className="text-4xl font-bold text-blue-500">240</div>
-                        <div className="text-sm text-neutral-400 font-medium">Mbps Download</div>
+                <div className="flex flex-col h-full justify-between pt-6">
+                    <div className="text-center space-y-1">
+                         <div className="inline-flex items-center gap-2 px-2 py-1 bg-green-500/10 text-green-600 dark:text-green-400 rounded-full text-[10px] font-bold">
+                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                            Stable
+                        </div>
+                        <div className="text-4xl font-black text-foreground tracking-tight flex justify-center items-baseline gap-1">
+                            240
+                            <span className="text-sm font-medium text-muted-foreground">Mbps</span>
+                        </div>
                     </div>
-                    <div className="h-32 flex items-end gap-1 justify-between px-2 pb-2">
+
+                    <div className="h-32 flex items-end gap-1.5 justify-between px-2 pb-2">
                         {[40, 60, 30, 80, 50, 90, 40, 60, 80, 50].map((h, i) => (
                             <motion.div 
                                 key={i}
-                                initial={{ height: 0 }}
-                                animate={{ height: `${h}%` }}
-                                transition={{ delay: i * 0.05 }}
-                                className="w-4 bg-blue-500/20 hover:bg-blue-500 rounded-t-sm transition-colors"
-                            />
+                                initial={{ height: "10%" }}
+                                animate={{ height: [`${h}%`, `${Math.max(20, h - 20)}%`, `${h}%`] }}
+                                transition={{ duration: 2, repeat: Infinity, delay: i * 0.1, ease: "easeInOut" }}
+                                className="w-full bg-blue-500/20 rounded-t-sm"
+                            >
+                                <motion.div 
+                                    className="w-full bg-blue-500 absolute bottom-0 rounded-t-sm"
+                                    initial={{ height: "0%" }}
+                                    animate={{ height: "40%" }}
+                                    style={{ height: '50%' }}
+                                />
+                            </motion.div>
                         ))}
                     </div>
-                    <div className="flex gap-2 justify-center">
-                        <span className="h-2 w-2 rounded-full bg-green-500" />
-                        <span className="text-xs text-neutral-500">Network Stable</span>
+
+                    <div className="grid grid-cols-2 gap-2 mt-2">
+                         <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-2 text-center border border-neutral-100 dark:border-neutral-700">
+                             <div className="text-[10px] text-muted-foreground uppercase">Upload</div>
+                             <div className="font-bold text-foreground">85</div>
+                         </div>
+                         <div className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-2 text-center border border-neutral-100 dark:border-neutral-700">
+                             <div className="text-[10px] text-muted-foreground uppercase">Ping</div>
+                             <div className="font-bold text-foreground">12ms</div>
+                         </div>
                     </div>
                 </div>
             )
@@ -93,18 +133,35 @@ function AnimationVisual() {
             sub: "On",
             renderExpanded: () => (
                 <div className="flex flex-col h-full pt-4">
-                    <div className="flex justify-between items-center mb-8">
-                        <span className="text-lg font-bold">Living Room</span>
-                        <div className="px-3 py-1 bg-white/20 rounded-full text-xs font-bold">ON</div>
+                    <div className="flex justify-between items-start mb-8">
+                        <div>
+                            <span className="text-xl font-bold block">Living Room</span>
+                            <span className="text-xs opacity-60">Philips Hue</span>
+                        </div>
+                        <div className="px-3 py-1 bg-white/20 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-bold shadow-sm">ON</div>
                     </div>
-                    <div className="flex-1 flex flex-col justify-center gap-6">
+                    
+                    <div className="flex-1 flex flex-col justify-end gap-6">
+                         {/* Brightness Slider Visual */}
                          <div className="space-y-2">
-                            <div className="flex justify-between text-xs opacity-70"><span>Brightness</span><span>80%</span></div>
-                            <div className="h-4 bg-white/20 rounded-full overflow-hidden"><div className="w-[80%] h-full bg-white" /></div>
+                            <div className="flex justify-between text-xs font-medium opacity-80">
+                                <span>Brightness</span>
+                                <span>80%</span>
+                            </div>
+                            <div className="h-10 bg-white/10 rounded-xl overflow-hidden p-1 border border-white/10 backdrop-blur-sm relative">
+                                <div className="absolute inset-y-0 left-0 w-[80%] bg-white/90 shadow-[0_0_15px_rgba(255,255,255,0.3)] rounded-lg" />
+                                <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity cursor-pointer">
+                                     <div className="w-1 h-4 bg-black/20 rounded-full mx-auto" />
+                                </div>
+                            </div>
                          </div>
-                         <div className="flex justify-between gap-2">
-                            {["#fff", "#f00", "#0f0", "#00f"].map(c => (
-                                <div key={c} className="w-10 h-10 rounded-full border-2 border-white/20" style={{ backgroundColor: c }} />
+                         
+                         {/* Color Presets */}
+                         <div className="grid grid-cols-4 gap-3">
+                            {["#fff", "#FF9500", "#FF2D55", "#007AFF"].map((c, i) => (
+                                <div key={c} className="aspect-square rounded-full border border-white/20 flex items-center justify-center cursor-pointer hover:scale-110 transition-transform" style={{ backgroundColor: `${c}40` }}>
+                                    <div className="w-4 h-4 rounded-full shadow-sm" style={{ backgroundColor: c }} />
+                                </div>
                             ))}
                          </div>
                     </div>
@@ -118,17 +175,30 @@ function AnimationVisual() {
             label: "Climate",
             sub: "72°F",
             renderExpanded: () => (
-                <div className="flex flex-col h-full items-center justify-center relative">
-                     <div className="w-40 h-40 rounded-full border-4 border-orange-100 dark:border-orange-900/30 flex items-center justify-center relative">
-                        <div className="absolute inset-0 border-4 border-orange-500 border-t-transparent rounded-full rotate-45" />
-                        <div className="text-center">
-                            <div className="text-4xl font-bold text-neutral-900 dark:text-white">72°</div>
-                            <div className="text-xs text-neutral-500">Heating</div>
-                        </div>
+                <div className="flex flex-col h-full items-center justify-center relative py-4">
+                     <div className="relative w-48 h-48 flex items-center justify-center">
+                         {/* Dial Skeletons */}
+                         <div className="absolute inset-0 rounded-full border-[12px] border-neutral-100 dark:border-neutral-700/50" />
+                         <svg className="absolute inset-0 rotate-[-90deg] drop-shadow-lg" viewBox="0 0 100 100">
+                             <circle cx="50" cy="50" r="44" fill="none" stroke="#f97316" strokeWidth="12" strokeDasharray="200 300" strokeLinecap="round" />
+                         </svg>
+                         
+                         <div className="text-center relative z-10 flex flex-col items-center">
+                            <span className="text-xs font-bold text-orange-500 uppercase tracking-wider mb-1">Heating</span>
+                            <div className="text-5xl font-black text-foreground tracking-tighter">72°</div>
+                            <span className="text-xs text-muted-foreground mt-1">Room Temp</span>
+                         </div>
                      </div>
-                     <div className="absolute bottom-0 flex gap-4 w-full justify-between">
-                         <button className="w-10 h-10 rounded-full bg-neutral-100 dark:bg-neutral-700 flex items-center justify-center text-xl font-bold">-</button>
-                         <button className="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center text-xl font-bold shadow-lg shadow-orange-500/30">+</button>
+
+                     <div className="absolute bottom-2 w-full px-4 flex justify-between items-center bg-neutral-50 dark:bg-neutral-900/80 p-2 rounded-2xl border border-neutral-100 dark:border-neutral-700">
+                         <button className="w-8 h-8 rounded-xl bg-white dark:bg-neutral-800 shadow-sm border border-neutral-200 dark:border-neutral-700 text-neutral-500 flex items-center justify-center hover:bg-neutral-50 transition-colors">-</button>
+                         <div className="flex gap-1">
+                             <div className="w-1.5 h-1.5 rounded-full bg-neutral-300 dark:bg-neutral-600" />
+                             <div className="w-1.5 h-1.5 rounded-full bg-neutral-300 dark:bg-neutral-600" />
+                             <div className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+                             <div className="w-1.5 h-1.5 rounded-full bg-neutral-300 dark:bg-neutral-600" />
+                         </div>
+                         <button className="w-8 h-8 rounded-xl bg-orange-500 shadow-sm shadow-orange-500/20 text-white flex items-center justify-center hover:bg-orange-600 transition-colors">+</button>
                      </div>
                 </div>
             )
@@ -528,9 +598,10 @@ export default function FeatureSection() {
             d += ` C ${cp1x} ${current.y + (next.y - current.y)*0.2}, ${cp1x} ${next.y - (next.y - current.y)*0.2}, ${next.x} ${next.y}`;
         }
         
-         // Extend past last dot
-         const lastDot = dots[dots.length - 1];
-         d += ` L ${lastDot.x} ${containerRect.height}`;
+        
+         // Extend past last dot - REMOVED per user request
+         // const lastDot = dots[dots.length - 1];
+         // d += ` L ${lastDot.x} ${containerRect.height}`;
 
         setPathD(d);
         setSvgDimensions({ width: containerRect.width, height: containerRect.height });
@@ -560,7 +631,28 @@ export default function FeatureSection() {
           <div className="absolute bottom-[20%] right-[10%] w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[100px]" />
        </div>
 
-       <div className="max-w-[1400px] mx-auto relative z-10">
+       {/* --- Background Grid & Lines --- */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0">
+        <svg className="absolute inset-0 w-full h-full opacity-[0.4] dark:opacity-[0.6]" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="feature-grid-pattern" width="80" height="80" patternUnits="userSpaceOnUse">
+              <path d="M 80 0 L 0 0 0 80" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-neutral-300 dark:text-neutral-500"/>
+            </pattern>
+          </defs>
+          {/* Base Grid - Constrained to vertical lines */}
+          <rect x="10%" y="0" width="80%" height="100%" fill="url(#feature-grid-pattern)" />
+          
+          {/* Vertical Lines */}
+          <line x1="10%" y1="0" x2="10%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+          <line x1="90%" y1="0" x2="90%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+          
+          {/* Horizontal Lines */}
+          <line x1="0" y1="2%" x2="100%" y2="2%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+          <line x1="0" y1="98%" x2="100%" y2="98%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+        </svg>
+      </div>
+
+       <div className="max-w-[1400px] w-[80%] mx-auto relative z-10 pt-20">
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-24 md:mb-32">
               <SkewOnScroll>
@@ -603,7 +695,7 @@ export default function FeatureSection() {
           </div>
 
           {/* Features List (Timeline Layout) */}
-          <div ref={containerRef} className="relative flex flex-col gap-40 md:gap-64 pb-64">
+          <div ref={containerRef} className="relative flex flex-col gap-40 md:gap-64 pb-20">
               
               {/* Dynamic SVG Noodle Beam - Hidden on Mobile */}
               <div className="absolute inset-0 pointer-events-none z-0 hidden md:block">
@@ -658,7 +750,7 @@ function FeatureRow({ feature, index }: { feature: any, index: number }) {
 
     return (
         <div ref={ref} className={cn(
-            "relative flex flex-col lg:flex-row items-center gap-12 lg:gap-24 z-10 min-h-[60vh] md:min-h-screen", // Increased height
+            "relative flex flex-col lg:flex-row items-center gap-12 lg:gap-24 z-10 min-h-[60vh] md:min-h-[600px]", // Increased height
             !isEven && "lg:flex-row-reverse"
         )}>
             {/* Center Connector Dot - Hidden on Mobile */}
