@@ -145,7 +145,7 @@ export default function HowItWorks() {
                     hidden: { opacity: 0, y: 20 },
                     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
                 }}
-                className="group relative bg-background dark:bg-background p-8 md:p-10 h-[320px] md:h-[350px] transition-colors duration-300"
+                className="group relative bg-background dark:bg-background p-8 md:p-10 h-[320px] md:h-[380px] transition-colors duration-300"
               >
                  <CardBeam />
                  <div className="relative z-10 h-full flex flex-col justify-between">
@@ -155,7 +155,7 @@ export default function HowItWorks() {
                         <div>
                             <h4 className="text-xl font-bold text-foreground mb-1">Browse Components</h4>
                             <p className="text-muted-foreground text-sm leading-relaxed text-pretty max-w-xs">
-                             Explore 100+ minimal components with live previews and variant controls.
+                             Explore components with live previews and variant controls.
                             </p>
                         </div>
                     </div>
