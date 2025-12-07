@@ -32,17 +32,11 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
     } else {
       document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
     }
     return () => {
       document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
     };
   }, [isOpen]);
 
@@ -117,14 +111,27 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
         {/* Sidebar */}
         <aside
           className={cn(
-            "fixed inset-y-0 left-0 z-40 w-72 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0",
-            isOpen ? "translate-x-0" : "-translate-x-full",
-            "top-14 md:top-0"
+            "fixed md:relative z-40 transform transition-transform duration-500 cubic-bezier(0.32, 0.72, 0, 1)",
+            // Mobile: Bottom Sheet logic
+            "inset-x-0 bottom-0 top-auto h-[85vh] w-full rounded-t-[20px] border-t shadow-2xl md:shadow-none md:border-t-0 md:rounded-none",
+            isOpen ? "translate-y-0" : "translate-y-full",
+            // Desktop: Normal Sidebar logic
+            "md:inset-y-0 md:left-0 md:top-0 md:h-full md:w-72 md:translate-y-0 md:border-r"
           )}
         >
-          <div className="h-full flex flex-col bg-background/95 backdrop-blur-xl border-r border-border">
+          <div className="h-full flex flex-col bg-background/95 backdrop-blur-xl md:border-r border-border rounded-t-[20px] md:rounded-none overflow-hidden">
             <div className="flex-1 overflow-y-auto p-4 space-y-6">
               
+                  {/* Handle Bar for Mobile */}
+                  <div className="md:hidden w-full flex justify-center pb-4 pt-2" onClick={() => setIsOpen(false)}>
+                    <div className="w-12 h-1.5 bg-muted-foreground/20 rounded-full" />
+                  </div>
+
+                  {/* Mobile Search */}
+                  <div className="md:hidden px-2 pb-6 border-b border-border mb-6">
+                    <CustomSearchBar />
+                  </div>
+
                   {/* Mobile Main Nav Links */}
               <div className="md:hidden space-y-2 pb-6 border-b border-border">
                 <h3 className="px-2 py-1 text-sm font-semibold text-foreground/90">
