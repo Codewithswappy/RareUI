@@ -30,6 +30,20 @@ export function Preview({ children, className, code, cliCommand }: PreviewProps)
   const [isLoading, setIsLoading] = React.useState(false);
   const [showToast, setShowToast] = React.useState(false);
   const [toastPlatform, setToastPlatform] = React.useState("");
+  const [packageManager, setPackageManager] = React.useState<'npm' | 'pnpm' | 'yarn' | 'bun'>('npm');
+
+  const getPackageManagerCommand = () => {
+    if (!cliCommand) return '';
+    
+    const commands = {
+      npm: cliCommand,
+      pnpm: cliCommand.replace('npx', 'pnpm dlx'),
+      yarn: cliCommand.replace('npx', 'yarn dlx'),
+      bun: cliCommand.replace('npx', 'bunx')
+    };
+    
+    return commands[packageManager];
+  };
 
   const convertToJSX = (tsxCode: string) => {
     return tsxCode
@@ -76,13 +90,14 @@ export function Preview({ children, className, code, cliCommand }: PreviewProps)
   };
 
   const copyCli = async () => {
-    if (cliCommand) {
+    const commandToCopy = getPackageManagerCommand();
+    if (commandToCopy) {
       try {
         if (navigator.clipboard && navigator.clipboard.writeText) {
-          await navigator.clipboard.writeText(cliCommand);
+          await navigator.clipboard.writeText(commandToCopy);
         } else {
           const textArea = document.createElement('textarea');
-          textArea.value = cliCommand;
+          textArea.value = commandToCopy;
           textArea.style.position = 'fixed';
           textArea.style.left = '-999999px';
           document.body.appendChild(textArea);
@@ -477,6 +492,28 @@ Ensure it's fully functional, responsive, and matches the original design exactl
               <div className="p-4 sm:p-6 space-y-4">
                 <div>
                   <p className="text-sm text-muted-foreground mb-3 break-words">Run the following command to install the component:</p>
+                  
+                  {/* Package Manager Tabs */}
+                  <div className="flex gap-1 mb-3 bg-muted/50 p-1 rounded-lg w-fit">
+                    {['npm', 'pnpm', 'yarn', 'bun'].map((pm) => (
+                      <button
+                        key={pm}
+                        onClick={() => {
+                          const pmState = pm as 'npm' | 'pnpm' | 'yarn' | 'bun';
+                          setPackageManager(pmState);
+                        }}
+                        className={cn(
+                          "px-3 py-1.5 text-xs font-medium transition-all rounded-md",
+                          packageManager === pm
+                            ? "bg-background text-foreground shadow-sm"
+                            : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+                        )}
+                      >
+                        {pm}
+                      </button>
+                    ))}
+                  </div>
+
                   <div className="relative">
                     <button
                       onClick={copyCli}
@@ -529,7 +566,7 @@ Ensure it's fully functional, responsive, and matches the original design exactl
                         },
                       }}
                     >
-                      {cliCommand}
+                      {getPackageManagerCommand()}
                     </SyntaxHighlighter>
                   </div>
                 </div>
