@@ -1,5 +1,14 @@
 export const sidebarData = [
   {
+    "title": "Getting Started",
+    "items": [
+      {
+        "title": "Introduction",
+        "href": "/docs/introduction"
+      }
+    ]
+  },
+  {
     "title": "Installation",
     "items": [
       {
