@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 GitHub Discussions
+    url: https://github.com/Codewithswappy/RareUI/discussions
+    about: Ask questions, share ideas, and discuss RareUI with the community
+  - name: 📚 Documentation
+    url: https://rareui.in/docs
+    about: Read the full documentation for RareUI
+  - name: 🐦 Twitter/X
+    url: https://x.com/heyyswap
+    about: Follow for updates and announcements
+  - name: ❓ Q&A Discussions
+    url: https://github.com/Codewithswappy/RareUI/discussions/categories/q-a
+    about: Ask questions in our Q&A discussions
