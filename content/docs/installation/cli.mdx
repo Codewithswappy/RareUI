@@ -34,6 +34,28 @@ Run the `init` command to initialize RareUI in your project. This will create a 
   </Tab>
 </Tabs>
 
+<details>
+<summary>💡 Which command should I use?</summary>
+
+**Use the package manager you already have installed!** Most users have npm (comes with Node.js).
+
+Not sure which you have? Run these in your terminal:
+```bash
+npm --version    # ✅ Most common (comes with Node.js)
+pnpm --version   # Fast alternative
+yarn --version   # Classic choice
+bun --version    # Fastest runtime
+```
+
+If you get a "command not found" error, that package manager isn't installed. Just use **npm** - it's installed by default with Node.js!
+
+**Common Error:** `pnpm is not recognized` → Use `npm` instead:
+```bash
+npx rareui@latest init
+```
+</details>
+
+
 ## Add
 
 Use the `add` command to add components to your project. This command downloads the component code and places it in your `components` directory, installing any necessary dependencies automatically.
@@ -305,6 +327,24 @@ Components are installed to `components/rareui/` in your project directory. For 
 <summary>What if I want to customize a component?</summary>
 
 All components are installed as source code in your project, so you can customize them freely! Just edit the files in `components/rareui/` after installation.
+</details>
+
+<details>
+<summary>I'm getting "pnpm/yarn/bun is not recognized" error</summary>
+
+This means the package manager isn't installed on your system. **Solution:** Use npm instead (comes with Node.js):
+
+```bash
+npx rareui@latest init
+npx rareui@latest add liquid-button
+```
+
+**Want to install that package manager?**
+- **pnpm**: `npm install -g pnpm`
+- **yarn**: `npm install -g yarn`  
+- **bun**: Visit [bun.sh](https://bun.sh) for installation
+
+Most users just use npm - it works perfectly! 
 </details>
 
 <details>
