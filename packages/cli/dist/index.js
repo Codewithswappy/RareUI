@@ -8,7 +8,7 @@ import fs from "fs-extra";
 import path from "path";
 import * as p from "@clack/prompts";
 import chalk from "chalk";
-var REGISTRY_URL = "https://rare-ui.vercel.app/r";
+var REGISTRY_URL = "https://rareui.in/r";
 async function init() {
   console.log();
   p.intro(chalk.bold("Welcome to RareUI!"));
@@ -52,7 +52,7 @@ async function init() {
   console.log();
   console.log("Next steps:");
   console.log(chalk.dim("  1. Run ") + chalk.cyan("npx rareui add [component]") + chalk.dim(" to add components"));
-  console.log(chalk.dim("  2. Visit ") + chalk.cyan("https://rare-ui.vercel.app/docs") + chalk.dim(" to browse components"));
+  console.log(chalk.dim("  2. Visit ") + chalk.cyan("https://rareui.in/docs") + chalk.dim(" to browse components"));
   console.log();
 }
 
@@ -62,7 +62,7 @@ import path2 from "path";
 import * as p2 from "@clack/prompts";
 import chalk2 from "chalk";
 import { execa } from "execa";
-var REGISTRY_URL2 = "https://rare-ui.vercel.app/r";
+var REGISTRY_URL2 = "https://rareui.in/r";
 function kebabToPascal(str) {
   return str.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join("");
 }
@@ -206,7 +206,7 @@ import path3 from "path";
 import * as p3 from "@clack/prompts";
 import chalk3 from "chalk";
 import { execa as execa2 } from "execa";
-var REGISTRY_URL3 = "https://rare-ui.vercel.app/r";
+var REGISTRY_URL3 = "https://rareui.in/r";
 function kebabToPascal2(str) {
   return str.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join("");
 }
@@ -426,7 +426,7 @@ ${chalk4.bold("Examples:")}
   ${chalk4.cyan("$ npx rareui add liquid-button")}
 
   ${chalk4.dim("Add multiple components")}
-  ${chalk4.cyan("$ npx rareui add particle-card soft-button loader")}
+  ${chalk4.cyan("$ npx rareui add particle-card soft-button")}
 
   ${chalk4.dim("Install all components")}
   ${chalk4.cyan("$ npx rareui add .")}
@@ -435,7 +435,7 @@ ${chalk4.bold("Examples:")}
   ${chalk4.cyan("$ npx rareui diff")}
 
 ${chalk4.bold("Documentation:")}
-  ${chalk4.dim("Visit")} ${chalk4.cyan("https://rare-ui.vercel.app/docs")} ${chalk4.dim("for more information")}
+  ${chalk4.dim("Visit")} ${chalk4.cyan("https://rareui.in/docs")} ${chalk4.dim("for more information")}
 `);
 program.command("init").description("Initialize RareUI configuration in your project").addHelpText("after", `
 ${chalk4.bold("What this does:")}
@@ -457,7 +457,7 @@ ${chalk4.bold("Examples:")}
   ${chalk4.cyan("$ npx rareui add liquid-button")}
 
   ${chalk4.dim("Add multiple components")}
-  ${chalk4.cyan("$ npx rareui add particle-card soft-button loader")}
+  ${chalk4.cyan("$ npx rareui add particle-card soft-button")}
 
   ${chalk4.dim("Install all available components")}
   ${chalk4.cyan("$ npx rareui add .")}

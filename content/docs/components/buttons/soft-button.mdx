@@ -8,11 +8,24 @@ import SoftButton from "@/components/rareui/buttons/SoftButton";
 
 <Preview
   code={`import React from 'react';
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
-const SoftButton = () => {
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+interface SoftButtonProps extends React.HTMLAttributes<HTMLDivElement> {
+  children?: React.ReactNode;
+}
+
+const SoftButton = ({ children = 'Button', className, ...props }: SoftButtonProps) => {
   return (
     // Outer Wrapper
-    <div className="group relative top-0 left-0 m-0 flex h-[50px] w-[160px] cursor-pointer items-center justify-center">
+    <div 
+      className={cn("group relative top-0 left-0 m-0 flex h-[50px] w-[160px] cursor-pointer items-center justify-center", className)}
+      {...props}
+    >
       
       {/* Inner Div */}
       <div
@@ -21,10 +34,11 @@ const SoftButton = () => {
           
           /* Base Styles */
           bg-transparent
-          text-[#ff0000]
+          text-foreground
           tracking-[1px]
           rounded-[30px]
           z-10
+          font-medium
           
           /* Borders */
           border-t border-b border-white/10 dark:border-black/20
@@ -37,7 +51,7 @@ const SoftButton = () => {
              2. -4px -4px... Gray (Top-Left Shadow)
              3. Inset -4px -4px... White (Inner Top-Left Highlight)
              4. Inset 4px 4px... Black (Inner Bottom-Right Shadow)
-
+             
              Dark Mode Shadow (dark: prefix):
              1. 4px 4px... Faint White (Bottom-Right Highlight, opacity reduced to 0.05)
              2. -4px -4px... Deep Black (Top-Left Shadow, opacity 0.5)
@@ -52,15 +66,15 @@ const SoftButton = () => {
           transition-all duration-[600ms]
           
           /* Hover States */
-          group-hover:bg-[#ff0000]
-          group-hover:text-white
-          group-hover:tracking-[4px]
+          group-hover:bg-primary
+          group-hover:text-primary-foreground
+          group-hover:tracking-[2px]
           
-          /* Dark Mode Hover Adjustment (Optional: keeps the red vibrant) */
-          dark:group-hover:shadow-[0_0_15px_rgba(255,0,0,0.5)]
+          /* Dark Mode Hover Adjustment */
+          dark:group-hover:shadow-[0_0_15px_hsl(var(--primary)/0.5)]
         "
       >
-        Delete
+        {children}
       </div>
     </div>
   );
@@ -72,4 +86,18 @@ export default SoftButton;`}
   <SoftButton />
 </Preview>
 
+## Props
 
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `children` | `React.ReactNode` | `"Button"` | The content to display inside the button. |
+| `className` | `string` | `-` | Additional CSS classes for the outer wrapper. |
+| `...props` | `React.HTMLAttributes<HTMLDivElement>` | `-` | Any additional HTML div attributes. |
+
+## Features
+
+- **Neumorphic Design**: Soft, multi-layered shadows for a 3D effect
+- **Theme Aware**: Uses CSS variables for primary colors
+- **Smooth Transitions**: 600ms animated state changes
+- **Dark Mode Support**: Optimized shadows for both light and dark themes
+- **Letter Spacing Animation**: Expands tracking on hover for dynamic effect

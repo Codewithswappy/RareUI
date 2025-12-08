@@ -18,6 +18,6 @@
     "hooks": "@/hooks"
   },
   "registries": {
-    "@rareui": "https://rare-ui.vercel.app/r/{name}.json"
+    "@rareui": "https://rareui.in/r/{name}.json"
   }
 }
