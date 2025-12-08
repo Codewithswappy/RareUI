@@ -1,14 +1,17 @@
 blank_issues_enabled: false
 contact_links:
-  - name: 💬 GitHub Discussions
-    url: https://github.com/Codewithswappy/RareUI/discussions
-    about: Ask questions, share ideas, and discuss RareUI with the community
+  - name: 💡 Ideas & Feature Requests
+    url: https://github.com/Codewithswappy/RareUI/discussions/categories/ideas-feature-requests
+    about: Suggest new components or features in our Ideas category
+  - name: ❓ Q&A - Ask Questions
+    url: https://github.com/Codewithswappy/RareUI/discussions/categories/q-a
+    about: Ask questions and get help from the community
+  - name: 🎨 Show and Tell
+    url: https://github.com/Codewithswappy/RareUI/discussions/categories/show-and-tell
+    about: Share what you've built with RareUI
   - name: 📚 Documentation
     url: https://rareui.in/docs
     about: Read the full documentation for RareUI
   - name: 🐦 Twitter/X
     url: https://x.com/heyyswap
     about: Follow for updates and announcements
-  - name: ❓ Q&A Discussions
-    url: https://github.com/Codewithswappy/RareUI/discussions/categories/q-a
-    about: Ask questions in our Q&A discussions
