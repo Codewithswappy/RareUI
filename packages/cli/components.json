@@ -1,5 +1,4 @@
 {
-  "$schema": "https://ui.shadcn.com/schema.json",
   "style": "new-york",
   "rsc": true,
   "tsx": true,
@@ -19,6 +18,6 @@
     "hooks": "@/hooks"
   },
   "registries": {
-    "@rareui": "https://rare-ui.vercel.app/r/{name}.json"
+    "@rareui": "https://rareui.in/r/{name}.json"
   }
 }

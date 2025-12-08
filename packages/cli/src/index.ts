@@ -10,7 +10,7 @@ const program = new Command()
 program
   .name('rareui')
   .description(chalk.bold('CLI for adding RareUI components to your project'))
-  .version('0.1.2')
+  .version('0.1.3')
   .addHelpText('after', `
 ${chalk.bold('Examples:')}
   ${chalk.dim('Initialize RareUI in your project')}

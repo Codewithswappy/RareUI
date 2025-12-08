@@ -1,21 +1,106 @@
+# RareUI - React UI Components Library
+# https://rareui.in
+# Professional robots.txt for optimal SEO
+
+# Allow all search engines to crawl entire site
 User-agent: *
 Allow: /
 Disallow: /api/
-Disallow: /_next/
+Disallow: /_next/static/
+Disallow: /_next/image
 Disallow: /admin
+Disallow: /private/
 
-# Sitemaps
+# Main Sitemap
 Sitemap: https://rareui.in/sitemap.xml
 
-# Crawl-delay
+# No crawl delay for fast indexing
 Crawl-delay: 0
 
-# Google bot specific rules
+# Google Bot - Premium Access
 User-agent: Googlebot
+Allow: /
+Allow: /docs/*
+Allow: /docs/components/*
+Disallow: /api/
+Disallow: /_next/
+
+# Google Image Bot - Allow component previews
+User-agent: Googlebot-Image
+Allow: /
+Allow: /public/*
+Allow: *.png
+Allow: *.jpg
+Allow: *.svg
+Allow: *.webp
+
+# Bing Bot - Full Access
+User-agent: Bingbot
+Allow: /
+Allow: /docs/*
+Disallow: /api/
+
+# DuckDuckGo Bot
+User-agent: DuckDuckBot
 Allow: /
 Disallow: /api/
 
-# Bing bot
-User-agent: Bingbot
+# Yandex (Russian search engine)
+User-agent: Yandex
 Allow: /
 Disallow: /api/
+
+# Baidu (Chinese search engine)
+User-agent: Baiduspider
+Allow: /
+Disallow: /api/
+
+# Social Media Crawlers (for rich previews)
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# AI Crawlers (ChatGPT, Claude, etc.)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# GitHub crawler (for README previews)
+User-agent: github-camo
+Allow: /
+
+# Prevent scraping/bad bots
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# Prioritize important pages for crawling
+# (Google uses this as a hint for crawl budget)
+Host: https://rareui.in
