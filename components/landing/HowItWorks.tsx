@@ -34,25 +34,29 @@ export default function HowItWorks() {
 
         {/* --- Background Grid & Lines --- */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0">
-            <svg className="absolute inset-0 w-full h-full opacity-[0.4] dark:opacity-[0.6]" xmlns="http://www.w3.org/2000/svg">
+            <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <pattern id="how-grid-pattern" width="80" height="80" patternUnits="userSpaceOnUse">
                 <path d="M 80 0 L 0 0 0 80" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-neutral-300 dark:text-neutral-500"/>
                 </pattern>
             </defs>
             {/* Base Grid - Constrained to vertical lines */}
-            <rect x="10%" y="0" width="80%" height="100%" fill="url(#how-grid-pattern)" />
+            {/* Desktop Grid */}
+            <rect x="10%" y="0" width="80%" height="100%" fill="url(#how-grid-pattern)" className="hidden md:block" />
+            <line x1="10%" y1="0" x2="10%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400 hidden md:block" strokeDasharray="4 4"/>
+            <line x1="90%" y1="0" x2="90%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400 hidden md:block" strokeDasharray="4 4"/>
             
-            {/* Vertical Lines */}
-            <line x1="10%" y1="0" x2="10%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
-            <line x1="90%" y1="0" x2="90%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
+            {/* Mobile Grid */}
+            <rect x="2.5%" y="0" width="95%" height="100%" fill="url(#how-grid-pattern)" className="block md:hidden" />
+            <line x1="2.5%" y1="0" x2="2.5%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400 block md:hidden" strokeDasharray="4 4"/>
+            <line x1="97.5%" y1="0" x2="97.5%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400 block md:hidden" strokeDasharray="4 4"/>
             
             {/* Horizontal Lines */}
             <line x1="0" y1="0" x2="100%" y2="0" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
             <line x1="0" y1="100%" x2="100%" y2="100%" stroke="currentColor" strokeWidth="1" className="text-neutral-400 dark:text-neutral-400" strokeDasharray="4 4"/>
             </svg>
         </div>
-      <div className="max-w-[1400px] w-[80%] mx-auto">
+      <div className="max-w-[1400px] w-[95%] md:w-[80%] mx-auto">
         {/* Header */}
         <div className="text-center mb-16 space-y-4">
           <SkewOnScroll>

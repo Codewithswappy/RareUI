@@ -13,12 +13,14 @@ export default function LiquidButton({
   text = "Hover me",
   className,
   backgroundColor = "bg-black dark:bg-white",
-  textColor = "text-white dark:text-black"
+  textColor = "text-white dark:text-black",
+  isDripping = false
 }: { 
   text?: string
   className?: string
   backgroundColor?: string
   textColor?: string
+  isDripping?: boolean
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const mouseX = useMotionValue(0)
@@ -85,16 +87,16 @@ export default function LiquidButton({
         </motion.button>
 
         {/* Drops */}
-        <Drop left="10%" size="w-3 h-3 md:w-4 md:h-4" delay={0.1} duration={2.1} mouseX={springX} backgroundColor={backgroundColor} />
-        <Drop left="20%" size="w-4 h-4 md:w-5 md:h-5" delay={0} duration={2} mouseX={springX} backgroundColor={backgroundColor} />
-        <Drop left="30%" size="w-2 h-2 md:w-3 md:h-3" delay={0.6} duration={2.5} mouseX={springX} backgroundColor={backgroundColor} />
-        <Drop left="40%" size="w-5 h-5 md:w-6 md:h-6" delay={0.8} duration={2.4} mouseX={springX} backgroundColor={backgroundColor} />
-        <Drop left="50%" size="w-3 h-3 md:w-4 md:h-4" delay={0.4} duration={1.8} mouseX={springX} backgroundColor={backgroundColor} />
-        <Drop left="55%" size="w-2 h-2 md:w-3 md:h-3" delay={1.5} duration={2.7} mouseX={springX} backgroundColor={backgroundColor} />
-        <Drop left="65%" size="w-6 h-6 md:w-7 md:h-7" delay={1.2} duration={2.6} mouseX={springX} backgroundColor={backgroundColor} />
-        <Drop left="75%" size="w-3 h-3 md:w-4 md:h-4" delay={0.9} duration={2.3} mouseX={springX} backgroundColor={backgroundColor} />
-        <Drop left="80%" size="w-4 h-4 md:w-5 md:h-5" delay={0.2} duration={2.2} mouseX={springX} backgroundColor={backgroundColor} />
-        <Drop left="90%" size="w-3 h-3 md:w-4 md:h-4" delay={0.5} duration={2.8} mouseX={springX} backgroundColor={backgroundColor} />
+        <Drop left="10%" size="w-3 h-3 md:w-4 md:h-4" delay={0.1} duration={2.1} mouseX={springX} backgroundColor={backgroundColor} isDripping={isDripping} />
+        <Drop left="20%" size="w-4 h-4 md:w-5 md:h-5" delay={0} duration={2} mouseX={springX} backgroundColor={backgroundColor} isDripping={isDripping} />
+        <Drop left="30%" size="w-2 h-2 md:w-3 md:h-3" delay={0.6} duration={2.5} mouseX={springX} backgroundColor={backgroundColor} isDripping={isDripping} />
+        <Drop left="40%" size="w-5 h-5 md:w-6 md:h-6" delay={0.8} duration={2.4} mouseX={springX} backgroundColor={backgroundColor} isDripping={isDripping} />
+        <Drop left="50%" size="w-3 h-3 md:w-4 md:h-4" delay={0.4} duration={1.8} mouseX={springX} backgroundColor={backgroundColor} isDripping={isDripping} />
+        <Drop left="55%" size="w-2 h-2 md:w-3 md:h-3" delay={1.5} duration={2.7} mouseX={springX} backgroundColor={backgroundColor} isDripping={isDripping} />
+        <Drop left="65%" size="w-6 h-6 md:w-7 md:h-7" delay={1.2} duration={2.6} mouseX={springX} backgroundColor={backgroundColor} isDripping={isDripping} />
+        <Drop left="75%" size="w-3 h-3 md:w-4 md:h-4" delay={0.9} duration={2.3} mouseX={springX} backgroundColor={backgroundColor} isDripping={isDripping} />
+        <Drop left="80%" size="w-4 h-4 md:w-5 md:h-5" delay={0.2} duration={2.2} mouseX={springX} backgroundColor={backgroundColor} isDripping={isDripping} />
+        <Drop left="90%" size="w-3 h-3 md:w-4 md:h-4" delay={0.5} duration={2.8} mouseX={springX} backgroundColor={backgroundColor} isDripping={isDripping} />
         
       </motion.div>
     </div>
@@ -107,14 +109,16 @@ function Drop({
     delay, 
     duration,
     mouseX,
-    backgroundColor
+    backgroundColor,
+    isDripping
 }: { 
     left: string, 
     size: string, 
     delay: number, 
     duration: number,
     mouseX: MotionValue,
-    backgroundColor: string
+    backgroundColor: string,
+    isDripping?: boolean
 }) {
     // Randomize the movement factor slightly based on duration to give depth
     const factor = duration * 10
@@ -124,6 +128,7 @@ function Drop({
         <motion.div
           className={cn("absolute bottom-4 rounded-full -z-10 will-change-transform", size, backgroundColor)}
           style={{ left, x }}
+          animate={isDripping ? "hover" : undefined}
           variants={{
             initial: { y: 0, scale: 1, opacity: 1 },
             hover: { 

@@ -18,12 +18,17 @@ const Footer = dynamic(() => import('@/components/landing/Footer'), {
     loading: () => <div className="h-20 w-full bg-background" />
 });
 
+const ComponentsGrid = dynamic(() => import('@/components/landing/ComponentsGrid'), {
+  loading: () => <div className="h-[600px] w-full bg-background" />
+});
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <HeroSection />
+      <ComponentsGrid />
       <HowItWorks />
-      <FeatureSection />   
+      {/* <FeatureSection />    */}
       <CTASection />
       <Footer />
       {/* <WaterFlow /> */}
