@@ -36,7 +36,7 @@ export function DraggableTwitterBadge() {
         whileHover={{ scale: 1.05, cursor: "grab" }}
         whileTap={{ scale: 0.95, cursor: "grabbing" }}
         whileDrag={{ cursor: "grabbing" }}
-        className="fixed top-24 left-0 right-0 mx-auto w-fit z-[101] flex"
+        className="fixed top-2 left-0 right-0 mx-auto w-fit z-[101] flex"
       >
         <a 
            href="https://x.com/heyyswap" 
