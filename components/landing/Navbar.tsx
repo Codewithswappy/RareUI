@@ -129,7 +129,7 @@ export default function Navbar() {
                 { name: 'Docs', href: '/docs/installation/cli' },
                 { name: 'Components', href: '/docs' },
                 { name: 'Templates', href: '/templates' },
-                { name: 'Pricing', href: '/pricing' }
+                // { name: 'Pricing', href: '/pricing' }
               ].map((item) => (
                 <TransitionLink 
                   key={item.name}
@@ -305,7 +305,7 @@ export default function Navbar() {
                 { name: 'Docs', href: '/docs/installation/cli' },
                 { name: 'Components', href: '/docs' },
                 { name: 'Templates', href: '/templates' },
-                { name: 'Pricing', href: '/pricing' }
+                // { name: 'Pricing', href: '/pricing' }
               ].map((item, i) => (
                 <motion.div
                   key={item.name}

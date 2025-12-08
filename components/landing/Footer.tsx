@@ -32,7 +32,7 @@ export default function Footer() {
       </div>
 
       {/* Footer Card */}
-      <div className="max-w-[1400px] w-[95%] md:w-[80%] mx-auto bg-secondary/20 border border-border/50 border-b-0 overflow-hidden relative backdrop-blur-sm group/footer">
+      <div className="max-w-fd-container w-[95%] md:w-[80%] mx-auto bg-secondary/20 border border-border/50 border-b-0 overflow-hidden relative backdrop-blur-sm group/footer">
         
         {/* Main Content */}
         <div className="p-8 md:p-12 lg:p-16 relative z-10">
@@ -94,23 +94,37 @@ export default function Footer() {
             </div>
             
             {/* Right: Links Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-2 gap-8">
               {[
-                { title: 'Product', links: ['Features', 'Components', 'Pricing', 'Changelog'] },
-                { title: 'Resources', links: ['Documentation', 'Templates', 'Blog', 'Support'] },
-                { title: 'Company', links: ['About', 'Careers', 'Contact', 'Partners'] }
+                { 
+                  title: 'Product', 
+                  links: [
+                    // { name: 'Features', href: '/#features' },
+                    { name: 'Components', href: '/docs' },
+                    { name: 'Templates', href: '/templates' },
+                    // { name: 'Pricing', href: '/pricing' }
+                  ] 
+                },
+                { 
+                  title: 'Resources', 
+                  links: [
+                    { name: 'Documentation', href: '/docs/installation/cli' },               
+                    { name: 'Blog', href: '/blog' },
+                    { name: 'Support', href: 'https://github.com/Codewithswappy/RareUI/discussions' }
+                  ] 
+                }
               ].map((column) => (
                 <div key={column.title} className="flex flex-col gap-4">
                   <h4 className="font-semibold text-foreground">{column.title}</h4>
                   <ul className="flex flex-col gap-3">
                     {column.links.map((link) => (
-                      <li key={link}>
+                      <li key={link.name}>
                         <Link 
-                          href="#" 
+                          href={link.href} 
                           className="text-sm text-muted-foreground hover:text-foreground inline-flex items-center gap-1 group/link transition-colors"
                         >
                           <span className="relative">
-                            {link}
+                            {link.name}
                             <span className="absolute bottom-0 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover/link:w-full" />
                           </span>
                         </Link>
@@ -126,13 +140,8 @@ export default function Footer() {
           {/* <div className="w-full h-px bg-gradient-to-r from-transparent via-border to-transparent mb-8 opacity-50" /> */}
           
           {/* Bottom Bar */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
+          <div className="flex justify-center items-center gap-4 text-sm text-muted-foreground">
              <p>© {new Date().getFullYear()} RareUI. All rights reserved.</p>
-             <div className="flex items-center gap-6">
-                <Link href="#" className="hover:text-foreground transition-colors hover:underline underline-offset-4">Privacy Policy</Link>
-                <Link href="#" className="hover:text-foreground transition-colors hover:underline underline-offset-4">Terms of Service</Link>
-                <Link href="#" className="hover:text-foreground transition-colors hover:underline underline-offset-4">Cookies Settings</Link>
-             </div>
           </div>
         </div>
 
