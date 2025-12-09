@@ -1,6 +1,6 @@
 ---
 title: Glass Shimmer Button
-description: A button with a glassmorphism effect and shimmer animation on hover.
+description: A premium glassmorphism button with continuous shimmer animation and hover effects.
 ---
 
 import { Preview } from "@/components/mdx/preview";
@@ -10,37 +10,69 @@ import { GlassShimmerButton } from "@/components/rareui/glass-shimmer-button";
   code={`"use client"
 
 import type React from "react"
+import { cn } from "@/lib/utils"
 
-import { useState } from "react"
-
-interface GlassShimmerButtonProps {
+interface GlassShimmerButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
-  onClick?: () => void
 }
 
-export function GlassShimmerButton({ children, onClick }: GlassShimmerButtonProps) {
-  const [isHovered, setIsHovered] = useState(false)
-
+export function GlassShimmerButton({
+  children,
+  className,
+  ...props
+}: GlassShimmerButtonProps) {
   return (
-    <button
-      onClick={onClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="relative inline-block px-5 py-2.5 text-base font-medium text-primary-foreground bg-primary border border-input rounded overflow-hidden transition-all duration-300 ease-in-out cursor-pointer"
-    >
-      <div
-        className="absolute inset-0 pointer-events-none bg-white/20 dark:bg-black/10"
-        style={{
-          transform: isHovered
-            ? "perspective(5px) rotateX(0deg) rotateY(0deg)"
-            : "perspective(5px) rotateX(2deg) rotateY(2deg)",
-          transition: "transform 0.3s ease-out",
-        }}
-      />
+    <>
+      <style jsx>{\`
+        @keyframes glass-shimmer {
+          0% {
+            transform: translateX(-150%) skewX(-20deg);
+          }
+          100% {
+            transform: translateX(150%) skewX(-20deg);
+          }
+        }
+      \`}</style>
+      <button
+        className={cn(
+          "group relative inline-flex items-center justify-center overflow-hidden rounded-full",
+          "dark:bg-white/5 border border-white/10 px-8 py-3",
+          "text-base font-medium text-white dark:text-white transition-all duration-300",
+          "hover:bg-white/10 hover:scale-105 active:scale-95",
+          "backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.1)] hover:shadow-[0_0_0_0.4rgba(255,255,255,0.2)]",
+          "bg-black hover:bg-black/30 dark:bg-white/30 dark:hover:bg-white/40",
+          className
+        )}
+        {...props}
+      >
+        {/* Shimmer Animation Element */}
+        <div
+          className="absolute inset-0 -z-10 h-full w-full pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to right, transparent, rgba(255, 255, 255, 1) 50%, transparent)",
+            animation: "glass-shimmer 2.5s infinite linear",
+            width: "200%",
+            left: "-50%",
+          }}
+        />
 
-      {/* Text content */}
-      <span className="relative z-10">{children}</span>
-    </button>
+        {/* Static Glass Gloss Top */}
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-50" />
+        
+        {/* Static Glass Gloss Bottom */}
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-30" />
+
+        {/* Content */}
+        <span className="relative z-10 tracking-wide drop-shadow-sm">
+          {children}
+        </span>
+        
+        {/* Local Glow on Hover */}
+        <div className="absolute inset-0 -z-10 bg-white/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      </button>
+    </>
   )
 }`}
   cliCommand="npx rareui add glass-shimmer-button"
@@ -62,9 +94,20 @@ export default function App() {
 }
 ```
 
+## Features
+
+- **Continuous Shimmer Animation**: Self-contained animated shimmer effect that runs continuously
+- **Glassmorphism Design**: Premium frosted glass aesthetic with backdrop blur
+- **Hover Effects**: Scale animation and enhanced glow on hover
+- **Dark Mode Support**: Optimized colors for both light and dark themes
+- **Fully Self-Contained**: No global CSS required - animations defined inline
+
 ## Props
+
+Extends all standard `React.ButtonHTMLAttributes<HTMLButtonElement>`.
 
 | Prop | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `children` | `React.ReactNode` | `-` | The content to display inside the button. |
-| `onClick` | `() => void` | `-` | Callback function when the button is clicked. |
+| `className` | `string` | `-` | Additional CSS classes to merge with default styles. |
+| `...props` | `ButtonHTMLAttributes` | `-` | Any additional HTML button attributes (onClick, disabled, etc.). |

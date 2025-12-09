@@ -60,9 +60,16 @@ const SoftButton = ({ children = 'Button', className, ...props }: SoftButtonProp
           group-hover:bg-primary
           group-hover:text-primary-foreground
           group-hover:tracking-[2px]
+          group-hover:scale-[1.05]
+          
+          /* Active State */
+          group-active:scale-[0.98]
+          
+          /* Enhanced Hover Shadow */
+          group-hover:shadow-[0_0_20px_hsl(var(--primary)/0.6),4px_4px_8px_0_rgba(255,255,255,0.3),-4px_-4px_8px_0_rgba(116,125,136,0.3)]
           
           /* Dark Mode Hover Adjustment */
-          dark:group-hover:shadow-[0_0_15px_hsl(var(--primary)/0.5)]
+          dark:group-hover:shadow-[0_0_20px_hsl(var(--primary)/0.6),4px_4px_8px_0_rgba(255,255,255,0.08),-4px_-4px_8px_0_rgba(0,0,0,0.6)]
         "
       >
         {children}

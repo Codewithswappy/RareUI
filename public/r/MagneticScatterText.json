@@ -1,0 +1,19 @@
+{
+  "name": "MagneticScatterText",
+  "type": "registry:ui",
+  "dependencies": [
+    "react",
+    "framer-motion",
+    "@types/react",
+    "typescript"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/rareui/Text Animation/MagneticScatterText.tsx",
+      "content": "\"use client\"\r\n\r\nimport React, { useState, useEffect } from 'react';\r\nimport { motion, useAnimation } from 'framer-motion';\r\nimport { cn } from '@/lib/utils';\r\n\r\ninterface MagneticScatterTextProps {\r\n  text: string;\r\n  className?: string;\r\n  trigger?: boolean;\r\n}\r\n\r\nexport const MagneticScatterText: React.FC<MagneticScatterTextProps> = ({ text, className, trigger = true }) => {\r\n  const controls = useAnimation();\r\n  const [isHovering, setIsHovering] = useState(false);\r\n\r\n  useEffect(() => {\r\n    if (trigger) {\r\n      controls.start(\"visible\");\r\n    } else {\r\n      controls.start(\"hidden\");\r\n    }\r\n  }, [trigger, controls]);\r\n\r\n  useEffect(() => {\r\n    if (isHovering) {\r\n      controls.start(\"scatter\");\r\n    } else {\r\n      controls.start(\"visible\");\r\n    }\r\n  }, [isHovering, controls]);\r\n\r\n  const letters = text.split(\"\");\r\n\r\n  // Deterministic random for consistent scattering based on index\r\n  const getRandom = (index: number) => {\r\n    const seed = index * 42;\r\n    const x = Math.sin(seed) * 100; // -100 to 100\r\n    const y = Math.cos(seed) * 100; // -100 to 100\r\n    const rotate = Math.sin(seed * 2) * 180; // -180 to 180\r\n    return { x, y, rotate };\r\n  };\r\n\r\n  return (\r\n    <motion.div\r\n      className={cn(\"flex cursor-default select-none\", className)}\r\n      onMouseEnter={() => setIsHovering(true)}\r\n      onMouseLeave={() => setIsHovering(false)}\r\n    >\r\n      {letters.map((letter, index) => {\r\n        const randoms = getRandom(index);\r\n        return (\r\n          <motion.span\r\n            key={index}\r\n            className=\"inline-block font-sans font-bold text-black dark:text-white\"\r\n            initial=\"hidden\"\r\n            animate={controls}\r\n            variants={{\r\n              hidden: {\r\n                x: randoms.x * 5,\r\n                y: randoms.y * 5,\r\n                rotate: randoms.rotate,\r\n                opacity: 0,\r\n                scale: 0.5,\r\n              },\r\n              visible: {\r\n                x: 0,\r\n                y: 0,\r\n                rotate: 0,\r\n                opacity: 1,\r\n                scale: 1,\r\n                transition: {\r\n                  type: \"spring\",\r\n                  damping: 12,\r\n                  stiffness: 80,\r\n                  mass: 0.8,\r\n                  delay: index * 0.02,\r\n                },\r\n              },\r\n              scatter: {\r\n                x: randoms.x * 0.5, // Slight scatter on hover\r\n                y: randoms.y * 0.5,\r\n                rotate: randoms.rotate * 0.2,\r\n                scale: 1.1,\r\n                transition: {\r\n                  type: \"spring\",\r\n                  damping: 15,\r\n                  stiffness: 200,\r\n                },\r\n              },\r\n            }}\r\n          >\r\n            {letter === \" \" ? \"\\u00A0\" : letter}\r\n          </motion.span>\r\n        );\r\n      })}\r\n    </motion.div>\r\n  );\r\n};",
+      "type": "registry:ui",
+      "target": "components/rareui/Text Animation/MagneticScatterText.tsx"
+    }
+  ]
+}
