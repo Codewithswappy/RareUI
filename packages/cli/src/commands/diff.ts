@@ -131,6 +131,10 @@ function createDiff(oldContent: string, newContent: string): { hasChanges: boole
 export async function diff(component: string | undefined, options: DiffOptions) {
     const cwd = options.cwd || process.cwd()
 
+    // Increase max listeners to prevent warnings when updating multiple components
+    // Each execa call adds event listeners, and we may update many components
+    process.setMaxListeners(0) // 0 = unlimited
+
     console.log()
     p.intro(chalk.bold('Checking for component updates'))
 

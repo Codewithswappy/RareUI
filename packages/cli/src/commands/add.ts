@@ -65,6 +65,10 @@ function findComponentName(input: string, availableComponents: string[]): string
 export async function add(components: string[], options: AddOptions) {
     const cwd = options.cwd || process.cwd()
 
+    // Increase max listeners to prevent warnings when installing multiple components
+    // Each execa call adds event listeners, and we may have many components with dependencies
+    process.setMaxListeners(0) // 0 = unlimited
+
     console.log()
     p.intro(chalk.bold('Adding RareUI components'))
 

@@ -125,7 +125,7 @@ export default function HeroSection() {
               {/* CLI Command Button */}
               <button 
                 onClick={() => {
-                   navigator.clipboard.writeText("npx rareui init");
+                   navigator.clipboard.writeText("npx rareui@lates init");
                    setHasCopied(true);
                    setTimeout(() => setHasCopied(false), 2000);
                 }}
@@ -136,7 +136,7 @@ export default function HeroSection() {
                 <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-background px-6 py-4 text-foreground transition-colors backdrop-blur-3xl gap-2 relative">
                   <div className="flex items-center gap-1 font-mono text-sm">
                     <span className="text-muted-foreground select-none">$</span>
-                    <span className="font-medium mr-2">npx rareui init</span>
+                    <span className="font-medium mr-2">npx rareui@latest init</span>
                   </div>
                   <div className="relative w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors">
                     <AnimatePresence mode='wait' initial={false}>
