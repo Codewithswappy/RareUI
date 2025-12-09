@@ -1,7 +1,7 @@
 
 import { Metadata } from "next";
-import { SearchProvider } from "@/components/rareui/search-context";
-import { CommandPaletteModal } from "@/components/rareui/overlays/modal";
+import { SearchProvider } from "@/components/internal/search-context";
+import { CommandPaletteModal } from "@/components/internal/modal";
 
 export const metadata: Metadata = {
   title: {

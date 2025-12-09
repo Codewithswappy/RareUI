@@ -33,6 +33,7 @@ const CATEGORY_LABELS: Record<string, string> = {
   card: "Card Components",
   button: "Buttons",
   btn: "Buttons",
+  tabs: "Tabs",
   input: "Inputs & Forms",
   "ai-input": "Inputs & Forms",
   text: "Text Components",
@@ -62,6 +63,7 @@ async function buildSidebar() {
     return;
   }
 
+
   const files = getAllMdxFiles(ROOT);
   const grouped: Record<string, { title: string; items: any[] }> = {};
 
@@ -81,7 +83,15 @@ async function buildSidebar() {
     });
   }
 
-  const sidebar = [...STATIC_SECTIONS, ...Object.values(grouped)];
+  // Create a single "Components" section with all component categories as subsections
+  const componentItems = Object.values(grouped).flatMap(group => group.items);
+
+  const componentsSection = {
+    title: "Components",
+    items: componentItems
+  };
+
+  const sidebar = [...STATIC_SECTIONS, componentsSection];
 
   try {
     // Ensure lib directory exists

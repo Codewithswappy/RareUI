@@ -1,0 +1,19 @@
+{
+  "name": "AnimatedTab",
+  "type": "registry:ui",
+  "dependencies": [
+    "react",
+    "framer-motion",
+    "@types/react",
+    "typescript"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/rareui/AnimatedTab.tsx",
+      "content": "\"use client\";\r\n\r\nimport React, { useState } from 'react';\r\nimport { motion } from 'framer-motion';\r\nimport { cn } from '@/lib/utils';\r\n\r\nexport interface Tab {\r\n  id: string;\r\n  label: string;\r\n}\r\n\r\ninterface AnimatedTabsProps {\r\n  tabs: Tab[];\r\n  activeTab: string;\r\n  onChange: (id: string) => void;\r\n  className?: string;\r\n}\r\n\r\nexport const AnimatedTabs: React.FC<AnimatedTabsProps> = ({\r\n  tabs,\r\n  activeTab,\r\n  onChange,\r\n  className,\r\n}) => {\r\n  const [hoveredTab, setHoveredTab] = useState<string | null>(null);\r\n\r\n  return (\r\n    <div\r\n      className={cn(\r\n        'flex flex-row items-center justify-center p-1.5 rounded-full',\r\n        'bg-white/60 dark:bg-zinc-900/60', // Light/Dark glass effect\r\n        'border border-black/5 dark:border-white/10', // Border adaptation\r\n        'backdrop-blur-xl', // Strong glass effect\r\n        'shadow-2xl', // Container shadow\r\n        className\r\n      )}\r\n    >\r\n      {tabs.map((tab) => {\r\n        const isActive = activeTab === tab.id;\r\n        const isHovered = hoveredTab === tab.id;\r\n\r\n        return (\r\n          <motion.button\r\n            key={tab.id}\r\n            onClick={() => onChange(tab.id)}\r\n            onMouseEnter={() => setHoveredTab(tab.id)}\r\n            onMouseLeave={() => setHoveredTab(null)}\r\n            whileTap={{ scale: 0.95 }}\r\n            className={cn(\r\n              'relative z-10 px-6 py-2.5 text-sm font-semibold rounded-full transition-colors duration-200 outline-none cursor-pointer',\r\n              isActive\r\n                ? 'text-white dark:text-black' // Active text\r\n                : 'text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300' // Inactive text\r\n            )}\r\n            style={{\r\n              WebkitTapHighlightColor: 'transparent',\r\n            }}\r\n          >\r\n            {/* Active Pill with \"Transferring\" Shadow */}\r\n            {isActive && (\r\n              <motion.div\r\n                layoutId=\"active-pill\"\r\n                className=\"absolute inset-0 bg-black dark:bg-white rounded-full z-[-1] shadow-xl dark:shadow-[0_0_20px_rgba(255,255,255,0.3)]\"\r\n                transition={{\r\n                  type: 'spring',\r\n                  stiffness: 320,\r\n                  damping: 32,\r\n                  mass: 0.9\r\n                }}\r\n              />\r\n            )}\r\n\r\n            {/* Hover Background - Subtle highlight */}\r\n            {isHovered && !isActive && (\r\n              <motion.div\r\n                layoutId=\"hover-pill\"\r\n                className=\"absolute inset-0 bg-black/5 dark:bg-white/5 rounded-full z-[-1]\"\r\n                initial={{ opacity: 0 }}\r\n                animate={{ opacity: 1 }}\r\n                exit={{ opacity: 0 }}\r\n                transition={{ duration: 0.15 }}\r\n              />\r\n            )}\r\n\r\n            <span className=\"relative z-10\">{tab.label}</span>\r\n          </motion.button>\r\n        );\r\n      })}\r\n    </div>\r\n  );\r\n};",
+      "type": "registry:ui",
+      "target": "components/rareui/AnimatedTab.tsx"
+    }
+  ]
+}

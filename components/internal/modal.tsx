@@ -23,7 +23,7 @@ import {
   AtSign,
   Sparkles
 } from "lucide-react";
-import { useSearchContext } from "@/components/rareui/search-context";
+import { useSearchContext } from "@/components/internal/search-context";
 import { sidebarData } from "@/lib/sidebar-data";
 import { useRouter } from "next/navigation";
 

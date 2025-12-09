@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchContext } from '@/components/rareui/search-context';
+import { useSearchContext } from '@/components/internal/search-context';
 import { useEffect } from 'react';
 
 

@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import HeroSection from '@/components/landing/HeroSection';
-import WaterFlow from '@/components/rareui/shaders/waterFlow';
+import WaterFlow from '@/components/rareui/waterFlow';
 
 const HowItWorks = dynamic(() => import('@/components/landing/HowItWorks'), {
   loading: () => <div className="h-[500px] w-full bg-background" />,

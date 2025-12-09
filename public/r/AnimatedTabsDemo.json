@@ -1,0 +1,18 @@
+{
+  "name": "AnimatedTabsDemo",
+  "type": "registry:ui",
+  "dependencies": [
+    "react",
+    "@types/react",
+    "typescript"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/rareui/AnimatedTabsDemo.tsx",
+      "content": "\"use client\";\r\nimport React, { useState } from 'react';\r\nimport { AnimatedTabs } from '@/components/rareui/AnimatedTab';\r\n\r\nconst TABS = [\r\n  { id: 'home', label: 'Home' },\r\n  { id: 'about', label: 'About' },\r\n  { id: 'services', label: 'Services' },\r\n  { id: 'contact', label: 'Contact' },\r\n];\r\n\r\nexport const AnimatedTabsDemo = () => {\r\n    const [activeTab, setActiveTab] = useState('home');\r\n\r\n    return (\r\n        <div className=\"flex justify-center items-center py-10\">\r\n            <AnimatedTabs \r\n                tabs={TABS}\r\n                activeTab={activeTab}\r\n                onChange={setActiveTab}\r\n            />\r\n        </div>\r\n    );\r\n};\r\n",
+      "type": "registry:ui",
+      "target": "components/rareui/AnimatedTabsDemo.tsx"
+    }
+  ]
+}

@@ -3,55 +3,55 @@
 import React from 'react'
 import Link from 'next/link'
 import { motion } from 'motion/react'
-import { GlassShimmerButton } from '@/components/rareui/buttons/glass-shimmer-button'
-import LiquidButton from '@/components/rareui/buttons/LiquidButton'
-import { Neumorphism3DButton } from '@/components/rareui/buttons/neumorphism3DButton'
-import SoftButton from '@/components/rareui/buttons/SoftButton'
-import { UpgradeButton } from '@/components/rareui/buttons/upgrade-button'
-import ParticleCard from '@/components/rareui/cards/ParticleCard'
-import PremiumProfileCard from '@/components/rareui/cards/premiumProfileCard'
+import { GlassShimmerButton } from '@/components/rareui/glass-shimmer-button'
+import LiquidButton from '@/components/rareui/LiquidButton'
+import { Neumorphism3DButton } from '@/components/rareui/neumorphism3DButton'
+import SoftButton from '@/components/rareui/SoftButton'
+import { UpgradeButton } from '@/components/rareui/upgrade-button'
+import ParticleCard from '@/components/rareui/ParticleCard'
+import PremiumProfileCard from '@/components/rareui/premiumProfileCard'
 
 const components = [
   {
     name: 'Liquid Button',
     component: <LiquidButton />,
-    href: '/docs/components/buttons/liquid-button',
+    href: '/docs/components/liquid-button',
     className: 'col-span-1'
   },
   {
     name: 'Glass Shimmer',
     component: <GlassShimmerButton>Shimmer</GlassShimmerButton>,
-    href: '/docs/components/buttons/glass-shimmer-button',
+    href: '/docs/components/glass-shimmer-button',
     className: 'col-span-1'
   },
   {
     name: 'Neumorphism 3D',
     component: <Neumorphism3DButton>Click Me</Neumorphism3DButton>,
-    href: '/docs/components/buttons/neumorphism3DButton',
+    href: '/docs/components/neumorphism3DButton',
     className: 'col-span-1'
   },
   {
     name: 'Soft Button',
     component: <SoftButton>Button</SoftButton>,
-    href: '/docs/components/buttons/soft-button',
+    href: '/docs/components/soft-button',
     className: 'col-span-1'
   },
   {
     name: 'Upgrade Button',
     component: <UpgradeButton />,
-    href: '/docs/components/buttons/upgrade-button',
+    href: '/docs/components/upgrade-button',
     className: 'col-span-1'
   },
   {
     name: 'Particle Card',
     component: <div className="scale-[0.6] origin-center"><ParticleCard /></div>,
-    href: '/docs/components/cards/particle-card',
+    href: '/docs/components/particle-card',
     className: 'col-span-1 md:col-span-2 lg:col-span-1'
   },
   {
     name: 'Premium Profile',
     component: <div className="scale-75 origin-center"><PremiumProfileCard /></div>,
-    href: '/docs/components/cards/premium-profile-card',
+    href: '/docs/components/premium-profile-card',
     className: 'col-span-1 md:col-span-2 lg:col-span-2'
   }
 ]

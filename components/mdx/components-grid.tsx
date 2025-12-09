@@ -2,28 +2,28 @@
 
 import Link from "next/link";
 import { sidebarData } from "@/lib/sidebar-data";
-import LiquidButton from "@/components/rareui/buttons/LiquidButton";
-import SoftButton from "@/components/rareui/buttons/SoftButton";
-import { GlassShimmerButton } from "@/components/rareui/buttons/glass-shimmer-button";
+import LiquidButton from "@/components/rareui/LiquidButton";
+import SoftButton from "@/components/rareui/SoftButton";
+import { GlassShimmerButton } from "@/components/rareui/glass-shimmer-button";
 
-import { Neumorphism3DButton } from "@/components/rareui/buttons/neumorphism3DButton";
-import UpgradeButton from "@/components/rareui/buttons/upgrade-button";
-import ParticleCard from "@/components/rareui/cards/ParticleCard";
-import PremiumProfileCard from "@/components/rareui/cards/premiumProfileCard";
+import { Neumorphism3DButton } from "@/components/rareui/neumorphism3DButton";
+import UpgradeButton from "@/components/rareui/upgrade-button";
+import ParticleCard from "@/components/rareui/ParticleCard";
+import PremiumProfileCard from "@/components/rareui/premiumProfileCard";
 
 const componentMap: Record<string, any> = {
-  "/docs/components/buttons/glass-shimmer-button": () => <GlassShimmerButton>Shimmer</GlassShimmerButton>,
-  "/docs/components/buttons/liquid-button": () => <LiquidButton text="Liquid" backgroundColor="bg-neutral-900 dark:bg-neutral-100" textColor="text-white dark:text-black" />,
+  "/docs/components/glass-shimmer-button": () => <GlassShimmerButton>Shimmer</GlassShimmerButton>,
+  "/docs/components/liquid-button": () => <LiquidButton text="Liquid" backgroundColor="bg-neutral-900 dark:bg-neutral-100" textColor="text-white dark:text-black" />,
 
-  "/docs/components/buttons/neumorphism3DButton": () => <Neumorphism3DButton>3D Button</Neumorphism3DButton>,
-  "/docs/components/buttons/soft-button": SoftButton,
-  "/docs/components/buttons/upgrade-button": UpgradeButton,
-  "/docs/components/cards/particle-card": () => (
+  "/docs/components/neumorphism3DButton": () => <Neumorphism3DButton>3D Button</Neumorphism3DButton>,
+  "/docs/components/soft-button": SoftButton,
+  "/docs/components/upgrade-button": UpgradeButton,
+  "/docs/components/particle-card": () => (
     <div className="scale-[0.35] -my-20">
       <ParticleCard />
     </div>
   ),
-  "/docs/components/cards/premium-profile-card": () => (
+  "/docs/components/premium-profile-card": () => (
     <div className="scale-[0.32] -my-24 pointer-events-none">
       <PremiumProfileCard />
     </div>

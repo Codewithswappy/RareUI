@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { TransitionLink } from '@/components/ui/TransitionLink'
 import Image from "next/image"
-import { useSearchContext } from '@/components/rareui/search-context'
+import { useSearchContext } from '@/components/internal/search-context'
 import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
 import { motion, AnimatePresence } from 'motion/react'

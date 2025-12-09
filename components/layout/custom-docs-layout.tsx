@@ -207,16 +207,31 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
                       const linkContent = (
                         <div
                           className={cn(
-                            "group flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-all duration-300 ease-out relative overflow-hidden",
+                            "group flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-colors relative overflow-hidden",
                             isActive
-                              ? "text-foreground font-medium bg-accent/50 shadow-sm"
-                              : "text-muted-foreground hover:text-foreground hover:bg-accent/30 hover:pl-4"
+                              ? "text-foreground font-medium"
+                              : "text-muted-foreground hover:text-foreground hover:bg-accent/30 hover:pl-4 transition-all duration-300"
                           )}
                         >
                           {isActive && (
-                            <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-primary rounded-r-full shadow-[0_0_8px_rgba(0,0,0,0.2)] dark:shadow-[0_0_8px_rgba(255,255,255,0.2)] animate-in fade-in slide-in-from-left-1 duration-300" />
+                            <motion.div
+                              layoutId="sidebar-active-item"
+                              className="absolute inset-0 bg-accent/50 border border-border/50 rounded-lg"
+                              transition={{
+                                type: "spring",
+                                stiffness: 300,
+                                damping: 30
+                              }}
+                            />
                           )}
-                          {item.title}
+                          {/* Active Indicator Line */}
+                          {isActive && (
+                            <motion.span 
+                                layoutId="sidebar-active-line"
+                                className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-primary rounded-r-full shadow-[0_0_8px_rgba(0,0,0,0.2)] dark:shadow-[0_0_8px_rgba(255,255,255,0.2)]" 
+                            />
+                          )}
+                          <span className="relative z-10">{item.title}</span>
                         </div>
                       );
 

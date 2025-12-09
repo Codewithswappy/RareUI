@@ -4,7 +4,7 @@ description: An interactive card with particle explosion effect on hover, perfec
 ---
 
 import { Preview } from "@/components/mdx/preview";
-import ParticleCard from "@/components/rareui/cards/ParticleCard";
+import ParticleCard from "@/components/rareui/ParticleCard";
 import { CopyButton } from "@/components/mdx/copy-button";
 
 <Preview
@@ -83,7 +83,7 @@ export function cn(...inputs: ClassValue[]) {
 ### Basic Usage
 
 ```tsx
-import ParticleCard from '@/components/rareui/cards/ParticleCard';
+import ParticleCard from '@/components/rareui/ParticleCard';
 
 export default function App() {
   return (
@@ -219,7 +219,7 @@ For better performance with many cards:
 
 // Or lazy load cards
 import dynamic from 'next/dynamic';
-const ParticleCard = dynamic(() => import('@/components/rareui/cards/ParticleCard'));
+const ParticleCard = dynamic(() => import('@/components/rareui/ParticleCard'));
 ```
 
 ## Customization

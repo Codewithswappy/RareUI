@@ -7,6 +7,7 @@ import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { useTheme } from "next-themes";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { InternalAnimatedTabs } from "@/components/internal/internal-animated-tabs";
 
 interface PreviewProps {
   children: React.ReactNode;
@@ -265,28 +266,15 @@ Ensure it's fully functional, responsive, and matches the original design exactl
       {code && (
         <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
           <div className="flex">
-            <button
-              onClick={() => setActiveTab("preview")}
-              className={cn(
-                "px-4 py-2 text-sm font-medium transition-colors rounded-lg",
-                activeTab === "preview"
-                  ? "text-foreground bg-accent"
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() => setActiveTab("code")}
-              className={cn(
-                "px-4 py-2 text-sm font-medium transition-colors rounded-lg",
-                activeTab === "code"
-                  ? "text-foreground bg-accent"
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              Code
-            </button>
+            <InternalAnimatedTabs
+              tabs={[
+                { id: "preview", label: "Preview" },
+                { id: "code", label: "Code" }
+              ]}
+              activeTab={activeTab}
+              onChange={setActiveTab}
+              layoutId="preview-code-tabs"
+            />
           </div>
 
           {/* Copy Prompt Dropdown */}
@@ -462,28 +450,15 @@ Ensure it's fully functional, responsive, and matches the original design exactl
           
           {/* Installation Tabs */}
           <div className="flex mb-3">
-            <button
-              onClick={() => setInstallTab("cli")}
-              className={cn(
-                "px-4 py-2 text-sm font-medium transition-colors rounded-lg",
-                installTab === "cli"
-                  ? "text-foreground bg-accent"
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              CLI
-            </button>
-            <button
-              onClick={() => setInstallTab("manual")}
-              className={cn(
-                "px-4 py-2 text-sm font-medium transition-colors rounded-lg",
-                installTab === "manual"
-                  ? "text-foreground bg-accent"
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              Manual
-            </button>
+            <InternalAnimatedTabs
+              tabs={[
+                { id: "cli", label: "CLI" },
+                { id: "manual", label: "Manual" }
+              ]}
+              activeTab={installTab}
+              onChange={setInstallTab}
+              layoutId="install-tabs"
+            />
           </div>
 
           {/* Installation Content */}
@@ -494,24 +469,19 @@ Ensure it's fully functional, responsive, and matches the original design exactl
                   <p className="text-sm text-muted-foreground mb-3 break-words">Run the following command to install the component:</p>
                   
                   {/* Package Manager Tabs */}
-                  <div className="flex gap-1 mb-3 bg-muted/50 p-1 rounded-lg w-fit">
-                    {['npm', 'pnpm', 'yarn', 'bun'].map((pm) => (
-                      <button
-                        key={pm}
-                        onClick={() => {
-                          const pmState = pm as 'npm' | 'pnpm' | 'yarn' | 'bun';
-                          setPackageManager(pmState);
-                        }}
-                        className={cn(
-                          "px-3 py-1.5 text-xs font-medium transition-all rounded-md",
-                          packageManager === pm
-                            ? "bg-background text-foreground shadow-sm"
-                            : "text-muted-foreground hover:text-foreground hover:bg-background/50"
-                        )}
-                      >
-                        {pm}
-                      </button>
-                    ))}
+                  <div className="mb-3">
+                    <InternalAnimatedTabs
+                      tabs={[
+                        { id: "npm", label: "npm" },
+                        { id: "pnpm", label: "pnpm" },
+                        { id: "yarn", label: "yarn" },
+                        { id: "bun", label: "bun" }
+                      ]}
+                      activeTab={packageManager}
+                      onChange={setPackageManager}
+                      layoutId="pm-tabs"
+                      className="w-fit"
+                    />
                   </div>
 
                   <div className="relative">

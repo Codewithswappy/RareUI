@@ -30,40 +30,39 @@ export const sidebarData = [
     ]
   },
   {
-    "title": "Buttons",
+    "title": "Components",
     "items": [
       {
+        "title": "Animated Tab",
+        "href": "/docs/components/animated-tab"
+      },
+      {
         "title": "Glass Shimmer Button",
-        "href": "/docs/components/buttons/glass-shimmer-button"
+        "href": "/docs/components/glass-shimmer-button"
       },
       {
         "title": "Liquid Button",
-        "href": "/docs/components/buttons/liquid-button"
+        "href": "/docs/components/liquid-button"
       },
       {
         "title": "Neumorphism3DButton",
-        "href": "/docs/components/buttons/neumorphism3DButton"
+        "href": "/docs/components/neumorphism3DButton"
       },
-      {
-        "title": "Soft Button",
-        "href": "/docs/components/buttons/soft-button"
-      },
-      {
-        "title": "Upgrade Button",
-        "href": "/docs/components/buttons/upgrade-button"
-      }
-    ]
-  },
-  {
-    "title": "Cards",
-    "items": [
       {
         "title": "Particle Card",
-        "href": "/docs/components/cards/particle-card"
+        "href": "/docs/components/particle-card"
       },
       {
         "title": "Premium Profile Card",
-        "href": "/docs/components/cards/premium-profile-card"
+        "href": "/docs/components/premium-profile-card"
+      },
+      {
+        "title": "Soft Button",
+        "href": "/docs/components/soft-button"
+      },
+      {
+        "title": "Upgrade Button",
+        "href": "/docs/components/upgrade-button"
       }
     ]
   }

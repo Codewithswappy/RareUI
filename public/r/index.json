@@ -1,13 +1,15 @@
 {
   "name": "@rareui",
   "components": [
+    "AnimatedTab",
+    "AnimatedTabsDemo",
     "glass-shimmer-button",
     "LiquidButton",
     "neumorphism3DButton",
-    "SoftButton",
-    "upgrade-button",
     "ParticleCard",
     "premiumProfileCard",
+    "SoftButton",
+    "upgrade-button",
     "waterFlow"
   ]
 }

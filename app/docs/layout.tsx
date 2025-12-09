@@ -1,6 +1,6 @@
 import { CustomDocsLayout } from "@/components/layout/custom-docs-layout";
-import { SearchProvider } from "@/components/rareui/search-context";
-import { CommandPaletteModal } from "@/components/rareui/overlays/modal";
+import { SearchProvider } from "@/components/internal/search-context";
+import { CommandPaletteModal } from "@/components/internal/modal";
 import { sidebarData } from "@/lib/sidebar-data";
 import type { ReactNode } from "react";
 import type { Metadata } from "next";

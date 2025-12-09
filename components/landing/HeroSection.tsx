@@ -1,9 +1,9 @@
 'use client'
 
-import PremiumProfileCard from '@/components/rareui/cards/premiumProfileCard'
+import PremiumProfileCard from '@/components/rareui/premiumProfileCard'
 
 import { motion, AnimatePresence, hover } from 'motion/react'
-import LiquidButton  from '@/components/rareui/buttons/LiquidButton'
+import LiquidButton  from '@/components/rareui/LiquidButton'
 import Link from "next/link"
 import Navbar from "@/components/landing/Navbar"
 import { useState, useEffect } from 'react'
