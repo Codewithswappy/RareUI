@@ -1,0 +1,354 @@
+"use client"
+
+import { motion, AnimatePresence } from "framer-motion"
+import { cn } from "@/lib/utils"
+import { useState, useEffect } from "react"
+
+interface PageData {
+  title?: string
+  content?: string
+  image?: string
+  caption?: string
+  quote?: string
+  author?: string
+}
+
+interface Book3DProps {
+  src?: string
+  title?: string
+  subtitle?: string
+  width?: number
+  height?: number
+  className?: string
+  pages?: PageData[]
+}
+
+export function Book3D({ 
+  src, 
+  title, 
+  subtitle, 
+  width = 230, 
+  height = 350,
+  className,
+  pages = [
+    {
+      title: "Welcome to RareUI",
+      content: "A premium collection of beautifully crafted, animated React components. Built with Motion and Tailwind CSS for modern web applications."
+    },
+    {
+       image: "https://images.unsplash.com/photo-1589561253898-768105ca91a8?q=80&w=1738&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+       caption: "Beautiful Design"
+    },
+    {
+      title: "Premium Components",
+      content: "From glass-morphic buttons to 3D cards, each component is designed with attention to detail. Self-contained, easy to install via CLI, and ready to use."
+    },
+    {
+        quote: "Great design is not just what looks good. It also needs to perform, convert, and amaze.",
+        author: "RareUI Philosophy"
+    },
+    {
+        title: "Getting Started",
+        content: "Install any component with a single command: npx rareui@latest add [component-name]. No configuration needed, just beautiful components ready to go."
+    },
+    {
+        title: "Build Something Rare",
+        content: "Join thousands of developers creating stunning interfaces with RareUI. Your next project deserves components that stand out."
+    }
+  ]
+}: Book3DProps) {
+  const [isHovered, setIsHovered] = useState(false)
+  const [pageIndex, setPageIndex] = useState(0) // 0 means just cover open, no pages flipped
+
+  // Reset pages when book closes
+  useEffect(() => {
+    if (!isHovered) {
+      const timer = setTimeout(() => {
+        setPageIndex(0)
+      }, 300) // Small delay to allow cover to start closing
+      return () => clearTimeout(timer)
+    }
+  }, [isHovered])
+
+  const [isFlipping, setIsFlipping] = useState(false)
+
+  const handlePageClick = (index: number) => {
+     if (!isHovered || isFlipping) return
+     if (pageIndex === index) {
+         setIsFlipping(true)
+         setPageIndex(prev => prev + 1)
+         setTimeout(() => setIsFlipping(false), 300) // Debounce
+     }
+  }
+
+  const handleBackClick = (e: React.MouseEvent, index: number) => {
+      e.stopPropagation()
+      if (isFlipping) return
+      setIsFlipping(true)
+      setPageIndex(index) 
+      setTimeout(() => setIsFlipping(false), 300)
+  }
+
+  return (
+    <div 
+      className={cn("relative group cursor-pointer z-10", className, isHovered && "z-50")}
+      style={{ 
+        perspective: "1500px",
+        paddingLeft: "150px", // Extra space for the rotated cover on the left
+        marginLeft: "-150px" // Pull back to maintain visual position
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <motion.div
+        className="relative preserve-3d transition-all duration-700 ease-out"
+        style={{ 
+          width, 
+          height,
+          transformStyle: "preserve-3d", 
+        }}
+        animate={{ 
+          rotateY: isHovered ? -35 : 0,
+          rotateX: isHovered ? 15 : 0,
+          z: isHovered ? 60 : 0
+        }}
+      >
+        {/* Back Cover - Static Base */}
+        <div 
+          className="absolute inset-0 bg-[#2f2f2f] rounded-r-md rounded-l-sm shadow-2xl"
+          style={{ 
+            transform: "translateZ(-20px)",
+            boxShadow: "20px 20px 50px rgba(0,0,0,0.5)"
+          }}
+        />
+
+        {/* PAGES STACK */}
+        {Array.from({ length: pages.length }).map((_, i) => pages.length - 1 - i).map((index) => {
+             const isFlipped = index < pageIndex
+             
+             // Dynamic z-index optimization
+             let activeZIndex = 0
+             if (isFlipped) {
+                 activeZIndex = index + 1
+             } else {
+                 activeZIndex = 20 - index // Higher base to safely sit above back cover but below front cover
+             }
+
+             return (
+                 <motion.div
+                    key={index}
+                    className="absolute inset-y-[2px] right-[2px] left-[4px] bg-[#fffcf5] rounded-l-sm rounded-r-md origin-left transform-style-3d border border-neutral-100/50 cursor-pointer"
+                    style={{
+                        transformStyle: "preserve-3d",
+                        zIndex: activeZIndex
+                    }}
+                    animate={{
+                        rotateY: isFlipped ? -178 : 0,
+                        z: isFlipped ? 0 : (pages.length - 1 - index) , 
+                    }}
+                    transition={{
+                        duration: 0.6,
+                        ease: [0.23, 1, 0.32, 1], 
+                        delay: isFlipped ? 0 : (index * 0.05)
+                    }}
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        if (isFlipped) {
+                            handleBackClick(e, index)
+                        } else {
+                            handlePageClick(index)
+                        }
+                    }}
+                 >
+                     {/* FRONT FACE (Right side content) */}
+                     <div 
+                        className="absolute inset-0 backface-hidden p-6 overflow-hidden flex flex-col items-center justify-center text-center bg-white"
+                        style={{ backfaceVisibility: "hidden" }}
+                     >
+                         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/paper.png')] opacity-10 pointer-events-none" />
+                         {/* Deeper right edge shadow for book crease */}
+                         <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-black/20 via-black/5 to-transparent pointer-events-none" />
+                         {/* Left edge for binding */}
+                         <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-r from-black/10 to-transparent pointer-events-none" />
+                         
+                         <div className="relative z-10 font-serif text-neutral-800 select-none">
+                             {pages[index].image && (
+                                 <div className="mb-4 rounded-sm overflow-hidden border border-neutral-200 shadow-inner">
+                                     <img src={pages[index].image} alt="Page visual" className="w-full h-32 object-cover grayscale hover:grayscale-0 transition-all" />
+                                 </div>
+                             )}
+                             {pages[index].title && (
+                                 <h3 className="text-lg font-bold mb-2 font-sans uppercase tracking-widest text-[10px]">{pages[index].title}</h3>
+                             )}
+                             {pages[index].content && (
+                                 <p className="text-[10px] leading-relaxed text-neutral-600">{pages[index].content}</p>
+                             )}
+                             {pages[index].quote && (
+                                 <blockquote className="italic text-sm text-neutral-600 border-l-2 border-neutral-300 pl-3">
+                                     "{pages[index].quote}"
+                                     <footer className="text-[9px] text-neutral-400 mt-2 not-italic font-sans">- {pages[index].author}</footer>
+                                 </blockquote>
+                             )}
+                             <span className="absolute bottom-2 right-4 text-[8px] text-neutral-400">{index + 1}</span>
+                         </div>
+                     </div>
+
+                     {/* BACK FACE (Left side content) */}
+                     <div 
+                        className="absolute inset-0 bg-[#f8f5f0] backface-hidden flex items-center justify-center"
+                        style={{ 
+                            transform: "rotateY(180deg)",
+                            backfaceVisibility: "hidden" 
+                        }}
+                     >
+                        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/paper.png')] opacity-10 pointer-events-none" />
+                        {/* Left edge shadow (becomes visible when flipped) */}
+                        <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-black/20 via-black/5 to-transparent pointer-events-none" />
+                        <div className="text-[9px] text-neutral-400 font-sans tracking-widest uppercase transform rotate-90 opacity-30 select-none">Notes</div>
+                     </div>
+                 </motion.div>
+             )
+        })}
+
+        {/* Front Cover */}
+        <motion.div
+            className={cn(
+                "absolute inset-0 origin-left", 
+                isHovered ? "z-0 pointer-events-none" : "z-50 pointer-events-auto"
+            )}
+            style={{ 
+                transformStyle: "preserve-3d",
+                transform: !isHovered ? "translateZ(10px)" : undefined // Ensure it starts in front
+            }}
+            animate={{ 
+                rotateY: isHovered ? -180 : 0,
+                z: isHovered ? 0 : 10, // Push far forward when closed to be in front of all pages
+            }}
+            transition={{
+                duration: 0.8,
+                ease: [0.23, 1, 0.32, 1],
+                delay: isHovered ? 0 : 0.5 // Delay closing so pages flip back first
+            }}
+        >
+            {/* Outer Cover */}
+            <div 
+            className={cn(
+              "absolute inset-0 rounded-r-md rounded-l-sm overflow-hidden backface-hidden shadow-md border-l border-white/10",
+              src ? "bg-neutral-900" : "bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900"
+            )}
+            style={{ 
+                backgroundImage: src ? `url(${src})` : undefined,
+                backgroundSize: src ? "cover" : undefined,
+                backgroundPosition: src ? "center" : undefined,
+                backfaceVisibility: "hidden"
+            }}
+            >
+                {/* Conditional overlays based on mode */}
+                {src ? (
+                  <>
+                    {/* Image mode overlays */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
+                  </>
+                ) : (
+                  <>
+                    {/* Branding mode pattern */}
+                    <div className="absolute inset-0 opacity-5" style={{
+                        backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+                        backgroundSize: '32px 32px'
+                    }} />
+                  </>
+                )}
+                
+                {/* Decorative border frame */}
+                <div className="absolute inset-4 border border-white/20 rounded-sm pointer-events-none" />
+                <div className="absolute inset-6 border border-white/10 rounded-sm pointer-events-none" />
+                
+                {/* Corner ornaments */}
+                <div className="absolute top-8 left-8 w-8 h-8 border-t-2 border-l-2 border-white/30" />
+                <div className="absolute top-8 right-8 w-8 h-8 border-t-2 border-r-2 border-white/30" />
+                <div className="absolute bottom-8 left-8 w-8 h-8 border-b-2 border-l-2 border-white/30" />
+                <div className="absolute bottom-8 right-8 w-8 h-8 border-b-2 border-r-2 border-white/30" />
+                
+                {/* Content - Custom or Default */}
+                {src || title || subtitle ? (
+                  // Custom cover with user's image/title/subtitle
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-8 select-none z-10">
+                      {title && (
+                          <div className="text-center mb-4">
+                              <div className="w-16 h-[1px] bg-white/40 mx-auto mb-6" />
+                              <h3 className="text-3xl font-bold font-serif tracking-wider mb-2 drop-shadow-lg">{title}</h3>
+                              <div className="w-16 h-[1px] bg-white/40 mx-auto mt-4" />
+                          </div>
+                      )}
+                      {subtitle && (
+                          <p className="text-sm font-light tracking-widest uppercase opacity-90 mt-2">{subtitle}</p>
+                      )}
+                  </div>
+                ) : (
+                  // Default RareUI branding cover
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-white pl-10 pr-10 select-none z-10">
+                      {/* Logo/Brand */}
+                      <div className="text-center mb-8">
+                          <div className="w-20 h-[2px] bg-gradient-to-r from-transparent via-white/60 to-transparent mx-auto pt-16" />
+                          <h1 className="text-4xl font-bold font-serif tracking-wider mb-2 drop-shadow-lg bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent pt-1">
+                              RareUI
+                          </h1>
+                          <div className="w-20 h-[2px] bg-gradient-to-r from-transparent via-white/60 to-transparent mx-auto mt-4" />
+                      </div>
+                      
+                      {/* Tagline */}
+                      <p className="text-xs font-light tracking-[0.3em] uppercase opacity-80 mb-8">
+                          Premium Component Library
+                      </p>
+                      
+                      {/* Description */}
+                      <div className="max-w-[180px] text-center space-y-3 text-[9px] leading-relaxed opacity-70 font-light">
+                          <p>Beautifully crafted React components with stunning animations</p>
+                          <p className="text-white/50">•</p>
+                          <p>Built with Motion & Tailwind CSS</p>
+                          <p className="text-white/50">•</p>
+                          <p className="pb-8.5">Easy installation via CLI</p>
+                      </div>
+                      
+                      {/* Bottom accent */}
+                      <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
+                          <div className="flex items-center gap-2">
+                              <div className="w-8 h-[1px] bg-white/30" />
+                              <div className="w-1 h-1 rounded-full bg-white/50" />
+                              <div className="w-8 h-[1px] bg-white/30" />
+                          </div>
+                      </div>
+                  </div>
+                )}
+            </div>
+
+            {/* Inner Cover */}
+            <div 
+                className="absolute inset-0 bg-[#f5f1e8] rounded-l-md rounded-r-sm overflow-hidden backface-hidden border-r border-neutral-200"
+                style={{ 
+                    transform: "rotateY(180deg)",
+                    backfaceVisibility: "hidden"
+                }}
+            >
+                <div className="w-full h-full p-8 flex flex-col justify-end">
+                     <p className="text-xs font-serif italic text-neutral-500 text-center select-none">RareUi</p>
+                </div>
+            </div>
+        </motion.div>
+
+      </motion.div>
+
+      {/* Shadow */}
+      <div 
+        className={cn(
+            "absolute bottom-0 left-4 right-4 h-10 bg-black/40 blur-xl rounded-[100%] transition-all duration-500",
+            isHovered ? "opacity-80 scale-110" : "opacity-40"
+        )}
+        style={{
+            transform: "perspective(1000px) rotateX(60deg) translateZ(-60px)"
+        }}
+       />
+    </div>
+  )
+}

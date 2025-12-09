@@ -99,11 +99,19 @@ async function buildSidebar() {
   // Build Text Animation section
   const textAnimationSection = buildTextAnimationSection();
 
+  // Build 3D Elements section
+  const threeDElementsSection = build3DElementsSection();
+
   const sidebar = [...STATIC_SECTIONS, componentsSection];
 
   // Add Text Animation section if it exists
   if (textAnimationSection) {
     sidebar.push(textAnimationSection);
+  }
+
+  // Add 3D Elements section if it exists
+  if (threeDElementsSection) {
+    sidebar.push(threeDElementsSection);
   }
 
 
@@ -222,6 +230,41 @@ function buildTextAnimationSection() {
 
   return {
     title: "Text Animation",
+    items
+  };
+}
+
+function build3DElementsSection() {
+  const THREE_D_ROOT = path.resolve(process.cwd(), "content/docs/3d-elements");
+
+  if (!fs.existsSync(THREE_D_ROOT)) {
+    return null;
+  }
+
+  const files = getAllMdxFiles(THREE_D_ROOT);
+  const items: any[] = [];
+
+  for (const file of files) {
+    const name = path.basename(file, ".mdx");
+    const prettyTitle = formatComponentTitle(name);
+    const relativePath = path.relative(THREE_D_ROOT, file);
+    const urlPath = relativePath.replace(/\.mdx$/, '').replace(/\\/g, '/');
+
+    const badge = getBadgeFromFrontmatter(file);
+
+    items.push({
+      title: prettyTitle,
+      href: `/docs/3d-elements/${urlPath}`,
+      ...(badge && { badge }),
+    });
+  }
+
+  if (items.length === 0) {
+    return null;
+  }
+
+  return {
+    title: "3D Elements",
     items
   };
 }

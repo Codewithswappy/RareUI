@@ -1,6 +1,7 @@
 {
   "name": "@rareui",
   "components": [
+    "book-3d",
     "AnimatedTab",
     "AnimatedTabsDemo",
     "glass-shimmer-button",

@@ -82,5 +82,15 @@
         "badge": "New"
       }
     ]
+  },
+  {
+    "title": "3D Elements",
+    "items": [
+      {
+        "title": "Book 3d",
+        "href": "/docs/3d-elements/book-3d",
+        "badge": "New"
+      }
+    ]
   }
 ]

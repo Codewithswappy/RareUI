@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
-import HeroSection from '@/components/landing/HeroSection'; 
+import HeroSection from '@/components/landing/HeroSection';
+import { Book3D } from '@/components/rareui/3d-elements/book-3d'; 
 
 const HowItWorks = dynamic(() => import('@/components/landing/HowItWorks'), {
   loading: () => <div className="h-[500px] w-full bg-background" />,
