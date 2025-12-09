@@ -27,11 +27,12 @@ export const AnimatedTabs: React.FC<AnimatedTabsProps> = ({
   return (
     <div
       className={cn(
-        'flex flex-row items-center justify-center p-1.5 rounded-full',
+        'flex flex-row flex-wrap items-center justify-center gap-1 sm:gap-0 p-1 sm:p-1.5 rounded-full',
         'bg-white/60 dark:bg-zinc-900/60', // Light/Dark glass effect
         'border border-black/5 dark:border-white/10', // Border adaptation
         'backdrop-blur-xl', // Strong glass effect
         'shadow-2xl', // Container shadow
+        'max-w-full', // Ensure it doesn't overflow
         className
       )}
     >
@@ -47,7 +48,7 @@ export const AnimatedTabs: React.FC<AnimatedTabsProps> = ({
             onMouseLeave={() => setHoveredTab(null)}
             whileTap={{ scale: 0.95 }}
             className={cn(
-              'relative z-10 px-6 py-2.5 text-sm font-semibold rounded-full transition-colors duration-200 outline-none cursor-pointer',
+              'relative z-10 px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-full transition-colors duration-200 outline-none cursor-pointer whitespace-nowrap',
               isActive
                 ? 'text-white dark:text-black' // Active text
                 : 'text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300' // Inactive text
