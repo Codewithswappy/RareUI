@@ -125,7 +125,7 @@ export default function HeroSection() {
               {/* CLI Command Button */}
               <button 
                 onClick={() => {
-                   navigator.clipboard.writeText("npx rareui@lates init");
+                   navigator.clipboard.writeText("npx rareui@latest init");
                    setHasCopied(true);
                    setTimeout(() => setHasCopied(false), 2000);
                 }}
