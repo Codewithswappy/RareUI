@@ -158,6 +158,39 @@ function Drop({
   <LiquidButton />
 </Preview>
 
+## Usage
+
+```tsx
+import LiquidButton from '@/components/rareui/LiquidButton';
+
+export default function App() {
+  return (
+    <LiquidButton text="Hover me" />
+  );
+}
+```
+
+## Examples
+
+### Custom Colors
+
+```tsx
+<LiquidButton 
+  text="Click me"
+  backgroundColor="bg-blue-500"
+  textColor="text-white"
+/>
+```
+
+### Continuous Dripping
+
+```tsx
+<LiquidButton 
+  text="Always Dripping"
+  isDripping={true}
+/>
+```
+
 ## Props
 
 | Prop | Type | Default | Description |

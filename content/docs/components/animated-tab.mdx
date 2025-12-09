@@ -104,14 +104,6 @@ export const AnimatedTabs: React.FC<AnimatedTabsProps> = ({
   <AnimatedTabsDemo />
 </Preview>
 
-## Features
-
-- **Smooth Animations**: Spring-based transitions using Framer Motion
-- **Glassmorphism Design**: Beautiful frosted glass effect with backdrop blur
-- **Dark Mode Support**: Fully adaptable to light and dark themes
-- **Hover Effects**: Subtle hover states for better UX
-- **Responsive**: Works seamlessly across all device sizes
-
 ## Usage
 
 ```tsx
@@ -140,14 +132,13 @@ export default function MyComponent() {
 }
 ```
 
-## Props
+## Features
 
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `tabs` | `Tab[]` | - | Array of tab objects with `id` and `label` properties. |
-| `activeTab` | `string` | - | The ID of the currently active tab. |
-| `onChange` | `(id: string) => void` | - | Callback function triggered when a tab is clicked. |
-| `className` | `string` | - | Additional CSS classes for the container. |
+- **Smooth Animations**: Spring-based transitions using Framer Motion
+- **Glassmorphism Design**: Beautiful frosted glass effect with backdrop blur
+- **Dark Mode Support**: Fully adaptable to light and dark themes
+- **Hover Effects**: Subtle hover states for better UX
+- **Responsive**: Works seamlessly across all device sizes
 
 ## Tab Interface
 
@@ -157,3 +148,12 @@ interface Tab {
   label: string;
 }
 ```
+
+## Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `tabs` | `Tab[]` | - | Array of tab objects with `id` and `label` properties. |
+| `activeTab` | `string` | - | The ID of the currently active tab. |
+| `onChange` | `(id: string) => void` | - | Callback function triggered when a tab is clicked. |
+| `className` | `string` | - | Additional CSS classes for the container. |

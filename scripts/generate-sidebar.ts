@@ -96,7 +96,16 @@ async function buildSidebar() {
     items: componentItems
   };
 
+  // Build Text Animation section
+  const textAnimationSection = buildTextAnimationSection();
+
   const sidebar = [...STATIC_SECTIONS, componentsSection];
+
+  // Add Text Animation section if it exists
+  if (textAnimationSection) {
+    sidebar.push(textAnimationSection);
+  }
+
 
   try {
     // Ensure lib directory exists
@@ -180,6 +189,41 @@ function getBadgeFromFrontmatter(filePath: string): string | undefined {
   } catch (error) {
     return undefined;
   }
+}
+
+function buildTextAnimationSection() {
+  const TEXT_ANIMATION_ROOT = path.resolve(process.cwd(), "content/docs/text-animation");
+
+  if (!fs.existsSync(TEXT_ANIMATION_ROOT)) {
+    return null;
+  }
+
+  const files = getAllMdxFiles(TEXT_ANIMATION_ROOT);
+  const items: any[] = [];
+
+  for (const file of files) {
+    const name = path.basename(file, ".mdx");
+    const prettyTitle = formatComponentTitle(name);
+    const relativePath = path.relative(TEXT_ANIMATION_ROOT, file);
+    const urlPath = relativePath.replace(/\.mdx$/, '').replace(/\\/g, '/');
+
+    const badge = getBadgeFromFrontmatter(file);
+
+    items.push({
+      title: prettyTitle,
+      href: `/docs/text-animation/${urlPath}`,
+      ...(badge && { badge }),
+    });
+  }
+
+  if (items.length === 0) {
+    return null;
+  }
+
+  return {
+    title: "Text Animation",
+    items
+  };
 }
 
 buildSidebar();

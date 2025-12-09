@@ -1,0 +1,183 @@
+---
+title: Magnetic Scatter Text
+description: An interactive text animation that scatters on hover with magnetic spring effects.
+badge: New
+---
+
+import { MagneticScatterText } from "@/components/rareui/Text Animation/MagneticScatterText";
+import { Preview } from "@/components/mdx/preview";
+import { DemoWithRefresh } from "@/components/mdx/demo-with-refresh";
+
+<Preview
+  code={`"use client"
+
+import React, { useState, useEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { cn } from '@/lib/utils';
+
+interface MagneticScatterTextProps {
+  text: string;
+  className?: string;
+  trigger?: boolean;
+}
+
+export const MagneticScatterText: React.FC<MagneticScatterTextProps> = ({ text, className, trigger = true }) => {
+  const controls = useAnimation();
+  const [isHovering, setIsHovering] = useState(false);
+
+  useEffect(() => {
+    if (trigger) {
+      controls.start("visible");
+    } else {
+      controls.start("hidden");
+    }
+  }, [trigger, controls]);
+
+  useEffect(() => {
+    if (isHovering) {
+      controls.start("scatter");
+    } else {
+      controls.start("visible");
+    }
+  }, [isHovering, controls]);
+
+  const letters = text.split("");
+
+  // Deterministic random for consistent scattering based on index
+  const getRandom = (index: number) => {
+    const seed = index * 42;
+    const x = Math.sin(seed) * 100; // -100 to 100
+    const y = Math.cos(seed) * 100; // -100 to 100
+    const rotate = Math.sin(seed * 2) * 180; // -180 to 180
+    return { x, y, rotate };
+  };
+
+  return (
+    <motion.div
+      className={cn("flex cursor-default select-none", className)}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
+      {letters.map((letter, index) => {
+        const randoms = getRandom(index);
+        return (
+          <motion.span
+            key={index}
+            className="inline-block font-sans font-bold text-black dark:text-white"
+            initial="hidden"
+            animate={controls}
+            variants={{
+              hidden: {
+                x: randoms.x * 5,
+                y: randoms.y * 5,
+                rotate: randoms.rotate,
+                opacity: 0,
+                scale: 0.5,
+              },
+              visible: {
+                x: 0,
+                y: 0,
+                rotate: 0,
+                opacity: 1,
+                scale: 1,
+                transition: {
+                  type: "spring",
+                  damping: 12,
+                  stiffness: 80,
+                  mass: 0.8,
+                  delay: index * 0.02,
+                },
+              },
+              scatter: {
+                x: randoms.x * 0.5, // Slight scatter on hover
+                y: randoms.y * 0.5,
+                rotate: randoms.rotate * 0.2,
+                scale: 1.1,
+                transition: {
+                  type: "spring",
+                  damping: 15,
+                  stiffness: 200,
+                },
+              },
+            }}
+          >
+            {letter === " " ? "\\u00A0" : letter}
+          </motion.span>
+        );
+      })}
+    </motion.div>
+  );
+};`}
+  cliCommand="npx rareui add MagneticScatterText"
+>
+  <DemoWithRefresh>
+    <div className="w-full h-[300px] flex items-center justify-center">
+      <MagneticScatterText text="Hover Me" className="text-6xl" />
+    </div>
+  </DemoWithRefresh>
+</Preview>
+
+## Usage
+
+```tsx
+import { MagneticScatterText } from "@/components/rareui/Text Animation/MagneticScatterText";
+
+export default function MyComponent() {
+  return (
+    <MagneticScatterText text="Your Text" className="text-6xl" />
+  );
+}
+```
+
+## Examples
+
+### With Trigger Control
+
+```tsx
+"use client";
+import { useState } from 'react';
+import { MagneticScatterText } from "@/components/rareui/Text Animation/MagneticScatterText";
+
+export default function ControlledAnimation() {
+  const [show, setShow] = useState(false);
+
+  return (
+    <div>
+      <button onClick={() => setShow(!show)}>
+        Toggle Animation
+      </button>
+      
+      <MagneticScatterText 
+        text="Click to animate" 
+        trigger={show}
+        className="text-6xl text-foreground"
+      />
+    </div>
+  );
+}
+```
+
+### Custom Styling
+
+```tsx
+<MagneticScatterText 
+  text="Magnetic" 
+  className="text-9xl font-bold text-blue-500"
+/>
+```
+
+## Features
+
+- **Magnetic Spring Animation**: Letters gather from scattered positions with spring physics
+- **Interactive Hover**: Slight scatter effect when hovering over the text
+- **Deterministic Random**: Consistent scatter pattern based on letter position
+- **Smooth Transitions**: Spring-based animations for natural movement
+- **Fully Customizable**: Control trigger state and styling
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `text` | `string` | **Required** | The text content to animate |
+| `className` | `string` | `undefined` | Additional styles for the container |
+| `trigger` | `boolean` | `true` | Controls animation state (true = visible, false = hidden) |

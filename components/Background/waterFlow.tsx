@@ -86,7 +86,7 @@ const vertexShaderSource = `
   }
 `;
 
-const fragmentShaderSource = `
+  const fragmentShaderSource = `
   precision highp float;
   
   uniform float u_time;
@@ -96,19 +96,16 @@ const fragmentShaderSource = `
   uniform float u_pressed;
 
   // -- PHYSICS & CONFIGURATION --
-  const int ITERATIONS = 8;           // High iteration count for detailed micro-ripples
-  const vec3 SUN_DIR = normalize(vec3(-0.2, 0.4, -0.5)); // Sun position
-  const vec3 SUN_COLOR = vec3(1.2, 1.1, 1.0);            // Warm sunlight
+  const int ITERATIONS = 8;           
+  const vec3 SUN_DIR = normalize(vec3(-0.2, 0.4, -0.5)); 
+  const vec3 SUN_COLOR = vec3(1.2, 1.1, 1.0);            
 
   // -- UTILS --
-  
-  // High-performance pseudo-random hash
   vec2 hash(vec2 p) {
     p = vec2(dot(p,vec2(127.1,311.7)), dot(p,vec2(269.5,183.3)));
     return -1.0 + 2.0*fract(sin(p)*43758.5453123);
   }
 
-  // Gradient Noise function
   float noise(vec2 p) {
     const float K1 = 0.366025404;
     const float K2 = 0.211324865;
@@ -123,51 +120,35 @@ const fragmentShaderSource = `
   }
 
   // -- WAVE GENERATION --
-  // Uses FBM (Fractal Brownian Motion) with domain warping to simulate water surface
   float getWaves(vec2 p) {
     float iter = 0.0;
     float frequency = 0.8;
-    float timeMultiplier = u_time * 0.5;
+    float timeMultiplier = u_time * 0.6; // Slightly faster basic flow
     float weight = 0.8;
     float waveHeight = 0.0;
     
-    // Rotation matrix for chaotic wave direction
     mat2 m = mat2(1.6, 1.2, -1.2, 1.6);
     
     for(int i=0; i<ITERATIONS; i++) {
-        // Sample noise
         float d = noise(p * frequency + timeMultiplier);
-        
-        // "Choppy" Modifier:
-        // Real waves are peaked, not smooth sine waves. 
-        // We invert the noise abs value to create sharp crests.
         d = 1.0 - abs(d); 
-        d = pow(d, 2.2); // Sharpening factor
-        
+        d = pow(d, 2.2); 
         waveHeight += d * weight;
-        
-        // Evolve parameters for next octave
         weight *= 0.5;      
         frequency *= 1.18;  
         p = m * p;          
         timeMultiplier *= 1.07;
     }
-    
     return waveHeight;
   }
   
-  // -- CAUSTICS --
-  // Simulates light refraction hitting the ocean floor
   float getCaustics(vec2 p) {
       vec2 q = p * 2.0;
       float d = noise(q + u_time * 0.5) * 0.5;
       d += noise(q * 2.0 - u_time * 0.3) * 0.25;
-      // High contrast thresholding for "light beam" look
       return pow(smoothstep(0.3, 0.8, d + 0.3), 3.0); 
   }
 
-  // -- ACES TONE MAPPING --
-  // Cinema-standard tone mapping to handle high dynamic range lighting naturally
   vec3 aces_tonemap(vec3 color){  
     mat3 m1 = mat3(
         0.59719, 0.07600, 0.02840,
@@ -188,104 +169,88 @@ const fragmentShaderSource = `
   void main() {
       // 1. Setup Coordinates
       vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-      // Correct aspect ratio
       vec2 p = (gl_FragCoord.xy * 2.0 - u_resolution.xy) / min(u_resolution.x, u_resolution.y);
       
-      // 2. Interactive Ripples
-      // Convert mouse to shader coords
+      // 2. Interactive Ripples & Flow
       vec2 mouse = (u_mouse / u_resolution) * 2.0 - 1.0;
       mouse.x *= u_resolution.x / u_resolution.y;
       
       float dist = length(p - mouse);
       vec2 toMouse = p - mouse;
       
-      // Mouse velocity magnitude for flow strength
-      float speed = length(u_velocity) * 0.5;
-      vec2 flowDir = normalize(u_velocity + vec2(0.001)); // Avoid zero division
+      float speed = length(u_velocity);
+      vec2 flowDir = normalize(u_velocity + vec2(0.001)); 
       
-      // Natural water ripples - grow with press intensity
-      float pressIntensity = u_pressed * 0.5 + 1.0; // 1.0 to 2.5
-      float rippleRadius = 0.6 + u_pressed * 0.3; // Grows from 0.6 to 1.5
+      float pressIntensity = u_pressed * 0.5 + 1.0;
+      float rippleRadius = 0.6 + u_pressed * 0.3;
       
+      // Ripple waves
       float ripple1 = sin(dist * 25.0 - u_time * 8.0) * exp(-dist * 3.5) * pressIntensity;
       float ripple2 = sin(dist * 40.0 - u_time * 13.0) * exp(-dist * 5.0) * 0.4 * pressIntensity;
       float ripple = ripple1 + ripple2;
       
-      // Influence area grows with press
       float influence = smoothstep(rippleRadius, 0.0, dist);
       
-      // Directional flow - water pushed in movement direction
-      float speedFactor = clamp(speed * 2.0, 0.0, 1.0);
-      vec2 flowDistortion = flowDir * speedFactor * influence * 0.15;
+      // --- ATTRACTION PHYSICS ---
+      // 1. Drag Flow: Water follows mouse velocity
+      // Invert direction (-=) so sampling moves opposite to motion -> visuals move WITH motion
+      float speedFactor = clamp(speed * 3.0, 0.0, 1.0);
+      vec2 flowDistortion = flowDir * speedFactor * influence * 0.2;
+      p -= flowDistortion; 
+
+      // 2. Suction/Attraction: Water pulled towards mouse center
+      // += to sampling coordinate pulls OUTER content INWARDS (Pinch/Attract)
+      vec2 attraction = normalize(toMouse) * influence * 0.15;
+      p += attraction;
       
       // Subtle ripple refraction
       vec2 rippleDistortion = normalize(toMouse) * ripple * influence * 0.06;
-      
-      p += rippleDistortion + flowDistortion;
+      p += rippleDistortion;
 
-      // 3. Height & Normals Calculation
+      // 3. Height & Normals
       float h = getWaves(p * 2.0); 
       
-      // Calculate Normal Vector with ripple influence
       vec2 e = vec2(0.01, 0.0);
       float hx = getWaves((p + e.xy) * 2.0);
       float hy = getWaves((p + e.yx) * 2.0);
       
-      // Add ripple normals for realistic water surface
       vec3 rippleNormal = vec3(-ripple * normalize(toMouse).x, 1.0, -ripple * normalize(toMouse).y) * influence;
       vec3 normal = normalize(vec3(h - hx, 0.1, h - hy) + rippleNormal * 0.5);
       
-      // 4. Lighting Calculation
+      // 4. Lighting
       vec3 viewDir = normalize(vec3(0.0, 1.0, 0.5));
-      
-      // Fresnel: Reflectivity increases at glancing angles
       float fresnel = 0.02 + 0.98 * pow(1.0 - max(dot(viewDir, normal), 0.0), 4.0);
       
-      // Sun Specular Highlight (Blinn-Phong model)
       vec3 halfVec = normalize(SUN_DIR + viewDir);
       float spec = pow(max(dot(normal, halfVec), 0.0), 180.0);
       
-      // Caustics Pattern
-      // We project caustics based on the normal to make them "swim"
       float caustics = getCaustics(p * 2.0 + normal.xz * 0.2);
       
-      // 5. Coloring - #16dde4 Cyan Water
-      vec3 deepColor = vec3(0.05, 0.7, 0.8);     // Darker #16dde4
-      vec3 shallowColor = vec3(0.09, 0.87, 0.89); // #16dde4 (22, 221, 228)
+      // 5. Coloring - Deep Blue/Cyan
+      vec3 deepColor = vec3(0.0, 0.4, 0.6);      
+      vec3 shallowColor = vec3(0.0, 0.8, 0.95); 
       
-      // Mix water color based on wave height
       vec3 col = mix(deepColor, shallowColor, h * 0.5 + 0.4);
-      
-      // Enhanced Caustics (bright underwater light rays)
       col += caustics * vec3(0.5, 0.9, 1.0) * 0.5;
       
-      // Bright Sky Reflection
       vec3 skyColor = vec3(0.6, 0.8, 0.95);
       col = mix(col, skyColor, fresnel * 0.5);
       
-      // Add Sun Highlight
       col += SUN_COLOR * spec * 2.5;
       
-      // Natural water interaction effects
+      // Highlights
       float rippleIntensity = abs(ripple) * influence;
-      
-      // Refracted caustics (bright light bending through water)
       float refractedCaustics = getCaustics(p * 2.0 + rippleIntensity * 0.5);
       col += vec3(0.4, 0.7, 0.85) * refractedCaustics * rippleIntensity * 0.6;
       
-      // Bright highlights on ripple peaks
       float highlight = smoothstep(0.3, 0.8, ripple) * influence;
       col += vec3(0.7, 0.9, 1.0) * highlight * 0.3;
       
-      // Slight transparency effect where water is disturbed
       col = mix(col, shallowColor, rippleIntensity * 0.15);
 
-      // 6. Post-Processing
-      // Brighten overall
+      // 6. Post
       col *= 1.3;
       col = aces_tonemap(col);
-      
-      // Subtle vignette
       col *= 1.0 - length(uv - 0.5) * 0.3;
 
       gl_FragColor = vec4(col, 1.0);
@@ -415,14 +380,14 @@ const BackgroundShader = () => {
   return (
     <canvas 
       ref={canvasRef} 
-      className="fixed top-0 left-0 w-full h-full block bg-black"
+      className="absolute top-0 left-0 w-full h-full block bg-black"
     />
   );
 };
 
 export default function App() {
   return (
-    <div className="relative w-full h-screen bg-black overflow-hidden">
+    <div className="relative w-full h-full bg-black overflow-hidden">
       <BackgroundShader />
     </div>
   );

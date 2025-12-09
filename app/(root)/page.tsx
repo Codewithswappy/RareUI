@@ -1,13 +1,12 @@
 import dynamic from 'next/dynamic';
-import HeroSection from '@/components/landing/HeroSection';
-import WaterFlow from '@/components/rareui/waterFlow';
+import HeroSection from '@/components/landing/HeroSection'; 
 
 const HowItWorks = dynamic(() => import('@/components/landing/HowItWorks'), {
   loading: () => <div className="h-[500px] w-full bg-background" />,
 });
 
 const FeatureSection = dynamic(() => import('@/components/landing/FeatureSection'), {
-  loading: () => <div className="h-[600px] w-full bg-background" />, // Simple placeholder to prevent layout shift
+  loading: () => <div className="h-[600px] w-full bg-background" />,
 });
 
 const CTASection = dynamic(() => import('@/components/landing/CTASection'), {
@@ -28,10 +27,8 @@ export default function Home() {
       <HeroSection />
       <ComponentsGrid />
       <HowItWorks />
-      {/* <FeatureSection />    */}
       <CTASection />
       <Footer />
-      {/* <WaterFlow /> */}
     </main> 
   );
 }

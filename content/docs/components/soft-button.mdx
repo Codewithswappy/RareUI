@@ -86,13 +86,19 @@ export default SoftButton;`}
   <SoftButton />
 </Preview>
 
-## Props
+## Usage
 
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `children` | `React.ReactNode` | `"Button"` | The content to display inside the button. |
-| `className` | `string` | `-` | Additional CSS classes for the outer wrapper. |
-| `...props` | `React.HTMLAttributes<HTMLDivElement>` | `-` | Any additional HTML div attributes. |
+```tsx
+import SoftButton from '@/components/rareui/SoftButton';
+
+export default function App() {
+  return (
+    <SoftButton onClick={() => alert('Clicked!')}>
+      Click Me
+    </SoftButton>
+  );
+}
+```
 
 ## Features
 
@@ -101,3 +107,11 @@ export default SoftButton;`}
 - **Smooth Transitions**: 600ms animated state changes
 - **Dark Mode Support**: Optimized shadows for both light and dark themes
 - **Letter Spacing Animation**: Expands tracking on hover for dynamic effect
+
+## Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `children` | `React.ReactNode` | `"Button"` | The content to display inside the button. |
+| `className` | `string` | `-` | Additional CSS classes for the outer wrapper. |
+| `...props` | `React.HTMLAttributes<HTMLDivElement>` | `-` | Any additional HTML div attributes. |

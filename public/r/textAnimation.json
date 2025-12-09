@@ -1,0 +1,18 @@
+{
+  "name": "textAnimation",
+  "type": "registry:ui",
+  "dependencies": [
+    "react",
+    "@types/react",
+    "typescript"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/rareui/Text Animation/textAnimation.tsx",
+      "content": "\"use client\";\r\n\r\nimport React, { useRef, useState, useEffect } from 'react';\r\nimport { cn } from \"@/lib/utils\";\r\n\r\n/**\r\n * \"LIQUID CHROME\" TEXT\r\n * Static geometry, but fluid internal lighting.\r\n * The gradient creates a mercury-like effect that follows the mouse light source.\r\n */\r\n\r\ninterface TextAnimationProps {\r\n  text?: string;\r\n  className?: string;\r\n  fontSize?: number;\r\n}\r\n\r\nexport default function TextAnimation({ \r\n  text = \"RARE UI\", \r\n  className,\r\n  fontSize = 120\r\n}: TextAnimationProps) {\r\n  const containerRef = useRef<HTMLDivElement>(null);\r\n  const [gradientPos, setGradientPos] = useState({ x: 50, y: 50 });\r\n\r\n  const handleMouseMove = (e: React.MouseEvent) => {\r\n    const rect = containerRef.current?.getBoundingClientRect();\r\n    if (rect) {\r\n      const x = ((e.clientX - rect.left) / rect.width) * 100;\r\n      const y = ((e.clientY - rect.top) / rect.height) * 100;\r\n      setGradientPos({ x, y });\r\n    }\r\n  };\r\n\r\n  const handleMouseLeave = () => {\r\n    setGradientPos({ x: 50, y: 50 });\r\n  };\r\n\r\n  return (\r\n    <div \r\n      ref={containerRef}\r\n      className={cn(\"relative flex items-center justify-center p-20 cursor-default bg-black min-h-[300px]\", className)}\r\n      onMouseMove={handleMouseMove}\r\n      onMouseLeave={handleMouseLeave}\r\n    >\r\n      <div \r\n        className=\"relative z-10 font-black text-center select-none tracking-tighter\"\r\n        style={{ \r\n          fontSize: fontSize,\r\n          // Premium Multi-Layer Gradient\r\n          backgroundImage: `\r\n            radial-gradient(\r\n              circle at ${gradientPos.x}% ${gradientPos.y}%, \r\n              #ffffff 0%,    \r\n              #e2e8f0 25%,   \r\n              #94a3b8 50%,   \r\n              #475569 75%,   \r\n              #0f172a 100%   \r\n            )\r\n          `,\r\n          WebkitBackgroundClip: \"text\",\r\n          WebkitTextFillColor: \"transparent\",\r\n          backgroundClip: \"text\",\r\n          color: \"transparent\",\r\n          // Deep metallic shadow\r\n          filter: \"drop-shadow(0px 10px 20px rgba(0,0,0,0.5))\"\r\n        }}\r\n      >\r\n        {text}\r\n        \r\n        {/* Reflection Layer (Sheen) */}\r\n        <div \r\n           className=\"absolute inset-0 pointer-events-none mix-blend-overlay opacity-50\"\r\n           aria-hidden=\"true\"\r\n           style={{\r\n             backgroundImage: `\r\n               linear-gradient(\r\n                 ${gradientPos.x * 3.6}deg, \r\n                 transparent 40%, \r\n                 rgba(255,255,255,0.8) 50%, \r\n                 transparent 60%\r\n               )\r\n             `,\r\n             WebkitBackgroundClip: \"text\",\r\n             backgroundClip: \"text\",\r\n           }}\r\n        >\r\n          {text}\r\n        </div>\r\n      </div>\r\n      \r\n      {/* Dynamic Glow behind */}\r\n      <div \r\n        className=\"absolute w-[50%] h-[50%] blur-[100px] pointer-events-none transition-all duration-300 ease-out opacity-20\"\r\n        style={{\r\n          background: \"radial-gradient(circle, #38bdf8 0%, transparent 70%)\",\r\n          left: `${gradientPos.x}%`,\r\n          top: `${gradientPos.y}%`,\r\n          transform: \"translate(-50%, -50%)\"\r\n        }}\r\n      />\r\n    </div>\r\n  );\r\n}\r\n",
+      "type": "registry:ui",
+      "target": "components/rareui/Text Animation/textAnimation.tsx"
+    }
+  ]
+}

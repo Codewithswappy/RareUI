@@ -67,5 +67,20 @@ export const sidebarData = [
         "href": "/docs/components/soft-button"
       }
     ]
+  },
+  {
+    "title": "Text Animation",
+    "items": [
+      {
+        "title": "Magnetic ScatterText",
+        "href": "/docs/text-animation/magnetic-scatterText",
+        "badge": "New"
+      },
+      {
+        "title": "Vapor SmokeText",
+        "href": "/docs/text-animation/vapor-smokeText",
+        "badge": "New"
+      }
+    ]
   }
 ];
