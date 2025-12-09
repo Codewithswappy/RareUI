@@ -11,6 +11,8 @@ import PremiumButton from "@/components/rareui/premium-button";
 import ParticleCard from "@/components/rareui/ParticleCard";
 import PremiumProfileCard from "@/components/rareui/premiumProfileCard";
 import { AnimatedTabsDemo } from "@/components/rareui/AnimatedTabsDemo";
+import { VaporSmokeText } from "@/components/rareui/Text Animation/VaporSmokeText";
+import { MagneticScatterText } from "@/components/rareui/Text Animation/MagneticScatterText";
 
 const componentMap: Record<string, any> = {
   "/docs/components/animated-tab": () => (
@@ -32,6 +34,16 @@ const componentMap: Record<string, any> = {
   "/docs/components/premium-profile-card": () => (
     <div className="scale-[0.32] -my-24 pointer-events-none">
       <PremiumProfileCard />
+    </div>
+  ),
+  "/docs/text-animation/vapor-smokeText": () => (
+    <div className="scale-75">
+      <VaporSmokeText text="Vapor" className="text-4xl" />
+    </div>
+  ),
+  "/docs/text-animation/magnetic-scatterText": () => (
+    <div className="scale-75">
+      <MagneticScatterText text="Magnetic" className="text-4xl" />
     </div>
   ),
 };
