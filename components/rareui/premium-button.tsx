@@ -2,7 +2,7 @@
 
 import React from "react";
 
-export const UpgradeButton = () => {
+export const PremiumButton = () => {
   return (
     <button
       className="
@@ -45,4 +45,4 @@ export const UpgradeButton = () => {
   );
 };
 
-export default UpgradeButton;
+export default PremiumButton;

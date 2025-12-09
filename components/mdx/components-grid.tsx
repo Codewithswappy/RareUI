@@ -7,7 +7,7 @@ import SoftButton from "@/components/rareui/SoftButton";
 import { GlassShimmerButton } from "@/components/rareui/glass-shimmer-button";
 
 import { Neumorphism3DButton } from "@/components/rareui/neumorphism3DButton";
-import UpgradeButton from "@/components/rareui/upgrade-button";
+import PremiumButton from "@/components/rareui/premium-button";
 import ParticleCard from "@/components/rareui/ParticleCard";
 import PremiumProfileCard from "@/components/rareui/premiumProfileCard";
 
@@ -17,7 +17,7 @@ const componentMap: Record<string, any> = {
 
   "/docs/components/neumorphism3DButton": () => <Neumorphism3DButton>3D Button</Neumorphism3DButton>,
   "/docs/components/soft-button": SoftButton,
-  "/docs/components/upgrade-button": UpgradeButton,
+  "/docs/components/premium-button": PremiumButton,
   "/docs/components/particle-card": () => (
     <div className="scale-[0.35] -my-20">
       <ParticleCard />

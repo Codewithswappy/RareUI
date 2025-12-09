@@ -80,7 +80,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/docs/components/buttons/liquid-button',
         '/docs/components/buttons/neumorphism3DButton',
         '/docs/components/buttons/soft-button',
-        '/docs/components/buttons/upgrade-button',
+        '/docs/components/buttons/premium-button',
         // Cards - High conversion keywords
         '/docs/components/cards/particle-card',
         '/docs/components/cards/premium-profile-card',

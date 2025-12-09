@@ -1,17 +1,17 @@
 ---
-title: Upgrade Button
-description: A premium upgrade button with a dynamic gradient background and hover effects.
+title: Premium Button
+description: A premium button with a dynamic gradient background and hover effects.
 ---
 
 import { Preview } from "@/components/mdx/preview";
-import { UpgradeButton } from "@/components/rareui/upgrade-button";
+import { PremiumButton } from "@/components/rareui/premium-button";
 
 <Preview
   code={`"use client";
 
 import React from "react";
 
-export const UpgradeButton = () => {
+export const PremiumButton = () => {
   return (
     <button
       className="
@@ -54,20 +54,20 @@ export const UpgradeButton = () => {
   );
 };
 
-export default UpgradeButton;`}
-  cliCommand="npx rareui add upgrade-button"
+export default PremiumButton;`}
+  cliCommand="npx rareui add premium-button"
 >
-  <UpgradeButton />
+  <PremiumButton />
 </Preview>
 
 ## Usage
 
 ```tsx
-import { UpgradeButton } from '@/components/rareui/upgrade-button';
+import { PremiumButton } from '@/components/rareui/premium-button';
 
 export default function App() {
   return (
-    <UpgradeButton />
+    <PremiumButton />
   );
 }
 ```

@@ -7,7 +7,7 @@ import { GlassShimmerButton } from '@/components/rareui/glass-shimmer-button'
 import LiquidButton from '@/components/rareui/LiquidButton'
 import { Neumorphism3DButton } from '@/components/rareui/neumorphism3DButton'
 import SoftButton from '@/components/rareui/SoftButton'
-import { UpgradeButton } from '@/components/rareui/upgrade-button'
+import { PremiumButton } from '@/components/rareui/premium-button'
 import ParticleCard from '@/components/rareui/ParticleCard'
 import PremiumProfileCard from '@/components/rareui/premiumProfileCard'
 
@@ -37,9 +37,9 @@ const components = [
     className: 'col-span-1'
   },
   {
-    name: 'Upgrade Button',
-    component: <UpgradeButton />,
-    href: '/docs/components/upgrade-button',
+    name: 'Premium Button',
+    component: <PremiumButton />,
+    href: '/docs/components/premium-button',
     className: 'col-span-1'
   },
   {
