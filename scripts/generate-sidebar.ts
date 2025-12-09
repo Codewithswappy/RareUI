@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import chalk from "chalk";
+import matter from "gray-matter";
 
 const ROOT = path.resolve(process.cwd(), "content/docs/components");
 const OUTPUT = path.resolve(process.cwd(), "lib/sidebar-data.ts");
@@ -77,9 +78,13 @@ async function buildSidebar() {
     const relativePath = path.relative(ROOT, file);
     const urlPath = relativePath.replace(/\.mdx$/, '').replace(/\\/g, '/');
 
+    // Read frontmatter to get badge information
+    const badge = getBadgeFromFrontmatter(file);
+
     grouped[category].items.push({
       title: prettyTitle,
       href: `/docs/components/${urlPath}`,
+      ...(badge && { badge }), // Only include badge if it exists
     });
   }
 
@@ -165,6 +170,16 @@ function formatComponentTitle(fileName: string): string {
   return fileName
     .replace(/-/g, ' ')
     .replace(/\b\w/g, l => l.toUpperCase());
+}
+
+function getBadgeFromFrontmatter(filePath: string): string | undefined {
+  try {
+    const fileContent = fs.readFileSync(filePath, 'utf-8');
+    const { data } = matter(fileContent);
+    return data.badge as string | undefined;
+  } catch (error) {
+    return undefined;
+  }
 }
 
 buildSidebar();

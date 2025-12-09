@@ -34,7 +34,8 @@
     "items": [
       {
         "title": "Animated Tab",
-        "href": "/docs/components/animated-tab"
+        "href": "/docs/components/animated-tab",
+        "badge": "New"
       },
       {
         "title": "Glass Shimmer Button",
@@ -54,7 +55,8 @@
       },
       {
         "title": "Premium Button",
-        "href": "/docs/components/premium-button"
+        "href": "/docs/components/premium-button",
+        "badge": "Updated"
       },
       {
         "title": "Premium Profile Card",

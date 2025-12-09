@@ -7,7 +7,8 @@
     "build": "npm run build:all && next build",
     "build:sidebar": "tsx scripts/generate-sidebar.ts",
     "build:registry": "tsx scripts/generate-registry.ts",
-    "build:all": "npm run build:sidebar && npm run build:registry",
+    "build:latest": "tsx scripts/generate-latest-component.ts",
+    "build:all": "npm run build:sidebar && npm run build:registry && npm run build:latest",
     "start": "next start",
     "lint": "eslint"
   },
@@ -58,6 +59,7 @@
     "fumadocs-core": "^16.0.8",
     "fumadocs-mdx": "^13.0.5",
     "fumadocs-ui": "^16.0.8",
+    "gray-matter": "^4.0.3",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.553.0",
     "motion": "^12.23.24",

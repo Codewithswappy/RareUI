@@ -13,6 +13,7 @@ import { motion } from "motion/react";
 interface SidebarItem {
   title: string;
   href: string;
+  badge?: string;
 }
 
 interface SidebarSection {
@@ -231,7 +232,22 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
                                 className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-primary rounded-r-full shadow-[0_0_8px_rgba(0,0,0,0.2)] dark:shadow-[0_0_8px_rgba(255,255,255,0.2)]" 
                             />
                           )}
-                          <span className="relative z-10">{item.title}</span>
+                          <span className="relative z-10 flex items-center gap-2 flex-1">
+                            <span className="flex-1">{item.title}</span>
+                            {item.badge && (
+                              <span
+                                className={cn(
+                                  "px-1.5 py-0.5 text-[10px] font-semibold rounded uppercase tracking-wider",
+                                  item.badge.toLowerCase() === "new" && "bg-neutral-950 text-white dark:bg-neutral-100 dark:text-black rounded-full",
+                                  item.badge.toLowerCase() === "updated" && "bg-neutral-500 text-neutral-100 dark:bg-neutral-100 dark:text-neutral-500 rounded-full",
+                                  item.badge.toLowerCase() === "pro" && "bg-yellow-200 text-yellow-600 dark:bg-yellow-200 dark:text-yellow-600 rounded-full",
+                                  !["new", "updated", "pro"].includes(item.badge.toLowerCase()) && "bg-primary/20 text-primary dark:bg-primary/30"
+                                )}
+                              >
+                                {item.badge}
+                              </span>
+                            )}
+                          </span>
                         </div>
                       );
 

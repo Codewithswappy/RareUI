@@ -1,15 +1,13 @@
 /**
  * Configuration for the latest/newest component badge on the homepage
- * Update this whenever you add a new component to automatically update the hero badge
+ * This file automatically reads from the generated latest-component-data.json
+ * Run `npm run build:latest` to update the latest component
  */
 
+import latestData from './latest-component-data.json';
+
 export const latestComponent = {
-    // Display name for the badge
-    name: "Premium Profile Card",
-
-    // Full path to the component's documentation page
-    href: "/docs/components/cards/premium-profile-card",
-
-    // Optional: Date added (for reference)
-    dateAdded: "2024-12-05",
+    name: latestData.name,
+    href: latestData.href,
+    dateAdded: latestData.dateAdded,
 };

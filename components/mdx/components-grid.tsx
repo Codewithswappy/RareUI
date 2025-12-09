@@ -10,8 +10,14 @@ import { Neumorphism3DButton } from "@/components/rareui/neumorphism3DButton";
 import PremiumButton from "@/components/rareui/premium-button";
 import ParticleCard from "@/components/rareui/ParticleCard";
 import PremiumProfileCard from "@/components/rareui/premiumProfileCard";
+import { AnimatedTabsDemo } from "@/components/rareui/AnimatedTabsDemo";
 
 const componentMap: Record<string, any> = {
+  "/docs/components/animated-tab": () => (
+    <div className="scale-75">
+      <AnimatedTabsDemo />
+    </div>
+  ),
   "/docs/components/glass-shimmer-button": () => <GlassShimmerButton>Shimmer</GlassShimmerButton>,
   "/docs/components/liquid-button": () => <LiquidButton text="Liquid" backgroundColor="bg-neutral-900 dark:bg-neutral-100" textColor="text-white dark:text-black" />,
 
