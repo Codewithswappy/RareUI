@@ -92,5 +92,15 @@ export const sidebarData = [
         "badge": "New"
       }
     ]
+  },
+  {
+    "title": "Interactive Background",
+    "items": [
+      {
+        "title": "Liquid Wave",
+        "href": "/docs/interactive-background/liquid-wave",
+        "badge": "New"
+      }
+    ]
   }
 ];

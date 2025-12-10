@@ -14,9 +14,11 @@ interface PreviewProps {
   className?: string;
   code?: string;
   cliCommand?: string;
+  hideCodeTab?: boolean; // Hide the Code tab at the top but keep Manual tab in Installation
+  previewClassName?: string; // Custom className for the preview container
 }
 
-export function Preview({ children, className, code, cliCommand }: PreviewProps) {
+export function Preview({ children, className, code, cliCommand, hideCodeTab = false, previewClassName }: PreviewProps) {
   console.log('Preview props:', { hasCode: !!code, hasCliCommand: !!cliCommand, cliCommand });
   const { theme } = useTheme();
   const [activeTab, setActiveTab] = React.useState<"preview" | "code">("preview");
@@ -263,7 +265,7 @@ Ensure it's fully functional, responsive, and matches the original design exactl
       )}
 
       {/* Tabs & Copy Prompt - Outside Container */}
-      {code && (
+      {code && !hideCodeTab && (
         <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
           <div className="flex">
             <InternalAnimatedTabs
@@ -324,8 +326,8 @@ Ensure it's fully functional, responsive, and matches the original design exactl
 
       {/* Content Container */}
       <div className="rounded-xl border border-border backdrop-blur-sm w-full bg-white dark:bg-card not-prose">
-        {activeTab === "preview" ? (
-          <div className="relative flex w-full items-center justify-center p-4 sm:p-8 md:p-10 min-h-[350px] bg-neutral-100 dark:bg-neutral-900 rounded-xl overflow-visible not-prose">
+        {(hideCodeTab || activeTab === "preview") ? (
+          <div className={`relative flex w-full items-center justify-center p-4 sm:p-8 md:p-10 min-h-[350px] bg-neutral-100 dark:bg-neutral-900 rounded-xl overflow-visible not-prose ${previewClassName || ''}`}>
             {children}
           </div>
         ) : (
