@@ -7,45 +7,70 @@ interface ComponentInfo {
     href: string;
     dateAdded: string;
     modifiedTime: number;
+    hasNewBadge: boolean;
 }
 
 async function generateLatestComponent() {
-    const componentsDir = path.join(process.cwd(), 'content/docs/components');
+    const docsDir = path.join(process.cwd(), 'content/docs');
     const outputPath = path.join(process.cwd(), 'lib/latest-component-data.json');
 
-    // Read all .mdx files in the components directory
-    const files = fs.readdirSync(componentsDir).filter(file => file.endsWith('.mdx'));
+    // Define directories to scan (excluding non-component sections)
+    const componentDirs = [
+        'components',
+        'text-animation',
+        '3d-elements',
+        'interactive-background'
+    ];
 
     const components: ComponentInfo[] = [];
 
-    for (const file of files) {
-        const filePath = path.join(componentsDir, file);
-        const stats = fs.statSync(filePath);
-        const fileContent = fs.readFileSync(filePath, 'utf-8');
+    // Scan each directory
+    for (const dir of componentDirs) {
+        const dirPath = path.join(docsDir, dir);
 
-        // Parse frontmatter to get the title
-        const { data } = matter(fileContent);
-        const title = data.title || file.replace('.mdx', '');
+        // Skip if directory doesn't exist
+        if (!fs.existsSync(dirPath)) continue;
 
-        // Create the component info
-        const componentSlug = file.replace('.mdx', '');
-        components.push({
-            name: title,
-            href: `/docs/components/${componentSlug}`,
-            dateAdded: stats.mtime.toISOString().split('T')[0],
-            modifiedTime: stats.mtimeMs
-        });
+        // Read all .mdx files in the directory
+        const files = fs.readdirSync(dirPath).filter(file => file.endsWith('.mdx'));
+
+        for (const file of files) {
+            const filePath = path.join(dirPath, file);
+            const stats = fs.statSync(filePath);
+            const fileContent = fs.readFileSync(filePath, 'utf-8');
+
+            // Parse frontmatter to get the title and badge
+            const { data } = matter(fileContent);
+            const title = data.title || file.replace('.mdx', '');
+            const hasNewBadge = data.badge === 'New';
+
+            // Create the component info with the correct href
+            const componentSlug = file.replace('.mdx', '');
+            components.push({
+                name: title,
+                href: `/docs/${dir}/${componentSlug}`,
+                dateAdded: stats.mtime.toISOString().split('T')[0],
+                modifiedTime: stats.mtimeMs,
+                hasNewBadge
+            });
+        }
     }
 
-    // Sort by modification time (newest first)
-    components.sort((a, b) => b.modifiedTime - a.modifiedTime);
+    // Sort by badge first (New badge components first), then by modification time (newest first)
+    components.sort((a, b) => {
+        // Prioritize components with "New" badge
+        if (a.hasNewBadge && !b.hasNewBadge) return -1;
+        if (!a.hasNewBadge && b.hasNewBadge) return 1;
+        // If both have or don't have "New" badge, sort by modification time
+        return b.modifiedTime - a.modifiedTime;
+    });
 
     // Get the latest component
     const latestComponent = components[0];
 
     if (latestComponent) {
-        // Remove modifiedTime before saving (not needed in the output)
-        const { modifiedTime, ...output } = latestComponent;
+        // Remove modifiedTime and hasNewBadge before saving (not needed in the output)
+        const { modifiedTime, hasNewBadge, ...output } = latestComponent;
 
         // Write to JSON file
         fs.writeFileSync(
