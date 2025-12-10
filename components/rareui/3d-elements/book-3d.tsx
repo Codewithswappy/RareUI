@@ -220,6 +220,10 @@ export function Book3D({
                 transformStyle: "preserve-3d",
                 transform: !isHovered ? "translateZ(10px)" : undefined // Ensure it starts in front
             }}
+            initial={{
+                rotateY: 0,
+                z: 10
+            }}
             animate={{ 
                 rotateY: isHovered ? -180 : 0,
                 z: isHovered ? 0 : 10, // Push far forward when closed to be in front of all pages
