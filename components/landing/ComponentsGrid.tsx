@@ -3,25 +3,18 @@
 import React from 'react'
 import Link from 'next/link'
 import { motion } from 'motion/react'
-import { GlassShimmerButton } from '@/components/rareui/glass-shimmer-button'
 import LiquidButton from '@/components/rareui/LiquidButton'
 import { Neumorphism3DButton } from '@/components/rareui/neumorphism3DButton'
 import SoftButton from '@/components/rareui/SoftButton'
 import { PremiumButton } from '@/components/rareui/premium-button'
 import ParticleCard from '@/components/rareui/ParticleCard'
-import PremiumProfileCard from '@/components/rareui/premiumProfileCard'
+import { Book3D } from '@/components/rareui/3D elements/book-3d'
 
 const components = [
   {
     name: 'Liquid Button',
     component: <LiquidButton />,
     href: '/docs/components/liquid-button',
-    className: 'col-span-1'
-  },
-  {
-    name: 'Glass Shimmer',
-    component: <GlassShimmerButton>Shimmer</GlassShimmerButton>,
-    href: '/docs/components/glass-shimmer-button',
     className: 'col-span-1'
   },
   {
@@ -49,10 +42,10 @@ const components = [
     className: 'col-span-1 md:col-span-2 lg:col-span-1'
   },
   {
-    name: 'Premium Profile',
-    component: <div className="scale-75 origin-center"><PremiumProfileCard /></div>,
-    href: '/docs/components/premium-profile-card',
-    className: 'col-span-1 md:col-span-2 lg:col-span-2'
+    name: 'Book 3D',
+    component: <div className="scale-75 origin-center"><Book3D /></div>,
+    href: '/docs/3d-elements/book-3d',
+    className: 'col-span-1'
   }
 ]
 

@@ -5,7 +5,6 @@ import { sidebarData } from "@/lib/sidebar-data";
 import LiquidButton from "@/components/rareui/LiquidButton";
 import SoftButton from "@/components/rareui/SoftButton";
 import { GlassShimmerButton } from "@/components/rareui/glass-shimmer-button";
-
 import { Neumorphism3DButton } from "@/components/rareui/neumorphism3DButton";
 import PremiumButton from "@/components/rareui/premium-button";
 import ParticleCard from "@/components/rareui/ParticleCard";
@@ -13,6 +12,7 @@ import PremiumProfileCard from "@/components/rareui/premiumProfileCard";
 import { AnimatedTabsDemo } from "@/components/rareui/AnimatedTabsDemo";
 import { VaporSmokeText } from "@/components/rareui/Text Animation/VaporSmokeText";
 import { MagneticScatterText } from "@/components/rareui/Text Animation/MagneticScatterText";
+import { Book3D } from "@/components/rareui/3D elements/book-3d";
 
 const componentMap: Record<string, any> = {
   "/docs/components/animated-tab": () => (
@@ -46,11 +46,16 @@ const componentMap: Record<string, any> = {
       <MagneticScatterText text="Magnetic" className="text-4xl" />
     </div>
   ),
+  "/docs/3d-elements/book-3d": () => (
+    <div className="scale-75">
+      <Book3D />
+    </div>
+  ),
 };
 
 export function ComponentsGrid() {
   const componentSections = sidebarData.filter(
-    section => !["Follow for updates", "Installation", "Getting Started"].includes(section.title)
+    section => !["Follow for updates", "Installation", "Getting Started", "Interactive Background"].includes(section.title)
   );
 
   return (

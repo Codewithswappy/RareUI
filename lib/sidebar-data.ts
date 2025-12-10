@@ -55,8 +55,7 @@ export const sidebarData = [
       },
       {
         "title": "Premium Button",
-        "href": "/docs/components/premium-button",
-        "badge": "Updated"
+        "href": "/docs/components/premium-button"
       },
       {
         "title": "Premium Profile Card",
@@ -78,8 +77,7 @@ export const sidebarData = [
       },
       {
         "title": "Vapor SmokeText",
-        "href": "/docs/text-animation/vapor-smokeText",
-        "badge": "New"
+        "href": "/docs/text-animation/vapor-smokeText"
       }
     ]
   },

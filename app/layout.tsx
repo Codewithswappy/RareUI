@@ -4,6 +4,7 @@ import "./globals.css";
 import { RootProvider } from "fumadocs-ui/provider/next";
 import { ThemeProvider } from "next-themes";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import { ClickSpark } from "@/components/rareui/ClickSpark";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -384,6 +385,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
 
+
         <RootProvider>
         <ThemeProvider
             attribute="class"
@@ -392,7 +394,14 @@ export default function RootLayout({
             disableTransitionOnChange
             storageKey="theme"
           >
-          <div className="flex flex-col min-h-screen">
+            <ClickSpark
+              sparkColor={undefined}
+              sparkSize={10}
+              sparkRadius={15}
+              sparkCount={8}
+              duration={400}
+            />
+            <div className="flex flex-col min-h-screen">
             <div className="flex-1">{children}</div>
           </div>
           </ThemeProvider>
