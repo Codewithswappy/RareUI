@@ -164,14 +164,14 @@ export const metadata: Metadata = {
     description: "Build stunning web applications with our collection of 100+ free, open-source React components. Featuring modern designs, smooth animations, and copy-paste simplicity. Perfect for landing pages, dashboards, and web apps. No installation required.",
     images: [
       {
-        url: "/og-imageblack.png?v=1",
+        url: "/og-imageblack.png?v=2",
         width: 1200,
         height: 630,
         alt: "RareUI - Free Premium React UI Components Library with Tailwind CSS",
         type: "image/png",
       },
       {
-        url: "/og-imagewhite.png?v=1",
+        url: "/og-imagewhite.png?v=2",
         width: 1200,
         height: 630,
         alt: "RareUI - Open Source React Components for Modern Web Apps",
@@ -185,7 +185,7 @@ export const metadata: Metadata = {
     creator: "@heyyswap",
     title: "RareUI - 100+ Free Premium React UI Components",
     description: "Build beautiful web apps with free, open-source React components. Tailwind CSS + Framer Motion. Copy-paste ready. No installation.",
-    images: ["/og-imageblack.png?v=1", "/og-imagewhite.png?v=1"],
+    images: ["/og-imageblack.png?v=2", "/og-imagewhite.png?v=2"],
   },
   alternates: {
     canonical: "https://rareui.in",
