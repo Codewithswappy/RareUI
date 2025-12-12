@@ -22,11 +22,7 @@ export const metadata: Metadata = {
     default: "RareUI - Premium React UI Components Library | Free & Open Source | Tailwind CSS",
     template: "%s | RareUI - Free React UI Component Library"
   },
-  icons: {
-    icon: '/favicon.png',
-    shortcut: '/favicon.png',
-    apple: '/favicon.png',
-  },
+
   description: "Discover 100+ premium, free, and open-source React UI components. Built with Tailwind CSS, Next.js, and Framer Motion. Copy-paste ready components for building modern web applications. Download buttons, cards, forms, modals, navbars, and more. No installation required - just copy and use.",
   keywords: [
     // Primary Keywords (High Competition)
