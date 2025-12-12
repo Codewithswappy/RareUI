@@ -34,8 +34,7 @@ export const sidebarData = [
     "items": [
       {
         "title": "Animated Tab",
-        "href": "/docs/components/animated-tab",
-        "badge": "New"
+        "href": "/docs/components/animated-tab"
       },
       {
         "title": "Glass Shimmer Button",
@@ -62,6 +61,11 @@ export const sidebarData = [
         "href": "/docs/components/premium-profile-card"
       },
       {
+        "title": "Retro Pixel Button",
+        "href": "/docs/components/retro-pixel-button",
+        "badge": "New"
+      },
+      {
         "title": "Soft Button",
         "href": "/docs/components/soft-button"
       }
@@ -72,8 +76,7 @@ export const sidebarData = [
     "items": [
       {
         "title": "Magnetic ScatterText",
-        "href": "/docs/text-animation/magnetic-scatterText",
-        "badge": "New"
+        "href": "/docs/text-animation/magnetic-scatterText"
       },
       {
         "title": "Vapor SmokeText",

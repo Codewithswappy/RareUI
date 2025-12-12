@@ -154,8 +154,9 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
           )}
         >
           <div className="h-full flex flex-col bg-background/95 backdrop-blur-xl md:border-r border-border rounded-t-[20px] md:rounded-none overflow-hidden">
-            <div className="flex-1 overflow-y-auto p-4 space-y-6">
-              
+            {/* Scrollable Content Wrapper */}
+            <div className="flex-1 relative min-h-0">
+              <div className="h-full overflow-y-auto p-4 space-y-6 scrollbar-thin scrollbar-thumb-muted-foreground/20 hover:scrollbar-thumb-muted-foreground/40 scrollbar-track-transparent">
                   {/* Handle Bar for Mobile */}
                   <div className="md:hidden w-full flex justify-center pb-4 pt-2" onClick={() => setIsOpen(false)}>
                     <div className="w-12 h-1.5 bg-muted-foreground/20 rounded-full" />
@@ -171,108 +172,114 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
                 <h3 className="px-2 py-1 text-sm font-semibold text-foreground/90">
                   Menu
                 </h3>
-                <div className="space-y-1">
-                   {[
-                     { title: "Home", href: "/" },
-                     { title: "Components", href: "/docs" },
-                     { title: "Templates", href: "/templates" },
-                     { title: "Pricing", href: "/pricing" }
-                   ].map((item) => (
-                      <TransitionLink
-                        key={item.href}
-                        href={item.href}
-                        onClick={() => setIsOpen(false)}
-                        className={cn(
-                          "group flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-all duration-300 ease-out relative overflow-hidden",
-                          pathname === item.href
-                            ? "text-foreground font-medium bg-accent/50 shadow-sm"
-                            : "text-muted-foreground hover:text-foreground hover:bg-accent/30 hover:pl-4"
-                        )}
-                      >
-                         {item.title}
-                      </TransitionLink>
-                   ))}
-                </div>
-              </div>
-
-              {sidebar.map((section, index) => (
-                <div key={index} className="space-y-2">
-                  <h3 className="px-2 py-1 text-sm font-semibold text-foreground/90">
-                    {section.title}
-                  </h3>
-                  <div className="space-y-1">
-                    {section.items.map((item, itemIndex) => {
-                      const isActive = pathname === item.href;
-                      const isExternal = item.href.startsWith("http");
-
-                      const linkContent = (
-                        <div
-                          className={cn(
-                            "group flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-colors relative overflow-hidden",
-                            isActive
-                              ? "text-foreground font-medium"
-                              : "text-muted-foreground hover:text-foreground hover:bg-accent/30 hover:pl-4 transition-all duration-300"
-                          )}
-                        >
-                          {isActive && (
-                            <motion.div
-                              layoutId="sidebar-active-item"
-                              className="absolute inset-0 bg-accent/50 border border-border/50 rounded-lg"
-                              transition={{
-                                type: "spring",
-                                stiffness: 300,
-                                damping: 30
-                              }}
-                            />
-                          )}
-                          {/* Active Indicator Line */}
-                          {isActive && (
-                            <motion.span 
-                                layoutId="sidebar-active-line"
-                                className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-primary rounded-r-full shadow-[0_0_8px_rgba(0,0,0,0.2)] dark:shadow-[0_0_8px_rgba(255,255,255,0.2)]" 
-                            />
-                          )}
-                          <span className="relative z-10 flex items-center gap-2 flex-1">
-                            <span className="flex-1">{item.title}</span>
-                            {item.badge && (
-                              <span
-                                className={cn(
-                                  "px-1.5 py-0.5 text-[10px] font-semibold rounded uppercase tracking-wider",
-                                  item.badge.toLowerCase() === "new" && "bg-neutral-950 text-white dark:bg-neutral-100 dark:text-black rounded-full",
-                                  item.badge.toLowerCase() === "updated" && "bg-neutral-500 text-neutral-100 dark:bg-neutral-100 dark:text-neutral-500 rounded-full",
-                                  item.badge.toLowerCase() === "pro" && "bg-yellow-200 text-yellow-600 dark:bg-yellow-200 dark:text-yellow-600 rounded-full",
-                                  !["new", "updated", "pro"].includes(item.badge.toLowerCase()) && "bg-primary/20 text-primary dark:bg-primary/30"
-                                )}
-                              >
-                                {item.badge}
-                              </span>
+                    <div className="space-y-1">
+                      {[
+                        { title: "Home", href: "/" },
+                        { title: "Components", href: "/docs" },
+                        { title: "Templates", href: "/templates" },
+                        { title: "Pricing", href: "/pricing" }
+                      ].map((item) => (
+                          <TransitionLink
+                            key={item.href}
+                            href={item.href}
+                            onClick={() => setIsOpen(false)}
+                            className={cn(
+                              "group flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-all duration-300 ease-out relative overflow-hidden",
+                              pathname === item.href
+                                ? "text-foreground font-medium bg-accent/50 shadow-sm"
+                                : "text-muted-foreground hover:text-foreground hover:bg-accent/30 hover:pl-4"
                             )}
-                          </span>
-                        </div>
-                      );
-
-                      return isExternal ? (
-                        <a
-                          key={itemIndex}
-                          href={item.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {linkContent}
-                        </a>
-                      ) : (
-                        <TransitionLink
-                          key={itemIndex}
-                          href={item.href}
-                          onClick={() => setIsOpen(false)}
-                        >
-                          {linkContent}
-                        </TransitionLink>
-                      );
-                    })}
+                          >
+                            {item.title}
+                          </TransitionLink>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+
+                  {sidebar.map((section, index) => (
+                    <div key={index} className="space-y-2">
+                      <h3 className="px-2 py-1 text-sm font-semibold text-foreground/90">
+                        {section.title}
+                      </h3>
+                      <div className="space-y-1">
+                        {section.items.map((item, itemIndex) => {
+                          const isActive = pathname === item.href;
+                          const isExternal = item.href.startsWith("http");
+
+                          const linkContent = (
+                            <div
+                              className={cn(
+                                "group flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-colors relative overflow-hidden",
+                                isActive
+                                  ? "text-foreground font-medium"
+                                  : "text-muted-foreground hover:text-foreground hover:bg-accent/30 hover:pl-4 transition-all duration-300"
+                              )}
+                            >
+                              {isActive && (
+                                <motion.div
+                                  layoutId="sidebar-active-item"
+                                  className="absolute inset-0 bg-accent/50 border border-border/50 rounded-lg"
+                                  transition={{
+                                    type: "spring",
+                                    stiffness: 300,
+                                    damping: 30
+                                  }}
+                                />
+                              )}
+                              {/* Active Indicator Line */}
+                              {isActive && (
+                                <motion.span 
+                                    layoutId="sidebar-active-line"
+                                    className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-primary rounded-r-full shadow-[0_0_8px_rgba(0,0,0,0.2)] dark:shadow-[0_0_8px_rgba(255,255,255,0.2)]" 
+                                />
+                              )}
+                              <span className="relative z-10 flex items-center gap-2 flex-1">
+                                <span className="flex-1">{item.title}</span>
+                                {item.badge && (
+                                  <span
+                                    className={cn(
+                                      "px-1.5 py-0.5 text-[10px] font-semibold rounded uppercase tracking-wider",
+                                      item.badge.toLowerCase() === "new" && "bg-neutral-950 text-white dark:bg-neutral-100 dark:text-black rounded-full",
+                                      item.badge.toLowerCase() === "updated" && "bg-neutral-500 text-neutral-100 dark:bg-neutral-100 dark:text-neutral-500 rounded-full",
+                                      item.badge.toLowerCase() === "pro" && "bg-yellow-200 text-yellow-600 dark:bg-yellow-200 dark:text-yellow-600 rounded-full",
+                                      !["new", "updated", "pro"].includes(item.badge.toLowerCase()) && "bg-primary/20 text-primary dark:bg-primary/30"
+                                    )}
+                                  >
+                                    {item.badge}
+                                  </span>
+                                )}
+                              </span>
+                            </div>
+                          );
+
+                          return isExternal ? (
+                            <a
+                              key={itemIndex}
+                              href={item.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {linkContent}
+                            </a>
+                          ) : (
+                            <TransitionLink
+                              key={itemIndex}
+                              href={item.href}
+                              onClick={() => setIsOpen(false)}
+                            >
+                              {linkContent}
+                            </TransitionLink>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                  {/* Padding bottom to prevent content from being hidden behind mask */}
+                  <div className="h-10" />
+              </div>
+              
+              {/* Bottom Gradient Mask */}
+              <div className="absolute bottom-0 left-0 right-0 h-24 bg-linear-to-t from-background via-background/60 to-transparent pointer-events-none z-10" />
             </div>
 
             {/* Mobile Social Footer */}

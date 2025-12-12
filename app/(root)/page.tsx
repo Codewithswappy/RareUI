@@ -29,6 +29,9 @@ export default function Home() {
       <HowItWorks />
       <CTASection />
       <Footer />
+      {/* <div className=' flex flex-col items-center justify-center h-screen'>
+        <RetroPixelButton/>
+      </div> */}
     </main> 
   );
 }
