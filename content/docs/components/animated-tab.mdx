@@ -5,6 +5,7 @@ description: A smooth, animated tab component with glassmorphism design and spri
 
 import { AnimatedTabsDemo } from "@/components/rareui/AnimatedTabsDemo";
 import { Preview } from "@/components/mdx/preview";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Preview
   code={`'use client';
@@ -105,16 +106,24 @@ export const AnimatedTabs: React.FC<AnimatedTabsProps> = ({
 
 ## Usage
 
+<Steps>
+<Step>
+### Import the component
+
 ```tsx
 'use client';
-
 import { useState } from 'react';
 import { AnimatedTabs } from '@/components/rareui/AnimatedTab';
+```
+</Step>
 
+<Step>
+### Define tabs and render
+
+```tsx
 const tabs = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
-  { id: 'services', label: 'Services' },
   { id: 'contact', label: 'Contact' },
 ];
 
@@ -130,29 +139,22 @@ export default function MyComponent() {
   );
 }
 ```
+</Step>
+</Steps>
 
 ## Features
 
-- **Smooth Animations**: Spring-based transitions using Framer Motion
-- **Glassmorphism Design**: Beautiful frosted glass effect with backdrop blur
-- **Dark Mode Support**: Fully adaptable to light and dark themes
-- **Hover Effects**: Subtle hover states for better UX
-- **Responsive**: Works seamlessly across all device sizes
-
-## Tab Interface
-
-```tsx
-interface Tab {
-  id: string;
-  label: string;
-}
-```
+- **Smooth Animations**: Fluid spring-based transitions using Framer Motion.
+- **Glassmorphism**: Premium frosted glass effect with backdrop blur.
+- **Dark Mode**: Fully adaptable colors for light and dark themes.
+- **Interactive**: Detailed hover states and tap feedback.
+- **Responsive**: Scales perfectly across different device sizes.
 
 ## Props
 
 | Prop | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `tabs` | `Tab[]` | - | Array of tab objects with `id` and `label` properties. |
+| `tabs` | `Tab[]` | - | Array of tab objects. |
 | `activeTab` | `string` | - | The ID of the currently active tab. |
 | `onChange` | `(id: string) => void` | - | Callback function triggered when a tab is clicked. |
 | `className` | `string` | - | Additional CSS classes for the container. |

@@ -6,6 +6,7 @@ badge: New
 
 import { Preview } from "@/components/mdx/preview";
 import { Book3D } from "@/components/rareui/3D elements/book-3d";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Preview
   code={`"use client"
@@ -375,19 +376,25 @@ export function Book3D({
 
 ## Usage
 
-The Book3D component is **fully customizable** with smart defaults. Use it out-of-the-box or customize every aspect.
-
-### Basic Usage (Default)
+<Steps>
+<Step>
+### Import the component
 
 ```tsx
 import { Book3D } from '@/components/rareui/3d-elements/book-3d';
+```
+</Step>
 
+<Step>
+### Use in your application
+
+```tsx
 export default function App() {
   return <Book3D />;
 }
 ```
-
-This displays a beautiful RareUI-branded book with 6 pre-filled pages about RareUI.
+</Step>
+</Steps>
 
 ### Custom Cover
 
@@ -445,6 +452,30 @@ const customPages = [
   className="shadow-2xl"
 />
 ```
+
+## Features
+
+- **Interactive 3D Animation**: Hover to open, click pages to flip.
+- **Realistic Physics**: Smooth page-turning animations with natural easing.
+- **Bi-directional Navigation**: Click right to advance, click left to go back.
+- **Smart Defaults**: Beautiful RareUI branding when no customization provided.
+- **Fully Customizable**: Override cover, title, and all page content.
+- **TypeScript Support**: Full type safety with defined interfaces.
+- **Responsive**: Configurable dimensions to fit your layout.
+
+## Interactions
+
+1. **Hover** → Book opens (cover flips to the left)
+2. **Click right page** → Flip to next page
+3. **Click left page** → Flip back to previous page
+4. **Mouse leave** → Book closes automatically
+
+## Tips
+
+- Keep `content` text concise (50-100 words) for best readability
+- Use high-quality images with good contrast for the cover
+- Limit pages to 4-6 for optimal user experience
+- The book resets to page 1 when closed
 
 ## Props
 
@@ -509,27 +540,3 @@ You can create different types of pages:
   image: "/image.jpg"
 }
 ```
-
-## Features
-
-- **Interactive 3D Animation**: Hover to open, click pages to flip
-- **Realistic Physics**: Smooth page-turning animations with natural easing
-- **Bi-directional Navigation**: Click right to advance, click left to go back
-- **Smart Defaults**: Beautiful RareUI branding when no customization provided
-- **Fully Customizable**: Override cover, title, and all page content
-- **TypeScript Support**: Full type safety with defined interfaces
-- **Responsive**: Configurable dimensions to fit your layout
-
-## Interactions
-
-1. **Hover** → Book opens (cover flips to the left)
-2. **Click right page** → Flip to next page
-3. **Click left page** → Flip back to previous page
-4. **Mouse leave** → Book closes automatically
-
-## Tips
-
-- Keep `content` text concise (50-100 words) for best readability
-- Use high-quality images with good contrast for the cover
-- Limit pages to 4-6 for optimal user experience
-- The book resets to page 1 when closed

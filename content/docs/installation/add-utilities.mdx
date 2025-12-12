@@ -1,75 +1,54 @@
 ---
 title: Add Utilities
-description: Commonly used utilities for using RareUI
+description: Essential utility functions for RareUI components.
 ---
 
-## Install dependencies
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+RareUI components rely on a few common utility functions. If you used the `init` command, these are likely already set up.
+
+<Steps>
+<Step>
+### Install dependencies
+
+We use `clsx` and `tailwind-merge` for conditional class merging.
 
 ```bash
-npm i motion clsx tailwind-merge
+npm install clsx tailwind-merge
 ```
+</Step>
 
----
+<Step>
+### Create utility file
 
-## Add util file
+Create a file at `lib/utils.ts` (or your preferred location) and add the following code:
 
-Create a `lib/utils.ts` file with the cn utility function:
-
-```ts
-import { ClassValue, clsx } from "clsx";
+```ts title="lib/utils.ts"
+import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
- 
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 ```
+</Step>
+</Steps>
 
----
+## Animation Dependencies
 
-## Next.js 15 and React 19 Framer Motion Fix
+RareUI uses `framer-motion` (or `motion`) for animations.
 
-If you're using Next.js 15 and React 19, you'll need to make the following changes in order to use framer motion (which is now motion), since framer motion is not compatible with React 19 yet.
+### Next.js 15 / React 19 Note
 
-### Using framer-motion
+If you are using the latest React 19, you may need to override the peer dependency versions until `framer-motion` is fully updated, or switch to the new `motion` package.
 
-```json
+```json title="package.json"
 {
-  "dependencies": {
-    "framer-motion": "^12.0.0-alpha.1",
-    "next": "15.0.3",
-    "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106",
-    "tailwind-merge": "^2.5.5"
-  },
   "overrides": {
     "framer-motion": {
-      "react": "19.0.0-rc-66855b96-20241106",
-      "react-dom": "19.0.0-rc-66855b96-20241106"
+      "react": "19.0.0-rc",
+      "react-dom": "19.0.0-rc"
     }
   }
 }
 ```
-
-### Using motion (recommended)
-
-If you're using motion instead of framer-motion, you can make the following changes:
-
-```json
-{
-  "dependencies": {
-    "motion": "^12.0.0-alpha.1",
-    "next": "15.0.3",
-    "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106",
-    "tailwind-merge": "^2.5.5"
-  },
-  "overrides": {
-    "motion": {
-      "react": "19.0.0-rc-66855b96-20241106",
-      "react-dom": "19.0.0-rc-66855b96-20241106"
-    }
-  }
-}
-```
-
-> **Note**: The `overrides` field ensures that motion/framer-motion uses the correct React version to avoid compatibility issues.

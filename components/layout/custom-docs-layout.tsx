@@ -8,7 +8,8 @@ import { cn } from "@/lib/utils";
 import { CustomSearchBar } from "@/components/landing/CustomSearchBar";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { DraggableTwitterBadge } from "@/components/layout/draggable-twitter-badge";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
+import { ChevronRight } from "lucide-react";
 
 interface SidebarItem {
   title: string;
@@ -24,6 +25,107 @@ interface SidebarSection {
 interface CustomDocsLayoutProps {
   children: ReactNode;
   sidebar: SidebarSection[];
+}
+
+function CollapsibleSection({ 
+  section, 
+  pathname, 
+  onLinkClick 
+}: { 
+  section: SidebarSection; 
+  pathname: string;
+  onLinkClick: () => void;
+}) {
+  const isActiveSection = section.items.some(item => pathname === item.href);
+  const isDefaultOpen = ["Getting Started", "Installation"].includes(section.title);
+  const [isOpen, setIsOpen] = useState(isActiveSection || isDefaultOpen);
+
+  useEffect(() => {
+    if (isActiveSection) setIsOpen(true);
+  }, [isActiveSection]);
+
+  return (
+    <div className="space-y-1">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={cn(
+          "w-full flex items-center justify-between px-2 py-1.5 text-sm font-semibold transition-colors group",
+          isOpen ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+        )}
+      >
+        <span>{section.title}</span>
+        <ChevronRight 
+          className={cn(
+            "w-4 h-4 transition-transform duration-200 opacity-50 group-hover:opacity-100",
+            isOpen && "rotate-90"
+          )} 
+        />
+      </button>
+
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <div className="space-y-0.5 pb-2">
+              {section.items.map((item, itemIndex) => {
+                const isActive = pathname === item.href;
+                const isExternal = item.href.startsWith("http");
+
+                const linkContent = (
+                  <div
+                    className={cn(
+                      "group flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-colors relative overflow-hidden pl-6",
+                      isActive
+                        ? "text-foreground font-medium bg-accent/50"
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent/30 transition-all duration-300"
+                    )}
+                  >
+                    {isActive && (
+                      <motion.span 
+                          layoutId="sidebar-active-line"
+                          className="absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-6 bg-red-500 rounded-r-full shadow-[0_0_8px_rgba(239,68,68,0.4)]" 
+                      />
+                    )}
+                    <span className="relative z-10 flex items-center gap-2 flex-1">
+                      <span className="flex-1 truncate">{item.title}</span>
+                      {item.badge && (
+                        <span
+                          className={cn(
+                            "px-1.5 py-0.5 text-[10px] font-semibold rounded uppercase tracking-wider",
+                            item.badge.toLowerCase() === "new" && "bg-neutral-950 text-white dark:bg-neutral-100 dark:text-black rounded-full",
+                            item.badge.toLowerCase() === "updated" && "bg-neutral-500 text-neutral-100 dark:bg-neutral-100 dark:text-neutral-500 rounded-full",
+                            item.badge.toLowerCase() === "pro" && "bg-yellow-200 text-yellow-600 dark:bg-yellow-200 dark:text-yellow-600 rounded-full",
+                            !["new", "updated", "pro"].includes(item.badge.toLowerCase()) && "bg-primary/20 text-primary dark:bg-primary/30"
+                          )}
+                        >
+                          {item.badge}
+                        </span>
+                      )}
+                    </span>
+                  </div>
+                );
+
+                return isExternal ? (
+                  <a key={itemIndex} href={item.href} target="_blank" rel="noopener noreferrer">
+                    {linkContent}
+                  </a>
+                ) : (
+                  <TransitionLink key={itemIndex} href={item.href} onClick={onLinkClick}>
+                    {linkContent}
+                  </TransitionLink>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
 }
 
 export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
@@ -53,7 +155,7 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
     <div className="h-screen overflow-hidden overflow-x-hidden">
 
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b border-black/5 dark:border-white/10 bg-background/80 backdrop-blur-xl">
       
         <div className="flex h-14 items-center justify-between px-4">
           {/* Left: Logo & Nav Links */}
@@ -150,10 +252,10 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
             "inset-x-0 bottom-0 top-auto h-[85vh] w-full rounded-t-[20px] border-t shadow-2xl md:shadow-none md:border-t-0 md:rounded-none",
             isOpen ? "translate-y-0" : "translate-y-full",
             // Desktop: Normal Sidebar logic
-            "md:inset-y-0 md:left-0 md:top-0 md:h-full md:w-72 md:translate-y-0 md:border-r"
+            "md:inset-y-0 md:left-0 md:top-0 md:h-full md:w-60 md:translate-y-0"
           )}
         >
-          <div className="h-full flex flex-col bg-background/95 backdrop-blur-xl md:border-r border-border rounded-t-[20px] md:rounded-none overflow-hidden">
+          <div className="h-full flex flex-col bg-background/95 backdrop-blur-xl md:border-r border-black/5 dark:border-white/10 rounded-t-[20px] md:rounded-none overflow-hidden">
             {/* Scrollable Content Wrapper */}
             <div className="flex-1 relative min-h-0">
               <div className="h-full overflow-y-auto p-4 space-y-6 scrollbar-thin scrollbar-thumb-muted-foreground/20 hover:scrollbar-thumb-muted-foreground/40 scrollbar-track-transparent">
@@ -197,82 +299,12 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
                   </div>
 
                   {sidebar.map((section, index) => (
-                    <div key={index} className="space-y-2">
-                      <h3 className="px-2 py-1 text-sm font-semibold text-foreground/90">
-                        {section.title}
-                      </h3>
-                      <div className="space-y-1">
-                        {section.items.map((item, itemIndex) => {
-                          const isActive = pathname === item.href;
-                          const isExternal = item.href.startsWith("http");
-
-                          const linkContent = (
-                            <div
-                              className={cn(
-                                "group flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-colors relative overflow-hidden",
-                                isActive
-                                  ? "text-foreground font-medium"
-                                  : "text-muted-foreground hover:text-foreground hover:bg-accent/30 hover:pl-4 transition-all duration-300"
-                              )}
-                            >
-                              {isActive && (
-                                <motion.div
-                                  layoutId="sidebar-active-item"
-                                  className="absolute inset-0 bg-accent/50 border border-border/50 rounded-lg"
-                                  transition={{
-                                    type: "spring",
-                                    stiffness: 300,
-                                    damping: 30
-                                  }}
-                                />
-                              )}
-                              {/* Active Indicator Line */}
-                              {isActive && (
-                                <motion.span 
-                                    layoutId="sidebar-active-line"
-                                    className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-primary rounded-r-full shadow-[0_0_8px_rgba(0,0,0,0.2)] dark:shadow-[0_0_8px_rgba(255,255,255,0.2)]" 
-                                />
-                              )}
-                              <span className="relative z-10 flex items-center gap-2 flex-1">
-                                <span className="flex-1">{item.title}</span>
-                                {item.badge && (
-                                  <span
-                                    className={cn(
-                                      "px-1.5 py-0.5 text-[10px] font-semibold rounded uppercase tracking-wider",
-                                      item.badge.toLowerCase() === "new" && "bg-neutral-950 text-white dark:bg-neutral-100 dark:text-black rounded-full",
-                                      item.badge.toLowerCase() === "updated" && "bg-neutral-500 text-neutral-100 dark:bg-neutral-100 dark:text-neutral-500 rounded-full",
-                                      item.badge.toLowerCase() === "pro" && "bg-yellow-200 text-yellow-600 dark:bg-yellow-200 dark:text-yellow-600 rounded-full",
-                                      !["new", "updated", "pro"].includes(item.badge.toLowerCase()) && "bg-primary/20 text-primary dark:bg-primary/30"
-                                    )}
-                                  >
-                                    {item.badge}
-                                  </span>
-                                )}
-                              </span>
-                            </div>
-                          );
-
-                          return isExternal ? (
-                            <a
-                              key={itemIndex}
-                              href={item.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {linkContent}
-                            </a>
-                          ) : (
-                            <TransitionLink
-                              key={itemIndex}
-                              href={item.href}
-                              onClick={() => setIsOpen(false)}
-                            >
-                              {linkContent}
-                            </TransitionLink>
-                          );
-                        })}
-                      </div>
-                    </div>
+                    <CollapsibleSection 
+                      key={index} 
+                      section={section} 
+                      pathname={pathname} 
+                      onLinkClick={() => setIsOpen(false)} 
+                    />
                   ))}
                   {/* Padding bottom to prevent content from being hidden behind mask */}
                   <div className="h-10" />
@@ -304,7 +336,7 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
 
         {/* Main Content */}
         <main className="flex-1 min-w-0 overflow-y-auto overflow-x-hidden touch-pan-y">
-          <div className="container mx-auto px-4 py-8 max-w-4xl animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
+          <div className="container mx-auto px-6 md:px-16 py-12 md:py-20 max-w-6xl animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
             {children}
           </div>
         </main>

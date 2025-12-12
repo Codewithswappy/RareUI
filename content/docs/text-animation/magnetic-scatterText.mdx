@@ -6,6 +6,7 @@ description: An interactive text animation that scatters on hover with magnetic 
 import { MagneticScatterText } from "@/components/rareui/Text Animation/MagneticScatterText";
 import { Preview } from "@/components/mdx/preview";
 import { DemoWithRefresh } from "@/components/mdx/demo-with-refresh";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Preview
   code={`"use client"
@@ -118,19 +119,31 @@ export const MagneticScatterText: React.FC<MagneticScatterTextProps> = ({ text, 
 
 ## Usage
 
+<Steps>
+<Step>
+### Import the component
+
 ```tsx
 import { MagneticScatterText } from "@/components/rareui/Text Animation/MagneticScatterText";
+```
+</Step>
 
+<Step>
+### Use in your application
+
+```tsx
 export default function MyComponent() {
   return (
     <MagneticScatterText text="Your Text" className="text-6xl" />
   );
 }
 ```
+</Step>
+</Steps>
 
 ## Examples
 
-### With Trigger Control
+### Controlled Animation
 
 ```tsx
 "use client";
@@ -141,15 +154,18 @@ export default function ControlledAnimation() {
   const [show, setShow] = useState(false);
 
   return (
-    <div>
-      <button onClick={() => setShow(!show)}>
+    <div className="flex flex-col items-center gap-4">
+      <button 
+        onClick={() => setShow(!show)} 
+        className="px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium"
+      >
         Toggle Animation
       </button>
       
       <MagneticScatterText 
-        text="Click to animate" 
+        text="Click button" 
         trigger={show}
-        className="text-6xl text-foreground"
+        className="text-4xl text-foreground"
       />
     </div>
   );
@@ -161,22 +177,14 @@ export default function ControlledAnimation() {
 ```tsx
 <MagneticScatterText 
   text="Magnetic" 
-  className="text-9xl font-bold text-blue-500"
+  className="text-8xl font-black text-blue-500 tracking-tighter"
 />
 ```
-
-## Features
-
-- **Magnetic Spring Animation**: Letters gather from scattered positions with spring physics
-- **Interactive Hover**: Slight scatter effect when hovering over the text
-- **Deterministic Random**: Consistent scatter pattern based on letter position
-- **Smooth Transitions**: Spring-based animations for natural movement
-- **Fully Customizable**: Control trigger state and styling
 
 ## Props
 
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `text` | `string` | **Required** | The text content to animate |
-| `className` | `string` | `undefined` | Additional styles for the container |
-| `trigger` | `boolean` | `true` | Controls animation state (true = visible, false = hidden) |
+| :--- | :--- | :--- | :--- |
+| `text` | `string` | **Required** | The text content to animate. |
+| `trigger` | `boolean` | `true` | Controls animation state (true = visible, false = hidden). |
+| `className` | `string` | `-` | Additional styles for the container. |

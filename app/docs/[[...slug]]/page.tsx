@@ -21,20 +21,31 @@ export default async function Page(props: PageProps) {
   const MDX = page.data.body;
 
   return (
-    <article className="prose prose-invert dark:prose-invert max-w-none">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">{page.data.title}</h1>
-        {page.data.description && (
-          <p className="text-lg text-muted-foreground">{page.data.description}</p>
-        )}
-      </header>
-      <div className="text-foreground">
-        <MDX />
-      </div>
+    <div className="flex justify-center">
+      <article className="prose prose-zinc dark:prose-invert max-w-4xl min-w-0 flex-1">
+        <header className="mb-8 not-prose border-b border-border pb-8">
+          <p className="text-sm text-muted-foreground mb-2 flex items-center gap-2">
+            Docs <span className="text-muted-foreground/40">/</span> {page.data.title}
+          </p>
+          <h1 className="text-4xl font-extrabold tracking-tight text-foreground mb-4 scroll-m-20">
+            {page.data.title}
+          </h1>
+          {page.data.description && (
+            <p className="text-xl text-muted-foreground leading-relaxed text-balance">
+              {page.data.description}
+            </p>
+          )}
+        </header>
+        
+        <div className="text-foreground">
+          <MDX />
+        </div>
 
-      <DocsPager currentSlug={page.slugs} />
-    </article>
+        <DocsPager currentSlug={page.slugs} />
+      </article>
+    </div>
   );
+
 }
 
 function DocsPager({ currentSlug }: { currentSlug: string[] }) {
@@ -110,5 +121,17 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   return {
     title: page.data.title,
     description: page.data.description,
+    openGraph: {
+      type: "article",
+      title: page.data.title,
+      description: page.data.description,
+      // Default to global OG image if page specific one isn't defined
+      // If you have dynamic OG generation, you would point to that endpoint here
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: page.data.title,
+      description: page.data.description,
+    }
   };
 }

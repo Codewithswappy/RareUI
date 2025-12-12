@@ -1,7 +1,11 @@
-'use client'
-
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "Pricing | RareUI",
+  description: "Simple, transparent pricing for lifetime access to RareUI components."
+}
 
 export default function PricingPage() {
   return (

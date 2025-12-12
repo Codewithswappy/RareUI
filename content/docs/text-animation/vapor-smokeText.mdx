@@ -6,6 +6,7 @@ description: A smoky text animation with blur and spring effects that creates an
 import { VaporSmokeText } from "@/components/rareui/Text Animation/VaporSmokeText";
 import { Preview } from "@/components/mdx/preview";
 import { DemoWithRefresh } from "@/components/mdx/demo-with-refresh";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Preview
   code={`"use client";
@@ -92,15 +93,27 @@ export const VaporSmokeText: React.FC<VaporSmokeTextProps> = ({
 
 ## Usage
 
+<Steps>
+<Step>
+### Import the component
+
 ```tsx
 import { VaporSmokeText } from "@/components/rareui/Text Animation/VaporSmokeText";
+```
+</Step>
 
+<Step>
+### Use in your application
+
+```tsx
 export default function MyComponent() {
   return (
     <VaporSmokeText text="Your Text" className="text-6xl text-foreground" />
   );
 }
 ```
+</Step>
+</Steps>
 
 ## Examples
 

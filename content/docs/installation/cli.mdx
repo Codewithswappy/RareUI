@@ -1,15 +1,20 @@
 ---
 title: CLI
-description: Use the CLI to add components to your project.
+description: Use the RareUI CLI to manage components.
 ---
 
+import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 The RareUI CLI is the fastest way to add components to your project. It handles dependencies, configuration, and placement for you.
 
-## Init
+## Commands
 
-Run the `init` command to initialize RareUI in your project. This will create a `components.json` file and configure your project for the best experience.
+<Steps>
+<Step>
+### init
+
+Initialize RareUI in your project. This creates a `components.json` file and configures aliases.
 
 <Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
   <Tab value="npm">
@@ -33,165 +38,46 @@ Run the `init` command to initialize RareUI in your project. This will create a 
     ```
   </Tab>
 </Tabs>
+</Step>
 
-<details>
-<summary>💡 Which command should I use?</summary>
+<Step>
+### add
 
-**Use the package manager you already have installed!** Most users have npm (comes with Node.js).
+Add a specific component to your project. This downloads the source code to your `components/rareui` directory.
 
-Not sure which you have? Run these in your terminal:
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+    ```bash
+    npx rareui@latest add [component-name]
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm dlx rareui@latest add [component-name]
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn dlx rareui@latest add [component-name]
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bunx rareui@latest add [component-name]
+    ```
+  </Tab>
+</Tabs>
+
+**Example:**
 ```bash
-npm --version    # ✅ Most common (comes with Node.js)
-pnpm --version   # Fast alternative
-yarn --version   # Classic choice
-bun --version    # Fastest runtime
+npx rareui@latest add liquid-button
 ```
+</Step>
 
-If you get a "command not found" error, that package manager isn't installed. Just use **npm** - it's installed by default with Node.js!
+<Step>
+### diff
 
-**Common Error:** `pnpm is not recognized` → Use `npm` instead:
-```bash
-npx rareui@latest init
-```
-</details>
-
-
-## Add
-
-Use the `add` command to add components to your project. This command downloads the component code and places it in your `components` directory, installing any necessary dependencies automatically.
-
-<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
-  <Tab value="npm">
-    ```bash
-    npx rareui@latest add [component]
-    ```
-  </Tab>
-  <Tab value="pnpm">
-    ```bash
-    pnpm dlx rareui@latest add [component]
-    ```
-  </Tab>
-  <Tab value="yarn">
-    ```bash
-    yarn dlx rareui@latest add [component]
-    ```
-  </Tab>
-  <Tab value="bun">
-    ```bash
-    bunx rareui@latest add [component]
-    ```
-  </Tab>
-</Tabs>
-
-### Examples
-
-Add a single component (supports both PascalCase and kebab-case):
-
-<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
-  <Tab value="npm">
-    ```bash
-    npx rareui@latest add particle-card
-    npx rareui@latest add LiquidButton
-    ```
-  </Tab>
-  <Tab value="pnpm">
-    ```bash
-    pnpm dlx rareui@latest add particle-card
-    pnpm dlx rareui@latest add LiquidButton
-    ```
-  </Tab>
-  <Tab value="yarn">
-    ```bash
-    yarn dlx rareui@latest add particle-card
-    yarn dlx rareui@latest add LiquidButton
-    ```
-  </Tab>
-  <Tab value="bun">
-    ```bash
-    bunx rareui@latest add particle-card
-    bunx rareui@latest add LiquidButton
-    ```
-  </Tab>
-</Tabs>
-
-Add multiple components at once:
-
-<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
-  <Tab value="npm">
-    ```bash
-    npx rareui@latest add particle-card liquid-button soft-button
-    ```
-  </Tab>
-  <Tab value="pnpm">
-    ```bash
-    pnpm dlx rareui@latest add particle-card liquid-button soft-button
-    ```
-  </Tab>
-  <Tab value="yarn">
-    ```bash
-    yarn dlx rareui@latest add particle-card liquid-button soft-button
-    ```
-  </Tab>
-  <Tab value="bun">
-    ```bash
-    bunx rareui@latest add particle-card liquid-button soft-button
-    ```
-  </Tab>
-</Tabs>
-
-Install all available components:
-
-<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
-  <Tab value="npm">
-    ```bash
-    npx rareui@latest add .
-    ```
-  </Tab>
-  <Tab value="pnpm">
-    ```bash
-    pnpm dlx rareui@latest add .
-    ```
-  </Tab>
-  <Tab value="yarn">
-    ```bash
-    yarn dlx rareui@latest add .
-    ```
-  </Tab>
-  <Tab value="bun">
-    ```bash
-    bunx rareui@latest add .
-    ```
-  </Tab>
-</Tabs>
-
-View the list of available components:
-
-<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
-  <Tab value="npm">
-    ```bash
-    npx rareui@latest add
-    ```
-  </Tab>
-  <Tab value="pnpm">
-    ```bash
-    pnpm dlx rareui@latest add
-    ```
-  </Tab>
-  <Tab value="yarn">
-    ```bash
-    yarn dlx rareui@latest add
-    ```
-  </Tab>
-  <Tab value="bun">
-    ```bash
-    bunx rareui@latest add
-    ```
-  </Tab>
-</Tabs>
-
-## Diff
-
-Check for updates to your installed components and update them if needed.
+Check for differences between your local components and the registry versions.
 
 <Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
   <Tab value="npm">
@@ -215,66 +101,16 @@ Check for updates to your installed components and update them if needed.
     ```
   </Tab>
 </Tabs>
-
-### Examples
-
-Check a specific component:
-
-<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
-  <Tab value="npm">
-    ```bash
-    npx rareui@latest diff liquid-button
-    ```
-  </Tab>
-  <Tab value="pnpm">
-    ```bash
-    pnpm dlx rareui@latest diff liquid-button
-    ```
-  </Tab>
-  <Tab value="yarn">
-    ```bash
-    yarn dlx rareui@latest diff liquid-button
-    ```
-  </Tab>
-  <Tab value="bun">
-    ```bash
-    bunx rareui@latest diff liquid-button
-    ```
-  </Tab>
-</Tabs>
-
-Update without confirmation:
-
-<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
-  <Tab value="npm">
-    ```bash
-    npx rareui@latest diff -y
-    ```
-  </Tab>
-  <Tab value="pnpm">
-    ```bash
-    pnpm dlx rareui@latest diff -y
-    ```
-  </Tab>
-  <Tab value="yarn">
-    ```bash
-    yarn dlx rareui@latest diff -y
-    ```
-  </Tab>
-  <Tab value="bun">
-    ```bash
-    bunx rareui@latest diff -y
-    ```
-  </Tab>
-</Tabs>
+</Step>
+</Steps>
 
 ## Options
 
 | Option | Description |
 | :--- | :--- |
-| `-y`, `--yes` | Skip confirmation prompt. |
+| `-y`, `--yes` | Skip confirmation prompts. |
 | `-o`, `--overwrite` | Overwrite existing files. |
-| `-c`, `--cwd <cwd>` | The working directory. |
+| `-c`, `--cwd <cwd>` | The current working directory. |
 | `-p`, `--path <path>` | The path to install the component to. |
 | `-h`, `--help` | Display help for command. |
 
@@ -283,78 +119,11 @@ Update without confirmation:
 <details>
 <summary>Does it work with other frameworks?</summary>
 
-Currently, the CLI is optimized for Next.js and React projects using Tailwind CSS. Support for other frameworks is planned.
+Currently, the CLI is optimized for React/Next.js and Tailwind CSS. Support for other frameworks is planned.
 </details>
 
 <details>
 <summary>Can I use it without the CLI?</summary>
 
-Yes! You can manually copy and paste the code from the documentation into your project. The CLI just automates this process.
-</details>
-
-<details>
-<summary>Can I use both kebab-case and PascalCase for component names?</summary>
-
-Yes! The CLI supports both formats:
-- `npx rareui add liquid-button` (kebab-case)
-- `npx rareui add LiquidButton` (PascalCase)
-
-Both will install the same component. Use whichever format you prefer!
-</details>
-
-<details>
-<summary>How do I know if my components need updates?</summary>
-
-Run the `diff` command to check for updates:
-
-```bash
-npx rareui@latest diff
-```
-
-This will show you which components have updates available and what changed.
-</details>
-
-<details>
-<summary>Where are components installed?</summary>
-
-Components are installed to `components/rareui/` in your project directory. For example:
-- Buttons: `components/rareui/buttons/`
-- Cards: `components/rareui/cards/`
-- Loaders: `components/rareui/loaders/`
-</details>
-
-<details>
-<summary>What if I want to customize a component?</summary>
-
-All components are installed as source code in your project, so you can customize them freely! Just edit the files in `components/rareui/` after installation.
-</details>
-
-<details>
-<summary>I'm getting "pnpm/yarn/bun is not recognized" error</summary>
-
-This means the package manager isn't installed on your system. **Solution:** Use npm instead (comes with Node.js):
-
-```bash
-npx rareui@latest init
-npx rareui@latest add liquid-button
-```
-
-**Want to install that package manager?**
-- **pnpm**: `npm install -g pnpm`
-- **yarn**: `npm install -g yarn`  
-- **bun**: Visit [bun.sh](https://bun.sh) for installation
-
-Most users just use npm - it works perfectly! 
-</details>
-
-<details>
-<summary>Which package manager should I use?</summary>
-
-All package managers work perfectly with RareUI:
-- **npm**: Built-in with Node.js, most widely used
-- **pnpm**: Faster, more disk-efficient
-- **yarn**: Great workspace support
-- **bun**: Fastest JavaScript runtime
-
-Choose the one you prefer or the one your project already uses!
+Yes! The CLI is purely for convenience. You can always manually copy the code from the documentation.
 </details>

@@ -5,6 +5,7 @@ description: A button with a liquid gooey effect on hover.
 
 import LiquidButton from "@/components/rareui/LiquidButton";
 import { Preview } from "@/components/mdx/preview";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Preview
   code={`'use client'
@@ -160,15 +161,27 @@ function Drop({
 
 ## Usage
 
+<Steps>
+<Step>
+### Import the component
+
 ```tsx
 import LiquidButton from '@/components/rareui/LiquidButton';
+```
+</Step>
 
+<Step>
+### Use in your application
+
+```tsx
 export default function App() {
   return (
     <LiquidButton text="Hover me" />
   );
 }
 ```
+</Step>
+</Steps>
 
 ## Examples
 

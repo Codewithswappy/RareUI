@@ -5,6 +5,7 @@ description: A 3D neumorphic button with realistic shadows and press effects.
 
 import { Preview } from "@/components/mdx/preview";
 import { Neumorphism3DButton } from "@/components/rareui/neumorphism3DButton";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Preview
   code={`"use client"
@@ -118,9 +119,19 @@ export const Neumorphism3DButton = ({ children = "Click Me", onClick, disabled }
 
 ## Usage
 
+<Steps>
+<Step>
+### Import the component
+
 ```tsx
 import { Neumorphism3DButton } from '@/components/rareui/neumorphism3DButton';
+```
+</Step>
 
+<Step>
+### Use in your application
+
+```tsx
 export default function App() {
   return (
     <Neumorphism3DButton onClick={() => alert('Clicked!')}>
@@ -129,6 +140,15 @@ export default function App() {
   );
 }
 ```
+</Step>
+</Steps>
+
+## Features
+
+- **Realistic 3D Depth**: Multiple box-shadow layers create convincingly substantial depth.
+- **Interactive Press State**: Detailed inset shadows and scaling on click relative to cursor.
+- **Premium Text Effects**: Gradient text with clip and text-shadow for a metallic look.
+- **Complex Neumorphism**: Advanced implementation of light and shadow physics.
 
 ## Props
 

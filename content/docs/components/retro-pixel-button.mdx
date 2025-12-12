@@ -6,6 +6,7 @@ badge: New
 
 import { Preview } from "@/components/mdx/preview";
 import RetroPixelButton from "@/components/rareui/retro-pixel-button";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Preview
   code={`"use client";
@@ -115,9 +116,19 @@ export default function RetroPixelButton({
 
 ## Usage
 
+<Steps>
+<Step>
+### Import the component
+
 ```tsx
 import RetroPixelButton from '@/components/rareui/retro-pixel-button';
+```
+</Step>
 
+<Step>
+### Use in your application
+
+```tsx
 export default function App() {
   return (
     <RetroPixelButton onClick={() => alert('Clicked!')}>
@@ -126,52 +137,23 @@ export default function App() {
   );
 }
 ```
-
-## Examples
-
-### Custom Colors
-
-```tsx
-<RetroPixelButton 
-  pixelColor="#00ff00"
-  baseColor="#1a1a1a"
-  textColor="#ffffff"
->
-  CUSTOM COLORS
-</RetroPixelButton>
-```
-
-### Different Sizes
-
-```tsx
-<RetroPixelButton className="h-12 px-6 text-sm">
-  SMALL BUTTON
-</RetroPixelButton>
-
-<RetroPixelButton className="h-20 px-12 text-xl">
-  LARGE BUTTON
-</RetroPixelButton>
-```
+</Step>
+</Steps>
 
 ## Features
 
-- **Retro Pixel Aesthetic**: Font-mono styling with pixelated arrow icon
-- **Sliding Animation**: Smooth spring-based expansion of the pixel block on hover
-- **Icon Rotation**: Pixelated arrow rotates 180° during hover state
-- **Text Morphing**: Text subtly blurs and shifts during transition for a glitch-like effect
-- **Customizable Colors**: Control pixel block, base, and text colors independently
-- **Tap Feedback**: Subtle scale-down effect on click for tactile response
-- **Theme Support**: Works seamlessly with light and dark modes
-- **Framer Motion**: Powered by smooth, physics-based animations
-- **Fully Type-Safe**: Complete TypeScript support with proper prop types
+- **Retro Aesthetic**: Font-mono styling with pixelated arrow icon.
+- **Sliding Animation**: Smooth spring-based expansion of the pixel block on hover.
+- **Icon Rotation**: Pixelated arrow rotates 180° during the hover transition.
+- **Text Morphing**: Text subtly blurs and shifts with a glitch-like effect.
+- **Fully Customizable**: Control pixel block, base, and text colors independently.
 
 ## Props
 
 | Prop | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `children` | `React.ReactNode` | `"TRY FRAMER FOR FREE"` | The button text content. |
-| `className` | `string` | `-` | Additional CSS classes for the button. |
-| `pixelColor` | `string` | `"orange"` | Color of the sliding pixel block (CSS color value). |
-| `baseColor` | `string` | `-` | Optional background color override for the button. |
+| `children` | `React.ReactNode` | `"TRY..."` | The button text content. |
+| `pixelColor` | `string` | `"orange"` | Color of the sliding pixel block. |
+| `baseColor` | `string` | `-` | Optional background color override. |
 | `textColor` | `string` | `-` | Optional text color override. |
-| `...props` | `React.ButtonHTMLAttributes<HTMLButtonElement>` | `-` | All standard button HTML attributes (onClick, disabled, etc.). |
+| `className` | `string` | `-` | Additional CSS classes. |

@@ -5,6 +5,7 @@ description: An interactive card with particle explosion effect on hover, perfec
 
 import { Preview } from "@/components/mdx/preview";
 import ParticleCard from "@/components/rareui/ParticleCard";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Preview
   code={`'use client'
@@ -51,15 +52,27 @@ interface ParticleCardProps {
 
 ## Usage
 
+<Steps>
+<Step>
+### Import the component
+
 ```tsx
 import ParticleCard from '@/components/rareui/ParticleCard';
+```
+</Step>
 
+<Step>
+### Use in your application
+
+```tsx
 export default function App() {
   return (
     <ParticleCard />
   );
 }
 ```
+</Step>
+</Steps>
 
 ## Examples
 
@@ -106,12 +119,12 @@ export default function Team() {
 
 ## Features
 
-- **Particle Explosion Effect**: Image breaks into animated particles on hover
-- **Smooth Transitions**: Framer Motion powered animations
-- **Dual-Sided Content**: Front shows preview, back shows detailed info
-- **Fully Customizable**: Control particle density, content, and styling
-- **Responsive Design**: Adapts to different screen sizes
-- **Performance Optimized**: Uses useMemo for particle calculations
+- **Particle Explosion Effect**: Image breaks into animated particles on hover.
+- **Smooth Transitions**: Framer Motion powered animations.
+- **Dual-Sided Content**: Front shows preview, back shows detailed info.
+- **Fully Customizable**: Control particle density, content, and styling.
+- **Responsive Design**: Adapts to different screen sizes.
+- **Performance Optimized**: Uses useMemo for particle calculations.
 
 ## Customization
 

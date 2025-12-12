@@ -5,6 +5,7 @@ description: A high-end, interactive profile card with 3D tilt, flip animation, 
 
 import { Preview } from "@/components/mdx/preview";
 import PremiumProfileCard from "@/components/rareui/premiumProfileCard";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Preview
   code={`"use client";
@@ -69,25 +70,37 @@ export default PremiumProfileCard;`}
 
 ## Usage
 
+<Steps>
+<Step>
+### Import the component
+
 ```tsx
 import PremiumProfileCard from '@/components/rareui/premiumProfileCard';
+```
+</Step>
 
+<Step>
+### Use in your application
+
+```tsx
 export default function App() {
   return (
     <PremiumProfileCard />
   );
 }
 ```
+</Step>
+</Steps>
 
 ## Features
 
-- **3D Tilt Effect**: Smooth, mouse-tracking rotation with configurable sensitivity
-- **Flip Animation**: Click to reveal card back with contact information
-- **Dark Mode Support**: Seamlessly adapts to light and dark themes
-- **Premium Animations**: Glowing borders, sheen effects, and micro-interactions
-- **Fully Self-Contained**: All CSS included inline - no global styles needed
-- **Responsive Design**: Optimized for all screen sizes
-- **Interactive Elements**: Hover states on skills, contact rows, and buttons
+- **3D Tilt Effect**: Smooth, mouse-tracking rotation with configurable sensitivity.
+- **Flip Animation**: Click to reveal card back with contact information.
+- **Dark Mode Support**: Seamlessly adapts to light and dark themes.
+- **Premium Animations**: Glowing borders, sheen effects, and micro-interactions.
+- **Fully Self-Contained**: All CSS included inline - no global styles needed.
+- **Responsive Design**: Optimized for all screen sizes.
+- **Interactive Elements**: Hover states on skills, contact rows, and buttons.
 
 ## Customization
 
@@ -131,10 +144,10 @@ Replace the demo content with your own:
 
 ## Notes
 
-- The component is fully self-contained with inline CSS for animations
-- No global CSS modifications required
-- Works out of the box after CLI installation
-- All images use Unsplash URLs - replace with your own in production
+- The component is fully self-contained with inline CSS for animations.
+- No global CSS modifications required.
+- Works out of the box after CLI installation.
+- All images use Unsplash URLs - replace with your own in production.
 
 ## Props
 

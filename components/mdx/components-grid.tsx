@@ -2,85 +2,65 @@
 
 import Link from "next/link";
 import { sidebarData } from "@/lib/sidebar-data";
-import LiquidButton from "@/components/rareui/LiquidButton";
-import SoftButton from "@/components/rareui/SoftButton";
-import { GlassShimmerButton } from "@/components/rareui/glass-shimmer-button";
-import { Neumorphism3DButton } from "@/components/rareui/neumorphism3DButton";
-import PremiumButton from "@/components/rareui/premium-button";
-import ParticleCard from "@/components/rareui/ParticleCard";
-import PremiumProfileCard from "@/components/rareui/premiumProfileCard";
-import { AnimatedTabsDemo } from "@/components/rareui/AnimatedTabsDemo";
-import { VaporSmokeText } from "@/components/rareui/Text Animation/VaporSmokeText";
-import { MagneticScatterText } from "@/components/rareui/Text Animation/MagneticScatterText";
-import { Book3D } from "@/components/rareui/3D elements/book-3d";
-
-const componentMap: Record<string, any> = {
-  "/docs/components/animated-tab": () => (
-    <div className="scale-75">
-      <AnimatedTabsDemo />
-    </div>
-  ),
-  "/docs/components/glass-shimmer-button": () => <GlassShimmerButton>Shimmer</GlassShimmerButton>,
-  "/docs/components/liquid-button": () => <LiquidButton text="Liquid" backgroundColor="bg-neutral-900 dark:bg-neutral-100" textColor="text-white dark:text-black" />,
-
-  "/docs/components/neumorphism3DButton": () => <Neumorphism3DButton>3D Button</Neumorphism3DButton>,
-  "/docs/components/soft-button": SoftButton,
-  "/docs/components/premium-button": PremiumButton,
-  "/docs/components/particle-card": () => (
-    <div className="scale-[0.35] -my-20">
-      <ParticleCard />
-    </div>
-  ),
-  "/docs/components/premium-profile-card": () => (
-    <div className="scale-[0.32] -my-24 pointer-events-none">
-      <PremiumProfileCard />
-    </div>
-  ),
-  "/docs/text-animation/vapor-smokeText": () => (
-    <div className="scale-75">
-      <VaporSmokeText text="Vapor" className="text-4xl" />
-    </div>
-  ),
-  "/docs/text-animation/magnetic-scatterText": () => (
-    <div className="scale-75">
-      <MagneticScatterText text="Magnetic" className="text-4xl" />
-    </div>
-  ),
-  "/docs/3d-elements/book-3d": () => (
-    <div className="scale-75">
-      <Book3D />
-    </div>
-  ),
-};
+import { motion } from "motion/react";
+import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
 
 export function ComponentsGrid() {
   const componentSections = sidebarData.filter(
-    section => !["Follow for updates", "Installation", "Getting Started", "Interactive Background"].includes(section.title)
+    section => !["Getting Started", "Installation", "Interactive Background"].includes(section.title)
   );
 
   return (
-    <div className="space-y-8">
-      {componentSections.map((section, index) => (
-        <div key={index}>
-          <h2 className="text-2xl font-bold mb-3 text-foreground">{section.title}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="space-y-24 pb-20">
+      {componentSections.map((section, sectionIndex) => (
+        <div key={sectionIndex} className="relative">
+          {/* Section Header */}
+          <div className="mb-8 flex items-end gap-4 overflow-hidden">
+             <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground/20 uppercase select-none absolute -top-8 -left-2 scale-150 transform-gpu opacity-20 hidden md:block">
+                {section.title}
+             </h2>
+             <div className="relative z-10 flex items-center gap-4 w-full">
+                 <h2 className="text-2xl font-bold tracking-tight text-foreground">{section.title}</h2>
+                 <div className="h-px flex-1 bg-border/40 ml-4" />
+             </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-2">
             {section.items.map((item, itemIndex) => {
-              const Component = componentMap[item.href];
-              
+              const delay = (itemIndex % 10) * 0.05;
+
               return (
-                <div key={itemIndex}>
+                <motion.div
+                  key={itemIndex}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.3, delay, ease: "easeOut" }}
+                >
                   <Link 
                     href={item.href} 
-                    className="block border rounded-md overflow-hidden hover:border-neutral-100/50 hover:dark:border-neutral-900 transition-all ease-linear duration-500 no-underline hover:shadow-lg"
+                    className="group flex items-center justify-between py-3 border-b border-border/40 hover:border-foreground/20 transition-colors no-underline"
                   >
-                    <div className="aspect-square bg-neutral-50 dark:bg-black/80 flex items-center justify-center p-4 overflow-hidden">
-                      {Component ? <Component /> : <div className="text-muted-foreground text-sm">Preview</div>}
+                    <div className="flex items-center gap-3">
+                        <span className="text-base text-muted-foreground group-hover:text-foreground group-hover:pl-2 transition-all duration-300 font-medium">
+                            {item.title}
+                        </span>
+                        {item.badge && (
+                            <span className={cn(
+                                "text-[10px] uppercase font-bold tracking-wider px-1.5 py-px rounded border",
+                                item.badge.toLowerCase() === 'new' 
+                                    ? "border-primary/30 text-primary bg-primary/5" 
+                                    : "border-muted-foreground/30 text-muted-foreground bg-muted/50"
+                            )}>
+                                {item.badge}
+                            </span>
+                        )}
                     </div>
+                    
+                    <ArrowRight className="w-4 h-4 text-muted-foreground/30 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                   </Link>
-                  <div className="mt-2 px-1">
-                    <h3 className="font-semibold text-base text-foreground">{item.title}</h3>
-                  </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>

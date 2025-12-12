@@ -1,50 +1,9 @@
 import { MetadataRoute } from 'next'
-import fs from 'fs'
-import path from 'path'
+import { source } from '@/lib/source'
 
 const baseUrl = 'https://rareui.in'
 
-function getDocsRoutes(dir: string, baseRoute: string): MetadataRoute.Sitemap {
-    if (!fs.existsSync(dir)) return []
-
-    let routes: MetadataRoute.Sitemap = []
-    const items = fs.readdirSync(dir, { withFileTypes: true })
-
-    for (const item of items) {
-        if (item.isDirectory()) {
-            routes = [
-                ...routes,
-                ...getDocsRoutes(path.join(dir, item.name), `${baseRoute}/${item.name}`)
-            ]
-        } else if (item.name.endsWith('.mdx')) {
-            const slug = item.name.replace('.mdx', '')
-            // Check if it's index or metadata
-            if (item.name === 'meta.json') continue
-
-            let url = ''
-            if (slug === 'index') {
-                url = `${baseUrl}${baseRoute}`
-            } else {
-                url = `${baseUrl}${baseRoute}/${slug}`
-            }
-
-            // Determine priority
-            let priority = 0.8
-            if (baseRoute.includes('/components')) priority = 0.9
-            if (baseRoute.includes('/installation')) priority = 0.85
-
-            routes.push({
-                url,
-                lastModified: new Date(),
-                changeFrequency: 'weekly',
-                priority,
-            })
-        }
-    }
-    return routes
-}
-
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const currentDate = new Date()
 
     // Static pages
@@ -69,17 +28,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
     ]
 
-    // Dynamic Docs Pages
-    const docsDir = path.join(process.cwd(), 'content/docs')
-    const dynamicDocsPaths = getDocsRoutes(docsDir, '/docs')
+    // Dynamic Docs Pages from Source
+    const dynamicDocsRoutes: MetadataRoute.Sitemap = source.getPages().map((page) => {
+        // Determine priority based on path
+        let priority = 0.8
+        if (page.url.includes('/components')) priority = 0.9
+        if (page.url.includes('/installation')) priority = 0.85
 
-    // Remove duplicates (e.g. if /docs was added statically and dynamically)
-    const allRoutes = [...staticPages, ...dynamicDocsPaths]
-    const uniqueRoutesMap = new Map()
-
-    allRoutes.forEach(route => {
-        uniqueRoutesMap.set(route.url, route)
+        return {
+            url: `${baseUrl}${page.url}`,
+            lastModified: currentDate, // In a real app, you might want to track file modification times
+            changeFrequency: 'weekly',
+            priority,
+        }
     })
 
-    return Array.from(uniqueRoutesMap.values())
+    return [...staticPages, ...dynamicDocsRoutes]
 }

@@ -3,19 +3,40 @@ title: Install Next.js
 description: Create a new Next.js app and run it locally.
 ---
 
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
 ## Quick start
 
-1. Create a new Next.js app named `my-app`
-2. `cd my-app` and start the dev server
-3. Visit `http://localhost:3000`
+<Steps>
+<Step>
+ ### Create a new project
+
+Run the following command to create a new Next.js app named `my-app`.
 
 ```bash
 npx create-next-app@latest my-app --yes
-cd my-app
-npm run dev
 ```
 
 `--yes` skips prompts using saved preferences or defaults. The default setup enables TypeScript, Tailwind, ESLint, App Router, and Turbopack, with import alias `@/*`.
+</Step>
+
+<Step>
+### Start the server
+
+Navigate to the project directory and start the development server.
+
+```bash
+cd my-app
+npm run dev
+```
+</Step>
+
+<Step>
+### Visit your app
+
+Open `http://localhost:3000` in your browser to see the result.
+</Step>
+</Steps>
 
 ---
 
@@ -23,29 +44,25 @@ npm run dev
 
 Before you begin, make sure your development environment meets the following requirements:
 
-- Minimum Node.js version: 20.9
-- Operating systems: macOS, Windows (including WSL), and Linux
-
----
-
-## Supported browsers
-
-Next.js supports modern browsers with zero configuration:
-
-- Chrome 111+
-- Edge 111+
-- Firefox 111+
-- Safari 16.4+
+- **Node.js 18.17** or later.
+- macOS, Windows (including WSL), or Linux.
 
 ---
 
 ## Create with the CLI
 
-The quickest way to create a new Next.js app is using `create-next-app`, which sets up everything automatically for you. To create a project, run:
+The quickest way to create a new Next.js app is using the automatic setup tool.
+
+<Steps>
+<Step>
+### Run the command
 
 ```bash
 npx create-next-app@latest
 ```
+</Step>
+<Step>
+### Answer Prompts
 
 On installation, you'll see the following prompts:
 
@@ -57,32 +74,29 @@ Would you like to use the recommended Next.js defaults?
     No, customize settings - Choose your own preferences
 ```
 
-If you choose to `customize settings`, you'll see the following prompts:
-
-```txt
-Would you like to use TypeScript? No / Yes
-Which linter would you like to use? ESLint / Biome / None
-Would you like to use React Compiler? No / Yes
-Would you like to use Tailwind CSS? No / Yes
-Would you like your code inside a `src/` directory? No / Yes
-Would you like to use App Router? (recommended) No / Yes
-Would you like to customize the import alias (`@/*` by default)? No / Yes
-What import alias would you like configured? @/*
-```
-
-After the prompts, `create-next-app` will create a folder with your project name and install the required dependencies.
+If you choose to `customize settings`, ensure you select **Tailwind CSS** as `Yes`.
+</Step>
+</Steps>
 
 ---
 
 ## Manual installation
 
-To manually create a new Next.js app, install the required packages:
+To manually create a new Next.js app, follow these steps:
+
+<Steps>
+<Step>
+### Install packages
 
 ```bash
 npm i next@latest react@latest react-dom@latest
 ```
+</Step>
 
-Then, add the following scripts to your `package.json` file:
+<Step>
+### Add scripts
+
+Add the following scripts to your `package.json` file:
 
 ```json
 {
@@ -95,19 +109,12 @@ Then, add the following scripts to your `package.json` file:
   }
 }
 ```
+</Step>
 
-These scripts refer to the different stages of developing an application:
-
-- `next dev`: Starts the development server using Turbopack (default bundler)
-- `next build`: Builds the application for production
-- `next start`: Starts the production server
-- `eslint`: Runs ESLint
-
+<Step>
 ### Create the `app` directory
 
-Next.js uses file-system routing, which means the routes in your application are determined by how you structure your files.
-
-Create an `app` folder. Then, inside `app`, create a `layout.tsx` file. This file is the root layout. It's required and must contain the `<html>` and `<body>` tags.
+Next.js uses file-system routing. Create an `app` folder and add a `layout.tsx` file:
 
 ```tsx
 export default function RootLayout({
@@ -123,96 +130,41 @@ export default function RootLayout({
 }
 ```
 
-Create a home page `app/page.tsx` with some initial content:
+Then create a `page.tsx`:
 
 ```tsx
 export default function Page() {
   return <h1>Hello, Next.js!</h1>
 }
 ```
-
-Both `layout.tsx` and `page.tsx` will be rendered when the user visits the root of your application (`/`).
-
-> **Good to know**: If you forget to create the root layout, Next.js will automatically create this file when running the development server with `next dev`.
-
-### Create the `public` folder (optional)
-
-Create a `public` folder at the root of your project to store static assets such as images, fonts, etc. Files inside `public` can then be referenced by your code starting from the base URL (`/`).
-
-```tsx
-import Image from 'next/image'
-
-export default function Page() {
-  return <Image src="/profile.png" alt="Profile" width={100} height={100} />
-}
-```
-
----
-
-## Run the development server
-
-1. Run `npm run dev` to start the development server
-2. Visit `http://localhost:3000` to view your application
-3. Edit the `app/page.tsx` file and save it to see the updated result in your browser
-
----
+</Step>
+</Steps>
 
 ## Set up TypeScript
 
-> Minimum TypeScript version: `v5.1.0`
+RareUI components are written in TypeScript. We strongly recommend using TypeScript for the best experience.
 
-Next.js comes with built-in TypeScript support. To add TypeScript to your project, rename a file to `.ts` / `.tsx` and run `next dev`. Next.js will automatically install the necessary dependencies and add a `tsconfig.json` file with the recommended config options.
+<Steps>
+<Step>
+### Install TypeScript
 
-### IDE Plugin
+Rename any `.js` file to `.tsx` and run `next dev`. Next.js will automatically detect TypeScript and create a `tsconfig.json` file.
+</Step>
 
-Next.js includes a custom TypeScript plugin and type checker, which VSCode and other code editors can use for advanced type-checking and auto-completion.
+<Step>
+### Configure Path Aliases
 
-You can enable the plugin in VS Code by:
-
-1. Opening the command palette (`Ctrl/⌘` + `Shift` + `P`)
-2. Searching for "TypeScript: Select TypeScript Version"
-3. Selecting "Use Workspace Version"
-
----
-
-## Set up Absolute Imports and Module Path Aliases
-
-Next.js has in-built support for the `"paths"` and `"baseUrl"` options of `tsconfig.json` and `jsconfig.json` files.
-
-These options allow you to alias project directories to absolute paths, making it easier and cleaner to import modules. For example:
-
-```jsx
-// Before
-import { Button } from '../../../components/button'
-
-// After
-import { Button } from '@/components/button'
-```
-
-To configure absolute imports, add the `baseUrl` configuration option to your `tsconfig.json` or `jsconfig.json` file:
+Ensure your `tsconfig.json` has the following paths configured for clean imports:
 
 ```json
 {
   "compilerOptions": {
-    "baseUrl": "src/"
-  }
-}
-```
-
-In addition to configuring the `baseUrl` path, you can use the `"paths"` option to "alias" module paths.
-
-For example, the following configuration maps `@/components/*` to `components/*`:
-
-```json
-{
-  "compilerOptions": {
-    "baseUrl": "src/",
+    "baseUrl": ".",
     "paths": {
-      "@/styles/*": ["styles/*"],
-      "@/components/*": ["components/*"]
+      "@/*": ["./*"]
     }
   }
 }
 ```
-
-Each of the `"paths"` are relative to the `baseUrl` location.
+</Step>
+</Steps>

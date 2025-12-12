@@ -22,6 +22,11 @@ export const metadata: Metadata = {
     default: "RareUI - Premium React UI Components Library | Free & Open Source | Tailwind CSS",
     template: "%s | RareUI - Free React UI Component Library"
   },
+  icons: {
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
   description: "Discover 100+ premium, free, and open-source React UI components. Built with Tailwind CSS, Next.js, and Framer Motion. Copy-paste ready components for building modern web applications. Download buttons, cards, forms, modals, navbars, and more. No installation required - just copy and use.",
   keywords: [
     // Primary Keywords (High Competition)
@@ -134,6 +139,29 @@ export const metadata: Metadata = {
     "beautiful animated components",
     "professional landing page components"
   ],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://rareui.in",
+    siteName: "RareUI",
+    title: "RareUI - Premium React UI Components Library",
+    description: "Discover 100+ premium, free, and open-source React UI components. Built with Tailwind CSS, Next.js, and Framer Motion.",
+    images: [
+      {
+        url: "https://rareui.in/og-imageblack.png",
+        width: 1200,
+        height: 630,
+        alt: "RareUI Component Library",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "RareUI - Premium React UI Components Library",
+    description: "Premium, free, and open-source React UI components. Built with Tailwind CSS, Next.js, and Framer Motion.",
+    images: ["https://rareui.in/og-imageblack.png"],
+    creator: "@heyy_swappy", 
+  },
   authors: [{ name: "Swappy", url: "https://x.com/heyyswap" }],
   creator: "Swappy",
   publisher: "RareUI",

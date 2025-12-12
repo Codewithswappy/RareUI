@@ -1,7 +1,11 @@
-'use client'
-
 import Link from 'next/link'
 import { ArrowLeft, LayoutTemplate } from 'lucide-react'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "Premium Templates | RareUI",
+  description: "Production-ready dashboards, landing pages, and complete SaaS kits. Save 100+ hours of development time."
+}
 
 export default function TemplatesPage() {
   return (

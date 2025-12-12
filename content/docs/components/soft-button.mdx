@@ -5,6 +5,7 @@ description: A neumorphic button with soft shadows, hover effects, and smooth an
 
 import { Preview } from "@/components/mdx/preview";
 import SoftButton from "@/components/rareui/SoftButton";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Preview
   code={`import React from 'react';
@@ -66,7 +67,7 @@ const SoftButton = ({ children = 'Button', className, ...props }: SoftButtonProp
           transition-all duration-[600ms]
           
           /* Hover States */
-           group-hover:bg-black dark:hover:bg-white
+          group-hover:bg-black dark:hover:bg-white
           group-hover:text-white dark:hover:text-black
           group-hover:tracking-[2px]
           group-hover:scale-[1.05]
@@ -95,9 +96,19 @@ export default SoftButton;`}
 
 ## Usage
 
+<Steps>
+<Step>
+### Import the component
+
 ```tsx
 import SoftButton from '@/components/rareui/SoftButton';
+```
+</Step>
 
+<Step>
+### Use in your application
+
+```tsx
 export default function App() {
   return (
     <SoftButton onClick={() => alert('Clicked!')}>
@@ -106,17 +117,19 @@ export default function App() {
   );
 }
 ```
+</Step>
+</Steps>
 
 ## Features
 
-- **Neumorphic Design**: Soft, multi-layered shadows for a 3D raised effect
-- **Interactive Hover**: Scale animation, background color change, and enhanced glow
-- **Active State**: Subtle scale-down feedback on click
-- **Theme Aware**: Uses CSS variables for primary colors
-- **Smooth Transitions**: 600ms animated state changes
-- **Dark Mode Support**: Optimized shadows for both light and dark themes
-- **Letter Spacing Animation**: Expands tracking on hover for dynamic effect
-- **Fully Self-Contained**: No global CSS required - all styles are in Tailwind classes
+- **Neumorphic Design**: Soft, multi-layered shadows for a 3D raised effect.
+- **Interactive Hover**: Scale animation, background color change, and enhanced glow.
+- **Active State**: Subtle scale-down feedback on click.
+- **Theme Aware**: Uses CSS variables for primary colors.
+- **Smooth Transitions**: 600ms animated state changes.
+- **Dark Mode Support**: Optimized shadows for both light and dark themes.
+- **Letter Spacing Animation**: Expands tracking on hover for dynamic effect.
+- **Fully Self-Contained**: No global CSS required - all styles are in Tailwind classes.
 
 ## Props
 

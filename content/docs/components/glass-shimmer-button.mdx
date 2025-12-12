@@ -5,6 +5,7 @@ description: A premium glassmorphism button with continuous shimmer animation an
 
 import { Preview } from "@/components/mdx/preview";
 import { GlassShimmerButton } from "@/components/rareui/glass-shimmer-button";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Preview
   code={`"use client"
@@ -82,9 +83,19 @@ export function GlassShimmerButton({
 
 ## Usage
 
+<Steps>
+<Step>
+### Import the component
+
 ```tsx
 import { GlassShimmerButton } from '@/components/rareui/glass-shimmer-button';
+```
+</Step>
 
+<Step>
+### Use in your application
+
+```tsx
 export default function App() {
   return (
     <GlassShimmerButton onClick={() => alert('Clicked!')}>
@@ -93,14 +104,16 @@ export default function App() {
   );
 }
 ```
+</Step>
+</Steps>
 
 ## Features
 
-- **Continuous Shimmer Animation**: Self-contained animated shimmer effect that runs continuously
-- **Glassmorphism Design**: Premium frosted glass aesthetic with backdrop blur
-- **Hover Effects**: Scale animation and enhanced glow on hover
-- **Dark Mode Support**: Optimized colors for both light and dark themes
-- **Fully Self-Contained**: No global CSS required - animations defined inline
+- **Continuous Shimmer Animation**: Self-contained animated shimmer effect that runs continuously.
+- **Glassmorphism Design**: Premium frosted glass aesthetic with backdrop blur.
+- **Hover Effects**: Scale animation and enhanced glow on hover.
+- **Dark Mode Support**: Optimized colors for both light and dark themes.
+- **Fully Self-Contained**: No global CSS required - animations defined inline.
 
 ## Props
 
