@@ -183,38 +183,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://rareui.in",
-    siteName: "RareUI - Free React UI Components Library",
-    title: "RareUI - 100+ Free Premium React UI Components | Tailwind CSS & Framer Motion",
-    description: "Build stunning web applications with our collection of 100+ free, open-source React components. Featuring modern designs, smooth animations, and copy-paste simplicity. Perfect for landing pages, dashboards, and web apps. No installation required.",
-    images: [
-      {
-        url: "/og-imageblack.png?v=2",
-        width: 1200,
-        height: 630,
-        alt: "RareUI - Free Premium React UI Components Library with Tailwind CSS",
-        type: "image/png",
-      },
-      {
-        url: "/og-imagewhite.png?v=2",
-        width: 1200,
-        height: 630,
-        alt: "RareUI - Open Source React Components for Modern Web Apps",
-        type: "image/png",
-      }
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: "@heyyswap",
-    creator: "@heyyswap",
-    title: "RareUI - 100+ Free Premium React UI Components",
-    description: "Build beautiful web apps with free, open-source React components. Tailwind CSS + Framer Motion. Copy-paste ready. No installation.",
-    images: ["/og-imageblack.png?v=2", "/og-imagewhite.png?v=2"],
-  },
+
   alternates: {
     canonical: "https://rareui.in",
     types: {
