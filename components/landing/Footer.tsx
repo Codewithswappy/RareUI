@@ -91,6 +91,33 @@ export default function Footer() {
                    </motion.div>
                  ))}
               </div>
+
+              {/* Product Hunt Badge */}
+              <div className="mt-6">
+                 <a 
+                    href="https://www.producthunt.com/products/rareui-free-premium-components?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-rareui" 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="block w-[250px]"
+                 >
+                    <img 
+                       src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1047809&theme=light" 
+                       alt="RareUI - Build beautiful interfaces with ready-made components | Product Hunt" 
+                       style={{ width: '250px', height: '54px' }} 
+                       width="250" 
+                       height="54" 
+                       className="dark:hidden"
+                    />
+                     <img 
+                       src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1047809&theme=dark" 
+                       alt="RareUI - Build beautiful interfaces with ready-made components | Product Hunt" 
+                       style={{ width: '250px', height: '54px' }} 
+                       width="250" 
+                       height="54" 
+                       className="hidden dark:block"
+                    />
+                 </a>
+              </div>
             </div>
             
             {/* Right: Links Grid */}

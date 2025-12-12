@@ -61,7 +61,7 @@ export default function HeroSection() {
       </div>
 
       {/* --- Main Hero Container --- */}
-      <main className="max-w-[1400px] w-[95%] md:w-[80%] mx-auto pt-32 pb-10 mt-10">
+      <main className="max-w-fd-container w-[95%] md:w-[80%] mx-auto pt-32 pb-10 mt-10">
         <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
           
           {/* Content */}
@@ -74,7 +74,7 @@ export default function HeroSection() {
             
             {/* 1. Badge - Dynamic Latest Component */}
             <Link href={latestComponent.href}>
-              <div className="relative inline-flex overflow-hidden rounded-full p-[1px] mb-8 cursor-pointer">
+              <div className="relative inline-flex overflow-hidden rounded-full p-px mb-8 cursor-pointer">
                 <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#000_50%,transparent_100%)] dark:bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#fff_50%,transparent_100%)] opacity-70" />
                 <span className="inline-flex h-full w-full items-center justify-center rounded-full bg-secondary/80 dark:bg-background/90 px-3 py-1.5 backdrop-blur-3xl gap-2 hover:bg-secondary/60 transition-all duration-300 group relative">
                     <span className="bg-foreground text-background text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">New</span>
@@ -129,7 +129,7 @@ export default function HeroSection() {
                    setHasCopied(true);
                    setTimeout(() => setHasCopied(false), 2000);
                 }}
-                className="relative inline-flex overflow-hidden rounded-full p-[1px] transition-all active:scale-95 group shadow-sm focus:outline-none"
+                className="relative inline-flex overflow-hidden rounded-full p-px transition-all active:scale-95 group shadow-sm focus:outline-none"
               >
                 <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#000_50%,transparent_100%)] dark:bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#fff_50%,transparent_100%)] opacity-70" />
                 
@@ -179,22 +179,7 @@ export default function HeroSection() {
               </Link>
             </div>
 
-            {/* Product Hunt Badge */}
-            <div className="flex justify-center mt-3">
-              <a 
-                href="https://www.producthunt.com/products/rareui-free-premium-components?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-rareui" 
-                target="_blank" 
-                rel="noreferrer"
-              >
-                <img 
-                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1047809&theme=light&t=1765445713009" 
-                  alt="RareUI - Build beautiful interfaces with ready-made components | Product Hunt" 
-                  style={{ width: '250px', height: '54px' }} 
-                  width="250" 
-                  height="54" 
-                />
-              </a>
-            </div>
+
             
             {/* 5. Tech Stack */}
            
