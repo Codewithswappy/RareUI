@@ -67,15 +67,10 @@ Detailed instructions can also be found [here](https://rareui.in/docs/installati
 Contributions are welcome! Check the [Open Issues](https://github.com/Codewithswappy/RareUI/issues) to see how you can help. <br/>
 Please review the [Contributing Guide](CONTRIBUTING.md) and follow our standards. Thanks for your time!
 
-## Contributors
-
-<a href="https://github.com/Codewithswappy/RareUI/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Codewithswappy/RareUI" />
-</a>
 
 ## Author
 
-[Swappy (Swapnil Kalambe)](https://x.com/heyyswap)
+[Swappy](https://x.com/heyyswap)
 
 ## License
 
