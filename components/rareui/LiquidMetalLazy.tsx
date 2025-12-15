@@ -20,7 +20,9 @@ const LiquidMetalDynamic = dynamic(
     }
 );
 
+import { LiquidMetalProps } from '@/components/rareui/LiquidMetal';
+
 // Forward props wrapper
-export default function LiquidMetal(props: any) {
+export default function LiquidMetal(props: LiquidMetalProps) {
     return <LiquidMetalDynamic {...props} />;
 }

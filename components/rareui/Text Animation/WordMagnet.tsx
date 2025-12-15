@@ -227,7 +227,7 @@ function Word({
         });
 
         const unsubscribeY = mouseY.on("change", () => {
-            const currentMouseX = mouseX.get();
+
 
             if (!wordRef.current) return;
             const offsetParent = wordRef.current.offsetParent as HTMLElement;

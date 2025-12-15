@@ -206,7 +206,7 @@ void main() {
 }
 `;
 
-interface LiquidMetalProps {
+export interface LiquidMetalProps {
     imageSource?: string;
     speed?: number;
     dispersion?: number; // refraction
