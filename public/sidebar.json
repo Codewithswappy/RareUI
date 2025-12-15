@@ -68,6 +68,11 @@
       {
         "title": "Soft Button",
         "href": "/docs/components/soft-button"
+      },
+      {
+        "title": "Loading Spinner",
+        "href": "/docs/components/loading-spinner",
+        "badge": "New"
       }
     ]
   },
@@ -81,6 +86,11 @@
       {
         "title": "Vapor SmokeText",
         "href": "/docs/text-animation/vapor-smokeText"
+      },
+      {
+        "title": "Word Magnet",
+        "href": "/docs/text-animation/word-magnet",
+        "badge": "New"
       }
     ]
   },

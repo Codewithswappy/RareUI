@@ -2,6 +2,7 @@
     "title": "Text Animation",
     "pages": [
         "vapor-smokeText",
-        "magnetic-scatterText"
+        "magnetic-scatterText",
+        "word-magnet"
     ]
 }

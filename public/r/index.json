@@ -9,6 +9,7 @@
     "LiquidWave",
     "LiquidWaveLazy",
     "LiquidButton",
+    "LoadingSpinner",
     "neumorphism3DButton",
     "ParticleCard",
     "premium-button",
@@ -16,6 +17,7 @@
     "retro-pixel-button",
     "SoftButton",
     "MagneticScatterText",
-    "VaporSmokeText"
+    "VaporSmokeText",
+    "WordMagnet"
   ]
 }

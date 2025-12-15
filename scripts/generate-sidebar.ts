@@ -56,6 +56,7 @@ const CATEGORY_LABELS: Record<string, string> = {
   "currency-transfer": "Inputs & Forms",
   "avatar-picker": "Inputs & Forms",
   "action-search-bar": "Navigation",
+  "loading-spinner": "UI Elements",
 };
 
 async function buildSidebar() {

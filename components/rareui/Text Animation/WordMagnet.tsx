@@ -1,0 +1,289 @@
+"use client";
+
+import React, { useEffect, useRef, useState, startTransition } from "react";
+import { motion, useSpring, useMotionValue, MotionValue } from "framer-motion";
+import { cn } from "@/lib/utils";
+
+interface WordMagnetProps {
+    /**
+     * The text content to display
+     */
+    text?: string;
+    /**
+     * Interaction radius in pixels
+     */
+    radius?: number;
+    /**
+     * Repulsion force (0.1 to 1.0)
+     */
+    force?: number;
+    /**
+     * Spring damping (5 to 50)
+     */
+    damping?: number;
+    /**
+     * Delay before returning to original position in ms
+     */
+    returnDelay?: number;
+    /**
+     * Text color
+     */
+    textColor?: string;
+    /**
+     * Font styling object
+     */
+    font?: React.CSSProperties;
+    /**
+     * Disable interaction on mobile devices
+     */
+    disableOnMobile?: boolean;
+    /**
+     * CSS overflow property
+     */
+    overflow?: "visible" | "hidden" | "scroll" | "auto";
+    /**
+     * Additional class names
+     */
+    className?: string;
+    /**
+     * Inline styles
+     */
+    style?: React.CSSProperties;
+}
+
+export default function WordMagnet({
+    text = "Hover over these words and watch them dance",
+    radius = 130,
+    force = 0.45,
+    damping = 28,
+    returnDelay = 400,
+    textColor = "#000000",
+    font = {
+        fontSize: "32px",
+        fontWeight: 600, // Semibold
+        letterSpacing: "-0.03em",
+        lineHeight: "1.2em",
+    },
+    disableOnMobile = false,
+    overflow = "visible",
+    className,
+    style,
+}: WordMagnetProps) {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [words, setWords] = useState<string[]>([]);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Motion values to track mouse position relative to container
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+    const lastMoveTime = useRef(0);
+    const throttleDelay = 16; // ~60fps
+
+    // Detect mobile
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const checkMobile = () => {
+                startTransition(() => {
+                    setIsMobile(window.innerWidth < 768 || "ontouchstart" in window);
+                });
+            };
+            checkMobile();
+            window.addEventListener("resize", checkMobile);
+            return () => window.removeEventListener("resize", checkMobile);
+        }
+    }, []);
+
+    // Split text into words
+    useEffect(() => {
+        startTransition(() => {
+            setWords(text.split(" ").filter((word) => word.length > 0));
+        });
+    }, [text]);
+
+    // Track mouse movement
+    useEffect(() => {
+        if (disableOnMobile && isMobile) return;
+
+        const handleMouseMove = (e: MouseEvent) => {
+            const now = Date.now();
+            if (now - lastMoveTime.current < throttleDelay) return;
+            lastMoveTime.current = now;
+
+            if (containerRef.current) {
+                const rect = containerRef.current.getBoundingClientRect();
+                mouseX.set(e.clientX - rect.left);
+                mouseY.set(e.clientY - rect.top);
+            }
+        };
+
+        window.addEventListener("mousemove", handleMouseMove);
+        return () => window.removeEventListener("mousemove", handleMouseMove);
+    }, [mouseX, mouseY, isMobile, disableOnMobile]);
+
+    const isDisabled = disableOnMobile && isMobile;
+
+    return (
+        <div
+            ref={containerRef}
+            className={cn("flex flex-wrap items-center justify-center gap-[0.5em]", className)}
+            style={{
+                ...style,
+                position: "relative",
+                overflow,
+                color: textColor,
+                ...font,
+            }}
+        >
+            {words.map((word, index) => (
+                <Word
+                    key={`${word}-${index}`}
+                    word={word}
+                    mouseX={mouseX}
+                    mouseY={mouseY}
+                    radius={radius}
+                    force={force}
+                    damping={damping}
+                    returnDelay={returnDelay}
+                    disabled={isDisabled}
+                />
+            ))}
+        </div>
+    );
+}
+
+interface WordProps {
+    word: string;
+    mouseX: MotionValue<number>;
+    mouseY: MotionValue<number>;
+    radius: number;
+    force: number;
+    damping: number;
+    returnDelay: number;
+    disabled: boolean;
+}
+
+function Word({
+    word,
+    mouseX,
+    mouseY,
+    radius,
+    force,
+    damping,
+    returnDelay,
+    disabled,
+}: WordProps) {
+    const wordRef = useRef<HTMLSpanElement>(null);
+
+    // Spring animations for x and y displacement
+    const x = useSpring(0, { damping, stiffness: 200 });
+    const y = useSpring(0, { damping, stiffness: 200 });
+
+    const returnTimeout = useRef<number | null>(null);
+
+    useEffect(() => {
+        if (disabled) return;
+
+        const unsubscribeX = mouseX.on("change", (latestX) => {
+            if (!wordRef.current) return;
+
+            // Get word position relative to the container (which mouseX/Y are relative to)
+            // The parent container is the offsetParent
+            const offsetParent = wordRef.current.offsetParent as HTMLElement;
+            if (!offsetParent) return;
+
+            const rect = wordRef.current.getBoundingClientRect();
+            const parentRect = offsetParent.getBoundingClientRect();
+
+            // Center of the word relative to the container
+            const wordCenterX = rect.left - parentRect.left + rect.width / 2;
+            const wordCenterY = rect.top - parentRect.top + rect.height / 2;
+
+            const currentMouseY = mouseY.get();
+
+            const dx = wordCenterX - latestX;
+            const dy = wordCenterY - currentMouseY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < radius) {
+                const angle = Math.atan2(dy, dx);
+                // Repel force calculation
+                const repelForce = ((radius - distance) / radius) * force * 100;
+
+                const offsetX = Math.cos(angle) * repelForce;
+                const offsetY = Math.sin(angle) * repelForce;
+
+                x.set(offsetX);
+                y.set(offsetY);
+
+                if (returnTimeout.current !== null) {
+                    window.clearTimeout(returnTimeout.current);
+                }
+
+                returnTimeout.current = window.setTimeout(() => {
+                    x.set(0);
+                    y.set(0);
+                }, returnDelay);
+            }
+        });
+
+        const unsubscribeY = mouseY.on("change", () => {
+            const currentMouseX = mouseX.get();
+
+            if (!wordRef.current) return;
+            const offsetParent = wordRef.current.offsetParent as HTMLElement;
+            if (!offsetParent) return;
+
+            const rect = wordRef.current.getBoundingClientRect();
+            const parentRect = offsetParent.getBoundingClientRect();
+
+            const wordCenterX = rect.left - parentRect.left + rect.width / 2;
+            const wordCenterY = rect.top - parentRect.top + rect.height / 2;
+
+            const mouseXVal = mouseX.get();
+            const mouseYVal = mouseY.get();
+
+            const dx = wordCenterX - mouseXVal;
+            const dy = wordCenterY - mouseYVal;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < radius) {
+                const angle = Math.atan2(dy, dx);
+                const repelForce = ((radius - distance) / radius) * force * 100;
+                const offsetX = Math.cos(angle) * repelForce;
+                const offsetY = Math.sin(angle) * repelForce;
+                x.set(offsetX);
+                y.set(offsetY);
+
+                if (returnTimeout.current !== null) {
+                    window.clearTimeout(returnTimeout.current);
+                }
+                returnTimeout.current = window.setTimeout(() => {
+                    x.set(0);
+                    y.set(0);
+                }, returnDelay);
+            }
+        });
+
+        return () => {
+            unsubscribeX();
+            unsubscribeY();
+            if (returnTimeout.current !== null) {
+                window.clearTimeout(returnTimeout.current);
+            }
+        };
+    }, [mouseX, mouseY, radius, force, x, y, returnDelay, disabled]);
+
+    if (disabled) {
+        return <span className="inline-block whitespace-nowrap">{word}</span>;
+    }
+
+    return (
+        <motion.span
+            ref={wordRef}
+            className="inline-block whitespace-nowrap"
+            style={{ x, y }}
+        >
+            {word}
+        </motion.span>
+    );
+}
