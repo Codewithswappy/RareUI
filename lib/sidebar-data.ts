@@ -70,6 +70,11 @@ export const sidebarData = [
         "href": "/docs/components/soft-button"
       },
       {
+        "title": "Liquid Metal",
+        "href": "/docs/components/liquid-metal",
+        "badge": "New"
+      },
+      {
         "title": "Loading Spinner",
         "href": "/docs/components/loading-spinner",
         "badge": "New"

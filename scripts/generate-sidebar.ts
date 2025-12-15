@@ -57,6 +57,7 @@ const CATEGORY_LABELS: Record<string, string> = {
   "avatar-picker": "Inputs & Forms",
   "action-search-bar": "Navigation",
   "loading-spinner": "UI Elements",
+  "liquid-metal": "Backgrounds & Effects",
 };
 
 async function buildSidebar() {
