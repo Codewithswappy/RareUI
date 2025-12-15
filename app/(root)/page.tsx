@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic';
 import HeroSection from '@/components/landing/HeroSection';
-import LoadingSpinner from '@/components/rareui/LoadingSpinner';
 
 const HowItWorks = dynamic(() => import('@/components/landing/HowItWorks'), {
   loading: () => <div className="h-[500px] w-full bg-background" />,
@@ -26,14 +25,10 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background h-screen text-foreground overflow-x-hidden">
       <HeroSection />
-      <LoadingSpinner />
-      {/* <ComponentsGrid />
+      <ComponentsGrid />
       <HowItWorks />
       <CTASection />
-      <Footer /> */}
-      {/* <div className=' flex flex-col items-center justify-center h-screen'>
-        <RetroPixelButton/>
-      </div> */}
+      <Footer />
     </main> 
   );
 }
