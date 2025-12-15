@@ -1,401 +1,153 @@
 <div align="center">
-  <img src="public/RareUI_Logo.svg" alt="RareUI Logo" width="80" height="80">
-  
-  # RareUI
-  
-  ### 100+ Free, Open Source React UI Components
-  
-  **Beautiful • Animated • Production Ready**
-  
-  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-  [![React](https://img.shields.io/badge/React-19+-61DAFB?logo=react\u0026logoColor=white)](https://reactjs.org/)
-  [![TypeScript](https://img.shields.io/badge/TypeScript-5+-3178C6?logo=typescript\u0026logoColor=white)](https://www.typescriptlang.org/)
-  [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4+-38B2AC?logo=tailwind-css\u0026logoColor=white)](https://tailwindcss.com/)
-  [![Framer Motion](https://img.shields.io/badge/Framer_Motion-12+-FF0055?logo=framer\u0026logoColor=white)](https://www.framer.com/motion/)
-  
-  [🌐 Website](https://rareui.in) • [📚 Documentation](https://rareui.in/docs) • [🎨 Components](https://rareui.in/docs) • [🐦 Twitter](https://x.com/heyyswap)
-  
+  <br />
+  <img src="public/RareUI_Logo.svg" alt="RareUI Logo" width="120" height="120">
+  <br /> <br />
+
+  <h1 align="center">RareUI</h1>
+
+  <div align="center">
+    <b>The Most Unique React Component Library</b>
+  </div>
+
+  <br />
+
+  <div align="center">
+    
+![License](https://img.shields.io/badge/license-MIT-000000?style=flat-square)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&style=flat-square&logoColor=000)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript&style=flat-square&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?logo=tailwindcss&style=flat-square&logoColor=white)](https://tailwindcss.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-000000?logo=framer&style=flat-square&logoColor=white)](https://www.framer.com/motion/)
+
+  </div>
+
+  <br />
+  <br />
+
+  <a href="https://rareui.in"><strong>🌐 Website</strong></a> · 
+  <a href="https://rareui.in/docs"><strong>📚 Documentation</strong></a> · 
+  <a href="https://github.com/Codewithswappy/RareUI/issues"><strong>🐛 Report Bug</strong></a> · 
+  <a href="https://x.com/heyyswap"><strong>🐦 Twitter</strong></a>
+
+  <br />
+  <br />
+</div>
+
+<div align="center">
+  <br />
+  <p align="center">
+    <b>RareUI</b> is a collection of <b>premium, high-quality, and animated</b> React components built for modern web applications.
+    <br />
+    Designed to be copied and pasted into your apps. Open Source. Customizable. Beautiful.
+  </p>
+  <br />
 </div>
 
 ---
 
-## 🌟 Why RareUI?
+## ✨ Features
 
-RareUI is a **free, open-source component library** that helps you build **beautiful, modern web interfaces** without starting from scratch. Every component is crafted with attention to detail, featuring **smooth animations**, **dark mode support**, and **responsive design**.
-
-### ✨ Key Features
-
-<table>
-<tr>
-<td width="50%">
-
-**🎯 Core Features**
-- 100% Free & Open Source
-- Copy-Paste or CLI Install
-- Dark Mode Built-in
-- Fully Responsive
-- TypeScript Support
-- Next.js Optimized
-
-</td>
-<td width="50%">
-
-**🎨 Design Excellence**
-- Premium Quality Designs
-- Framer Motion Animations
-- Tailwind CSS Powered
-- Glassmorphism Effects
-- Micro-interactions
-- Accessible (WCAG)
-
-</td>
-</tr>
-</table>
-
----
+- **🎨 Premium Design**: Meticulously crafted components with a focus on aesthetics and user experience.
+- **⚡ Super Lightweight**: Built with performance in mind. No bloat, just the code you need.
+- **🌙 Dark Mode Support**: First-class support for light and dark modes out of the box.
+- **🔧 Fully Customizable**: Built on top of Tailwind CSS for easy styling and theming.
+- **♿ Accessible**: Follows WAI-ARIA patterns for maximum accessibility.
+- **🚀 Production Ready**: Typed with TypeScript and rigorously tested.
 
 ## 🚀 Quick Start
 
-### Install via CLI (Recommended)
+The fastest way to start using RareUI is via our CLI.
 
-The fastest way to add components to your project:
+### Installation
 
 ```bash
-# Install a single component
-npx rareui add glass-shimmer-button
+# Add a component to your project
+npx rareui add [component-name]
 
-# Install multiple components
-npx rareui add liquid-button particle-card
+# Example
+npx rareui add liquid-metal
 ```
 
-### Manual Installation
+OR
 
-1. Visit [rareui.in](https://rareui.in)
-2. Browse components
-3. Click "Copy Code"
-4. Paste into your project
+1. Browse components at [rareui.in](https://rareui.in)
+2. Copy the code.
+3. Paste it into your project.
 
-That's it! ✨
+## 📦 Components
 
----
+Explore our growing collection of unique components:
 
-## 📦 Available Components
-
-### 🔘 Buttons
-
-<table>
-<tr>
-<td>
-
-- **Glass Shimmer Button** - Glassmorphism with shimmer effect
-- **Liquid Button** - Liquid blob animation on hover
-- **Neumorphism 3D Button** - Soft 3D depth effect
-- **Soft Button** - Subtle, modern button style
-- **Upgrade Button** - Premium CTA with gradient
-
-</td>
-</tr>
-</table>
-
-### 🃏 Cards
-
-<table>
-<tr>
-<td>
-
-- **Premium Profile Card** - Animated profile card with glassmorphism
-- **Particle Card** - Explosive particle effect on hover
-
-</td>
-</tr>
-</table>
-
-### 🔜 Coming Soon
-
-- **Forms & Inputs** - Text fields, dropdowns, checkboxes
-- **Navigation** - Navbars, sidebars, breadcrumbs
-- **Modals & Overlays** - Dialogs, popovers, tooltips
-- **Data Display** - Tables, lists, grids
-- **Feedback** - Alerts, toasts, progress bars
-- **And 100+ more components!**
-
-[→ View all components](https://rareui.in/docs)
-
----
+| Category | Components |
+|:---|:---|
+| **Backgrounds** | Liquid Metal, Particle Waves, Grid Beams |
+| **Buttons** | Glass Shimmer, Liquid, Neumorphic, Retro Pixel |
+| **Cards** | Premium Profile, Particle Effect, glowing Border |
+| **Text Animations** | Word Magnet, Typewriter, Gradient Reveal |
+| **Interactives** | Magnetic Cursor, Tilt Effects, Parallax |
 
 ## 💻 Usage Example
 
-```tsx
-import { GlassShimmerButton } from '@/components/ui/glass-shimmer-button';
+Here's how easy it is to use a RareUI component:
 
-export default function App() {
+```tsx
+import { LiquidMetal } from "@/components/rareui/liquid-metal";
+
+export default function HeroSection() {
   return (
-    <GlassShimmerButton onClick={() => console.log('Clicked!')}>
-      Click Me
-    </GlassShimmerButton>
+    <div className="relative w-full h-screen bg-black overflow-hidden">
+      <LiquidMetal 
+        color="#61DAFB" 
+        mouseInfluence={0.5} 
+      />
+      
+      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+        <h1 className="text-6xl font-bold text-white mix-blend-difference">
+          RareUI
+        </h1>
+      </div>
+    </div>
   );
 }
 ```
 
-**That's it!** Every component is:
-- ✅ Fully typed with TypeScript
-- ✅ Accessible (keyboard navigation, ARIA labels)
-- ✅ Customizable via props and Tailwind classes
-- ✅ Production-ready
+## �️ Tech Stack
 
----
+RareUI is built on the shoulders of giants:
 
-## 🛠️ Tech Stack
-
-RareUI is built with modern, industry-standard technologies:
-
-<div align="center">
-
-| Technology | Purpose |
-|------------|---------|
-| **React 19** | UI Library |
-| **Next.js 16** | Framework |
-| **TypeScript 5** | Type Safety |
-| **Tailwind CSS 4** | Styling |
-| **Framer Motion 12** | Animations |
-| **Lucide React** | Icons |
-
-</div>
-
----
-
-## 📖 Documentation
-
-Comprehensive docs for every component:
-
-- 📘 [Installation Guide](https://rareui.in/docs/installation/cli) - Get started in 2 minutes
-- 🎨 [Component Showcase](https://rareui.in/docs) - Browse all components
-- ⚙️ [Customization](https://rareui.in/docs) - Learn how to customize
-- 🎯 [Best Practices](https://rareui.in/docs) - Tips for optimal usage
-- 🚀 [Performance](https://rareui.in/docs) - Keep your app fast
-
-[→ Read the full docs](https://rareui.in/docs)
-
----
-
-## 🎯 Use Cases
-
-Perfect for building:
-
-<table>
-<tr>
-<td width="50%">
-
-- 🏢 **SaaS Dashboards**
-- 🚀 **Landing Pages**
-- 🛍️ **E-commerce Sites**
-- 📊 **Admin Panels**
-
-</td>
-<td width="50%">
-
-- 💼 **Portfolio Sites**
-- 📱 **Mobile Apps**
-- 🎨 **Marketing Sites**
-- 🌐 **Web Applications**
-
-</td>
-</tr>
-</table>
-
----
+- **Framework**: [Next.js 16](https://nextjs.org/)
+- **Library**: [React 19](https://react.dev/)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **Animation**: [Framer Motion 12](https://www.framer.com/motion/) & [Motion](https://motion.dev/)
+- **Icons**: [Lucide React](https://lucide.dev/)
 
 ## 🤝 Contributing
 
-We ❤️ contributions! Help make RareUI better:
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
-### Ways to Contribute
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-1. **🐛 Report bugs** - Found an issue? [Open an issue](https://github.com/Codewithswappy/RareUI/issues)
-2. **💡 Suggest features** - Have an idea? We'd love to hear it
-3. **🎨 Add components** - Create new components
-4. **📝 Improve docs** - Help others understand better
-5. **⭐ Star the repo** - Show your support!
+## 🌟 Support
 
-### Development Setup
+Give a ⭐️ if this project helped you!
 
-```bash
-# Clone the repository
-git clone https://github.com/Codewithswappy/RareUI.git
-
-# Install dependencies
-cd RareUI
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-```
-
-### Contribution Guidelines
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-component`
-3. Make your changes
-4. Test thoroughly
-5. Commit: `git commit -m 'Add amazing component'`
-6. Push: `git push origin feature/amazing-component`
-7. Open a Pull Request
-
-[→ Read contributing guidelines](CONTRIBUTING.md)
-
----
-
-## 📝 License
-
-RareUI is **MIT licensed**. You can:
-- ✅ Use commercially
-- ✅ Modify freely
-- ✅ Distribute
-- ✅ Use privately
-
-See [LICENSE](LICENSE) for details.
-
----
-
-## 🌟 Support the Project
-
-If you find RareUI helpful:
-
-<table>
-<tr>
-<td align="center">
 <a href="https://github.com/Codewithswappy/RareUI">
-<b>⭐ Star on GitHub</b>
+  <img src="https://img.shields.io/github/stars/Codewithswappy/RareUI?style=social" alt="GitHub stars">
 </a>
-</td>
-<td align="center">
-<a href="https://x.com/heyyswap">
-<b>🐦 Follow on Twitter</b>
+<a href="https://twitter.com/heyyswap">
+  <img src="https://img.shields.io/twitter/follow/heyyswap?style=social" alt="Twitter Follow">
 </a>
-</td>
-<td align="center">
-<a href="https://github.com/Codewithswappy/RareUI/issues">
-<b>📢 Share Feedback</b>
-</a>
-</td>
-</tr>
-</table>
 
-Every star ⭐ motivates us to keep improving RareUI!
+## � License
 
----
+Distributed under the MIT License. See `LICENSE` for more information.
 
-## 🔗 Links
-
-<table>
-<tr>
-<td align="center">
-
-**Website**  
-[rareui.in](https://rareui.in)
-
-</td>
-<td align="center">
-
-**Documentation**  
-[rareui.in/docs](https://rareui.in/docs)
-
-</td>
-<td align="center">
-
-**Twitter**  
-[@heyyswap](https://x.com/heyyswap)
-
-</td>
-<td align="center">
-
-**GitHub**  
-[@Codewithswappy](https://github.com/Codewithswappy)
-
-</td>
-</tr>
-</table>
-
----
-
-## 📊 Project Stats
+<br />
 
 <div align="center">
-
-![GitHub stars](https://img.shields.io/github/stars/Codewithswappy/RareUI?style=for-the-badge\u0026logo=github)
-![GitHub forks](https://img.shields.io/github/forks/Codewithswappy/RareUI?style=for-the-badge\u0026logo=github)
-![GitHub issues](https://img.shields.io/github/issues/Codewithswappy/RareUI?style=for-the-badge\u0026logo=github)
-![License](https://img.shields.io/github/license/Codewithswappy/RareUI?style=for-the-badge)
-
-</div>
-
----
-
-## 💬 Community
-
-Join our growing community:
-
-- 🐦 **Twitter**: Share your builds with [@heyyswap](https://x.com/heyyswap)
-- 💼 **LinkedIn**: Connect at [swapnilkalambe4](https://www.linkedin.com/in/swapnilkalambe4/)
-- 🐙 **GitHub**: Star and watch for updates
-- 📧 **Email**: Questions? Reach out!
-
----
-
-## 🙏 Acknowledgments
-
-RareUI is inspired by and built with:
-
-- [Tailwind CSS](https://tailwindcss.com) - Amazing utility-first CSS framework
-- [Framer Motion](https://www.framer.com/motion/) - Beautiful animations
-- [shadcn/ui](https://ui.shadcn.com/) - Inspiration for component architecture
-- [Aceternity UI](https://ui.aceternity.com/) - Design inspiration
-- [Magic UI](https://magicui.design/) - Animation concepts
-
-Special thanks to the open-source community! 🙌
-
----
-
-## 📈 Roadmap
-
-<table>
-<tr>
-<td>
-
-**Till Feb 2026**
-- [ ] 50+ New Components
-- [ ] CLI Improvements
-- [ ] Component Playground
-- [ ] Color and Theme Customization
-
-</td>
-<td>
-
-**Till May 2026**
-- [ ] 100+ Components
-- [ ] Figma Plugin
-- [ ] VS Code Extension
-- [ ] Premium Templates
-
-</td>
-</tr>
-</table>
-
----
-
-<div align="center">
-
-### Built with ❤️ by [Swappy](https://x.com/heyyswap)
-
-**Made in India 🇮🇳**
-
-<sub>If you found this helpful, please ⭐ star the repo!</sub>
-
----
-
-**[↑ Back to Top](#rareui)**
-
+  <sub>Built with ❤️ by <a href="https://x.com/heyyswap">Swappy</a>. Made in India 🇮🇳</sub>
 </div>
