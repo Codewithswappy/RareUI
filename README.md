@@ -27,7 +27,7 @@
 <div align="center">
   <a href="https://github.com/Codewithswappy/RareUI/stargazers"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Codewithswappy/RareUI"></a>
   <a href="https://github.com/Codewithswappy/RareUI/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/License-MIT-magenta"></a>
-  <a href="https://nm0.in/twitter"><img alt="Twitter" src="https://img.shields.io/twitter/follow/heyyswap?style=social"></a>
+  <a href="https://x.com/heyyswap"><img alt="Twitter" src="https://img.shields.io/twitter/follow/heyyswap?style=social"></a>
 </div>
 
 ## Documentation
