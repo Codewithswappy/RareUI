@@ -37,6 +37,11 @@
         "href": "/docs/components/animated-tab"
       },
       {
+        "title": "Floating Navigation",
+        "href": "/docs/components/floating-navigation",
+        "badge": "New"
+      },
+      {
         "title": "Glass Shimmer Button",
         "href": "/docs/components/glass-shimmer-button"
       },
@@ -62,17 +67,20 @@
       },
       {
         "title": "Retro Pixel Button",
-        "href": "/docs/components/retro-pixel-button",
-        "badge": "New"
+        "href": "/docs/components/retro-pixel-button"
       },
       {
         "title": "Soft Button",
         "href": "/docs/components/soft-button"
       },
       {
-        "title": "Liquid Metal",
-        "href": "/docs/components/liquid-metal",
+        "title": "Toast Tabs",
+        "href": "/docs/components/toast-tabs",
         "badge": "New"
+      },
+      {
+        "title": "Liquid Metal",
+        "href": "/docs/components/liquid-metal"
       },
       {
         "title": "Loading Spinner",
@@ -89,13 +97,17 @@
         "href": "/docs/text-animation/magnetic-scatterText"
       },
       {
+        "title": "Sound Text",
+        "href": "/docs/text-animation/sound-text",
+        "badge": "New"
+      },
+      {
         "title": "Vapor SmokeText",
         "href": "/docs/text-animation/vapor-smokeText"
       },
       {
         "title": "Word Magnet",
-        "href": "/docs/text-animation/word-magnet",
-        "badge": "New"
+        "href": "/docs/text-animation/word-magnet"
       }
     ]
   },
@@ -104,8 +116,7 @@
     "items": [
       {
         "title": "Book 3d",
-        "href": "/docs/3d-elements/book-3d",
-        "badge": "New"
+        "href": "/docs/3d-elements/book-3d"
       }
     ]
   },
@@ -114,8 +125,7 @@
     "items": [
       {
         "title": "Liquid Wave",
-        "href": "/docs/interactive-background/liquid-wave",
-        "badge": "New"
+        "href": "/docs/interactive-background/liquid-wave"
       }
     ]
   }

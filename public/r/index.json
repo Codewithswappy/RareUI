@@ -5,6 +5,7 @@
     "AnimatedTab",
     "AnimatedTabsDemo",
     "ClickSpark",
+    "FloatingNavigation",
     "glass-shimmer-button",
     "LiquidWave",
     "LiquidWaveLazy",
@@ -19,7 +20,9 @@
     "retro-pixel-button",
     "SoftButton",
     "MagneticScatterText",
+    "SoundText",
     "VaporSmokeText",
-    "WordMagnet"
+    "WordMagnet",
+    "ToastTabs"
   ]
 }
