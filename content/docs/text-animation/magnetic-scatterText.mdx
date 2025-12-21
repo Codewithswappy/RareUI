@@ -5,7 +5,6 @@ description: An interactive text animation that scatters on hover with magnetic 
 
 import { MagneticScatterText } from "@/components/rareui/Text Animation/MagneticScatterText";
 import { Preview } from "@/components/mdx/preview";
-import { DemoWithRefresh } from "@/components/mdx/demo-with-refresh";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Preview
@@ -110,11 +109,9 @@ export const MagneticScatterText: React.FC<MagneticScatterTextProps> = ({ text, 
 };`}
   cliCommand="npx rareui add MagneticScatterText"
 >
-  <DemoWithRefresh>
     <div className="w-full h-[300px] flex items-center justify-center">
       <MagneticScatterText text="Hover Me" className="text-6xl" />
     </div>
-  </DemoWithRefresh>
 </Preview>
 
 ## Usage
