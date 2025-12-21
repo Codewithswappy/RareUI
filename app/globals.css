@@ -294,7 +294,7 @@ aside > div::-webkit-scrollbar-thumb:hover {
   border: 1px solid hsl(var(--border)) !important;
   border-radius: var(--radius-lg) !important;
   padding: 1rem !important;
-  margin: 1.5rem 0 !important;
+  margin: 1.5rem 0;
   overflow-x: auto;
 }
 
@@ -303,6 +303,20 @@ aside > div::-webkit-scrollbar-thumb:hover {
   padding: 0 !important;
   color: inherit !important;
   font-weight: 400;
+}
+
+/* Code blocks inside Tabs - compact styling */
+[role="tabpanel"] pre,
+.prose [role="tabpanel"] pre {
+  margin: 0 !important;
+  padding: 0.2rem 0rem !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+}
+
+[role="tabpanel"] pre code {
+  font-size: 0.875rem;
 }
 
 /* Headings */
