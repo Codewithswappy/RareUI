@@ -294,15 +294,15 @@ export function Preview({ children, className, code, cliCommand, hideCodeTab = f
 
         {/* Canvas Area */}
         <div className="relative min-h-[400px] bg-zinc-50/50 dark:bg-zinc-950/50 flex flex-col rounded-b-xl overflow-hidden">
-          <div
+          {/* <div
             className="absolute inset-0 pointer-events-none opacity-[0.4] hidden md:block"
             style={{
               backgroundImage: `radial-gradient(${theme === 'dark' ? '#333' : '#e5e7eb'} 1px, transparent 1px)`,
               backgroundSize: '24px 24px'
             }}
-          />
+          /> */}
 
-          <div className="flex-1 overflow-auto p-0 md:p-8 flex relative z-10">
+          <div className="flex-1 overflow-auto p-0 md:p-4 flex relative z-10">
             {activeTab === "preview" ? (
               <motion.div
                 layout
