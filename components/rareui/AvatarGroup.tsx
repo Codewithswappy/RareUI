@@ -28,71 +28,94 @@ export default function AvatarGroup() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % avatars.length);
-    }, 3500); // Slower interval to enjoy the state
+    }, 2000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="flex items-center gap-3">
-      {/* Dynamic Avatar Stack */}
-      <div className="flex items-center">
-        {avatars.map((avatar, index) => {
-          const isActive = index === activeIndex;
+    <div className="flex justify-center items-start  gap-1">
+      {/* Avatar Row */}
+      <div className="flex items-end h-[54px]">
+        {" "}
+        {/* Fixed height for jumping room */}
+        <div className="flex -space-x-4">
+          {avatars.map((avatar, index) => {
+            const isActive = index === activeIndex;
+            return (
+              <div key={avatar.alt} className="relative group">
+                {/* Floating Tooltip */}
+                <AnimatePresence mode="wait">
+                  {isActive && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 5, scale: 0.9 }}
+                      className="absolute -top-9 left-1/2 -translate-x-1/2 bg-neutral-900 text-white text-[10px] font-bold px-2 py-1 rounded-md shadow-xl whitespace-nowrap z-50 flex items-center gap-1"
+                    >
+                      {avatar.alt}
+                      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-neutral-900 rotate-45" />{" "}
+                      {/* Arrow */}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-          return (
-            <motion.div
-              key={avatar.alt}
-              layout
-              className={`relative flex items-center overflow-hidden rounded-full border-2 bg-white shadow-sm`}
-              style={{
-                zIndex: isActive ? 50 : avatars.length - index,
-                willChange: "width, margin-left",
-              }}
-              initial={false}
-              animate={{
-                width: isActive ? "auto" : 40,
-                marginLeft: index === 0 ? 0 : -10,
-                borderColor: isActive ? "#ffffff" : "#e5e5e5",
-                paddingRight: isActive ? 14 : 0,
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 260,
-                damping: 20,
-              }}
-            >
-              <img
-                src={avatar.src}
-                alt={avatar.alt}
-                className="h-10 w-10 object-cover shrink-0"
-              />
+                {/* Avatar Circle */}
+                <motion.div
+                  className={`relative h-10 w-10  rounded-full border-2 border-white shadow-sm bg-white overflow-hidden z-20`}
+                  animate={{
+                    y: isActive ? -8 : 0,
+                    scale: isActive ? 1.1 : 1,
+                    zIndex: isActive ? 50 : avatars.length - index,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20,
+                  }}
+                >
+                  <img
+                    src={avatar.src}
+                    alt={avatar.alt}
+                    className="h-full w-full object-cover"
+                  />
+                </motion.div>
 
-              <AnimatePresence mode="popLayout">
+                {/* Shadow underneath jumping avatar */}
                 {isActive && (
                   <motion.div
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -10 }}
-                    transition={{ duration: 0.4, delay: 0.1 }}
-                    className="flex items-center"
-                  >
-                    <span className="whitespace-nowrap pl-2 text-xs font-semibold text-black">
-                      {avatar.alt}
-                    </span>
-                  </motion.div>
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 0.2, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="absolute bottom-0 left-2 right-2 h-1 bg-black rounded-full blur-[2px] z-10"
+                  />
                 )}
-              </AnimatePresence>
-            </motion.div>
-          );
-        })}
+              </div>
+            );
+          })}
+          {/* Add button placeholder */}
+         
+        </div>
       </div>
 
-      {/* Static Context Label */}
-      <div className="flex items-start flex-col">
-        <p className="text-[12px] font-medium text-white">1k+ Users</p>
-        <p className="text-[8px] font-normal text-neutral-400">
-          Used and &hearts; by developers.
-        </p>
+      {/* Static Label */}
+      <div className="pl-3 flex flex-col items-start justify-center pt-4">
+        {/* <div className="flex gap-0.5">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <svg
+              key={i}
+              className="w-3 h-3 text-orange-300 fill-current"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+          ))}
+        </div> */}
+        <span className="text-[12px] font-semibold text-neutral-200">
+          2k+ Users
+        </span>
+        <span className="text-[10px] font-semibold text-neutral-400 uppercase tracking-wide">
+          &hearts; by many developers.
+        </span>
       </div>
     </div>
   );

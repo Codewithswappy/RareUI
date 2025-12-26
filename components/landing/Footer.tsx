@@ -6,7 +6,7 @@ import SkewOnScroll from "@/components/ui/SkewOnScroll";
 
 export default function Footer() {
   return (
-    <footer className="w-[98%] mx-auto pb-12 px-4 md:px-8 relative overflow-hidden rounded-b-4xl md:rounded-b-[3.5rem] mt-0">
+    <footer className="w-[98%] max-w-[1600px] mx-auto pb-12 px-4 md:px-8 relative overflow-hidden rounded-b-4xl md:rounded-b-[3.5rem] mt-0">
       <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0">
         {/* 1. Base Gradient Foundation */}
         <div className="absolute inset-0 transition-opacity duration-700 bg-linear-to-b from-[#d8e8f0] via-[#e8f2f6]/50 to-[#d8e8f0] dark:from-black dark:via-[#0d2a36]/15 dark:to-black" />
@@ -205,7 +205,7 @@ export default function Footer() {
       <div className="absolute bottom-[-10%] left-1/2 -translate-x-1/2 w-full text-center pointer-events-none select-none overflow-hidden leading-none z-0">
         <SkewOnScroll skewAmount={5}>
           <motion.h1
-            className="text-[25vw] md:text-[20vw] font-bold tracking-tighter text-foreground scale-125 blur-[2px]"
+            className="text-[25vw] md:text-[20vw] 2xl:text-[320px] font-bold tracking-tighter text-foreground scale-125 blur-[2px]"
             style={{
               maskImage:
                 "linear-gradient(to bottom, black 30%, transparent 100%)",

@@ -8,6 +8,8 @@ import { useTheme } from "next-themes";
 import SmartThemeToggle from "../internal/SmartThemeToggle";
 import { ThemeToggle } from "../theme-toggle";
 
+import { Menu03Icon, Cancel01Icon } from "hugeicons-react";
+
 export default function Navbar() {
   const [stars, setStars] = useState<number | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -35,7 +37,7 @@ export default function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-      className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-12 bg-transparent"
+      className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-8 pr-2 md:px-12 bg-transparent"
     >
       <div className="flex items-center gap-10">
         {/* Logo */}
@@ -45,7 +47,7 @@ export default function Navbar() {
             alt="RareUI Logo"
             width={70}
             height={40}
-            className="object-contain transition-transform duration-300 group-hover:scale-105"
+            className="object-contain transition-transform duration-300 group-hover:scale-105 size-10 md:size-12 lg:size-14"
           />
         </Link>
 
@@ -127,35 +129,9 @@ export default function Navbar() {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <Cancel01Icon className="w-6 h-6" />
           ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 9h16.5m-16.5 6.75h16.5"
-              />
-            </svg>
+            <Menu03Icon className="w-6 h-6" />
           )}
         </button>
       </div>
@@ -190,7 +166,7 @@ export default function Navbar() {
               transition: { duration: 0.2 },
             }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed inset-0 z-40 bg-[#0d2a36]/95 dark:bg-[#052b3b]/95 backdrop-blur-2xl md:hidden flex flex-col items-center justify-center gap-8 overflow-hidden"
+            className="fixed inset-0 z-40 bg-white/80 dark:bg-[#052b3b]/95 backdrop-blur-2xl md:hidden flex flex-col items-center justify-center gap-8 overflow-hidden"
             style={{ transformOrigin: "top right" }}
           >
             {/* Background Gradient Element */}
@@ -230,7 +206,7 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className="text-4xl font-bold text-white/90 hover:text-white transition-colors tracking-tight"
+                    className="text-4xl font-bold text-black/90 hover:text-black transition-colors tracking-tight"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {link.name}
@@ -249,7 +225,7 @@ export default function Navbar() {
                 href="https://x.com/heyyswap"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 bg-white/10 rounded-full text-white hover:bg-white/20 transition-all border border-white/5"
+                className="p-3 bg-white/10 rounded-full text-black hover:bg-white/80 transition-all border border-white/90"
               >
                 <svg
                   className="w-6 h-6"
@@ -263,7 +239,7 @@ export default function Navbar() {
                 href="https://github.com/Codewithswappy/RareUI"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 bg-white/10 rounded-full text-white hover:bg-white/20 transition-all border border-white/5"
+                className="p-3 bg-white/10 rounded-full text-black hover:bg-white/80 transition-all border border-white/90"
               >
                 <svg
                   className="w-6 h-6"

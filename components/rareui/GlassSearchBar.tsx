@@ -92,7 +92,7 @@ export default function GlassSearchBar() {
   };
 
   return (
-    <div className="relative z-50 flex flex-col items-start min-w-[360px]">
+    <div className="relative z-50 flex flex-col items-center md:items-start w-[90%] md:w-[360px]">
       {/* Search Input - Glass Wrapper */}
       <div
         className={`relative w-full p-2 bg-white/10 backdrop-blur-3xl border border-white/20 rounded-lg shadow-2xl overflow-hidden transition-all duration-300 ${isFocused ? "ring-2 ring-white/30" : ""}`}

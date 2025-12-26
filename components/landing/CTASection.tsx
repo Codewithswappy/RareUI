@@ -10,7 +10,7 @@ import ThreeDButton from "../rareui/ThreeDButton";
 
 export default function CTASection() {
   return (
-    <section className="relative w-[98%] mx-auto pt-8 md:pt-8 px-4 md:px-8 overflow-hidden rounded-t-4xl md:rounded-t-[3.5rem] mb-0">
+    <section className="relative w-[98%] max-w-[1600px] mx-auto pt-8 md:pt-8 px-4 md:px-8 overflow-hidden rounded-t-4xl md:rounded-t-[3.5rem] mb-0">
       {/* --- Technical Blueprint Background --- */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0">
         {/* 1. Base Gradient Foundation */}

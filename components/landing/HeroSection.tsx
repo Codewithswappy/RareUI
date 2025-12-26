@@ -21,8 +21,8 @@ export default function Hero() {
   }, []);
 
   return (
-    <div className="transition-colors duration-500 min-h-screen pt-2.5">
-      <div className="relative min-h-[97vh] w-[98%] mx-auto flex flex-col items-center justify-center overflow-hidden rounded-2xl md:rounded-2xl transition-colors duration-500 rounded-t-2xl md:rounded-t-2xl bg-[#0d2a36] dark:bg-[#052b3b]">
+    <div className="w-full flex justify-center items-start pt-4 pb-12">
+      <div className="relative h-[calc(100vh-2rem)] min-h-[600px] max-h-[900px] w-[98%] max-w-[1600px] mx-auto flex flex-col items-center justify-center overflow-hidden rounded-2xl md:rounded-2xl transition-colors duration-500 rounded-t-2xl md:rounded-t-2xl bg-[#0d2a36] dark:bg-[#052b3b]">
         <Navbar />
         {/* Main Gradient: Adjust based on theme */}
         <div className="absolute inset-0 transition-opacity duration-500 bg-linear-to-b from-white/50 via-[#e8f2f6]/50 to-[#0d2a36] dark:from-black/50 dark:via-[#e8f2f6]/50 dark:to-[#263a42]" />
@@ -41,14 +41,14 @@ export default function Hero() {
         <div className="absolute inset-0 pointer-events-none transition-colors duration-500 bg-linear-to-t from-[#0d2a36]/90 to-transparent dark:from-[#0d2a36]/90" />
 
         {/* Hero Content */}
-        <div className=" w-full z-10 flex h-[40vh] mb-13 items-center justify-center">
-          <div className="flex flex-col items-start justify-center h-auto md:h-[40vh] md:w-[50%] w-full p-6 md:p-12 pt-12 md:pt-0 z-10 text-pretty">
+        <div className="w-full max-w-7xl z-10 flex flex-col md:flex-row items-center justify-center mb-12">
+          <div className="flex flex-col items-start justify-center w-full md:w-1/2 px-6 py-12 md:p-12 md:pt-0 z-10 text-pretty">
             <div className="mb-1">
               <FeatureBadge badgeText="RareUI">
                 New Component everyday
               </FeatureBadge>
             </div>
-            <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter text-clip text-transparent bg-clip-text bg-linear-to-r from-neutral-50 via-neutral-100 to-neutral-50 dark:from-neutral-50 dark:via-neutral-100 dark:to-neutral-50">
+            <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter text-clip text-transparent bg-clip-text px-2 pb-3 bg-linear-to-r from-neutral-50 via-neutral-100 to-neutral-50 dark:from-neutral-50 dark:via-neutral-100 dark:to-neutral-50">
               Design Less <br /> Ship{" "}
               <span className="inline-flex min-w-[200px] [perspective:1000px]">
                 <AnimatePresence mode="wait">
@@ -65,20 +65,22 @@ export default function Hero() {
                 </AnimatePresence>
               </span>
             </h1>
-            <h3 className="text-lg font-normal tracking-tighter md:hidden text-neutral-300 mb-1">
+            <h3 className="text-lg font-normal tracking-tighter md:hidden text-neutral-300 mb-3">
               Spend less time designing and tweaking UI, and more time shipping
               reliable, visually refined interfaces.
             </h3>
             <div className="m-3">
               <AvatarGroup />
             </div>
-            <div className="flex items-start flex-col md:hidden mt-6 gap-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center md:hidden mt-6 gap-6 w-full">
               <ThreeDButton text="Browse Components" href="/docs" />
-              <GlassSearchBar />
+              <div className="w-full sm:w-auto max-w-[360px]">
+                <GlassSearchBar />
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-col hidden md:block items-start h-[40vh] w-[50%] pl-0 p-12 z-10">
+          <div className="hidden md:flex flex-col items-start justify-center w-1/2 pl-0 p-12 z-10">
             <h3 className="text-xl font-normal tracking-tighter text-neutral-300 mb-6">
               Spend less time designing and tweaking UI, and more time shipping
               reliable, visually refined interfaces.
