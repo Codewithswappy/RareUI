@@ -34,9 +34,9 @@ export default function HowItWorks() {
         className="w-[98%] mx-auto relative border border-black/5 dark:border-white/5 rounded-4xl md:rounded-[3.5rem] overflow-hidden py-16 md:py-24 px-6 md:px-12 group/how"
         style={{
           maskImage:
-            "linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)",
+            "linear-gradient(to bottom, transparent, black 5rem, black calc(100% - 5rem), transparent)",
           WebkitMaskImage:
-            "linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)",
+            "linear-gradient(to bottom, transparent, black 5rem, black calc(100% - 5rem), transparent)",
         }}
       >
         {/* --- Hero-style Background System --- */}

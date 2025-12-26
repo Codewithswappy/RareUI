@@ -119,9 +119,9 @@ export default function Navbar() {
           </svg>
         </motion.a>
 
-        {/* <div>
+        <div>
           <SmartThemeToggle enableSound={false} />
-        </div> */}
+        </div>
 
         {/* Mobile Menu Button */}
         <button
@@ -129,7 +129,7 @@ export default function Navbar() {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? (
-            <Cancel01Icon className="w-6 h-6 text-black" />
+            <Cancel01Icon className="w-6 h-6 text-black dark:text-white" />
           ) : (
             <Menu03Icon className="w-6 h-6" />
           )}
@@ -166,7 +166,7 @@ export default function Navbar() {
               transition: { duration: 0.2 },
             }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed inset-0 z-40 bg-white/80 dark:bg-[#052b3b]/95 backdrop-blur-2xl md:hidden flex flex-col items-center justify-center gap-8 overflow-hidden"
+            className="fixed inset-0 z-40 bg-white/80 dark:bg-black/90 backdrop-blur-2xl md:hidden flex flex-col items-center justify-center gap-8 overflow-hidden"
             style={{ transformOrigin: "top right" }}
           >
             {/* Background Gradient Element */}
@@ -206,7 +206,7 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className="text-4xl font-bold text-black/90 hover:text-black transition-colors tracking-tight"
+                    className="text-4xl font-bold text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition-colors tracking-tight"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {link.name}
@@ -225,7 +225,7 @@ export default function Navbar() {
                 href="https://x.com/heyyswap"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 bg-white/10 rounded-full text-black hover:bg-white/80 transition-all border border-white/90"
+                className="p-3 bg-white/10 rounded-full text-black hover:bg-white/80 transition-all border border-white/90 dark:bg-black/10 dark:text-white dark:hover:bg-black/80 "
               >
                 <svg
                   className="w-6 h-6"
@@ -239,7 +239,7 @@ export default function Navbar() {
                 href="https://github.com/Codewithswappy/RareUI"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 bg-white/10 rounded-full text-black hover:bg-white/80 transition-all border border-white/90"
+                className="p-3 bg-white/10 rounded-full text-black hover:bg-white/80 transition-all border border-white/90 dark:bg-black/10 dark:text-white dark:hover:bg-black/80 "
               >
                 <svg
                   className="w-6 h-6"

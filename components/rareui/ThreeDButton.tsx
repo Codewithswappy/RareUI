@@ -29,7 +29,7 @@ export default function ThreeDButton({
       whileTap={{ scale: 0.98, y: 1 }}
       transition={{ type: "spring", stiffness: 400, damping: 15 }}
       className={cn(
-        "group relative flex items-center justify-center rounded-[10px] bg-[#060612] dark:bg-neutral-900 dark:border dark:border-white/10 px-6 py-3 text-white transition-colors cursor-pointer",
+        "group relative flex items-center justify-center rounded-[10px] bg-[#060612] px-6 py-3 text-white transition-colors cursor-pointer",
         className
       )}
       style={{

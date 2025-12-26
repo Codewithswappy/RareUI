@@ -77,13 +77,13 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="p-1 rounded-full bg-black dark:bg-white cursor-pointer"
+      className="p-1 rounded-full cursor-pointer"
       aria-label="Toggle theme"
     >
       {isDark ? (
-        <Sun className="w-5 h-5 text-black" />
+        <Sun className="w-5 h-5 text-white" />
       ) : (
-        <Moon className="w-5 h-5 text-white" />
+        <Moon className="w-5 h-5 text-black" />
       )}
     </button>
   );

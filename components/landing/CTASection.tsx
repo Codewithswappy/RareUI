@@ -10,7 +10,7 @@ import ThreeDButton from "../rareui/ThreeDButton";
 
 export default function CTASection() {
   return (
-    <section className="relative w-[98%] max-w-[1600px] mx-auto pt-8 md:pt-8 px-4 md:px-8 overflow-hidden rounded-t-4xl md:rounded-t-[3.5rem] mb-0">
+    <section className="relative w-[98%] max-w-[1600px] mx-auto pt-8 md:pt-8 px-4 md:px-8 overflow-hidden mb-0">
       {/* --- Technical Blueprint Background --- */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0">
         {/* 1. Base Gradient Foundation */}
@@ -72,12 +72,18 @@ export default function CTASection() {
         >
           {/* Browse Components - Primary */}
           <Link href="/docs" className="w-full sm:w-auto">
-            <ThreeDButton text="Browse Components" />
+            <ThreeDButton
+              text="Browse Components"
+              className="dark:bg-white [&>span]:dark:text-black dark:shadow-[inset_0px_1px_0.75px_0px_rgba(0,0,0,0.02),0px_4px_4px_0px_rgba(255,255,255,0.1),0px_0px_0px_1px_rgba(255,255,255,0.2),0px_4px_4px_0px_rgba(255,255,255,0.1),0px_47.62px_46.23px_0px_rgba(255,255,255,0.1),0px_27.25px_26.45px_0px_rgba(255,255,255,0.1),0px_16.54px_16.06px_0px_rgba(255,255,255,0.1),0px_9.97px_9.68px_0px_rgba(255,255,255,0.1)]! border border-gray-400"
+            />
           </Link>
 
           {/* Docs - Secondary */}
           <Link href="/docs/installation/cli" className="w-full sm:w-auto">
-            <ThreeDButton text="Docs" />
+            <ThreeDButton
+              text="Docs"
+              className="dark:bg-white [&>span]:dark:text-black dark:shadow-[inset_0px_1px_0.75px_0px_rgba(0,0,0,0.02),0px_4px_4px_0px_rgba(255,255,255,0.1),0px_0px_0px_1px_rgba(255,255,255,0.2),0px_4px_4px_0px_rgba(255,255,255,0.1),0px_47.62px_46.23px_0px_rgba(255,255,255,0.1),0px_27.25px_26.45px_0px_rgba(255,255,255,0.1),0px_16.54px_16.06px_0px_rgba(255,255,255,0.1),0px_9.97px_9.68px_0px_rgba(255,255,255,0.1)]! border border-gray-400"
+            />
           </Link>
         </motion.div>
       </div>
