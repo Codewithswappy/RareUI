@@ -48,7 +48,7 @@ export default function Hero() {
                 New Component everyday
               </FeatureBadge>
             </div>
-            <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter text-clip text-transparent bg-clip-text px-2 pb-3 bg-linear-to-r from-neutral-50 via-neutral-100 to-neutral-50 dark:from-neutral-50 dark:via-neutral-100 dark:to-neutral-50">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-clip text-transparent bg-clip-text px-1.8 pb-3 bg-linear-to-r from-neutral-50 via-neutral-100 to-neutral-50 dark:from-neutral-50 dark:via-neutral-100 dark:to-neutral-50">
               Design Less <br /> Ship{" "}
               <span className="inline-flex min-w-[200px] [perspective:1000px]">
                 <AnimatePresence mode="wait">
@@ -65,7 +65,7 @@ export default function Hero() {
                 </AnimatePresence>
               </span>
             </h1>
-            <h3 className="text-lg font-normal tracking-tighter md:hidden text-neutral-300 mb-3">
+            <h3 className="text-md font-normal tracking-tighter md:hidden text-neutral-300 mb-3">
               Spend less time designing and tweaking UI, and more time shipping
               reliable, visually refined interfaces.
             </h3>
