@@ -37,7 +37,7 @@ export default function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-      className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-8 pr-2 md:px-12 bg-transparent"
+      className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-6 pr-2 md:px-12 pt-2 bg-transparent"
     >
       <div className="flex items-center gap-10">
         {/* Logo */}
@@ -129,7 +129,7 @@ export default function Navbar() {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? (
-            <Cancel01Icon className="w-6 h-6" />
+            <Cancel01Icon className="w-6 h-6 text-black" />
           ) : (
             <Menu03Icon className="w-6 h-6" />
           )}
