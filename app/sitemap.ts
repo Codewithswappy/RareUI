@@ -6,7 +6,9 @@ const baseUrl = 'https://rareui.in'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const currentDate = new Date()
 
-    // Static pages
+    // Static pages - only include fully functional pages
+    // Removed /templates and /pricing as they are "Coming Soon" placeholder pages
+    // This prevents Google from indexing incomplete pages
     const staticPages: MetadataRoute.Sitemap = [
         {
             url: baseUrl,
@@ -15,16 +17,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 1.0,
         },
         {
-            url: `${baseUrl}/templates`,
+            url: `${baseUrl}/docs`,
             lastModified: currentDate,
-            changeFrequency: 'weekly',
-            priority: 0.8,
-        },
-        {
-            url: `${baseUrl}/pricing`,
-            lastModified: currentDate,
-            changeFrequency: 'monthly',
-            priority: 0.7,
+            changeFrequency: 'daily',
+            priority: 0.95,
         },
     ]
 

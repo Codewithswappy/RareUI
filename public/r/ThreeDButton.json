@@ -1,0 +1,22 @@
+{
+  "name": "ThreeDButton",
+  "type": "registry:ui",
+  "dependencies": [
+    "react",
+    "framer-motion",
+    "clsx",
+    "tailwind-merge",
+    "next",
+    "@types/react",
+    "typescript"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/rareui/ThreeDButton.tsx",
+      "content": "\"use client\";\r\n\r\nimport React from \"react\";\r\nimport { motion } from \"framer-motion\";\r\n\r\n// Inline utility if needed\r\nimport { clsx, type ClassValue } from \"clsx\";\r\nimport { twMerge } from \"tailwind-merge\";\r\n\r\nimport Link from \"next/link\";\r\n\r\nfunction cn(...inputs: ClassValue[]) {\r\n  return twMerge(clsx(inputs));\r\n}\r\n\r\nexport default function ThreeDButton({\r\n  text = \"Book a call\",\r\n  className,\r\n  href,\r\n}: {\r\n  text?: string;\r\n  className?: string;\r\n  href?: string;\r\n}) {\r\n  const buttonContent = (\r\n    <motion.button\r\n      initial=\"initial\"\r\n      whileHover=\"hover\"\r\n      whileTap={{ scale: 0.98, y: 1 }}\r\n      transition={{ type: \"spring\", stiffness: 400, damping: 15 }}\r\n      className={cn(\r\n        \"group relative flex items-center justify-center rounded-[10px] bg-[#060612] px-6 py-3 text-white transition-colors cursor-pointer\",\r\n        className\r\n      )}\r\n      style={{\r\n        boxShadow:\r\n          \"inset 0px 1px 0.75px 0px rgba(255, 255, 255, 0.07), 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 0px 0px 1px rgb(47, 47, 55), 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 47.62px 46.23px 0px rgba(15, 15, 15, 0.4), 0px 27.25px 26.45px 0px rgba(15, 15, 15, 0.34), 0px 16.54px 16.06px 0px rgba(15, 15, 15, 0.29), 0px 9.97px 9.68px 0px rgba(15, 15, 15, 0.25)\",\r\n      }}\r\n    >\r\n      <span className=\"block whitespace-nowrap text-[15px] font-medium leading-[20px] text-white/90\">\r\n        {text}\r\n      </span>\r\n    </motion.button>\r\n  );\r\n\r\n  if (href) {\r\n    return <Link href={href}>{buttonContent}</Link>;\r\n  }\r\n\r\n  return buttonContent;\r\n}\r\n",
+      "type": "registry:ui",
+      "target": "components/rareui/ThreeDButton.tsx"
+    }
+  ]
+}

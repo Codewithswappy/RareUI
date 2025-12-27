@@ -4,9 +4,12 @@
     "book-3d",
     "AnimatedTab",
     "AnimatedTabsDemo",
+    "AvatarGroup",
     "ClickSpark",
+    "FeatureBadge",
     "FloatingNavigation",
     "glass-shimmer-button",
+    "GlassSearchBar",
     "LiquidWave",
     "LiquidWaveLazy",
     "LiquidButton",
@@ -23,6 +26,7 @@
     "SoundText",
     "VaporSmokeText",
     "WordMagnet",
+    "ThreeDButton",
     "ToastTabs"
   ]
 }

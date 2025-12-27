@@ -1,6 +1,6 @@
 "use client";
 
-import ThreeDButton from "@/components/rareui/ThreeDButton";
+import ThreeDButton from "@/components/internal/ThreeDButton";
 import Navbar from "@/components/landing/Navbar";
 import FeatureBadge from "@/components/rareui/FeatureBadge";
 import AvatarGroup from "@/components/rareui/AvatarGroup";

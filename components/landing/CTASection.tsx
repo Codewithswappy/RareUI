@@ -4,9 +4,7 @@ import SkewOnScroll from "@/components/ui/SkewOnScroll";
 
 import { motion } from "motion/react";
 import Link from "next/link";
-import { MoveRight, BookOpen, Layers } from "lucide-react";
-import LiquidButton from "../rareui/LiquidButton";
-import ThreeDButton from "../rareui/ThreeDButton";
+import ThreeDButton from "../internal/ThreeDButton";
 
 export default function CTASection() {
   return (
@@ -74,7 +72,7 @@ export default function CTASection() {
           <Link href="/docs" className="w-full sm:w-auto">
             <ThreeDButton
               text="Browse Components"
-              className="dark:bg-white [&>span]:dark:text-black dark:shadow-[inset_0px_1px_0.75px_0px_rgba(0,0,0,0.02),0px_4px_4px_0px_rgba(255,255,255,0.1),0px_0px_0px_1px_rgba(255,255,255,0.2),0px_4px_4px_0px_rgba(255,255,255,0.1),0px_47.62px_46.23px_0px_rgba(255,255,255,0.1),0px_27.25px_26.45px_0px_rgba(255,255,255,0.1),0px_16.54px_16.06px_0px_rgba(255,255,255,0.1),0px_9.97px_9.68px_0px_rgba(255,255,255,0.1)]! border border-gray-400"
+              className="dark:bg-white [&>span]:dark:text-black dark:shadow-[inset_0px_1px_0.75px_0px_rgba(0,0,0,0.02),0px_4px_4px_0px_rgba(255,255,255,0.1),0px_0px_0px_1px_rgba(255,255,255,0.2),0px_4px_4px_0px_rgba(255,255,255,0.1),0px_47.62px_46.23px_0px_rgba(255,255,255,0.1),0px_27.25px_26.45px_0px_rgba(255,255,255,0.1),0px_16.54px_16.06px_0px_rgba(255,255,255,0.1),0px_9.97px_9.68px_0px_rgba(255,255,255,0.1)]! border border-gray-200"
             />
           </Link>
 

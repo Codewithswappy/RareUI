@@ -1,0 +1,19 @@
+{
+  "name": "FeatureBadge",
+  "type": "registry:ui",
+  "dependencies": [
+    "react",
+    "framer-motion",
+    "@types/react",
+    "typescript"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/rareui/FeatureBadge.tsx",
+      "content": "\"use client\";\r\n\r\nimport React from \"react\";\r\nimport { motion } from \"framer-motion\";\r\n\r\nexport default function FeatureBadge({\r\n  badgeText = \"New\",\r\n  children = \"Multi-currency account\",\r\n  href = \"#\",\r\n}: {\r\n  badgeText?: string;\r\n  children?: React.ReactNode;\r\n  href?: string;\r\n}) {\r\n  return (\r\n    <a\r\n      href={href}\r\n      className=\"group relative inline-flex items-center gap-2 rounded-full bg-white/5 border border-white/10 pl-1 pr-3 py-1 backdrop-blur-md cursor-pointer overflow-hidden transition-all hover:bg-white/10 hover:border-white/20\"\r\n    >\r\n      {/* Continuous Glare Effect */}\r\n      <motion.div\r\n        className=\"absolute top-0 w-[50%] h-full bg-linear-to-r from-transparent via-white/20 to-transparent -skew-x-12 pointer-events-none z-0\"\r\n        initial={{ left: \"-100%\" }}\r\n        animate={{ left: \"200%\" }}\r\n        transition={{\r\n          repeat: Infinity,\r\n          repeatType: \"loop\",\r\n          duration: 3,\r\n          ease: \"linear\",\r\n          repeatDelay: 1, // Pause between shines\r\n        }}\r\n      />\r\n\r\n      <span className=\"relative z-10 rounded-full bg-white px-2.5 py-0.5 text-xs font-bold tracking-tight text-black shadow-sm\">\r\n        {badgeText}\r\n      </span>\r\n      <span className=\"relative z-10 text-sm font-medium text-neutral-300 group-hover:text-white transition-colors\">\r\n        {children}\r\n      </span>\r\n    </a>\r\n  );\r\n}\r\n",
+      "type": "registry:ui",
+      "target": "components/rareui/FeatureBadge.tsx"
+    }
+  ]
+}
