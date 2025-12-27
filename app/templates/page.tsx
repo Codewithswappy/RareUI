@@ -3,9 +3,9 @@ import { ArrowLeft, LayoutTemplate } from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Premium Templates | RareUI",
+  title: "Premium Templates - Coming Soon | RareUI Component Library",
   description:
-    "Production-ready dashboards, landing pages, and complete SaaS kits. Save 100+ hours of development time.",
+    "Premium React component templates coming soon. Production-ready dashboards, landing pages, and complete SaaS kits built with our UI component library.",
   robots: {
     index: false,
     follow: true,
@@ -21,12 +21,13 @@ export default function TemplatesPage() {
         </div>
 
         <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">
-          Premium Templates
+          Premium Component Templates
         </h1>
 
         <p className="text-muted-foreground leading-relaxed">
-          Production-ready dashboards, landing pages, and complete SaaS kits are
-          in the works. Save 100+ hours of development time.
+          Full-stack component templates are coming soon. Production-ready
+          dashboards, landing pages, and complete SaaS kits built with our React
+          component library.
         </p>
 
         <div className="pt-4">

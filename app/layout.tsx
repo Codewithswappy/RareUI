@@ -198,11 +198,23 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.png", type: "image/png" },
-      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/favicon.png", sizes: "96x96", type: "image/png" },
+      {
+        url: "/android-chrome-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        url: "/android-chrome-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
+      },
     ],
-    apple: [{ url: "/favicon.png", sizes: "180x180", type: "image/png" }],
-    shortcut: "/favicon.png",
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
   },
   manifest: "/site.webmanifest",
 };
@@ -215,8 +227,20 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
-        <link rel="icon" href="/favicon.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        {/* Favicons - Multiple sizes for best compatibility */}
+        <link rel="icon" href="/favicon.ico" sizes="48x48" />
+        <link rel="icon" href="/favicon.png" type="image/png" sizes="96x96" />
+        <link
+          rel="icon"
+          href="/android-chrome-192x192.png"
+          type="image/png"
+          sizes="192x192"
+        />
+        <link
+          rel="apple-touch-icon"
+          href="/apple-touch-icon.png"
+          sizes="180x180"
+        />
         <meta name="theme-color" content="#000000" />
         {/* Google Site Verification - Replace with your actual verification code */}
         <meta
@@ -279,12 +303,6 @@ export default function RootLayout({
                     price: "0",
                     priceCurrency: "USD",
                     availability: "https://schema.org/InStock",
-                  },
-                  aggregateRating: {
-                    "@type": "AggregateRating",
-                    ratingValue: "4.9",
-                    ratingCount: "150",
-                    bestRating: "5",
                   },
                   description:
                     "Free open-source React UI component library featuring 100+ premium components built with Tailwind CSS, Next.js, and Framer Motion. Copy-paste ready with zero installation required.",
