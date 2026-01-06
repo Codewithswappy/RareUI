@@ -245,7 +245,7 @@ export function Preview({
   };
 
   return (
-    <div className={cn("my-8 w-full", className)}>
+    <div className={cn("flex flex-col gap-4 my-8 w-full", className)}>
       {/* Toast */}
       <AnimatePresence>
         {showToast && (
@@ -264,205 +264,193 @@ export function Preview({
         )}
       </AnimatePresence>
 
-      {/* Premium Preview Box */}
-      <div className="rounded-xl border border-border bg-card shadow-sm group">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+        {/* Tabs */}
+        {!hideCodeTab ? (
+          <div className="relative inline-flex p-[4px] gap-1 rounded-lg bg-zinc-100/50 dark:bg-zinc-800/50 border border-zinc-200/50 dark:border-zinc-700/50 shadow-xs">
+            {["preview", "code"].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab as "preview" | "code")}
+                className={cn(
+                  "relative flex items-center justify-center min-w-[80px] px-4 py-1.5 text-xs font-bold rounded-md transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] z-10 capitalize cursor-pointer",
+                  activeTab === tab
+                    ? "text-zinc-900 dark:text-zinc-100"
+                    : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+                )}
+              >
+                <span className="relative z-10">{tab}</span>
+                {activeTab === tab && (
+                  <motion.div
+                    layoutId="previewActiveTab"
+                    className="absolute inset-0 bg-white dark:bg-zinc-700/80 rounded-md -z-10 shadow-sm"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+        ) : (
+          <div />
+        )}
+
         {/* Toolbar */}
-        <div className="relative z-20 flex flex-col md:flex-row items-center justify-between p-2 border-b border-border bg-muted/30 backdrop-blur-xl gap-4 md:gap-0 rounded-t-xl">
-          {/* Left: Tabs */}
-          {code && !hideCodeTab ? (
-            <div className="flex items-center p-1 bg-muted/50 rounded-lg border border-border/50">
-              <button
-                onClick={() => setActiveTab("preview")}
-                className={cn(
-                  "px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 flex items-center gap-2",
-                  activeTab === "preview"
-                    ? "bg-background text-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                )}
-              >
-                <Eye className="w-3.5 h-3.5" />
-                Preview
-              </button>
-              <button
-                onClick={() => setActiveTab("code")}
-                className={cn(
-                  "px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 flex items-center gap-2",
-                  activeTab === "code"
-                    ? "bg-background text-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                )}
-              >
-                <Code2 className="w-3.5 h-3.5" />
-                Code
-              </button>
-            </div>
-          ) : (
-            <div />
-          )}
-
-          {/* Right: Tools */}
-          <div className="flex items-center gap-2">
-            {/* Device Toggles */}
-            <div className="flex items-center p-1 bg-muted/50 rounded-lg border border-border/50">
-              <button
-                onClick={() => setPreviewWidth("100%")}
-                className={cn(
-                  "p-1.5 rounded  transition-colors",
-                  previewWidth === "100%"
-                    ? "bg-background shadow-sm text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                )}
-                title="Desktop"
-              >
-                <Monitor className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => setPreviewWidth("768px")}
-                className={cn(
-                  "p-1.5 rounded transition-colors",
-                  previewWidth === "768px"
-                    ? "bg-background shadow-sm text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                )}
-                title="Tablet"
-              >
-                <Tablet className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => setPreviewWidth("375px")}
-                className={cn(
-                  "p-1.5 rounded transition-colors",
-                  previewWidth === "375px"
-                    ? "bg-background shadow-sm text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                )}
-                title="Mobile"
-              >
-                <Smartphone className="w-4 h-4" />
-              </button>
-            </div>
-
-            <div className="w-px h-4 bg-border mx-1" />
-
+        <div className="flex items-center gap-2">
+          {/* Device Toggles */}
+          <div className="flex items-center p-1 bg-zinc-100/50 dark:bg-zinc-800/50 rounded-lg border border-zinc-200/50 dark:border-zinc-700/50">
             <button
-              onClick={handleReload}
+              onClick={() => setPreviewWidth("100%")}
               className={cn(
-                "p-2 text-muted-foreground hover:text-foreground bg-muted/50 hover:bg-muted rounded-lg transition-colors",
-                isLoading && "animate-spin"
+                "p-1.5 rounded transition-colors",
+                previewWidth === "100%"
+                  ? "bg-white dark:bg-zinc-700 shadow-sm text-zinc-900 dark:text-zinc-100"
+                  : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"
               )}
-              title="Reload Component"
+              title="Desktop"
             >
-              <RotateCcw className="w-4 h-4" />
+              <Monitor className="w-4 h-4" />
             </button>
-
-            <div className="w-px h-4 bg-border mx-1" />
-
-            {/* AI Prompt */}
-            <div className="relative">
-              <button
-                onClick={() => setShowPromptDropdown(!showPromptDropdown)}
-                className="flex items-center gap-2 px-3 py-1.5 bg-zinc-900 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-900 rounded-lg text-xs font-medium hover:opacity-90 transition-opacity"
-              >
-                <Sparkles className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">AI Prompt</span>
-                <ChevronDown className="w-3 h-3" />
-              </button>
-              {showPromptDropdown && (
-                <div className="absolute right-0 top-full mt-2 w-32 bg-popover border border-border rounded-lg shadow-xl z-50 overflow-hidden py-1">
-                  {["Claude", "v0", "Lovable", "Bolt"].map((platform) => (
-                    <button
-                      key={platform}
-                      onClick={() => copyPrompt(platform)}
-                      className="w-full px-4 py-2 text-left text-xs hover:bg-accent hover:text-accent-foreground transition-colors"
-                    >
-                      {platform}
-                    </button>
-                  ))}
-                </div>
+            <button
+              onClick={() => setPreviewWidth("768px")}
+              className={cn(
+                "p-1.5 rounded transition-colors",
+                previewWidth === "768px"
+                  ? "bg-white dark:bg-zinc-700 shadow-sm text-zinc-900 dark:text-zinc-100"
+                  : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"
               )}
-            </div>
+              title="Tablet"
+            >
+              <Tablet className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => setPreviewWidth("375px")}
+              className={cn(
+                "p-1.5 rounded transition-colors",
+                previewWidth === "375px"
+                  ? "bg-white dark:bg-zinc-700 shadow-sm text-zinc-900 dark:text-zinc-100"
+                  : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"
+              )}
+              title="Mobile"
+            >
+              <Smartphone className="w-4 h-4" />
+            </button>
+          </div>
+
+          <div className="w-px h-4 bg-zinc-200 dark:bg-zinc-800 mx-1" />
+
+          {/* Reload */}
+          <button
+            onClick={handleReload}
+            className={cn(
+              "p-2 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200 bg-zinc-100/50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors",
+              isLoading && "animate-spin"
+            )}
+            title="Reload Component"
+          >
+            <RotateCcw className="w-4 h-4" />
+          </button>
+
+          <div className="w-px h-4 bg-zinc-200 dark:bg-zinc-800 mx-1" />
+
+          {/* AI Prompt */}
+          <div className="relative">
+            <button
+              onClick={() => setShowPromptDropdown(!showPromptDropdown)}
+              className="flex items-center gap-2 px-3 py-1.5 bg-zinc-900 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-900 rounded-lg text-xs font-medium hover:opacity-90 transition-opacity"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">AI Prompt</span>
+              <ChevronDown className="w-3 h-3" />
+            </button>
+            {showPromptDropdown && (
+              <div className="absolute right-0 top-full mt-2 w-32 bg-popover border border-border rounded-lg shadow-xl z-50 overflow-hidden py-1">
+                {["Claude", "v0", "Lovable", "Bolt"].map((platform) => (
+                  <button
+                    key={platform}
+                    onClick={() => copyPrompt(platform)}
+                    className="w-full px-4 py-2 text-left text-xs hover:bg-accent hover:text-accent-foreground transition-colors"
+                  >
+                    {platform}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
+      </div>
 
-        {/* Canvas Area */}
-        <div className="relative min-h-[400px] bg-zinc-50/50 dark:bg-zinc-950/50 flex flex-col rounded-b-xl overflow-hidden">
-          {/* <div
-            className="absolute inset-0 pointer-events-none opacity-[0.4] hidden md:block"
-            style={{
-              backgroundImage: `radial-gradient(${theme === 'dark' ? '#333' : '#e5e7eb'} 1px, transparent 1px)`,
-              backgroundSize: '24px 24px'
-            }}
-          /> */}
+      <div
+        className={cn(
+          "relative min-h-[450px] flex bg-zinc-50/50 dark:bg-zinc-900/20 overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 transition-all",
+          activeTab === "preview" ? "p-0 items-center justify-center" : "p-0"
+        )}
+      >
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-size-[20px_20px]"></div>
 
-          <div className="flex-1 overflow-auto p-0 flex relative z-10">
-            {activeTab === "preview" ? (
-              <motion.div
-                layout
-                animate={{ width: previewWidth }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        <AnimatePresence mode="wait">
+          {activeTab === "preview" ? (
+            <motion.div
+              key="preview"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, width: previewWidth }}
+              exit={{ opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className={cn(
+                "relative z-10 overflow-hidden m-auto bg-transparent",
+                previewWidth === "100%"
+                  ? "w-full h-full"
+                  : "border border-zinc-200 dark:border-zinc-800 shadow-xl rounded-xl bg-background my-8"
+              )}
+            >
+              <div
+                key={renderKey}
                 className={cn(
-                  "bg-background overflow-hidden relative m-auto",
-                  previewWidth === "100%"
-                    ? "w-full h-full"
-                    : "border border-border/50 shadow-xl rounded-xl my-8"
+                  "min-h-[450px] w-full h-full flex items-center justify-center",
+                  previewClassName
                 )}
               >
-                <div
-                  key={renderKey}
-                  className={cn(
-                    "min-h-[350px] h-full w-full flex items-center justify-center",
-                    previewClassName
-                  )}
-                >
-                  {children}
-                </div>
-              </motion.div>
-            ) : (
-              <div className="w-full h-full relative group">
-                <div className="absolute right-4 top-4 z-20 flex gap-2">
-                  <div className="flex items-center gap-1">
+                {children}
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="code"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 z-10 w-full h-full"
+            >
+              <div className="w-full h-full bg-white dark:bg-zinc-950/50 flex flex-col">
+                <div className="flex items-center justify-between px-4 h-10 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 shrink-0">
+                  <div className="flex items-center gap-2">
+                    <Code2 className="w-3.5 h-3.5 text-zinc-400" />
+                    <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
+                      Example
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
                     <button
-                      onClick={() => setLanguage("tsx")}
-                      className={cn(
-                        "p-1.5 rounded transition-all duration-200",
-                        language === "tsx"
-                          ? "scale-110 opacity-100"
-                          : "opacity-40 hover:opacity-100 grayscale hover:grayscale-0"
-                      )}
-                      title="TypeScript"
+                      onClick={() =>
+                        setLanguage(language === "tsx" ? "jsx" : "tsx")
+                      }
+                      className="text-[10px] font-medium text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 uppercase"
                     >
-                      {ICONS.ts}
+                      {language}
                     </button>
+                    <div className="w-px h-3 bg-zinc-200 dark:bg-zinc-800" />
                     <button
-                      onClick={() => setLanguage("jsx")}
-                      className={cn(
-                        "p-1.5 rounded transition-all duration-200",
-                        language === "jsx"
-                          ? "scale-110 opacity-100"
-                          : "opacity-40 hover:opacity-100 grayscale hover:grayscale-0"
-                      )}
-                      title="JavaScript"
+                      onClick={copyToClipboard}
+                      className="p-1.5 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-colors"
                     >
-                      {ICONS.js}
+                      {copied ? (
+                        <Check className="w-3.5 h-3.5 text-emerald-500" />
+                      ) : (
+                        <Copy className="w-3.5 h-3.5" />
+                      )}
                     </button>
                   </div>
-                  <button
-                    onClick={copyToClipboard}
-                    className="p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {copied ? (
-                      <Check className="w-4 h-4 text-green-500" />
-                    ) : (
-                      <Copy className="w-4 h-4" />
-                    )}
-                  </button>
                 </div>
-                <div
-                  className={cn(
-                    "rounded-xl overflow-hidden border border-border/50 bg-zinc-50 dark:bg-[#09090b] relative",
-                    !expanded && "max-h-[400px]"
-                  )}
-                >
+                <div className="flex-1 overflow-auto">
                   {mounted ? (
                     <SyntaxHighlighter
                       language={language}
@@ -470,7 +458,6 @@ export function Preview({
                       customStyle={{
                         margin: 0,
                         padding: "1.5rem",
-                        paddingBottom: "3rem",
                         background: "transparent",
                         fontSize: "0.875rem",
                       }}
@@ -480,41 +467,11 @@ export function Preview({
                   ) : (
                     <pre className="p-6 text-sm opacity-0">{displayCode}</pre>
                   )}
-
-                  {!expanded && (
-                    <div
-                      className={cn(
-                        "absolute bottom-0 left-0 right-0 h-32 flex items-end justify-center pb-8 p-4 bg-linear-to-t",
-                        theme === "light"
-                          ? "from-zinc-50 to-transparent"
-                          : "from-[#09090b] to-transparent"
-                      )}
-                    >
-                      <button
-                        onClick={() => setExpanded(true)}
-                        className="px-4 py-2 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 text-sm font-medium rounded-full shadow-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors border border-zinc-200 dark:border-zinc-700 flex items-center gap-2"
-                      >
-                        <ChevronDown className="w-4 h-4" />
-                        View Full Code
-                      </button>
-                    </div>
-                  )}
                 </div>
-                {expanded && (
-                  <div className="flex justify-center mt-4">
-                    <button
-                      onClick={() => setExpanded(false)}
-                      className="px-4 py-2 bg-muted text-muted-foreground text-sm font-medium rounded-full hover:bg-muted/80 transition-colors flex items-center gap-2"
-                    >
-                      <ChevronUp className="w-4 h-4" />
-                      Collapse Code
-                    </button>
-                  </div>
-                )}
               </div>
-            )}
-          </div>
-        </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Installation Section */}
