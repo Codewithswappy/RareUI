@@ -264,7 +264,7 @@ export function Preview({
         )}
       </AnimatePresence>
 
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="flex  items-center justify-between gap-4">
         {/* Tabs */}
         {!hideCodeTab ? (
           <div className="relative inline-flex p-[4px] gap-1 rounded-lg bg-zinc-100/50 dark:bg-zinc-800/50 border border-zinc-200/50 dark:border-zinc-700/50 shadow-xs">
@@ -297,7 +297,7 @@ export function Preview({
         {/* Toolbar */}
         <div className="flex items-center gap-2">
           {/* Device Toggles */}
-          <div className="flex items-center p-1 bg-zinc-100/50 dark:bg-zinc-800/50 rounded-lg border border-zinc-200/50 dark:border-zinc-700/50">
+          <div className="hidden sm:flex items-center p-1 bg-zinc-100/50 dark:bg-zinc-800/50 rounded-lg border border-zinc-200/50 dark:border-zinc-700/50">
             <button
               onClick={() => setPreviewWidth("100%")}
               className={cn(
@@ -309,18 +309,6 @@ export function Preview({
               title="Desktop"
             >
               <Monitor className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => setPreviewWidth("768px")}
-              className={cn(
-                "p-1.5 rounded transition-colors",
-                previewWidth === "768px"
-                  ? "bg-white dark:bg-zinc-700 shadow-sm text-zinc-900 dark:text-zinc-100"
-                  : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"
-              )}
-              title="Tablet"
-            >
-              <Tablet className="w-4 h-4" />
             </button>
             <button
               onClick={() => setPreviewWidth("375px")}
@@ -353,7 +341,7 @@ export function Preview({
           <div className="w-px h-4 bg-zinc-200 dark:bg-zinc-800 mx-1" />
 
           {/* AI Prompt */}
-          <div className="relative">
+          {/* <div className="relative">
             <button
               onClick={() => setShowPromptDropdown(!showPromptDropdown)}
               className="flex items-center gap-2 px-3 py-1.5 bg-zinc-900 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-900 rounded-lg text-xs font-medium hover:opacity-90 transition-opacity"
@@ -375,7 +363,7 @@ export function Preview({
                 ))}
               </div>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
 
