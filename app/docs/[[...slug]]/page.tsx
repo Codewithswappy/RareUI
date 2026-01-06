@@ -28,11 +28,11 @@ export default async function Page(props: PageProps) {
             Docs <span className="text-muted-foreground/40">/</span>{" "}
             {page.data.title}
           </p>
-          <h1 className="text-4xl font-extrabold tracking-tight text-foreground mb-4 scroll-m-20">
+          <h1 className="text-4xl font-semibold tracking-tight text-foreground mb-4 scroll-m-20">
             {page.data.title}
           </h1>
           {page.data.description && (
-            <p className="text-xl text-muted-foreground leading-relaxed text-balance">
+            <p className="text-lg text-muted-foreground leading-tight text-balance">
               {page.data.description}
             </p>
           )}
