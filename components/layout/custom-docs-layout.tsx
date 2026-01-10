@@ -30,14 +30,16 @@ interface CustomDocsLayoutProps {
 function CollapsibleSection({
   section,
   pathname,
-  onLinkClick
+  onLinkClick,
 }: {
   section: SidebarSection;
   pathname: string;
   onLinkClick: () => void;
 }) {
-  const isActiveSection = section.items.some(item => pathname === item.href);
-  const isDefaultOpen = ["Getting Started", "Installation"].includes(section.title);
+  const isActiveSection = section.items.some((item) => pathname === item.href);
+  const isDefaultOpen = ["Getting Started", "Installation"].includes(
+    section.title
+  );
   const [isOpen, setIsOpen] = useState(isActiveSection || isDefaultOpen);
 
   useEffect(() => {
@@ -50,7 +52,9 @@ function CollapsibleSection({
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
           "w-full flex items-center justify-between px-2 py-1.5 text-sm font-semibold transition-colors group",
-          isOpen ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+          isOpen
+            ? "text-foreground"
+            : "text-muted-foreground hover:text-foreground"
         )}
       >
         <span>{section.title}</span>
@@ -97,10 +101,15 @@ function CollapsibleSection({
                         <span
                           className={cn(
                             "px-1.5 py-0.5 text-[10px] font-semibold rounded uppercase tracking-wider",
-                            item.badge.toLowerCase() === "new" && "bg-neutral-950 text-white dark:bg-neutral-100 dark:text-black rounded-full",
-                            item.badge.toLowerCase() === "updated" && "bg-neutral-500 text-neutral-100 dark:bg-neutral-100 dark:text-neutral-500 rounded-full",
-                            item.badge.toLowerCase() === "pro" && "bg-yellow-200 text-yellow-600 dark:bg-yellow-200 dark:text-yellow-600 rounded-full",
-                            !["new", "updated", "pro"].includes(item.badge.toLowerCase()) && "bg-primary/20 text-primary dark:bg-primary/30"
+                            item.badge.toLowerCase() === "new" &&
+                              "bg-neutral-950 text-white dark:bg-neutral-100 dark:text-black rounded-full",
+                            item.badge.toLowerCase() === "updated" &&
+                              "bg-neutral-500 text-neutral-100 dark:bg-neutral-100 dark:text-neutral-500 rounded-full",
+                            item.badge.toLowerCase() === "pro" &&
+                              "bg-yellow-200 text-yellow-600 dark:bg-yellow-200 dark:text-yellow-600 rounded-full",
+                            !["new", "updated", "pro"].includes(
+                              item.badge.toLowerCase()
+                            ) && "bg-primary/20 text-primary dark:bg-primary/30"
                           )}
                         >
                           {item.badge}
@@ -111,11 +120,20 @@ function CollapsibleSection({
                 );
 
                 return isExternal ? (
-                  <a key={itemIndex} href={item.href} target="_blank" rel="noopener noreferrer">
+                  <a
+                    key={itemIndex}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {linkContent}
                   </a>
                 ) : (
-                  <TransitionLink key={itemIndex} href={item.href} onClick={onLinkClick}>
+                  <TransitionLink
+                    key={itemIndex}
+                    href={item.href}
+                    onClick={onLinkClick}
+                  >
                     {linkContent}
                   </TransitionLink>
                 );
@@ -142,21 +160,19 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [isOpen]);
 
   return (
     <div className="h-screen overflow-hidden overflow-x-hidden">
-
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-black/5 dark:border-white/10 bg-background/80 backdrop-blur-xl">
-
         <div className="flex h-14 items-center justify-between px-4">
           {/* Left: Logo & Nav Links */}
           <div className="flex items-center gap-6">
@@ -166,9 +182,24 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
               aria-label="Toggle Menu"
             >
               <div className="relative w-5 h-4">
-                <span className={cn("absolute left-0 w-full h-0.5 bg-foreground transition-all duration-300 ease-in-out rounded-full", isOpen ? "top-1.5 rotate-45" : "top-0")} />
-                <span className={cn("absolute left-0 top-1.5 w-full h-0.5 bg-foreground transition-all duration-300 ease-in-out rounded-full", isOpen ? "opacity-0 translate-x-2" : "opacity-100")} />
-                <span className={cn("absolute left-0 w-full h-0.5 bg-foreground transition-all duration-300 ease-in-out rounded-full", isOpen ? "top-1.5 -rotate-45" : "top-3")} />
+                <span
+                  className={cn(
+                    "absolute left-0 w-full h-0.5 bg-foreground transition-all duration-300 ease-in-out rounded-full",
+                    isOpen ? "top-1.5 rotate-45" : "top-0"
+                  )}
+                />
+                <span
+                  className={cn(
+                    "absolute left-0 top-1.5 w-full h-0.5 bg-foreground transition-all duration-300 ease-in-out rounded-full",
+                    isOpen ? "opacity-0 translate-x-2" : "opacity-100"
+                  )}
+                />
+                <span
+                  className={cn(
+                    "absolute left-0 w-full h-0.5 bg-foreground transition-all duration-300 ease-in-out rounded-full",
+                    isOpen ? "top-1.5 -rotate-45" : "top-3"
+                  )}
+                />
               </div>
             </button>
             <TransitionLink href="/" className="hidden md:block">
@@ -176,7 +207,7 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
                 className="relative"
                 whileHover={{
                   rotate: [0, -10, 10, -10, 10, 0],
-                  transition: { duration: 0.5 }
+                  transition: { duration: 0.5 },
                 }}
               >
                 <Image
@@ -227,13 +258,29 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
                   aria-hidden="true"
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                  <path
+                    fillRule="evenodd"
+                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                    clipRule="evenodd"
+                  />
                 </motion.svg>
                 <div className="flex items-center gap-1 group-hover:text-yellow-400 transition-colors">
-                  <svg className="w-4 h-4 text-yellow-500 group-hover:fill-current group-hover:scale-110 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                  <svg
+                    className="w-4 h-4 text-yellow-500 group-hover:fill-current group-hover:scale-110 transition-all duration-300"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                    />
                   </svg>
-                  <span className="text-xs font-medium">{stars !== null ? stars : '...'}</span>
+                  <span className="text-xs font-medium">
+                    {stars !== null ? stars : "..."}
+                  </span>
                 </div>
               </motion.a>
               <CustomSearchBar />
@@ -260,7 +307,10 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
             <div className="flex-1 relative min-h-0">
               <div className="h-full overflow-y-auto p-4 space-y-6 scrollbar-thin scrollbar-thumb-muted-foreground/20 hover:scrollbar-thumb-muted-foreground/40 scrollbar-track-transparent">
                 {/* Handle Bar for Mobile */}
-                <div className="md:hidden w-full flex justify-center pb-4 pt-2" onClick={() => setIsOpen(false)}>
+                <div
+                  className="md:hidden w-full flex justify-center pb-4 pt-2"
+                  onClick={() => setIsOpen(false)}
+                >
                   <div className="w-12 h-1.5 bg-muted-foreground/20 rounded-full" />
                 </div>
 
@@ -278,7 +328,7 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
                     {[
                       { title: "Home", href: "/" },
                       { title: "Components", href: "/docs" },
-                      { title: "Templates", href: "/templates" }
+                      { title: "Templates", href: "/templates" },
                     ].map((item) => (
                       <TransitionLink
                         key={item.href}
@@ -316,16 +366,45 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
             {/* Mobile Social Footer */}
             <div className="p-4 border-t border-border md:hidden bg-muted/10">
               <div className="flex items-center justify-center gap-6">
-                <a href="https://x.com/heyyswap" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
-                  <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                <a
+                  href="https://x.com/heyyswap"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                  </svg>
                 </a>
 
                 {/* Github Star Count */}
-                <a href="https://github.com/Codewithswappy/RareUI" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group">
-                  <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" /></svg>
+                <a
+                  href="https://github.com/Codewithswappy/RareUI"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group"
+                >
+                  <svg
+                    className="h-5 w-5 fill-current"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
                   <div className="flex items-center gap-1 group-hover:text-yellow-400 transition-colors">
-                    <svg className="w-4 h-4 text-yellow-500 fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" /></svg>
-                    <span className="text-sm font-medium">{stars !== null ? stars : '...'}</span>
+                    <svg
+                      className="w-4 h-4 text-yellow-500 fill-current"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" />
+                    </svg>
+                    <span className="text-sm font-medium">
+                      {stars !== null ? stars : "..."}
+                    </span>
                   </div>
                 </a>
               </div>

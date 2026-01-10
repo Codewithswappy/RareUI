@@ -135,11 +135,11 @@ export const sidebarData = [
     ]
   },
   {
-    "title": "Blocks",
+    "title": "Sections",
     "items": [
       {
-        "title": "Profile Dropdown",
-        "href": "/docs/blocks/profile-dropdown",
+        "title": "Image Expand Testimonial",
+        "href": "/docs/sections/image-expand-testimonial",
         "badge": "New"
       }
     ]

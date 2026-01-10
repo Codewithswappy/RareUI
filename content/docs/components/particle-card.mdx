@@ -96,31 +96,27 @@ interface ParticleCardProps {
 
 ## Examples
 
-### With Custom Content
-
-```tsx
-<ParticleCard
+<UsageGuide title="Examples" steps={[
+  {
+    title: "With Custom Content",
+    code: `<ParticleCard
   name="Jane Doe"
   role="Senior Developer"
   bio="Full-stack engineer with 8+ years building scalable applications."
   img="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
   tags={['React', 'Node.js', 'TypeScript']}
-/>
-```
-
-### Adjusting Particle Density
-
-```tsx
-<ParticleCard
+/>`
+  },
+  {
+    title: "Adjusting Particle Density",
+    code: `<ParticleCard
   cols={30}  // More columns = smaller particles
   rows={36}  // More rows = denser effect
-/>
-```
-
-### Team Grid
-
-```tsx
-const teamMembers = [
+/>`
+  },
+  {
+    title: "Team Grid",
+    code: `const teamMembers = [
   { name: 'Alice Chen', role: 'CEO', tags: ['Leadership', 'Strategy'] },
   { name: 'Bob Smith', role: 'CTO', tags: ['Engineering', 'Architecture'] },
   { name: 'Carol Wang', role: 'Designer', tags: ['UI/UX', 'Branding'] },
@@ -134,8 +130,9 @@ export default function Team() {
       ))}
     </div>
   );
-}
-```
+}`
+  }
+]} />
 
 ## Customization
 

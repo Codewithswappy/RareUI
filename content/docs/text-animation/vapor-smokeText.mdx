@@ -128,12 +128,12 @@ export const VaporSmokeText: React.FC<VaporSmokeTextProps> = ({
   }
 ]} />
 
-## Examples
 
-### With Trigger Control
 
-```tsx
-"use client";
+<UsageGuide title="Examples" steps={[
+  {
+    title: "With Trigger Control",
+    code: `"use client";
 import { useState } from 'react';
 import { VaporSmokeText } from "@/components/rareui/Text Animation/VaporSmokeText";
 
@@ -153,17 +153,16 @@ export default function ControlledAnimation() {
       />
     </div>
   );
-}
-```
-
-### Custom Styling
-
-```tsx
-<VaporSmokeText 
+}`
+  },
+  {
+    title: "Custom Styling",
+    code: `<VaporSmokeText 
   text="Ethereal" 
   className="text-9xl font-serif text-cyan-400"
-/>
-```
+/>`
+  }
+]} />
 
 <PropsTable props={[
   {

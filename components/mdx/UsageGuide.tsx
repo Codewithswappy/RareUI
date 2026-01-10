@@ -12,14 +12,15 @@ interface UsageStep {
 
 interface UsageGuideProps {
   steps: UsageStep[];
+  title?: string;
 }
 
-export const UsageGuide = ({ steps }: UsageGuideProps) => {
+export const UsageGuide = ({ steps, title = "Usage" }: UsageGuideProps) => {
   return (
     <div className="flex flex-col gap-12 mt-12">
       <div className="flex items-center gap-3">
         <h2 className="text-4xl font-bold text-neutral-400 dark:text-neutral-800 font-mono tracking-tight">
-          Usage
+          {title}
         </h2>
       </div>
 
@@ -61,7 +62,7 @@ export const UsageGuide = ({ steps }: UsageGuideProps) => {
                   </div>
                   <CopyButton text={step.code} />
                 </div>
-                <div className="p-5 font-mono text-[11px] leading-relaxed text-neutral-500 bg-[#FAFAFA] dark:bg-neutral-950/50 overflow-x-auto whitespace-pre">
+                <div className="p-5 font-mono text-[13px] leading-relaxed text-neutral-500 bg-[#FAFAFA] dark:bg-neutral-950/50 overflow-x-auto whitespace-pre">
                   <SyntaxHighlighter code={step.code} />
                 </div>
               </div>

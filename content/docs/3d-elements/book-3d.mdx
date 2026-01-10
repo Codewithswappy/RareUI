@@ -391,24 +391,20 @@ export function Book3D({
   }
 ]} />
 
-### Custom Cover
+## Examples
 
-Add your own cover image and title:
-
-```tsx
-<Book3D 
+<UsageGuide title="Examples" steps={[
+  {
+    title: "Custom Cover",
+    code: `<Book3D 
   src="/my-book-cover.jpg"
   title="My Awesome Book"
   subtitle="By John Doe"
-/>
-```
-
-### Custom Pages
-
-Define your own page content:
-
-```tsx
-const customPages = [
+/>`
+  },
+  {
+    title: "Custom Pages",
+    code: `const customPages = [
   {
     title: "Introduction",
     content: "Welcome to my book. This is the first page with an introduction."
@@ -431,13 +427,11 @@ const customPages = [
   src="/cover.jpg"
   title="My Book"
   pages={customPages}
-/>
-```
-
-### Fully Customized
-
-```tsx
-<Book3D 
+/>`
+  },
+  {
+    title: "Fully Customized",
+    code: `<Book3D 
   src="/fantasy-cover.jpg"
   title="The Chronicles"
   subtitle="An Epic Tale"
@@ -445,8 +439,9 @@ const customPages = [
   height={380}
   pages={myCustomPages}
   className="shadow-2xl"
-/>
-```
+/>`
+  }
+]} />
 
 <FeaturesList features={[
   {

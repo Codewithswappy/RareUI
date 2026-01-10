@@ -298,7 +298,7 @@ export function Preview({
         {/* Toolbar */}
         <div className="flex items-center gap-2">
           {/* Device Toggles */}
-          <div className="hidden sm:flex items-center p-1 bg-zinc-100/50 dark:bg-zinc-800/50 rounded-lg border border-zinc-200/50 dark:border-zinc-700/50">
+          {/* <div className="hidden sm:flex items-center p-1 bg-zinc-100/50 dark:bg-zinc-800/50 rounded-lg border border-zinc-200/50 dark:border-zinc-700/50">
             <button
               onClick={() => setPreviewWidth("100%")}
               className={cn(
@@ -323,7 +323,7 @@ export function Preview({
             >
               <Smartphone className="w-4 h-4" />
             </button>
-          </div>
+          </div> */}
 
           <div className="w-px h-4 bg-zinc-200 dark:bg-zinc-800 mx-1" />
 

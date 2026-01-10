@@ -880,33 +880,30 @@ export default function LiquidWave({
 
 ## Examples
 
-### Custom Colors
-
-```tsx
-<LiquidWave 
+<UsageGuide title="Examples" steps={[
+  {
+    title: "Custom Colors",
+    code: `<LiquidWave 
   color1="#5227FF"
   color2="#FF9FFC"
   color3="#B19EEF"
-/>
-```
-
-### Custom Force and Cursor Size
-
-```tsx
-<LiquidWave 
+/>`
+  },
+  {
+    title: "Custom Force and Cursor Size",
+    code: `<LiquidWave 
   mouseForce={30}
   cursorSize={150}
-/>
-```
-
-### With Viscosity
-
-```tsx
-<LiquidWave 
+/>`
+  },
+  {
+    title: "With Viscosity",
+    code: `<LiquidWave 
   isViscous={true}
   viscous={50}
-/>
-```
+/>`
+  }
+]} />
 
 ## Props
 

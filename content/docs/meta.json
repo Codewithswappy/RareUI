@@ -6,7 +6,6 @@
         "components",
         "text-animation",
         "interactive-background",
-        "3d-elements",
-        "blocks"
+        "3d-elements"
     ]
 }

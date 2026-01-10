@@ -7,7 +7,7 @@ export const SyntaxHighlighter = ({ code }: { code: string }) => {
   );
 
   return (
-    <code className="font-mono">
+    <span className="font-mono">
       {tokens.map((token, i) => {
         if (!token) return null;
         if (/^['"`].*?['"`]$/.test(token)) {
@@ -48,6 +48,6 @@ export const SyntaxHighlighter = ({ code }: { code: string }) => {
         }
         return token;
       })}
-    </code>
+    </span>
   );
 };

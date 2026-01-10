@@ -22,7 +22,7 @@ export default async function Page(props: PageProps) {
 
   return (
     <div className="flex justify-center">
-      <article className=" prose-zinc dark:prose-invert max-w-4xl min-w-0 flex-1">
+      <article className=" prose prose-zinc dark:prose-invert max-w-4xl min-w-0 flex-1">
         <header className="mb-8 border-b border-border pb-8">
           {/* <p className="text-sm text-muted-foreground mb-2 flex items-center gap-2">
             Docs <span className="text-muted-foreground/40">/</span>{" "}

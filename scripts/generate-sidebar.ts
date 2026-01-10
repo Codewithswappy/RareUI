@@ -107,8 +107,8 @@ async function buildSidebar() {
   // Build Interactive Background section
   const interactiveBackgroundSection = buildInteractiveBackgroundSection();
 
-  // Build Blocks section
-  const blocksSection = buildBlocksSection();
+  // Build Sections section
+  const sectionsSection = buildSectionsSection();
 
   const sidebar = [...STATIC_SECTIONS, componentsSection];
 
@@ -127,9 +127,9 @@ async function buildSidebar() {
     sidebar.push(interactiveBackgroundSection);
   }
 
-  // Add Blocks section if it exists
-  if (blocksSection) {
-    sidebar.push(blocksSection);
+  // Add Sections section if it exists
+  if (sectionsSection) {
+    sidebar.push(sectionsSection);
   }
 
 
@@ -322,28 +322,27 @@ function buildInteractiveBackgroundSection() {
   };
 }
 
+function buildSectionsSection() {
+  const SECTIONS_ROOT = path.resolve(process.cwd(), "content/docs/sections");
 
-function buildBlocksSection() {
-  const BLOCKS_ROOT = path.resolve(process.cwd(), "content/docs/blocks");
-
-  if (!fs.existsSync(BLOCKS_ROOT)) {
+  if (!fs.existsSync(SECTIONS_ROOT)) {
     return null;
   }
 
-  const files = getAllMdxFiles(BLOCKS_ROOT);
+  const files = getAllMdxFiles(SECTIONS_ROOT);
   const items: any[] = [];
 
   for (const file of files) {
     const name = path.basename(file, ".mdx");
     const prettyTitle = formatComponentTitle(name);
-    const relativePath = path.relative(BLOCKS_ROOT, file);
+    const relativePath = path.relative(SECTIONS_ROOT, file);
     const urlPath = relativePath.replace(/\.mdx$/, '').replace(/\\/g, '/');
 
     const badge = getBadgeFromFrontmatter(file);
 
     items.push({
       title: prettyTitle,
-      href: `/docs/blocks/${urlPath}`,
+      href: `/docs/sections/${urlPath}`,
       ...(badge && { badge }),
     });
   }
@@ -353,9 +352,45 @@ function buildBlocksSection() {
   }
 
   return {
-    title: "Blocks",
+    title: "Sections",
     items
   };
 }
+
+
+// function buildBlocksSection() {
+//   const BLOCKS_ROOT = path.resolve(process.cwd(), "content/docs/blocks");
+//
+//   if (!fs.existsSync(BLOCKS_ROOT)) {
+//     return null;
+//   }
+//
+//   const files = getAllMdxFiles(BLOCKS_ROOT);
+//   const items: any[] = [];
+//
+//   for (const file of files) {
+//     const name = path.basename(file, ".mdx");
+//     const prettyTitle = formatComponentTitle(name);
+//     const relativePath = path.relative(BLOCKS_ROOT, file);
+//     const urlPath = relativePath.replace(/\.mdx$/, '').replace(/\\/g, '/');
+//
+//     const badge = getBadgeFromFrontmatter(file);
+//
+//     items.push({
+//       title: prettyTitle,
+//       href: `/docs/blocks/${urlPath}`,
+//       ...(badge && { badge }),
+//     });
+//   }
+//
+//   if (items.length === 0) {
+//     return null;
+//   }
+//
+//   return {
+//     title: "Blocks",
+//     items
+//   };
+// }
 
 buildSidebar();

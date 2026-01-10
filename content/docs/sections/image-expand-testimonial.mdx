@@ -1,0 +1,204 @@
+---
+title: Image Expand Testimonial
+description: An interactive testimonial section with smooth image expansion animations, autoplay, and responsive design.
+badge: New
+---
+
+import { ImageExpandTestimonial } from "@/components/rareui/Sections/imageExpandTestimonial";
+import { Preview } from "@/components/mdx/preview";
+import { PropsTable } from "@/components/mdx/PropsTable";
+import { UsageGuide } from "@/components/mdx/UsageGuide";
+import { FeaturesList } from "@/components/mdx/FeaturesList";
+
+export const testimonials = [
+  {
+    id: "1",
+    name: "Sarah Chen",
+    role: "VP of Engineering",
+    company: "TechCorp Inc.",
+    quote: "This component library has transformed our development workflow. The attention to detail is remarkable.",
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=600&fit=crop",
+    rating: 5,
+  },
+  {
+    id: "2",
+    name: "Marcus Johnson",
+    role: "Lead Developer",
+    company: "StartupXYZ",
+    quote: "Clean, performant, and beautiful. Everything we needed for our product launch.",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop",
+    rating: 4.5,
+  },
+  {
+    id: "3",
+    name: "Elena Rodriguez",
+    role: "Design Director",
+    company: "Creative Studio",
+    quote: "The animations are silky smooth. Our clients are always impressed with the final result.",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=600&fit=crop",
+    rating: 5,
+  },
+  {
+    id: "4",
+    name: "David Kim",
+    role: "Product Manager",
+    company: "InnovateCo",
+    quote: "Easy to integrate and customize. Saved us weeks of development time.",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=600&fit=crop",
+    rating: 5,
+  },
+];
+
+<Preview
+  code={`"use client";
+
+import { ImageExpandTestimonial } from "@/components/rareui/Sections/imageExpandTestimonial";
+
+const testimonials = [
+  {
+    id: "1",
+    name: "Sarah Chen",
+    role: "VP of Engineering",
+    company: "TechCorp Inc.",
+    quote: "This component library has transformed our development workflow.",
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=600&fit=crop",
+    rating: 5,
+  },
+  // ... more testimonials
+];
+
+export default function MyComponent() {
+  return (
+    <ImageExpandTestimonial testimonials={testimonials} />
+  );
+}`}
+  cliCommand="npx rareui add imageExpandTestimonial"
+>
+  <div className="w-full h-[500px] bg-white dark:bg-neutral-950 not-prose flex items-center justify-center overflow-hidden">
+    <div className="scale-[0.65] origin-center w-[1200px] h-[750px]">
+      <ImageExpandTestimonial testimonials={testimonials} className="h-full" autoPlayInterval={3000} />
+    </div>
+  </div>
+</Preview>
+
+<UsageGuide steps={[
+  {
+    title: "Import the component",
+    code: `import { ImageExpandTestimonial } from "@/components/rareui/Sections/imageExpandTestimonial";`
+  },
+  {
+    title: "Define your testimonials data",
+    code: `const testimonials = [
+  {
+    id: "1",
+    name: "Sarah Chen",
+    role: "VP of Engineering",
+    company: "TechCorp Inc.",
+    quote: "This component library has transformed our development workflow.",
+    image: "https://example.com/image.jpg",
+    rating: 5,
+  },
+  // Add more testimonials...
+];`
+  },
+  {
+    title: "Use in your application",
+    code: `export default function TestimonialsSection() {
+  return (
+    <ImageExpandTestimonial 
+      testimonials={testimonials}
+      autoPlayInterval={3000}
+    />
+  );
+}`
+  }
+]} />
+
+<FeaturesList features={[
+  {
+    title: "Smooth Animations",
+    description: "Framer Motion powered spring animations for fluid image transitions."
+  },
+  {
+    title: "Auto-play",
+    description: "Configurable interval for automatic testimonial cycling."
+  },
+  {
+    title: "Responsive Design",
+    description: "Adapts layout between mobile (center-active) and desktop (right-active) modes."
+  },
+  {
+    title: "Star Ratings",
+    description: "Supports full and half-star ratings with beautiful visual feedback."
+  },
+  {
+    title: "Dark Mode Ready",
+    description: "Fully styled for both light and dark themes."
+  },
+  {
+    title: "Keyboard Navigation",
+    description: "Navigate testimonials with arrow buttons and touch-friendly controls."
+  }
+]} />
+
+## Props
+
+<PropsTable props={[
+  {
+    name: "testimonials",
+    type: "Testimonial[]",
+    description: "Array of testimonial objects containing id, name, role, company, quote, image, and optional rating."
+  },
+  {
+    name: "autoPlayInterval",
+    type: "number",
+    default: "5000",
+    description: "Interval in milliseconds for auto-advancing testimonials."
+  },
+  {
+    name: "className",
+    type: "string",
+    description: "Additional CSS classes for the container."
+  }
+]} />
+
+### Testimonial Object
+
+<PropsTable props={[
+  {
+    name: "id",
+    type: "string",
+    description: "Unique identifier for the testimonial."
+  },
+  {
+    name: "name",
+    type: "string",
+    description: "Name of the person giving the testimonial."
+  },
+  {
+    name: "role",
+    type: "string",
+    description: "Job title or role of the person."
+  },
+  {
+    name: "company",
+    type: "string",
+    description: "Company or organization name."
+  },
+  {
+    name: "quote",
+    type: "string",
+    description: "The testimonial text."
+  },
+  {
+    name: "image",
+    type: "string",
+    description: "URL of the person's image."
+  },
+  {
+    name: "rating",
+    type: "number",
+    default: "5",
+    description: "Rating from 0-5, supports half values (e.g., 4.5)."
+  }
+]} />

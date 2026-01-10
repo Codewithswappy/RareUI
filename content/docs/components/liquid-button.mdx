@@ -201,24 +201,23 @@ function Drop({
 
 ## Examples
 
-### Custom Colors
-
-```tsx
-<LiquidButton 
+<UsageGuide title="Examples" steps={[
+  {
+    title: "Custom Colors",
+    code: `<LiquidButton 
   text="Click me"
   backgroundColor="bg-blue-500"
   textColor="text-white"
-/>
-```
-
-### Continuous Dripping
-
-```tsx
-<LiquidButton 
+/>`
+  },
+  {
+    title: "Continuous Dripping",
+    code: `<LiquidButton 
   text="Always Dripping"
   isDripping={true}
-/>
-```
+/>`
+  }
+]} />
 
 <PropsTable props={[
   {

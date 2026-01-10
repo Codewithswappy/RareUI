@@ -156,10 +156,10 @@ export const MagneticScatterText: React.FC<MagneticScatterTextProps> = ({ text, 
 
 ## Examples
 
-### Controlled Animation
-
-```tsx
-"use client";
+<UsageGuide title="Examples" steps={[
+  {
+    title: "Controlled Animation",
+    code: `"use client";
 import { useState } from 'react';
 import { MagneticScatterText } from "@/components/rareui/Text Animation/MagneticScatterText";
 
@@ -182,17 +182,16 @@ export default function ControlledAnimation() {
       />
     </div>
   );
-}
-```
-
-### Custom Styling
-
-```tsx
-<MagneticScatterText 
+}`
+  },
+  {
+    title: "Custom Styling",
+    code: `<MagneticScatterText 
   text="Magnetic" 
   className="text-8xl font-black text-blue-500 tracking-tighter"
-/>
-```
+/>`
+  }
+]} />
 
 <PropsTable props={[
   {
