@@ -2,7 +2,7 @@ export default {
   docs: { 
     autoSidebar: false,
     sidebar: {
-      defaultOpenLevel: 1,
+      defaultOpenLevel: Infinity,
       banner: {
         text: "RareUI Component Library",
         variant: "rainbow"

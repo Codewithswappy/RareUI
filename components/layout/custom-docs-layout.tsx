@@ -37,10 +37,10 @@ function CollapsibleSection({
   onLinkClick: () => void;
 }) {
   const isActiveSection = section.items.some((item) => pathname === item.href);
-  const isDefaultOpen = ["Getting Started", "Installation"].includes(
-    section.title
+  const isDefaultOpen = true; // All sections open by default
+  const [isOpen, setIsOpen] = useState<boolean>(
+    isActiveSection || isDefaultOpen
   );
-  const [isOpen, setIsOpen] = useState(isActiveSection || isDefaultOpen);
 
   useEffect(() => {
     if (isActiveSection) setIsOpen(true);

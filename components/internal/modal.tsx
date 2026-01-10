@@ -3,11 +3,11 @@
 import * as React from "react";
 import { Command } from "cmdk";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Search, 
-  ExternalLink, 
-  Hash, 
-  Laptop, 
+import {
+  Search,
+  ExternalLink,
+  Hash,
+  Laptop,
   FileText,
   Terminal,
   MousePointerClick,
@@ -21,7 +21,7 @@ import {
   Download,
   Box,
   AtSign,
-  Sparkles
+  Sparkles,
 } from "lucide-react";
 import { useSearchContext } from "@/components/internal/search-context";
 import { sidebarData } from "@/lib/sidebar-data";
@@ -60,9 +60,10 @@ export function CommandPaletteModal() {
     return () => document.removeEventListener("keydown", down);
   }, [setOpenSearch]);
 
-  const filteredItems = items.filter((item) =>
-    item.label.toLowerCase().includes(search.toLowerCase()) ||
-    item.category.toLowerCase().includes(search.toLowerCase())
+  const filteredItems = items.filter(
+    (item) =>
+      item.label.toLowerCase().includes(search.toLowerCase()) ||
+      item.category.toLowerCase().includes(search.toLowerCase())
   );
 
   const handleSelect = (url: string, external: boolean) => {
@@ -79,24 +80,34 @@ export function CommandPaletteModal() {
     const lowerLabel = label.toLowerCase();
     const lowerCategory = category.toLowerCase();
 
-    if (lowerLabel.includes("twitter") || lowerLabel.includes("follow")) return <AtSign className={className} />;
-    
+    if (lowerLabel.includes("twitter") || lowerLabel.includes("follow"))
+      return <AtSign className={className} />;
+
     // Category based
-    if (lowerCategory.includes("installation")) return <Terminal className={className} />;
-    if (lowerCategory.includes("buttons")) return <MousePointerClick className={className} />;
-    if (lowerCategory.includes("cards")) return <CreditCard className={className} />;
+    if (lowerCategory.includes("installation"))
+      return <Terminal className={className} />;
+    if (lowerCategory.includes("buttons"))
+      return <MousePointerClick className={className} />;
+    if (lowerCategory.includes("cards"))
+      return <CreditCard className={className} />;
     if (lowerCategory.includes("inputs")) return <Type className={className} />;
-    if (lowerCategory.includes("navigation")) return <Menu className={className} />;
-    if (lowerCategory.includes("overlays") || lowerCategory.includes("modals")) return <Layers className={className} />;
-    if (lowerCategory.includes("feedback")) return <MessageSquare className={className} />;
-    
+    if (lowerCategory.includes("navigation"))
+      return <Menu className={className} />;
+    if (lowerCategory.includes("overlays") || lowerCategory.includes("modals"))
+      return <Layers className={className} />;
+    if (lowerCategory.includes("feedback"))
+      return <MessageSquare className={className} />;
+
     // Label based
     if (lowerLabel.includes("cli")) return <Terminal className={className} />;
     if (lowerLabel.includes("utils")) return <Wrench className={className} />;
-    if (lowerLabel.includes("install")) return <Download className={className} />;
-    if (lowerLabel.includes("premium")) return <Sparkles className={className} />;
-    if (lowerLabel.includes("layout")) return <LayoutTemplate className={className} />;
-    
+    if (lowerLabel.includes("install"))
+      return <Download className={className} />;
+    if (lowerLabel.includes("premium"))
+      return <Sparkles className={className} />;
+    if (lowerLabel.includes("layout"))
+      return <LayoutTemplate className={className} />;
+
     return <Box className={className} />;
   };
 
@@ -119,13 +130,14 @@ export function CommandPaletteModal() {
             className="relative w-full max-w-2xl overflow-hidden rounded-xl border border-border/50 bg-background/80 backdrop-blur-xl shadow-2xl ring-1 ring-white/10"
             onClick={(e) => e.stopPropagation()}
           >
-            <Command className="w-full bg-transparent">
+            <Command className="w-full bg-transparent" shouldFilter={false}>
               <div className="flex items-center border-b border-border/50 px-4 py-4">
                 <Search className="mr-3 h-5 w-5 text-muted-foreground/70" />
-                <Command.Input
+                <input
+                  type="text"
                   placeholder="Search documentation..."
                   value={search}
-                  onValueChange={setSearch}
+                  onChange={(e) => setSearch(e.target.value)}
                   className="flex-1 bg-transparent text-base outline-none placeholder:text-muted-foreground/70 text-foreground"
                   autoFocus
                 />
@@ -134,21 +146,27 @@ export function CommandPaletteModal() {
                 </kbd>
               </div>
 
-              <Command.List className="max-h-[60vh] overflow-y-auto p-2 scroll-smooth">
+              <Command.List className="max-h-[60vh] overflow-y-auto p-2 overscroll-contain">
                 {filteredItems.length === 0 && (
                   <div className="py-12 text-center">
-                    <p className="text-sm text-muted-foreground">No results found.</p>
+                    <p className="text-sm text-muted-foreground">
+                      No results found.
+                    </p>
                   </div>
                 )}
 
-                {Array.from(new Set(filteredItems.map(item => item.category))).map((category) => {
-                  const categoryItems = filteredItems.filter(item => item.category === category);
+                {Array.from(
+                  new Set(filteredItems.map((item) => item.category))
+                ).map((category) => {
+                  const categoryItems = filteredItems.filter(
+                    (item) => item.category === category
+                  );
                   if (!categoryItems.length) return null;
-                  
+
                   return (
-                    <Command.Group 
-                      key={category} 
-                      heading={category} 
+                    <Command.Group
+                      key={category}
+                      heading={category}
                       className="px-2 py-2 text-xs font-semibold text-muted-foreground/70 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:pb-2 [&_[cmdk-group-heading]]:text-muted-foreground/50"
                     >
                       {categoryItems.map((item, i) => (
@@ -161,12 +179,20 @@ export function CommandPaletteModal() {
                             {item.external ? (
                               <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
                             ) : (
-                              getIcon(category, item.label, "h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors")
+                              getIcon(
+                                category,
+                                item.label,
+                                "h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors"
+                              )
                             )}
                           </div>
-                          <span className="flex-1 truncate font-medium">{item.label}</span>
+                          <span className="flex-1 truncate font-medium">
+                            {item.label}
+                          </span>
                           {item.external && (
-                            <span className="text-xs text-muted-foreground/50">External</span>
+                            <span className="text-xs text-muted-foreground/50">
+                              External
+                            </span>
                           )}
                         </Command.Item>
                       ))}
