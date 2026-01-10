@@ -5,7 +5,9 @@ description: An interactive text animation that scatters on hover with magnetic 
 
 import { MagneticScatterText } from "@/components/rareui/Text Animation/MagneticScatterText";
 import { Preview } from "@/components/mdx/preview";
-import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { PropsTable } from "@/components/mdx/PropsTable";
+import { UsageGuide } from "@/components/mdx/UsageGuide";
+import { FeaturesList } from "@/components/mdx/FeaturesList";
 
 <Preview
   code={`"use client"
@@ -114,29 +116,43 @@ export const MagneticScatterText: React.FC<MagneticScatterTextProps> = ({ text, 
     </div>
 </Preview>
 
-## Usage
-
-<Steps>
-<Step>
-### Import the component
-
-```tsx
-import { MagneticScatterText } from "@/components/rareui/Text Animation/MagneticScatterText";
-```
-</Step>
-
-<Step>
-### Use in your application
-
-```tsx
-export default function MyComponent() {
+<UsageGuide steps={[
+  {
+    title: "Import the component",
+    code: `import { MagneticScatterText } from "@/components/rareui/Text Animation/MagneticScatterText";`
+  },
+  {
+    title: "Use in your application",
+    code: `export default function MyComponent() {
   return (
     <MagneticScatterText text="Your Text" className="text-6xl" />
   );
-}
-```
-</Step>
-</Steps>
+}`
+  }
+]} />
+
+<FeaturesList features={[
+  {
+    title: "Magnetic Scattering",
+    description: "Text scatters in random directions on hover with physics-based movement."
+  },
+  {
+    title: "Deterministic Randomness",
+    description: "Consistent scattering patterns based on character index."
+  },
+  {
+    title: "Trigger Control",
+    description: "Programmatically control the visibility state."
+  },
+  {
+    title: "Spring Animations",
+    description: "Fluid entry and exit animations using Framer Motion springs."
+  },
+  {
+    title: "Customizable",
+    description: "Easily style text size, color, and font via className."
+  }
+]} />
 
 ## Examples
 
@@ -178,10 +194,21 @@ export default function ControlledAnimation() {
 />
 ```
 
-## Props
-
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `text` | `string` | **Required** | The text content to animate. |
-| `trigger` | `boolean` | `true` | Controls animation state (true = visible, false = hidden). |
-| `className` | `string` | `-` | Additional styles for the container. |
+<PropsTable props={[
+  {
+    name: "text",
+    type: "string",
+    description: "The text content to animate."
+  },
+  {
+    name: "trigger",
+    type: "boolean",
+    default: "true",
+    description: "Controls animation state (true = visible, false = hidden)."
+  },
+  {
+    name: "className",
+    type: "string",
+    description: "Additional styles for the container."
+  }
+]} />

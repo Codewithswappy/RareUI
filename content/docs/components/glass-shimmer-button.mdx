@@ -5,7 +5,9 @@ description: A premium glassmorphism button with continuous shimmer animation an
 
 import { Preview } from "@/components/mdx/preview";
 import { GlassShimmerButton } from "@/components/rareui/glass-shimmer-button";
-import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { PropsTable } from "@/components/mdx/PropsTable";
+import { UsageGuide } from "@/components/mdx/UsageGuide";
+import { FeaturesList } from "@/components/mdx/FeaturesList";
 
 <Preview
   code={`"use client"
@@ -60,10 +62,10 @@ export function GlassShimmerButton({
         />
 
         {/* Static Glass Gloss Top */}
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-50" />
+        <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/40 to-transparent opacity-50" />
         
         {/* Static Glass Gloss Bottom */}
-        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-30" />
+        <div className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-white/10 to-transparent opacity-30" />
 
         {/* Content */}
         <span className="relative z-10 tracking-wide drop-shadow-sm">
@@ -81,46 +83,60 @@ export function GlassShimmerButton({
   <GlassShimmerButton>Hover Me</GlassShimmerButton>
 </Preview>
 
-## Usage
-
-<Steps>
-<Step>
-### Import the component
-
-```tsx
-import { GlassShimmerButton } from '@/components/rareui/glass-shimmer-button';
-```
-</Step>
-
-<Step>
-### Use in your application
-
-```tsx
-export default function App() {
+<UsageGuide steps={[
+  {
+    title: "Import the component",
+    code: `import { GlassShimmerButton } from '@/components/rareui/glass-shimmer-button';`
+  },
+  {
+    title: "Use in your application",
+    code: `export default function App() {
   return (
     <GlassShimmerButton onClick={() => alert('Clicked!')}>
       Click Me
     </GlassShimmerButton>
   );
-}
-```
-</Step>
-</Steps>
+}`
+  }
+]} />
 
-## Features
+<FeaturesList features={[
+  {
+    title: "Continuous Shimmer Animation",
+    description: "Self-contained animated shimmer effect that runs continuously."
+  },
+  {
+    title: "Glassmorphism Design",
+    description: "Premium frosted glass aesthetic with backdrop blur."
+  },
+  {
+    title: "Hover Effects",
+    description: "Scale animation and enhanced glow on hover."
+  },
+  {
+    title: "Dark Mode Support",
+    description: "Optimized colors for both light and dark themes."
+  },
+  {
+    title: "Fully Self-Contained",
+    description: "No global CSS required - animations defined inline."
+  }
+]} />
 
-- **Continuous Shimmer Animation**: Self-contained animated shimmer effect that runs continuously.
-- **Glassmorphism Design**: Premium frosted glass aesthetic with backdrop blur.
-- **Hover Effects**: Scale animation and enhanced glow on hover.
-- **Dark Mode Support**: Optimized colors for both light and dark themes.
-- **Fully Self-Contained**: No global CSS required - animations defined inline.
-
-## Props
-
-Extends all standard `React.ButtonHTMLAttributes<HTMLButtonElement>`.
-
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `children` | `React.ReactNode` | `-` | The content to display inside the button. |
-| `className` | `string` | `-` | Additional CSS classes to merge with default styles. |
-| `...props` | `ButtonHTMLAttributes` | `-` | Any additional HTML button attributes (onClick, disabled, etc.). |
+<PropsTable props={[
+  {
+    name: "children",
+    type: "React.ReactNode",
+    description: "The content to display inside the button."
+  },
+  {
+    name: "className",
+    type: "string",
+    description: "Additional CSS classes to merge with default styles."
+  },
+  {
+    name: "...props",
+    type: "ButtonHTMLAttributes",
+    description: "Any additional HTML button attributes (onClick, disabled, etc.)."
+  }
+]} />

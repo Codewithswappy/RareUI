@@ -6,6 +6,9 @@ description: A text component where words are repelled by the cursor and snap ba
 
 import { Preview } from "@/components/mdx/preview";
 import WordMagnet from "@/components/rareui/Text Animation/WordMagnet";
+import { PropsTable } from "@/components/mdx/PropsTable";
+import { UsageGuide } from "@/components/mdx/UsageGuide";
+import { FeaturesList } from "@/components/mdx/FeaturesList";
 
 <Preview
   cliCommand="npx rareui add WordMagnet"
@@ -308,18 +311,109 @@ function Word({
   </div>
 </Preview>
 
-## Props
+<UsageGuide steps={[
+  {
+    title: "Import the component",
+    code: `import WordMagnet from "@/components/rareui/Text Animation/WordMagnet";`
+  },
+  {
+    title: "Use in your application",
+    code: `export default function MyComponent() {
+  return (
+    <WordMagnet 
+      text="Hover over these words and watch them dance across the screen with physics-based interaction"
+    />
+  );
+}`
+  }
+]} />
 
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `text` | `string` | `"Hover over these words and watch them dance"` | The text content to display |
-| `radius` | `number` | `130` | Interaction radius in pixels |
-| `force` | `number` | `0.45` | Repulsion force (0.1 to 1.0) |
-| `damping` | `number` | `28` | Spring damping (5 to 50) |
-| `returnDelay` | `number` | `400` | Delay before returning to original position in ms |
-| `textColor` | `string` | `"#000000"` | Text color |
-| `font` | `object` | `{ fontSize: "32px", fontWeight: 600, ... }` | Font styling object |
-| `disableOnMobile` | `boolean` | `false` | Disable interaction on mobile devices |
-| `overflow` | `"visible" \| "hidden" ...` | `"visible"` | CSS overflow property |
-| `className` | `string` | `undefined` | Additional class names |
-| `style` | `object` | `undefined` | Inline styles |
+<FeaturesList features={[
+  {
+    title: "Physics Repulsion",
+    description: "Words are pushed away by the mouse cursor using spring physics."
+  },
+  {
+    title: "Smart Recovery",
+    description: "Words smoothly snap back to their original position after interaction."
+  },
+  {
+    title: "Interaction Radius",
+    description: "Configurable zone of influence for the magnetic effect."
+  },
+  {
+    title: "Performance Optimized",
+    description: "Uses throttling and efficient DOM calculations for smooth 60fps."
+  },
+  {
+    title: "Mobile Aware",
+    description: "Optional setting to disable effects on touch devices."
+  }
+]} />
+
+<PropsTable props={[
+  {
+    name: "text",
+    type: "string",
+    default: '"Hover over..."',
+    description: "The text content to display"
+  },
+  {
+    name: "radius",
+    type: "number",
+    default: "130",
+    description: "Interaction radius in pixels"
+  },
+  {
+    name: "force",
+    type: "number",
+    default: "0.45",
+    description: "Repulsion force (0.1 to 1.0)"
+  },
+  {
+    name: "damping",
+    type: "number",
+    default: "28",
+    description: "Spring damping (5 to 50)"
+  },
+  {
+    name: "returnDelay",
+    type: "number",
+    default: "400",
+    description: "Delay before returning to original position in ms"
+  },
+  {
+    name: "textColor",
+    type: "string",
+    default: '"#000000"',
+    description: "Text color"
+  },
+  {
+    name: "font",
+    type: "object",
+    default: "{ fontSize: '32px', ... }",
+    description: "Font styling object"
+  },
+  {
+    name: "disableOnMobile",
+    type: "boolean",
+    default: "false",
+    description: "Disable interaction on mobile devices"
+  },
+  {
+    name: "overflow",
+    type: "string",
+    default: '"visible"',
+    description: "CSS overflow property"
+  },
+  {
+    name: "className",
+    type: "string",
+    description: "Additional class names"
+  },
+  {
+    name: "style",
+    type: "object",
+    description: "Inline styles"
+  }
+]} />

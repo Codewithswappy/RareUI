@@ -6,6 +6,9 @@ badge: New
 
 import { Preview } from "@/components/mdx/preview";
 import LoadingSpinner from "@/components/rareui/LoadingSpinner";
+import { PropsTable } from "@/components/mdx/PropsTable";
+import { UsageGuide } from "@/components/mdx/UsageGuide";
+import { FeaturesList } from "@/components/mdx/FeaturesList";
 
 <Preview
   cliCommand="npx rareui add LoadingSpinner"
@@ -114,21 +117,52 @@ export default function LoadingSpinner({ className }: LoadingSpinnerProps) {
 
 ## Usage
 
-```tsx
-import LoadingSpinner from "@/components/rareui/LoadingSpinner";
-
-export default function MyComponent() {
+<UsageGuide steps={[
+  {
+    title: "Import the component",
+    code: `import LoadingSpinner from "@/components/rareui/LoadingSpinner";`
+  },
+  {
+    title: "Use in your application",
+    code: `export default function MyComponent() {
   return (
     <div className="flex items-center justify-center h-screen">
       <LoadingSpinner />
     </div>
   );
-}
-```
+}`
+  }
+]} />
 
-## Props
+<FeaturesList features={[
+  {
+    title: "Smooth Animation",
+    description: "Fluid continuous rotation using Framer Motion."
+  },
+  {
+    title: "SVG-based",
+    description: "Crisp, scalable vector graphics for the spinner."
+  },
+  {
+    title: "Lightweight",
+    description: "Minimal dependencies and optimized performance."
+  },
+  {
+    title: "Customizable",
+    description: "Easily adjust size and colors via className."
+  },
+  {
+    title: "Dark Mode Support",
+    description: "Automatically adapts color for light and dark themes."
+  }
+]} />
 
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `className` | `string` | `undefined` | Additional class names for styling the container |
+<PropsTable props={[
+  {
+    name: "className",
+    type: "string",
+    default: "undefined",
+    description: "Additional class names for styling the container"
+  }
+]} />
 

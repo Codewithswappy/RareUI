@@ -38,6 +38,7 @@ import {
 } from "lucide-react";
 import { InternalAnimatedTabs } from "@/components/internal/internal-animated-tabs";
 import { motion, AnimatePresence } from "motion/react";
+import { InstallationGuide } from "@/components/mdx/InstallationGuide";
 
 // --- Icons ---
 const ICONS = {
@@ -463,107 +464,14 @@ export function Preview({
       </div>
 
       {/* Installation Section */}
+      {/* Installation Section */}
       {cliCommand && code && (
-        <>
-          <div className="mt-8 mb-3 flex items-center gap-2 text-sm font-medium text-muted-foreground">
-            <Terminal className="w-4 h-4" />
-            <span>Installation</span>
-          </div>
-          <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#09090b] overflow-hidden shadow-sm">
-            {/* Header with Tabs and Copy */}
-            <div className="flex items-center justify-between px-3 border-b border-zinc-200 dark:border-white/5 bg-white/50 dark:bg-white/5">
-              {/* Tabs */}
-              <div className="flex items-center gap-4">
-                {(["npm", "pnpm", "bun", "yarn"] as const).map((pm) => (
-                  <button
-                    key={pm}
-                    onClick={() => setPackageManager(pm)}
-                    className={cn(
-                      "flex items-center gap-2 py-2.5 text-xs font-medium transition-colors relative",
-                      packageManager === pm
-                        ? "text-zinc-900 dark:text-white"
-                        : "text-zinc-500 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
-                    )}
-                  >
-                    <div className="relative w-3.5 h-3.5">{ICONS[pm]}</div>
-                    {pm}
-                    {packageManager === pm && (
-                      <motion.div
-                        layoutId="install-indicator"
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-zinc-900 dark:bg-white"
-                      />
-                    )}
-                  </button>
-                ))}
-              </div>
-
-              {/* Header Copy Button */}
-              <button
-                onClick={copyCli}
-                className="p-1.5 hover:bg-zinc-100 dark:hover:bg-white/10 rounded-md text-zinc-400 hover:text-zinc-600 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors"
-                title="Copy command"
-              >
-                {copiedCli ? (
-                  <Check className="w-3.5 h-3.5 text-emerald-500" />
-                ) : (
-                  <Copy className="w-3.5 h-3.5" />
-                )}
-              </button>
-            </div>
-
-            {/* Command Output */}
-            <div className="flex items-center bg-transparent">
-              {mounted ? (
-                <SyntaxHighlighter
-                  language="bash"
-                  style={
-                    theme === "light"
-                      ? {
-                          'code[class*="language-"]': {
-                            color: "#1e293b",
-                          },
-                          'pre[class*="language-"]': {
-                            color: "#1e293b",
-                          },
-                          function: {
-                            color: "#7c3aed",
-                          },
-                          keyword: {
-                            color: "#0891b2",
-                          },
-                          string: {
-                            color: "#059669",
-                          },
-                          operator: {
-                            color: "#dc2626",
-                          },
-                          punctuation: {
-                            color: "#64748b",
-                          },
-                        }
-                      : materialDarkClean
-                  }
-                  customStyle={{
-                    margin: 0,
-                    padding: "1rem",
-                    background: "transparent",
-                    fontSize: "0.9rem",
-                    lineHeight: "1.5",
-                    fontFamily: "var(--font-geist-mono)",
-                    width: "100%",
-                    color: theme === "light" ? "#1e293b" : undefined,
-                  }}
-                >
-                  {getPackageManagerCommand()}
-                </SyntaxHighlighter>
-              ) : (
-                <pre className="p-4 text-sm opacity-0">
-                  {getPackageManagerCommand()}
-                </pre>
-              )}
-            </div>
-          </div>
-        </>
+        <InstallationGuide
+          componentName={cliCommand.split(" ").pop() || ""}
+          dependencies="framer-motion clsx tailwind-merge"
+          componentCode={code}
+          componentPath={`components/rareui/${cliCommand.split(" ").pop() || ""}.tsx`}
+        />
       )}
     </div>
   );

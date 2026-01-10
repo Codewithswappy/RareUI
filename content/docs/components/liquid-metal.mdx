@@ -6,6 +6,9 @@ description: A shader-based liquid metal effect that transforms images or text i
 
 import { Preview } from "@/components/mdx/preview";
 import LiquidMetal from "@/components/rareui/LiquidMetalLazy";
+import { PropsTable } from "@/components/mdx/PropsTable";
+import { UsageGuide } from "@/components/mdx/UsageGuide";
+import { FeaturesList } from "@/components/mdx/FeaturesList";
 
 <Preview
   cliCommand="npx rareui add LiquidMetal"
@@ -662,10 +665,14 @@ export default function LiquidMetal({
 
 ## Usage
 
-```tsx
-import LiquidMetal from "@/components/rareui/LiquidMetal";
-
-export default function MyComponent() {
+<UsageGuide steps={[
+  {
+    title: "Import the component",
+    code: `import LiquidMetal from "@/components/rareui/LiquidMetal";`
+  },
+  {
+    title: "Use in your application",
+    code: `export default function MyComponent() {
   return (
     <div className="w-full h-[600px]">
         {/* Basic Usage */}
@@ -683,19 +690,81 @@ export default function MyComponent() {
         />
     </div>
   );
-}
-```
+}`
+  }
+]} />
 
-## Props
+<FeaturesList features={[
+  {
+    title: "WebGL Flow",
+    description: "High-performance liquid metal effect powered by WebGL shaders."
+  },
+  {
+    title: "Shader-based",
+    description: "Complex fragment shaders create realistic fluid deformations."
+  },
+  {
+    title: "Interactive",
+    description: "Reacts to mouse movement and time for dynamic visualizations."
+  },
+  {
+    title: "Image Support",
+    description: "Can liquefy both text and images for versatile effects."
+  },
+  {
+    title: "Customizable Physics",
+    description: "Fine-tune speed, dispersion, and liquid viscosity."
+  }
+]} />
 
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `text` | `string` | `"RareUI"` | Text to transform into liquid metal |
-| `imageSource` | `string` | `undefined` | Optional image URL to use instead of text |
-| `speed` | `number` | `0.3` | Animation speed |
-| `dispersion` | `number` | `0.005` | Refraction/dispersion amount (chromatic aberration) |
-| `edge` | `number` | `0.5` | Sharpness of the edges |
-| `patternBlur` | `number` | `0.005` | Blur amount for the pattern |
-| `liquify` | `number` | `0.08` | Intensity of the liquid distortion effect |
-| `patternScale` | `number` | `2` | Scale of the metallic pattern |
+<PropsTable props={[
+  {
+    name: "text",
+    type: "string",
+    default: "RareUI",
+    description: "Text to transform into liquid metal"
+  },
+  {
+    name: "imageSource",
+    type: "string",
+    default: "undefined",
+    description: "Optional image URL to use instead of text"
+  },
+  {
+    name: "speed",
+    type: "number",
+    default: "0.3",
+    description: "Animation speed"
+  },
+  {
+    name: "dispersion",
+    type: "number",
+    default: "0.005",
+    description: "Refraction/dispersion amount (chromatic aberration)"
+  },
+  {
+    name: "edge",
+    type: "number",
+    default: "0.5",
+    description: "Sharpness of the edges"
+  },
+  {
+    name: "patternBlur",
+    type: "number",
+    default: "0.005",
+    description: "Blur amount for the pattern"
+  },
+  {
+    name: "liquify",
+    type: "number",
+    default: "0.08",
+    description: "Intensity of the liquid distortion effect"
+  },
+  {
+    name: "patternScale",
+    type: "number",
+    default: "2",
+    description: "Scale of the metallic pattern"
+  }
+]} />
 

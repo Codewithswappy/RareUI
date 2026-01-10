@@ -6,7 +6,9 @@ badge: New
 
 import SoundText from "@/components/rareui/Text Animation/SoundText";
 import { Preview } from "@/components/mdx/preview";
-import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { PropsTable } from "@/components/mdx/PropsTable";
+import { UsageGuide } from "@/components/mdx/UsageGuide";
+import { FeaturesList } from "@/components/mdx/FeaturesList";
 
 <Preview
   code={`"use client";
@@ -173,37 +175,63 @@ const Letter = ({ char, index, onHover }: { char: string; index: number; onHover
 
 ## Usage
 
-<Steps>
-
-
-<Step>
-### Import the component
-
-```tsx
-import SoundText from "@/components/rareui/SoundText";
-```
-</Step>
-
-<Step>
-### Use in your application
-
-```tsx
-export default function MyComponent() {
+<UsageGuide steps={[
+  {
+    title: "Import the component",
+    code: `import SoundText from "@/components/rareui/SoundText";`
+  },
+  {
+    title: "Use in your application",
+    code: `export default function MyComponent() {
   return (
     <SoundText 
       text="Hover to play!" 
       className="text-5xl font-bold"
     />
   );
-}
-```
-</Step>
-</Steps>
+}`
+  }
+]} />
 
-## Props
+<FeaturesList features={[
+  {
+    title: "Audio Feedback",
+    description: "Generates real-time audio frequencies on hover."
+  },
+  {
+    title: "Pentatonic Scale",
+    description: "Uses musical scales for harmonious sound generation."
+  },
+  {
+    title: "Interactive Animation",
+    description: "Letters jump and glow in sync with the sound."
+  },
+  {
+    title: "Web Audio API",
+    description: "Uses native Web Audio API for low-latency sound synthesis."
+  },
+  {
+    title: "Customizable Pitch",
+    description: "Adjust the base frequency to change the musical key."
+  }
+]} />
 
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `text` | `string` | `"Hover over me"` | The text content to display. |
-| `basePitch` | `number` | `300` | The base frequency in Hz for generating sound scale. |
-| `className` | `string` | `-` | Additional styles for the container. |
+<PropsTable props={[
+  {
+    name: "text",
+    type: "string",
+    default: '"Hover over me"',
+    description: "The text content to display."
+  },
+  {
+    name: "basePitch",
+    type: "number",
+    default: "300",
+    description: "The base frequency in Hz for generating sound scale."
+  },
+  {
+    name: "className",
+    type: "string",
+    description: "Additional styles for the container."
+  }
+]} />

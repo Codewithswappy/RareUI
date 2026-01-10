@@ -5,7 +5,9 @@ description: An interactive card with particle explosion effect on hover, perfec
 
 import { Preview } from "@/components/mdx/preview";
 import ParticleCard from "@/components/rareui/ParticleCard";
-import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { PropsTable } from "@/components/mdx/PropsTable";
+import { UsageGuide } from "@/components/mdx/UsageGuide";
+import { FeaturesList } from "@/components/mdx/FeaturesList";
 
 <Preview
   code={`'use client'
@@ -50,29 +52,47 @@ interface ParticleCardProps {
   </div>
 </Preview>
 
-## Usage
-
-<Steps>
-<Step>
-### Import the component
-
-```tsx
-import ParticleCard from '@/components/rareui/ParticleCard';
-```
-</Step>
-
-<Step>
-### Use in your application
-
-```tsx
-export default function App() {
+<UsageGuide steps={[
+  {
+    title: "Import the component",
+    code: `import ParticleCard from '@/components/rareui/ParticleCard';`
+  },
+  {
+    title: "Use in your application",
+    code: `export default function App() {
   return (
     <ParticleCard />
   );
-}
-```
-</Step>
-</Steps>
+}`
+  }
+]} />
+
+<FeaturesList features={[
+  {
+    title: "Particle Explosion Effect",
+    description: "Image breaks into animated particles on hover."
+  },
+  {
+    title: "Smooth Transitions",
+    description: "Framer Motion powered animations."
+  },
+  {
+    title: "Dual-Sided Content",
+    description: "Front shows preview, back shows detailed info."
+  },
+  {
+    title: "Fully Customizable",
+    description: "Control particle density, content, and styling."
+  },
+  {
+    title: "Responsive Design",
+    description: "Adapts to different screen sizes."
+  },
+  {
+    title: "Performance Optimized",
+    description: "Uses useMemo for particle calculations."
+  }
+]} />
 
 ## Examples
 
@@ -117,15 +137,6 @@ export default function Team() {
 }
 ```
 
-## Features
-
-- **Particle Explosion Effect**: Image breaks into animated particles on hover.
-- **Smooth Transitions**: Framer Motion powered animations.
-- **Dual-Sided Content**: Front shows preview, back shows detailed info.
-- **Fully Customizable**: Control particle density, content, and styling.
-- **Responsive Design**: Adapts to different screen sizes.
-- **Performance Optimized**: Uses useMemo for particle calculations.
-
 ## Customization
 
 ### Change Background Gradient
@@ -133,9 +144,9 @@ export default function Team() {
 Modify the back content gradient in the component:
 
 ```tsx
-className="bg-gradient-to-br from-purple-600 to-blue-600"
+className="bg-linear-to-br from-purple-600 to-blue-600"
 // Change to:
-className="bg-gradient-to-br from-emerald-600 to-cyan-600"
+className="bg-linear-to-br from-emerald-600 to-cyan-600"
 ```
 
 ### Adjust Animation Timing
@@ -163,14 +174,47 @@ import dynamic from 'next/dynamic';
 const ParticleCard = dynamic(() => import('@/components/rareui/ParticleCard'));
 ```
 
-## Props
-
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `name` | `string` | `"Sam Jenkins"` | Name displayed on the card front |
-| `role` | `string` | `"Product Designer"` | Role or title displayed |
-| `bio` | `string` | `Default bio...` | Biography shown on card back |
-| `img` | `string` | `Unsplash URL` | Background image URL |
-| `tags` | `string[]` | `['UI/UX', ...]` | Array of skill/tag labels |
-| `cols` | `number` | `20` | Particle grid columns (affects particle size) |
-| `rows` | `number` | `24` | Particle grid rows (affects particle density) |
+<PropsTable props={[
+  {
+    name: "name",
+    type: "string",
+    default: '"Sam Jenkins"',
+    description: "Name displayed on the card front"
+  },
+  {
+    name: "role",
+    type: "string",
+    default: '"Product Designer"',
+    description: "Role or title displayed"
+  },
+  {
+    name: "bio",
+    type: "string",
+    default: '"Default bio..."',
+    description: "Biography shown on card back"
+  },
+  {
+    name: "img",
+    type: "string",
+    default: "Unsplash URL",
+    description: "Background image URL"
+  },
+  {
+    name: "tags",
+    type: "string[]",
+    default: "['UI/UX', ...]",
+    description: "Array of skill/tag labels"
+  },
+  {
+    name: "cols",
+    type: "number",
+    default: "20",
+    description: "Particle grid columns (affects particle size)"
+  },
+  {
+    name: "rows",
+    type: "number",
+    default: "24",
+    description: "Particle grid rows (affects particle density)"
+  }
+]} />

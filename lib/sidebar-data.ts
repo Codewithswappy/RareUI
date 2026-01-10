@@ -50,6 +50,11 @@ export const sidebarData = [
         "href": "/docs/components/liquid-button"
       },
       {
+        "title": "Liquid Tooltip",
+        "href": "/docs/components/liquid-tooltip",
+        "badge": "New"
+      },
+      {
         "title": "Neumorphism3DButton",
         "href": "/docs/components/neumorphism3DButton"
       },
@@ -126,6 +131,16 @@ export const sidebarData = [
       {
         "title": "Liquid Wave",
         "href": "/docs/interactive-background/liquid-wave"
+      }
+    ]
+  },
+  {
+    "title": "Blocks",
+    "items": [
+      {
+        "title": "Profile Dropdown",
+        "href": "/docs/blocks/profile-dropdown",
+        "badge": "New"
       }
     ]
   }

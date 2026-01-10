@@ -6,7 +6,9 @@ badge: New
 
 import FloatingNavigation from "@/components/rareui/FloatingNavigation";
 import { Preview } from "@/components/mdx/preview";
-import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { PropsTable } from "@/components/mdx/PropsTable";
+import { UsageGuide } from "@/components/mdx/UsageGuide";
+import { FeaturesList } from "@/components/mdx/FeaturesList";
 
 <Preview
   code={`"use client";
@@ -188,35 +190,54 @@ export default function FloatingNavigation({ items = defaultItems, className }: 
     </div>
 </Preview>
 
-## Usage
-
-<Steps>
-
-
-<Step>
-### Import the component
-
-```tsx
-import FloatingNavigation from "@/components/rareui/FloatingNavigation";
-```
-</Step>
-
-<Step>
-### Use in your application
-
-```tsx
-export default function MyComponent() {
+<UsageGuide steps={[
+  {
+    title: "Import the component",
+    code: `import FloatingNavigation from "@/components/rareui/FloatingNavigation";`
+  },
+  {
+    title: "Use in your application",
+    code: `export default function MyComponent() {
   return (
     <FloatingNavigation />
   );
-}
-```
-</Step>
-</Steps>
+}`
+  }
+]} />
 
-## Props
+<FeaturesList features={[
+  {
+    title: "Floating Design",
+    description: "Elegant floating bar that stays accessible without cluttering the screen."
+  },
+  {
+    title: "Smooth Hover Effects",
+    description: "Fluid background transitions and scale effects on interaction."
+  },
+  {
+    title: "Animated Icons",
+    description: "Unique, playful animations for each icon state."
+  },
+  {
+    title: "Keyboard Navigation",
+    description: "Full keyboard support for accessibility."
+  },
+  {
+    title: "Responsive",
+    description: "Adapts perfectly to different screen sizes and themes."
+  }
+]} />
 
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `items` | `NavItem[]` | `defaultItems` | Array of navigation items with id, label, and icon. |
-| `className` | `string` | `-` | Additional styles for the container. |
+<PropsTable props={[
+  {
+    name: "items",
+    type: "NavItem[]",
+    default: "defaultItems",
+    description: "Array of navigation items with id, label, and icon."
+  },
+  {
+    name: "className",
+    type: "string",
+    description: "Additional styles for the container."
+  }
+]} />

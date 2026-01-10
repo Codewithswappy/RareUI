@@ -5,7 +5,8 @@ description: A premium button with a dynamic gradient background and hover effec
 
 import { Preview } from "@/components/mdx/preview";
 import { PremiumButton } from "@/components/rareui/premium-button";
-import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { UsageGuide } from "@/components/mdx/UsageGuide";
+import { FeaturesList } from "@/components/mdx/FeaturesList";
 
 <Preview
   code={`"use client";
@@ -61,37 +62,43 @@ export default PremiumButton;`}
   <PremiumButton />
 </Preview>
 
-## Usage
-
-<Steps>
-<Step>
-### Import the component
-
-```tsx
-import { PremiumButton } from '@/components/rareui/premium-button';
-```
-</Step>
-
-<Step>
-### Use in your application
-
-```tsx
-export default function App() {
+<UsageGuide steps={[
+  {
+    title: "Import the component",
+    code: `import { PremiumButton } from '@/components/rareui/premium-button';`
+  },
+  {
+    title: "Use in your application",
+    code: `export default function App() {
   return (
     <PremiumButton />
   );
-}
-```
-</Step>
-</Steps>
+}`
+  }
+]} />
 
-## Features
-
-- **Dynamic Gradient**: Animated gradient background that shifts on hover.
-- **Shadow Effects**: Text shadow and box shadow for depth.
-- **Smooth Transitions**: 300ms ease-out transitions.
-- **Premium Icon**: Built-in SVG crown icon.
-- **Responsive**: Scales beautifully on all device sizes.
+<FeaturesList features={[
+  {
+    title: "Dynamic Gradient",
+    description: "Animated gradient background that shifts on hover."
+  },
+  {
+    title: "Shadow Effects",
+    description: "Text shadow and box shadow for depth."
+  },
+  {
+    title: "Smooth Transitions",
+    description: "300ms ease-out transitions."
+  },
+  {
+    title: "Premium Icon",
+    description: "Built-in SVG crown icon."
+  },
+  {
+    title: "Responsive",
+    description: "Scales beautifully on all device sizes."
+  }
+]} />
 
 ## Props
 

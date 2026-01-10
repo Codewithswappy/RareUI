@@ -5,7 +5,9 @@ description: A smoky text animation with blur and spring effects that creates an
 
 import { VaporSmokeText } from "@/components/rareui/Text Animation/VaporSmokeText";
 import { Preview } from "@/components/mdx/preview";
-import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { PropsTable } from "@/components/mdx/PropsTable";
+import { UsageGuide } from "@/components/mdx/UsageGuide";
+import { FeaturesList } from "@/components/mdx/FeaturesList";
 
 <Preview
   code={`"use client";
@@ -88,29 +90,43 @@ export const VaporSmokeText: React.FC<VaporSmokeTextProps> = ({
     </div>
 </Preview>
 
-## Usage
-
-<Steps>
-<Step>
-### Import the component
-
-```tsx
-import { VaporSmokeText } from "@/components/rareui/Text Animation/VaporSmokeText";
-```
-</Step>
-
-<Step>
-### Use in your application
-
-```tsx
-export default function MyComponent() {
+<UsageGuide steps={[
+  {
+    title: "Import the component",
+    code: `import { VaporSmokeText } from "@/components/rareui/Text Animation/VaporSmokeText";`
+  },
+  {
+    title: "Use in your application",
+    code: `export default function MyComponent() {
   return (
     <VaporSmokeText text="Your Text" className="text-6xl text-foreground" />
   );
-}
-```
-</Step>
-</Steps>
+}`
+  }
+]} />
+
+<FeaturesList features={[
+  {
+    title: "Ethereal Blur",
+    description: "Combines opacity and blur filters for a smoky appearance."
+  },
+  {
+    title: "Spring Physics",
+    description: "Smooth, organic movement using Framer Motion springs."
+  },
+  {
+    title: "Staggered Entry",
+    description: "Characters animate sequentially for a cascading effect."
+  },
+  {
+    title: "Rotation Detail",
+    description: "Subtle rotation on entry adds natural disorder."
+  },
+  {
+    title: "Trigger Support",
+    description: "Fully controllable animation state via props."
+  }
+]} />
 
 ## Examples
 
@@ -149,10 +165,22 @@ export default function ControlledAnimation() {
 />
 ```
 
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `text` | `string` | **Required** | The text content to animate |
-| `className` | `string` | `undefined` | Additional styles for the container |
-| `trigger` | `boolean` | `true` | Controls animation state (true = visible, false = hidden) |
+<PropsTable props={[
+  {
+    name: "text",
+    type: "string",
+    description: "The text content to animate"
+  },
+  {
+    name: "className",
+    type: "string",
+    default: "undefined",
+    description: "Additional styles for the container"
+  },
+  {
+    name: "trigger",
+    type: "boolean",
+    default: "true",
+    description: "Controls animation state (true = visible, false = hidden)"
+  }
+]} />

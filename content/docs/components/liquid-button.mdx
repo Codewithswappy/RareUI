@@ -5,7 +5,9 @@ description: A button with a liquid gooey effect on hover.
 
 import LiquidButton from "@/components/rareui/LiquidButton";
 import { Preview } from "@/components/mdx/preview";
-import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { PropsTable } from "@/components/mdx/PropsTable";
+import { UsageGuide } from "@/components/mdx/UsageGuide";
+import { FeaturesList } from "@/components/mdx/FeaturesList";
 
 <Preview
   code={`'use client'
@@ -159,29 +161,43 @@ function Drop({
   <LiquidButton />
 </Preview>
 
-## Usage
-
-<Steps>
-<Step>
-### Import the component
-
-```tsx
-import LiquidButton from '@/components/rareui/LiquidButton';
-```
-</Step>
-
-<Step>
-### Use in your application
-
-```tsx
-export default function App() {
+<UsageGuide steps={[
+  {
+    title: "Import the component",
+    code: `import LiquidButton from '@/components/rareui/LiquidButton';`
+  },
+  {
+    title: "Use in your application",
+    code: `export default function App() {
   return (
     <LiquidButton text="Hover me" />
   );
-}
-```
-</Step>
-</Steps>
+}`
+  }
+]} />
+
+<FeaturesList features={[
+  {
+    title: "Liquid Physics",
+    description: "Realistic dripping effect using SVG filters and Framer Motion."
+  },
+  {
+    title: "Interactive Hover",
+    description: "Drops react to mouse position and movement speed."
+  },
+  {
+    title: "Customizable Colors",
+    description: "Easily change background and text colors via props."
+  },
+  {
+    title: "Dripping Mode",
+    description: "Optional continuous dripping mode for attention-grabbing effects."
+  },
+  {
+    title: "Responsive",
+    description: "Scales gracefully across different device sizes."
+  }
+]} />
 
 ## Examples
 
@@ -204,12 +220,34 @@ export default function App() {
 />
 ```
 
-## Props
-
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `text` | `string` | `"Hover me"` | The text to display inside the button. |
-| `className` | `string` | `-` | Additional CSS classes for the container. |
-| `backgroundColor` | `string` | `"bg-black dark:bg-white"` | Tailwind class for the background color. |
-| `textColor` | `string` | `"text-white dark:text-black"` | Tailwind class for the text color. |
-| `isDripping` | `boolean` | `false` | If true, liquid drops will continuously animate without needing hover. |
+<PropsTable props={[
+  {
+    name: "text",
+    type: "string",
+    default: "Hover me",
+    description: "The text to display inside the button."
+  },
+  {
+    name: "className",
+    type: "string",
+    description: "Additional CSS classes for the container."
+  },
+  {
+    name: "backgroundColor",
+    type: "string",
+    default: "bg-black dark:bg-white",
+    description: "Tailwind class for the background color."
+  },
+  {
+    name: "textColor",
+    type: "string",
+    default: "text-white dark:text-black",
+    description: "Tailwind class for the text color."
+  },
+  {
+    name: "isDripping",
+    type: "boolean",
+    default: "false",
+    description: "If true, liquid drops will continuously animate without needing hover."
+  }
+]} />

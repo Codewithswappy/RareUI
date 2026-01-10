@@ -335,7 +335,7 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
 
         {/* Main Content */}
         <main className="flex-1 min-w-0 overflow-y-auto overflow-x-hidden touch-pan-y">
-          <div className="container mx-auto px-6 md:px-16 py-12 md:py-20 max-w-4xl animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
+          <div className="container mx-auto px-6 md:px-16 py-12 md:py-10 max-w-4xl animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
             {children}
           </div>
         </main>

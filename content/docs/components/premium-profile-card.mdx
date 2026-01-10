@@ -5,7 +5,8 @@ description: A high-end, interactive profile card with 3D tilt, flip animation, 
 
 import { Preview } from "@/components/mdx/preview";
 import PremiumProfileCard from "@/components/rareui/premiumProfileCard";
-import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { UsageGuide } from "@/components/mdx/UsageGuide";
+import { FeaturesList } from "@/components/mdx/FeaturesList";
 
 <Preview
   code={`"use client";
@@ -68,39 +69,43 @@ export default PremiumProfileCard;`}
   <PremiumProfileCard />
 </Preview>
 
-## Usage
-
-<Steps>
-<Step>
-### Import the component
-
-```tsx
-import PremiumProfileCard from '@/components/rareui/premiumProfileCard';
-```
-</Step>
-
-<Step>
-### Use in your application
-
-```tsx
-export default function App() {
+<UsageGuide steps={[
+  {
+    title: "Import the component",
+    code: `import PremiumProfileCard from '@/components/rareui/premiumProfileCard';`
+  },
+  {
+    title: "Use in your application",
+    code: `export default function App() {
   return (
     <PremiumProfileCard />
   );
-}
-```
-</Step>
-</Steps>
+}`
+  }
+]} />
 
-## Features
-
-- **3D Tilt Effect**: Smooth, mouse-tracking rotation with configurable sensitivity.
-- **Flip Animation**: Click to reveal card back with contact information.
-- **Dark Mode Support**: Seamlessly adapts to light and dark themes.
-- **Premium Animations**: Glowing borders, sheen effects, and micro-interactions.
-- **Fully Self-Contained**: All CSS included inline - no global styles needed.
-- **Responsive Design**: Optimized for all screen sizes.
-- **Interactive Elements**: Hover states on skills, contact rows, and buttons.
+<FeaturesList features={[
+  {
+    title: "3D Tilt Effect",
+    description: "Smooth, mouse-tracking rotation creates a realistic depth effect."
+  },
+  {
+    title: "Flip Animation",
+    description: "Interactive card flip to reveal contact details and skills."
+  },
+  {
+    title: "Interactive Border",
+    description: "Spinning gradient border and sheen effects on hover."
+  },
+  {
+    title: "Dark Mode Support",
+    description: "Colors automatically adapt to system theme preferences."
+  },
+  {
+    title: "Self-Contained",
+    description: "All styles and animations are encapsulated within the component."
+  }
+]} />
 
 ## Customization
 
@@ -131,16 +136,7 @@ Replace the demo content with your own:
 - Skills list
 - Contact information
 
-## Component API
 
-| Feature | Type | Description |
-| :--- | :--- | :--- |
-| 3D Tilt | Mouse Tracking | Card follows mouse movement with smooth perspective rotation |
-| Flip Animation | Click Event | Click anywhere on card to flip and reveal back side |
-| Glowing Border | Hover Effect | Animated spinning gradient border appears on hover |
-| Sheen Effect | Hover Effect | Subtle light sweep follows rotation on hover |
-| Dark Mode | Automatic | Adapts colors based on system/app theme |
-| Dependencies | External | Requires lucide-react for icons |
 
 ## Notes
 

@@ -5,7 +5,9 @@ description: A smooth, animated tab component with glassmorphism design and spri
 
 import { AnimatedTabsDemo } from "@/components/rareui/AnimatedTabsDemo";
 import { Preview } from "@/components/mdx/preview";
-import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { PropsTable } from "@/components/mdx/PropsTable";
+import { UsageGuide } from "@/components/mdx/UsageGuide";
+import { FeaturesList } from "@/components/mdx/FeaturesList";
 
 <Preview
   code={`'use client';
@@ -104,24 +106,16 @@ export const AnimatedTabs: React.FC<AnimatedTabsProps> = ({
   <AnimatedTabsDemo />
 </Preview>
 
-## Usage
-
-<Steps>
-<Step>
-### Import the component
-
-```tsx
-'use client';
+<UsageGuide steps={[
+  {
+    title: "Import the component",
+    code: `'use client';
 import { useState } from 'react';
-import { AnimatedTabs } from '@/components/rareui/AnimatedTab';
-```
-</Step>
-
-<Step>
-### Define tabs and render
-
-```tsx
-const tabs = [
+import { AnimatedTabs } from '@/components/rareui/AnimatedTab';`
+  },
+  {
+    title: "Define tabs and render",
+    code: `const tabs = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
   { id: 'contact', label: 'Contact' },
@@ -137,24 +131,52 @@ export default function MyComponent() {
       onChange={setActiveTab}
     />
   );
-}
-```
-</Step>
-</Steps>
+}`
+  }
+]} />
 
-## Features
+<FeaturesList features={[
+  {
+    title: "Smooth Animations",
+    description: "Fluid spring-based transitions using Framer Motion."
+  },
+  {
+    title: "Glassmorphism",
+    description: "Premium frosted glass effect with backdrop blur."
+  },
+  {
+    title: "Dark Mode",
+    description: "Fully adaptable colors for light and dark themes."
+  },
+  {
+    title: "Interactive",
+    description: "Detailed hover states and tap feedback."
+  },
+  {
+    title: "Responsive",
+    description: "Scales perfectly across different device sizes."
+  }
+]} />
 
-- **Smooth Animations**: Fluid spring-based transitions using Framer Motion.
-- **Glassmorphism**: Premium frosted glass effect with backdrop blur.
-- **Dark Mode**: Fully adaptable colors for light and dark themes.
-- **Interactive**: Detailed hover states and tap feedback.
-- **Responsive**: Scales perfectly across different device sizes.
-
-## Props
-
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `tabs` | `Tab[]` | - | Array of tab objects. |
-| `activeTab` | `string` | - | The ID of the currently active tab. |
-| `onChange` | `(id: string) => void` | - | Callback function triggered when a tab is clicked. |
-| `className` | `string` | - | Additional CSS classes for the container. |
+<PropsTable props={[
+  {
+    name: "tabs",
+    type: "Tab[]",
+    description: "Array of tab objects."
+  },
+  {
+    name: "activeTab",
+    type: "string",
+    description: "The ID of the currently active tab."
+  },
+  {
+    name: "onChange",
+    type: "(id: string) => void",
+    description: "Callback function triggered when a tab is clicked."
+  },
+  {
+    name: "className",
+    type: "string",
+    description: "Additional CSS classes for the container."
+  }
+]} />

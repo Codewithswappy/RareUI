@@ -6,7 +6,9 @@ description: A 3D interactive book component that rotates on hover.
 
 import { Preview } from "@/components/mdx/preview";
 import { Book3D } from "@/components/rareui/3D elements/book-3d";
-import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { PropsTable } from "@/components/mdx/PropsTable";
+import { UsageGuide } from "@/components/mdx/UsageGuide";
+import { FeaturesList } from "@/components/mdx/FeaturesList";
 
 <Preview
   code={`"use client"
@@ -376,25 +378,18 @@ export function Book3D({
 
 ## Usage
 
-<Steps>
-<Step>
-### Import the component
-
-```tsx
-import { Book3D } from '@/components/rareui/3d-elements/book-3d';
-```
-</Step>
-
-<Step>
-### Use in your application
-
-```tsx
-export default function App() {
+<UsageGuide steps={[
+  {
+    title: "Import the component",
+    code: `import { Book3D } from '@/components/rareui/3d-elements/book-3d';`
+  },
+  {
+    title: "Use in your application",
+    code: `export default function App() {
   return <Book3D />;
-}
-```
-</Step>
-</Steps>
+}`
+  }
+]} />
 
 ### Custom Cover
 
@@ -453,22 +448,43 @@ const customPages = [
 />
 ```
 
-## Features
-
-- **Interactive 3D Animation**: Hover to open, click pages to flip.
-- **Realistic Physics**: Smooth page-turning animations with natural easing.
-- **Bi-directional Navigation**: Click right to advance, click left to go back.
-- **Smart Defaults**: Beautiful RareUI branding when no customization provided.
-- **Fully Customizable**: Override cover, title, and all page content.
-- **TypeScript Support**: Full type safety with defined interfaces.
-- **Responsive**: Configurable dimensions to fit your layout.
+<FeaturesList features={[
+  {
+    title: "Interactive 3D Animation",
+    description: "Hover to open, click pages to flip."
+  },
+  {
+    title: "Realistic Physics",
+    description: "Smooth page-turning animations with natural easing."
+  },
+  {
+    title: "Bi-directional Navigation",
+    description: "Click right to advance, click left to go back."
+  },
+  {
+    title: "Smart Defaults",
+    description: "Beautiful RareUI branding when no customization provided."
+  },
+  {
+    title: "Fully Customizable",
+    description: "Override cover, title, and all page content."
+  },
+  {
+    title: "TypeScript Support",
+    description: "Full type safety with defined interfaces."
+  },
+  {
+    title: "Responsive",
+    description: "Configurable dimensions to fit your layout."
+  }
+]} />
 
 ## Interactions
 
-1. **Hover** → Book opens (cover flips to the left)
-2. **Click right page** → Flip to next page
-3. **Click left page** → Flip back to previous page
-4. **Mouse leave** → Book closes automatically
+- **Hover** → Book opens (cover flips to the left)
+- **Click right page** → Flip to next page
+- **Click left page** → Flip back to previous page
+- **Mouse leave** → Book closes automatically
 
 ## Tips
 
@@ -479,15 +495,46 @@ const customPages = [
 
 ## Props
 
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `src` | `string` | `undefined` | Cover image URL. If not provided, shows RareUI branding. |
-| `title` | `string` | `undefined` | Title displayed on cover. |
-| `subtitle` | `string` | `undefined` | Subtitle displayed on cover. |
-| `pages` | `PageData[]` | `[...]` | Array of page content objects. Defaults to RareUI demo pages. |
-| `width` | `number` | `230` | Book width in pixels. |
-| `height` | `number` | `350` | Book height in pixels. |
-| `className` | `string` | `undefined` | Additional CSS classes for the container. |
+<PropsTable props={[
+  {
+    name: "src",
+    type: "string",
+    description: "Cover image URL. If not provided, shows RareUI branding."
+  },
+  {
+    name: "title",
+    type: "string",
+    description: "Title displayed on cover."
+  },
+  {
+    name: "subtitle",
+    type: "string",
+    description: "Subtitle displayed on cover."
+  },
+  {
+    name: "pages",
+    type: "PageData[]",
+    default: "[...]",
+    description: "Array of page content objects. Defaults to RareUI demo pages."
+  },
+  {
+    name: "width",
+    type: "number",
+    default: "230",
+    description: "Book width in pixels."
+  },
+  {
+    name: "height",
+    type: "number",
+    default: "350",
+    description: "Book height in pixels."
+  },
+  {
+    name: "className",
+    type: "string",
+    description: "Additional CSS classes for the container."
+  }
+]} />
 
 ## PageData Interface
 

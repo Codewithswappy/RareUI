@@ -107,6 +107,9 @@ async function buildSidebar() {
   // Build Interactive Background section
   const interactiveBackgroundSection = buildInteractiveBackgroundSection();
 
+  // Build Blocks section
+  const blocksSection = buildBlocksSection();
+
   const sidebar = [...STATIC_SECTIONS, componentsSection];
 
   // Add Text Animation section if it exists
@@ -122,6 +125,11 @@ async function buildSidebar() {
   // Add Interactive Background section if it exists
   if (interactiveBackgroundSection) {
     sidebar.push(interactiveBackgroundSection);
+  }
+
+  // Add Blocks section if it exists
+  if (blocksSection) {
+    sidebar.push(blocksSection);
   }
 
 
@@ -310,6 +318,42 @@ function buildInteractiveBackgroundSection() {
 
   return {
     title: "Interactive Background",
+    items
+  };
+}
+
+
+function buildBlocksSection() {
+  const BLOCKS_ROOT = path.resolve(process.cwd(), "content/docs/blocks");
+
+  if (!fs.existsSync(BLOCKS_ROOT)) {
+    return null;
+  }
+
+  const files = getAllMdxFiles(BLOCKS_ROOT);
+  const items: any[] = [];
+
+  for (const file of files) {
+    const name = path.basename(file, ".mdx");
+    const prettyTitle = formatComponentTitle(name);
+    const relativePath = path.relative(BLOCKS_ROOT, file);
+    const urlPath = relativePath.replace(/\.mdx$/, '').replace(/\\/g, '/');
+
+    const badge = getBadgeFromFrontmatter(file);
+
+    items.push({
+      title: prettyTitle,
+      href: `/docs/blocks/${urlPath}`,
+      ...(badge && { badge }),
+    });
+  }
+
+  if (items.length === 0) {
+    return null;
+  }
+
+  return {
+    title: "Blocks",
     items
   };
 }

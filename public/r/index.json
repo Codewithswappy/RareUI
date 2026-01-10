@@ -5,7 +5,7 @@
     "AnimatedTab",
     "AnimatedTabsDemo",
     "AvatarGroup",
-    "ClickSpark",
+    "ProfileDropdown",
     "FeatureBadge",
     "FloatingNavigation",
     "glass-shimmer-button",
@@ -15,6 +15,7 @@
     "LiquidButton",
     "LiquidMetal",
     "LiquidMetalLazy",
+    "LiquidTooltip",
     "LoadingSpinner",
     "neumorphism3DButton",
     "ParticleCard",
@@ -26,7 +27,6 @@
     "SoundText",
     "VaporSmokeText",
     "WordMagnet",
-    "ThreeDButton",
     "ToastTabs"
   ]
 }

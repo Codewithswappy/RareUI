@@ -5,7 +5,9 @@ description: A 3D neumorphic button with realistic shadows and press effects.
 
 import { Preview } from "@/components/mdx/preview";
 import { Neumorphism3DButton } from "@/components/rareui/neumorphism3DButton";
-import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { PropsTable } from "@/components/mdx/PropsTable";
+import { UsageGuide } from "@/components/mdx/UsageGuide";
+import { FeaturesList } from "@/components/mdx/FeaturesList";
 
 <Preview
   code={`"use client"
@@ -119,41 +121,58 @@ export const Neumorphism3DButton = ({ children = "Click Me", onClick, disabled }
 
 ## Usage
 
-<Steps>
-<Step>
-### Import the component
-
-```tsx
-import { Neumorphism3DButton } from '@/components/rareui/neumorphism3DButton';
-```
-</Step>
-
-<Step>
-### Use in your application
-
-```tsx
-export default function App() {
+<UsageGuide steps={[
+  {
+    title: "Import the component",
+    code: `import { Neumorphism3DButton } from '@/components/rareui/neumorphism3DButton';`
+  },
+  {
+    title: "Use in your application",
+    code: `export default function App() {
   return (
     <Neumorphism3DButton onClick={() => alert('Clicked!')}>
       Press Me
     </Neumorphism3DButton>
   );
-}
-```
-</Step>
-</Steps>
+}`
+  }
+]} />
 
-## Features
+<FeaturesList features={[
+  {
+    title: "Realistic 3D Depth",
+    description: "Multiple box-shadow layers create convincingly substantial depth."
+  },
+  {
+    title: "Interactive Press State",
+    description: "Detailed inset shadows and scaling on click relative to cursor."
+  },
+  {
+    title: "Premium Text Effects",
+    description: "Gradient text with clip and text-shadow for a metallic look."
+  },
+  {
+    title: "Complex Neumorphism",
+    description: "Advanced implementation of light and shadow physics."
+  }
+]} />
 
-- **Realistic 3D Depth**: Multiple box-shadow layers create convincingly substantial depth.
-- **Interactive Press State**: Detailed inset shadows and scaling on click relative to cursor.
-- **Premium Text Effects**: Gradient text with clip and text-shadow for a metallic look.
-- **Complex Neumorphism**: Advanced implementation of light and shadow physics.
-
-## Props
-
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `children` | `React.ReactNode` | `"Click Me"` | The content to display inside the button. |
-| `onClick` | `() => void` | `-` | Callback function when the button is clicked. |
-| `disabled` | `boolean` | `false` | Whether the button is disabled. |
+<PropsTable props={[
+  {
+    name: "children",
+    type: "React.ReactNode",
+    default: '"Click Me"',
+    description: "The content to display inside the button."
+  },
+  {
+    name: "onClick",
+    type: "() => void",
+    description: "Callback function when the button is clicked."
+  },
+  {
+    name: "disabled",
+    type: "boolean",
+    default: "false",
+    description: "Whether the button is disabled."
+  }
+]} />

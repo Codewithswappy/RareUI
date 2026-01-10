@@ -5,7 +5,9 @@ description: A neumorphic button with soft shadows, hover effects, and smooth an
 
 import { Preview } from "@/components/mdx/preview";
 import SoftButton from "@/components/rareui/SoftButton";
-import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { PropsTable } from "@/components/mdx/PropsTable";
+import { UsageGuide } from "@/components/mdx/UsageGuide";
+import { FeaturesList } from "@/components/mdx/FeaturesList";
 
 <Preview
   code={`import React from 'react';
@@ -94,47 +96,73 @@ export default SoftButton;`}
   <SoftButton />
 </Preview>
 
-## Usage
-
-<Steps>
-<Step>
-### Import the component
-
-```tsx
-import SoftButton from '@/components/rareui/SoftButton';
-```
-</Step>
-
-<Step>
-### Use in your application
-
-```tsx
-export default function App() {
+<UsageGuide steps={[
+  {
+    title: "Import the component",
+    code: `import SoftButton from '@/components/rareui/SoftButton';`
+  },
+  {
+    title: "Use in your application",
+    code: `export default function App() {
   return (
     <SoftButton onClick={() => alert('Clicked!')}>
       Click Me
     </SoftButton>
   );
-}
-```
-</Step>
-</Steps>
+}`
+  }
+]} />
 
-## Features
+<FeaturesList features={[
+  {
+    title: "Neumorphic Design",
+    description: "Soft, multi-layered shadows for a 3D raised effect."
+  },
+  {
+    title: "Interactive Hover",
+    description: "Scale animation, background color change, and enhanced glow."
+  },
+  {
+    title: "Active State",
+    description: "Subtle scale-down feedback on click."
+  },
+  {
+    title: "Theme Aware",
+    description: "Uses CSS variables for primary colors."
+  },
+  {
+    title: "Smooth Transitions",
+    description: "600ms animated state changes."
+  },
+  {
+    title: "Dark Mode Support",
+    description: "Optimized shadows for both light and dark themes."
+  },
+  {
+    title: "Letter Spacing Animation",
+    description: "Expands tracking on hover for dynamic effect."
+  },
+  {
+    title: "Fully Self-Contained",
+    description: "No global CSS required - all styles are in Tailwind classes."
+  }
+]} />
 
-- **Neumorphic Design**: Soft, multi-layered shadows for a 3D raised effect.
-- **Interactive Hover**: Scale animation, background color change, and enhanced glow.
-- **Active State**: Subtle scale-down feedback on click.
-- **Theme Aware**: Uses CSS variables for primary colors.
-- **Smooth Transitions**: 600ms animated state changes.
-- **Dark Mode Support**: Optimized shadows for both light and dark themes.
-- **Letter Spacing Animation**: Expands tracking on hover for dynamic effect.
-- **Fully Self-Contained**: No global CSS required - all styles are in Tailwind classes.
-
-## Props
-
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `children` | `React.ReactNode` | `"Button"` | The content to display inside the button. |
-| `className` | `string` | `-` | Additional CSS classes for the outer wrapper. |
-| `...props` | `React.HTMLAttributes<HTMLDivElement>` | `-` | Any additional HTML div attributes (onClick, onMouseEnter, etc.). |
+<PropsTable props={[
+  {
+    name: "children",
+    type: "React.ReactNode",
+    default: '"Button"',
+    description: "The content to display inside the button."
+  },
+  {
+    name: "className",
+    type: "string",
+    description: "Additional CSS classes for the outer wrapper."
+  },
+  {
+    name: "...props",
+    type: "React.HTMLAttributes<HTMLDivElement>",
+    description: "Any additional HTML div attributes (onClick, onMouseEnter, etc.)."
+  }
+]} />
