@@ -22,7 +22,7 @@ export default function Hero() {
 
   return (
     <div className="w-full flex justify-center items-start pt-4 pb-12">
-      <div className="relative h-[calc(100vh-2rem)] min-h-[600px] max-h-[900px] w-[98%] max-w-[1600px] mx-auto flex flex-col items-center justify-center overflow-hidden rounded-2xl md:rounded-2xl transition-colors duration-500 rounded-t-2xl md:rounded-t-2xl bg-[#0d2a36] dark:bg-[#052b3b]">
+      <div className="relative h-[calc(100vh-2rem)] min-h-[600px] max-h-[900px] w-[98%] max-w-[1600px] mx-auto flex flex-col items-center justify-center overflow-hidden transition-colors duration-500 bg-[#0d2a36] dark:bg-[#052b3b]">
         <Navbar />
         {/* Main Gradient: Adjust based on theme */}
         <div className="absolute inset-0 transition-opacity duration-500 bg-linear-to-b from-white/50 via-[#e8f2f6]/50 to-[#0d2a36] dark:from-black/50 dark:via-[#e8f2f6]/50 dark:to-[#263a42]" />
@@ -45,7 +45,7 @@ export default function Hero() {
           <div className="flex flex-col items-start justify-center w-full md:w-1/2 px-6 py-12 md:p-12 md:pt-0 z-10 text-pretty">
             <div className="mb-1">
               <FeatureBadge badgeText="RareUI">
-                New Component everyday
+                New Component every week
               </FeatureBadge>
             </div>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-clip text-transparent bg-clip-text px-1.8 pr-2 pb-3 bg-linear-to-r from-neutral-50 via-neutral-100 to-neutral-50 dark:from-neutral-50 dark:via-neutral-100 dark:to-neutral-50">
@@ -69,9 +69,9 @@ export default function Hero() {
               Spend less time designing and tweaking UI, and more time shipping
               reliable, visually refined interfaces.
             </h3>
-            <div className="m-3">
+            {/* <div className="m-3">
               <AvatarGroup />
-            </div>
+            </div> */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center md:hidden mt-6 gap-6 w-full">
               <ThreeDButton text="Browse Components" href="/docs" />
               <div className="w-full sm:w-auto max-w-[360px]">
