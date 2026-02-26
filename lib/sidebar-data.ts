@@ -38,8 +38,7 @@ export const sidebarData = [
       },
       {
         "title": "Floating Navigation",
-        "href": "/docs/components/floating-navigation",
-        "badge": "New"
+        "href": "/docs/components/floating-navigation"
       },
       {
         "title": "Glass Shimmer Button",
@@ -51,8 +50,7 @@ export const sidebarData = [
       },
       {
         "title": "Liquid Tooltip",
-        "href": "/docs/components/liquid-tooltip",
-        "badge": "New"
+        "href": "/docs/components/liquid-tooltip"
       },
       {
         "title": "Neumorphism3DButton",
@@ -80,8 +78,7 @@ export const sidebarData = [
       },
       {
         "title": "Toast Tabs",
-        "href": "/docs/components/toast-tabs",
-        "badge": "New"
+        "href": "/docs/components/toast-tabs"
       },
       {
         "title": "Liquid Metal",
@@ -89,8 +86,7 @@ export const sidebarData = [
       },
       {
         "title": "Loading Spinner",
-        "href": "/docs/components/loading-spinner",
-        "badge": "New"
+        "href": "/docs/components/loading-spinner"
       }
     ]
   },
@@ -103,8 +99,7 @@ export const sidebarData = [
       },
       {
         "title": "Sound Text",
-        "href": "/docs/text-animation/sound-text",
-        "badge": "New"
+        "href": "/docs/text-animation/sound-text"
       },
       {
         "title": "Vapor SmokeText",
@@ -139,8 +134,7 @@ export const sidebarData = [
     "items": [
       {
         "title": "Image Expand Testimonial",
-        "href": "/docs/sections/image-expand-testimonial",
-        "badge": "New"
+        "href": "/docs/sections/image-expand-testimonial"
       }
     ]
   }

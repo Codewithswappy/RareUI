@@ -16,7 +16,7 @@ const Footer = dynamic(() => import("@/components/landing/Footer"), {
 export default function Home() {
   return (
     <main className="min-h-screen bg-background h-screen text-foreground overflow-x-hidden">
-      <HeroSection />
+      <HeroSection />  
       <HowItWorks />
       <CTASection />
       <Footer />

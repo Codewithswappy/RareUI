@@ -31,6 +31,18 @@ export function CommandPaletteModal() {
   const { openSearch, setOpenSearch } = useSearchContext();
   const [search, setSearch] = React.useState("");
   const router = useRouter();
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  // Focus input when modal opens
+  React.useEffect(() => {
+    if (openSearch) {
+      // Small delay to ensure the animation has started and element is visible
+      const timer = setTimeout(() => {
+        inputRef.current?.focus();
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [openSearch]);
 
   // Flatten sidebar data
   const items = React.useMemo(() => {
@@ -134,6 +146,7 @@ export function CommandPaletteModal() {
               <div className="flex items-center border-b border-border/50 px-4 py-4">
                 <Search className="mr-3 h-5 w-5 text-muted-foreground/70" />
                 <input
+                  ref={inputRef}
                   type="text"
                   placeholder="Search documentation..."
                   value={search}

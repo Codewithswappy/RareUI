@@ -67,34 +67,6 @@ interface ParticleCardProps {
   }
 ]} />
 
-<FeaturesList features={[
-  {
-    title: "Particle Explosion Effect",
-    description: "Image breaks into animated particles on hover."
-  },
-  {
-    title: "Smooth Transitions",
-    description: "Framer Motion powered animations."
-  },
-  {
-    title: "Dual-Sided Content",
-    description: "Front shows preview, back shows detailed info."
-  },
-  {
-    title: "Fully Customizable",
-    description: "Control particle density, content, and styling."
-  },
-  {
-    title: "Responsive Design",
-    description: "Adapts to different screen sizes."
-  },
-  {
-    title: "Performance Optimized",
-    description: "Uses useMemo for particle calculations."
-  }
-]} />
-
-## Examples
 
 <UsageGuide title="Examples" steps={[
   {
@@ -134,42 +106,34 @@ export default function Team() {
   }
 ]} />
 
-## Customization
 
-### Change Background Gradient
+<FeaturesList features={[
+  {
+    title: "Particle Explosion Effect",
+    description: "Image breaks into animated particles on hover."
+  },
+  {
+    title: "Smooth Transitions",
+    description: "Framer Motion powered animations."
+  },
+  {
+    title: "Dual-Sided Content",
+    description: "Front shows preview, back shows detailed info."
+  },
+  {
+    title: "Fully Customizable",
+    description: "Control particle density, content, and styling."
+  },
+  {
+    title: "Responsive Design",
+    description: "Adapts to different screen sizes."
+  },
+  {
+    title: "Performance Optimized",
+    description: "Uses useMemo for particle calculations."
+  }
+]} />
 
-Modify the back content gradient in the component:
-
-```tsx
-className="bg-linear-to-br from-purple-600 to-blue-600"
-// Change to:
-className="bg-linear-to-br from-emerald-600 to-cyan-600"
-```
-
-### Adjust Animation Timing
-
-Modify the motion transition values:
-
-```tsx
-transition={{
-  duration: 1.2,  // Slower explosion
-  delay: p.delay,
-  ease: [0.25, 0.46, 0.45, 0.94],
-}}
-```
-
-### Performance Tips
-
-For better performance with many cards:
-
-```tsx
-// Reduce particle density
-<ParticleCard cols={15} rows={18} />
-
-// Or lazy load cards
-import dynamic from 'next/dynamic';
-const ParticleCard = dynamic(() => import('@/components/rareui/ParticleCard'));
-```
 
 <PropsTable props={[
   {

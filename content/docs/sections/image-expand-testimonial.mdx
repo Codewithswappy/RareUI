@@ -1,7 +1,6 @@
 ---
 title: Image Expand Testimonial
 description: An interactive testimonial section with smooth image expansion animations, autoplay, and responsive design.
-badge: New
 ---
 
 import { ImageExpandTestimonial } from "@/components/rareui/Sections/imageExpandTestimonial";
@@ -141,7 +140,6 @@ export default function MyComponent() {
   }
 ]} />
 
-## Props
 
 <PropsTable props={[
   {
@@ -162,43 +160,3 @@ export default function MyComponent() {
   }
 ]} />
 
-### Testimonial Object
-
-<PropsTable props={[
-  {
-    name: "id",
-    type: "string",
-    description: "Unique identifier for the testimonial."
-  },
-  {
-    name: "name",
-    type: "string",
-    description: "Name of the person giving the testimonial."
-  },
-  {
-    name: "role",
-    type: "string",
-    description: "Job title or role of the person."
-  },
-  {
-    name: "company",
-    type: "string",
-    description: "Company or organization name."
-  },
-  {
-    name: "quote",
-    type: "string",
-    description: "The testimonial text."
-  },
-  {
-    name: "image",
-    type: "string",
-    description: "URL of the person's image."
-  },
-  {
-    name: "rating",
-    type: "number",
-    default: "5",
-    description: "Rating from 0-5, supports half values (e.g., 4.5)."
-  }
-]} />

@@ -376,7 +376,6 @@ export function Book3D({
   </div>
 </Preview>
 
-## Usage
 
 <UsageGuide steps={[
   {
@@ -390,8 +389,6 @@ export function Book3D({
 }`
   }
 ]} />
-
-## Examples
 
 <UsageGuide title="Examples" steps={[
   {
@@ -443,36 +440,6 @@ export function Book3D({
   }
 ]} />
 
-<FeaturesList features={[
-  {
-    title: "Interactive 3D Animation",
-    description: "Hover to open, click pages to flip."
-  },
-  {
-    title: "Realistic Physics",
-    description: "Smooth page-turning animations with natural easing."
-  },
-  {
-    title: "Bi-directional Navigation",
-    description: "Click right to advance, click left to go back."
-  },
-  {
-    title: "Smart Defaults",
-    description: "Beautiful RareUI branding when no customization provided."
-  },
-  {
-    title: "Fully Customizable",
-    description: "Override cover, title, and all page content."
-  },
-  {
-    title: "TypeScript Support",
-    description: "Full type safety with defined interfaces."
-  },
-  {
-    title: "Responsive",
-    description: "Configurable dimensions to fit your layout."
-  }
-]} />
 
 ## Interactions
 
@@ -488,48 +455,7 @@ export function Book3D({
 - Limit pages to 4-6 for optimal user experience
 - The book resets to page 1 when closed
 
-## Props
 
-<PropsTable props={[
-  {
-    name: "src",
-    type: "string",
-    description: "Cover image URL. If not provided, shows RareUI branding."
-  },
-  {
-    name: "title",
-    type: "string",
-    description: "Title displayed on cover."
-  },
-  {
-    name: "subtitle",
-    type: "string",
-    description: "Subtitle displayed on cover."
-  },
-  {
-    name: "pages",
-    type: "PageData[]",
-    default: "[...]",
-    description: "Array of page content objects. Defaults to RareUI demo pages."
-  },
-  {
-    name: "width",
-    type: "number",
-    default: "230",
-    description: "Book width in pixels."
-  },
-  {
-    name: "height",
-    type: "number",
-    default: "350",
-    description: "Book height in pixels."
-  },
-  {
-    name: "className",
-    type: "string",
-    description: "Additional CSS classes for the container."
-  }
-]} />
 
 ## PageData Interface
 
@@ -582,3 +508,75 @@ You can create different types of pages:
   image: "/image.jpg"
 }
 ```
+<FeaturesList features={[
+  {
+    title: "Interactive 3D Animation",
+    description: "Hover to open, click pages to flip."
+  },
+  {
+    title: "Realistic Physics",
+    description: "Smooth page-turning animations with natural easing."
+  },
+  {
+    title: "Bi-directional Navigation",
+    description: "Click right to advance, click left to go back."
+  },
+  {
+    title: "Smart Defaults",
+    description: "Beautiful RareUI branding when no customization provided."
+  },
+  {
+    title: "Fully Customizable",
+    description: "Override cover, title, and all page content."
+  },
+  {
+    title: "TypeScript Support",
+    description: "Full type safety with defined interfaces."
+  },
+  {
+    title: "Responsive",
+    description: "Configurable dimensions to fit your layout."
+  }
+]} />
+
+
+<PropsTable props={[
+  {
+    name: "src",
+    type: "string",
+    description: "Cover image URL. If not provided, shows RareUI branding."
+  },
+  {
+    name: "title",
+    type: "string",
+    description: "Title displayed on cover."
+  },
+  {
+    name: "subtitle",
+    type: "string",
+    description: "Subtitle displayed on cover."
+  },
+  {
+    name: "pages",
+    type: "PageData[]",
+    default: "[...]",
+    description: "Array of page content objects. Defaults to RareUI demo pages."
+  },
+  {
+    name: "width",
+    type: "number",
+    default: "230",
+    description: "Book width in pixels."
+  },
+  {
+    name: "height",
+    type: "number",
+    default: "350",
+    description: "Book height in pixels."
+  },
+  {
+    name: "className",
+    type: "string",
+    description: "Additional CSS classes for the container."
+  }
+]} />
