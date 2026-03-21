@@ -37,31 +37,32 @@ export default function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-      className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-6 pr-2 md:px-12 pt-2 bg-transparent"
+      className="absolute top-0 left-0 w-full h-20 z-50 flex items-center justify-between px-1 md:px-10  bg-transparent"
     >
-      <div className="flex items-center gap-10">
+      <div className="flex items-center ">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
           <Image
-            src="/RareUI_Logo.png"
+            src="/logo/whiteTransparent.png"
             alt="RareUI Logo"
-            width={70}
-            height={40}
-            className="object-contain transition-transform duration-300 group-hover:scale-105 size-10 md:size-12 lg:size-14"
+           width={100}
+           height={100}
+            className="object-contain transition-transform duration-300 group-hover:scale-105 md:size-18 lg:size-28"
           />
         </Link>
 
+      </div>
+
+      {/* Right Side / CTA */}
+      <div className="flex items-center justify-start md:flex-1 ">
         {/* Links (Hidden on mobile) */}
-        <div className="hidden md:flex items-center  gap-8">
+        <div className="hidden md:flex items-center justify-center flex-1  gap-8">
           {navLinks.map((link) => (
             <WavyLink key={link.name} href={link.href} name={link.name} />
           ))}
         </div>
-      </div>
-
-      {/* Right Side / CTA */}
-      <div className="flex items-center justify-center">
-        {/* GitHub Icon + Stars */}
+       <div className="flex justify-end items-center">
+         {/* GitHub Icon + Stars */}
         <motion.a
           href="https://github.com/Codewithswappy/RareUI"
           target="_blank"
@@ -122,6 +123,7 @@ export default function Navbar() {
         <div>
           <SmartThemeToggle enableSound={false} />
         </div>
+       </div>
 
         {/* Mobile Menu Button */}
         <button

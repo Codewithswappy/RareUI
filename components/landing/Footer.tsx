@@ -33,17 +33,18 @@ export default function Footer() {
         <div className="p-8 md:p-12 lg:p-16 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 mb-16">
             {/* Left: Brand & Socials */}
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4">
               <Link
                 href="/"
-                className="flex items-center gap-3 group/brand w-fit"
+                className="flex items-center group/brand w-fit"
               >
-                <div className="relative w-9 h-9 overflow-hidden">
+                <div className="relative overflow-hidden">
                   <Image
-                    src="/RareUI_Logo.svg"
+                    src="/logo/whiteTransparent.png"
                     alt="RareUI"
-                    fill
-                    className="object-contain transition-transform duration-500 group-hover/brand:scale-110 group-hover/brand:rotate-12 brightness-0 dark:invert"
+                    width={60}
+                    height={100}
+                    className="object-cover transition-transform duration-500 group-hover/brand:scale-110 group-hover/brand:rotate-12 brightness-0 dark:invert"
                   />
                 </div>
                 <SkewOnScroll>
@@ -52,7 +53,7 @@ export default function Footer() {
                     whileInView={{ opacity: 1, filter: "blur(0px)" }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
-                    className="text-xl font-bold tracking-tight group-hover/brand:text-foreground/80 transition-colors"
+                    className="text-xl font-bold tracking-tight group-hover/brand:text-foreground/80 transition-colors "
                   >
                     RareUI
                   </motion.span>
