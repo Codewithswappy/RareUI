@@ -34,9 +34,9 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+      initial={{ y: -20, opacity: 0, filter: "blur(10px)" }}
+      animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
       className="absolute top-0 left-0 w-full h-20 z-50 flex items-center justify-between px-1 md:px-10  bg-transparent"
     >
       <div className="flex items-center ">
@@ -49,7 +49,9 @@ export default function Navbar() {
            height={100}
             className="object-contain transition-transform duration-300 group-hover:scale-105 md:size-18 lg:size-28"
           />
+        
         </Link>
+
 
       </div>
 
@@ -67,9 +69,10 @@ export default function Navbar() {
           href="https://github.com/Codewithswappy/RareUI"
           target="_blank"
           rel="noopener noreferrer"
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.1)" }}
           whileTap={{ scale: 0.95 }}
-          className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full transition-colors group text-white"
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-300 group text-white border border-transparent hover:border-white/20"
           aria-label="GitHub Repository"
         >
           <motion.svg
@@ -110,9 +113,10 @@ export default function Navbar() {
           href="https://x.com/heyyswap"
           target="_blank"
           rel="noopener noreferrer"
-          whileHover={{ scale: 1.1, rotate: 10 }}
+          whileHover={{ scale: 1.1, rotate: 10, backgroundColor: "rgba(255, 255, 255, 0.1)" }}
           whileTap={{ scale: 0.9 }}
-          className="p-2 rounded-full transition-colors hidden md:block text-white"
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          className="p-2 rounded-full transition-all duration-300 hidden md:block text-white border border-transparent hover:border-white/20"
           aria-label="Twitter Profile"
         >
           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -143,33 +147,20 @@ export default function Navbar() {
         {isMobileMenuOpen && (
           <motion.div
             initial={{
-              margin: "20px",
-              borderRadius: "2rem",
-              width: "0px",
-              height: "0px",
+              clipPath: "circle(0% at calc(100% - 2.5rem) 2.5rem)",
               opacity: 0,
-              scale: 0.8,
             }}
             animate={{
-              margin: "0px",
-              borderRadius: "0px",
-              width: "100%",
-              height: "100%",
+              clipPath: "circle(150% at calc(100% - 2.5rem) 2.5rem)",
               opacity: 1,
-              scale: 1,
             }}
             exit={{
-              margin: "20px",
-              borderRadius: "2rem",
-              width: "0px",
-              height: "0px",
+              clipPath: "circle(0% at calc(100% - 2.5rem) 2.5rem)",
               opacity: 0,
-              scale: 0.8,
-              transition: { duration: 0.2 },
+              transition: { duration: 0.4, ease: "easeInOut" },
             }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed inset-0 z-40 bg-white/80 dark:bg-black/90 backdrop-blur-2xl md:hidden flex flex-col items-center justify-center gap-8 overflow-hidden"
-            style={{ transformOrigin: "top right" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-40 bg-white/90 dark:bg-black/95 backdrop-blur-3xl md:hidden flex flex-col items-center justify-center gap-8 overflow-hidden"
           >
             {/* Background Gradient Element */}
             <div className="absolute inset-0 bg-radial-gradient from-white/10 to-transparent opacity-20 pointer-events-none" />
