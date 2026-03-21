@@ -65,7 +65,7 @@ export default function HowItWorks() {
         <div className="absolute top-0 left-0 right-0 h-64 bg-linear-to-b from-white to-transparent dark:from-black z-1" />
         <div className="absolute bottom-0 left-0 right-0 h-64 bg-linear-to-t from-white to-transparent dark:from-black z-1" />
 
-        <div className="max-w-[1400px] mx-auto relative z-10">
+        <div className="max-w-fd-container mx-auto relative z-10">
           {/* Header */}
           <div className="text-center mb-24 space-y-8">
             <h3 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-foreground max-w-4xl mx-auto leading-[0.9] md:leading-[0.85]">
@@ -206,7 +206,7 @@ export default function HowItWorks() {
                             exit={{ scale: 0.8, opacity: 0 }}
                             transition={{ type: "spring", bounce: 0.5 }}
                           >
-                            <button className="px-5 py-2 rounded-lg bg-gradient-to-r from-neutral-800 to-neutral-900 text-white text-xs font-semibold shadow-lg shadow-neutral-500/20 active:scale-95 transition-transform">
+                            <button className="px-5 py-2 rounded-lg bg-linear-to-r from-neutral-800 to-neutral-900 text-white text-xs font-semibold shadow-lg shadow-neutral-500/20 active:scale-95 transition-transform">
                               Click me
                             </button>
                           </motion.div>
@@ -241,7 +241,7 @@ export default function HowItWorks() {
                             transition={{ type: "spring", bounce: 0.5 }}
                             className="w-40 p-3 rounded-xl bg-background border border-border shadow-xl flex items-center gap-3"
                           >
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500" />
+                            <div className="w-8 h-8 rounded-full bg-linear-to-tr from-purple-500 to-pink-500" />
                             <div className="space-y-1">
                               <div className="h-1.5 w-16 bg-muted-foreground/30 rounded-full" />
                               <div className="h-1.5 w-10 bg-muted-foreground/10 rounded-full" />
@@ -402,7 +402,7 @@ export default function HowItWorks() {
                       initial={{ opacity: 0, scale: 0.8, y: 10 }}
                       animate={{ opacity: 1, scale: 1, y: 0 }}
                       transition={{ delay: 1.5, type: "spring", bounce: 0.5 }}
-                      className="bg-white/60 dark:bg-white/[0.03] backdrop-blur-md border border-black/5 dark:border-white/10 p-4 rounded-xl shadow-lg flex items-center justify-between"
+                      className="bg-white/60 dark:bg-white/3 backdrop-blur-md border border-black/5 dark:border-white/10 p-4 rounded-xl shadow-lg flex items-center justify-between"
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-[10px] font-bold shadow-sm">

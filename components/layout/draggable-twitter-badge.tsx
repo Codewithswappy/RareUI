@@ -18,25 +18,25 @@ export function DraggableTwitterBadge() {
     <>
       <div 
         ref={constraintsRef} 
-        className="fixed inset-8 pointer-events-none z-[100]" 
+        className="fixed inset-8 pointer-events-none z-100" 
       />
       
       <motion.div
-        drag
-        dragConstraints={constraintsRef}
-        dragMomentum={true}
-        onDragStart={() => {
-            isDraggingRef.current = true;
-        }}
-        onDragEnd={() => {
-            setTimeout(() => {
-                isDraggingRef.current = false;
-            }, 150);
-        }}
-        whileHover={{ scale: 1.05, cursor: "grab" }}
-        whileTap={{ scale: 0.95, cursor: "grabbing" }}
-        whileDrag={{ cursor: "grabbing" }}
-        className="fixed top-2 left-0 right-0 mx-auto w-fit z-[101] flex"
+        // drag
+        // dragConstraints={constraintsRef}
+        // dragMomentum={true}
+        // onDragStart={() => {
+        //     isDraggingRef.current = true;
+        // }}
+        // onDragEnd={() => {
+        //     setTimeout(() => {
+        //         isDraggingRef.current = false;
+        //     }, 150);
+        // }}
+        // whileHover={{ scale: 1.05, cursor: "grab" }}
+        // whileTap={{ scale: 0.95, cursor: "grabbing" }}
+        // whileDrag={{ cursor: "grabbing" }}
+        className="fixed top-2 left-0 right-0 mx-auto w-fit z-101 flex"
       >
         <a 
            href="https://x.com/heyyswap" 
@@ -51,7 +51,7 @@ export function DraggableTwitterBadge() {
                e.stopPropagation();
              }
            }}
-           className="flex items-center gap-2 p-3 md:px-4 md:py-2 bg-background/80 backdrop-blur-md border border-border rounded-full shadow-lg hover:shadow-xl transition-all group select-none"
+           className="flex items-center gap-2 p-3 md:px-4 md:py-2 rounded-lg shadow-sm ring-1 ring-black/10 dark:ring-white/10 hover:shadow-md transition-all group select-none"
         >
           <div className="text-foreground group-hover:text-primary transition-colors">
             {xIcon}

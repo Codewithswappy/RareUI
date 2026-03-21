@@ -167,9 +167,9 @@ export function Book3D({
                      >
                          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/paper.png')] opacity-10 pointer-events-none" />
                          {/* Deeper right edge shadow for book crease */}
-                         <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-black/20 via-black/5 to-transparent pointer-events-none" />
+                         <div className="absolute right-0 top-0 bottom-0 w-12 bg-linear-to-l from-black/20 via-black/5 to-transparent pointer-events-none" />
                          {/* Left edge for binding */}
-                         <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-r from-black/10 to-transparent pointer-events-none" />
+                         <div className="absolute left-0 top-0 bottom-0 w-2 bg-linear-to-r from-black/10 to-transparent pointer-events-none" />
                          
                          <div className="relative z-10 font-serif text-neutral-800 select-none">
                              {pages[index].image && (
@@ -203,7 +203,7 @@ export function Book3D({
                      >
                         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/paper.png')] opacity-10 pointer-events-none" />
                         {/* Left edge shadow (becomes visible when flipped) */}
-                        <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-black/20 via-black/5 to-transparent pointer-events-none" />
+                        <div className="absolute left-0 top-0 bottom-0 w-12 bg-linear-to-r from-black/20 via-black/5 to-transparent pointer-events-none" />
                         <div className="text-[9px] text-neutral-400 font-sans tracking-widest uppercase transform rotate-90 opacity-30 select-none">Notes</div>
                      </div>
                  </motion.div>
@@ -238,7 +238,7 @@ export function Book3D({
             <div 
             className={cn(
               "absolute inset-0 rounded-r-md rounded-l-sm overflow-hidden backface-hidden shadow-md border-l border-white/10",
-              src ? "bg-neutral-900" : "bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900"
+              src ? "bg-neutral-900" : "bg-linear-to-br from-neutral-900 via-neutral-800 to-neutral-900"
             )}
             style={{ 
                 backgroundImage: src ? `url(${src})` : undefined,
@@ -251,8 +251,8 @@ export function Book3D({
                 {src ? (
                   <>
                     {/* Image mode overlays */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
+                    <div className="absolute inset-0 bg-linear-to-r from-black/30 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-b from-black/20 via-transparent to-black/40" />
                   </>
                 ) : (
                   <>
@@ -280,9 +280,9 @@ export function Book3D({
                   <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-8 select-none z-10">
                       {title && (
                           <div className="text-center mb-4">
-                              <div className="w-16 h-[1px] bg-white/40 mx-auto mb-6" />
+                              <div className="w-16 h-px bg-white/40 mx-auto mb-6" />
                               <h3 className="text-3xl font-bold font-serif tracking-wider mb-2 drop-shadow-lg">{title}</h3>
-                              <div className="w-16 h-[1px] bg-white/40 mx-auto mt-4" />
+                              <div className="w-16 h-px bg-white/40 mx-auto mt-4" />
                           </div>
                       )}
                       {subtitle && (
