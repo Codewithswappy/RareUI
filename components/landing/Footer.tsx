@@ -44,6 +44,7 @@ export default function Footer() {
                     alt="RareUI"
                     width={60}
                     height={100}
+                    style={{ width: "auto", height: "auto" }}
                     className="object-cover transition-transform duration-500 group-hover/brand:scale-110 group-hover/brand:rotate-12 brightness-0 dark:invert"
                   />
                 </div>

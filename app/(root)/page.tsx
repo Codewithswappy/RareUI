@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import HeroSection from "@/components/landing/HeroSection";
+// import RareUiBento from "@/components/landing/RareUiBento";
 
 const HowItWorks = dynamic(() => import("@/components/landing/HowItWorks"), {
   loading: () => <div className="h-[500px] w-full bg-background" />,
@@ -15,8 +16,9 @@ const Footer = dynamic(() => import("@/components/landing/Footer"), {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background h-screen text-foreground overflow-x-hidden">
+    <main className="flex min-h-screen w-full max-w-[100vw] flex-col overflow-x-hidden bg-background text-foreground">
       <HeroSection />  
+      {/* <RareUiBento /> */}
       <HowItWorks />
       <CTASection />
       <Footer />

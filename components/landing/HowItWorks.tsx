@@ -494,11 +494,11 @@ export default function HowItWorks() {
                             scale: 1,
                             rotateX: 0,
                             borderColor:
-                              terminalStep % 3 === 2 ? "var(--primary)" : "",
+                              terminalStep % 3 === 2 ? "var(--primary)" : "rgba(0, 0, 0, 0)",
                             boxShadow:
                               terminalStep % 3 === 2
                                 ? "0 0 20px -5px hsl(var(--primary))"
-                                : "",
+                                : "0 0 0px 0px rgba(0,0,0,0)",
                           }}
                           exit={{ opacity: 0, scale: 0.95, rotateX: 10 }}
                           transition={{ duration: 0.4 }}
@@ -560,7 +560,7 @@ export default function HowItWorks() {
                         y: -5,
                         boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)",
                       }}
-                      className="w-full bg-background border border-border/60 rounded-xl shadow-lg overflow-hidden transition-all duration-300"
+                      className="w-full bg-background border border-border/60 rounded-xl shadow-lg overflow-hidden transition-colors duration-300"
                     >
                       {/* Browser Header */}
                       <div className="flex items-center gap-2 px-4 py-3 border-b border-border/60 bg-muted/30 backdrop-blur-md">

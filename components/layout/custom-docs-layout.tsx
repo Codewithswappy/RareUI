@@ -216,6 +216,7 @@ export function CustomDocsLayout({ children, sidebar }: CustomDocsLayoutProps) {
                   className="h-16 w-auto invert dark:invert-0"
                   width={80}
                   height={80}
+                  style={{ width: "auto", height: "auto" }}
                 />
               </motion.div>
             </TransitionLink>

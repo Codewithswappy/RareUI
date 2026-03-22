@@ -47,6 +47,7 @@ export default function Navbar() {
             alt="RareUI Logo"
             width={100}
             height={100}
+            style={{ width: "auto", height: "auto" }}
             className="object-contain transition-transform duration-300 group-hover:scale-105 md:size-18 lg:size-28"
           />
         </Link>
