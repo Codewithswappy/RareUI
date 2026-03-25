@@ -131,7 +131,7 @@ export function CommandPaletteModal() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-50 flex items-start justify-center pt-[15vh] px-4 bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-start justify-center pt-[15vh] px-4 bg-black/60  shadow-md shadow-black/10 ring-1 ring-black/10 border border-neutral-200/80"
           onClick={() => setOpenSearch(false)}
         >
           <motion.div
@@ -139,7 +139,7 @@ export function CommandPaletteModal() {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: -20 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="relative w-full max-w-2xl overflow-hidden rounded-xl border border-border/50 bg-background/80 backdrop-blur-xl shadow-2xl ring-1 ring-white/10"
+            className="relative w-full max-w-2xl overflow-hidden rounded-md border border-border/50 bg-background/80 backdrop-blur-xl shadow-2xl ring-1 ring-white/10"
             onClick={(e) => e.stopPropagation()}
           >
             <Command className="w-full bg-transparent" shouldFilter={false}>
@@ -180,12 +180,12 @@ export function CommandPaletteModal() {
                     <Command.Group
                       key={category}
                       heading={category}
-                      className="px-2 py-2 text-xs font-semibold text-muted-foreground/70 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:pb-2 [&_[cmdk-group-heading]]:text-muted-foreground/50"
+                      className="px-2 py-2 text-xs  font-semibold text-muted-foreground/70 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:pb-2 [&_[cmdk-group-heading]]:text-muted-foreground/50"
                     >
                       {categoryItems.map((item, i) => (
                         <Command.Item
                           key={i}
-                          className="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-foreground hover:bg-accent/50 hover:text-accent-foreground cursor-pointer transition-colors duration-200 ease-in-out aria-selected:bg-accent/50"
+                          className="group flex items-center gap-3 rounded-md px-3 py-2.5 text-sm text-foreground hover:bg-accent/50 hover:text-accent-foreground cursor-pointer transition-colors duration-200 ease-in-out aria-selected:bg-accent/50"
                           onSelect={() => handleSelect(item.url, item.external)}
                         >
                           <div className="flex h-8 w-8 items-center justify-center rounded-md border border-border/50 bg-background/50 group-hover:border-primary/20 group-hover:bg-primary/10 transition-colors">
