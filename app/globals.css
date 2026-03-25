@@ -158,6 +158,15 @@
     from { transform: scaleX(1); }
     to { transform: scaleX(0); }
   }
+
+  /* Utility to hide scrollbar but keep functionality */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 /* Custom scrollbar for main content */

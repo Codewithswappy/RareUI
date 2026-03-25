@@ -2,12 +2,7 @@
 
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
-import { Check, Terminal, Search, Code, Palette, Zap } from "lucide-react";
-import SkewOnScroll from "@/components/ui/SkewOnScroll";
-
-// Custom hook for mouse position (if needed for individual card glow, but user asked for "flow around cards border")
-// We will use a simpler CSS approach for the flowing border using a moving gradient on the parent container's mask or border image.
+import { Search, Zap, Check, ZapIcon } from "lucide-react";
 
 export default function HowItWorks() {
   const [terminalStep, setTerminalStep] = useState(0);
@@ -29,87 +24,19 @@ export default function HowItWorks() {
   }, []);
 
   return (
-    <section className="py-16 pb-0 relative overflow-hidden">
-      <div
-        className="w-[98%] mx-auto relative border border-black/5 dark:border-white/5 rounded-4xl md:rounded-[3.5rem] overflow-hidden py-16 md:py-24 px-6 md:px-12 group/how"
-        style={{
-          maskImage:
-            "linear-gradient(to bottom, transparent, black 5rem, black calc(100% - 5rem), transparent)",
-          WebkitMaskImage:
-            "linear-gradient(to bottom, transparent, black 5rem, black calc(100% - 5rem), transparent)",
-        }}
-      >
-        {/* --- Hero-style Background System --- */}
-
-        {/* 1. Base Gradient Foundation */}
-        <div className="absolute inset-0 transition-opacity duration-700 bg-linear-to-b from-white via-[#e8f2f6]/50 to-[#d8e8f0] dark:from-zinc-950 dark:via-[#0d2a36]/15 dark:to-black" />
-
-        {/* 2. Vertical Technical Lines (Match Hero) */}
-        <div
-          className="absolute inset-0 opacity-[0.012] dark:opacity-[0.025] pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(90deg, currentColor 1px, transparent 1px)",
-            backgroundSize: "8px 100%",
-          }}
-        />
-
-        {/* 3. Radial Depth Glow */}
-        <div className="absolute inset-0 pointer-events-none transition-colors duration-700 bg-linear-to-t from-white/60 via-transparent to-transparent dark:from-black dark:via-transparent" />
-
-        {/* 4. Ambient Movement Blobs */}
-        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
-        <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-[800px] h-[800px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
-
-        {/* 5. Edge Visual Masking (Fades to page background) */}
-        <div className="absolute top-0 left-0 right-0 h-64 bg-linear-to-b from-white to-transparent dark:from-black z-1" />
-        <div className="absolute bottom-0 left-0 right-0 h-64 bg-linear-to-t from-white to-transparent dark:from-black z-1" />
-
-        <div className="max-w-fd-container mx-auto relative z-10">
+    <section className="pb-0 relative overflow-hidden bg-neutral-50/50">
+      <div className="w-[98%] max-w-[1600px] mx-auto relative overflow-hidden py-4 md:py-8">
+        <div className="relative z-10 px-4">
           {/* Header */}
-          <div className="text-center mb-24 space-y-8">
-            <h3 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-foreground max-w-4xl mx-auto leading-[0.9] md:leading-[0.85]">
-              <SkewOnScroll className="block">
-                <motion.span
-                  initial={{ opacity: 0, y: 40, filter: "blur(12px)" }}
-                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                  className="block mb-2"
-                >
-                  Built for developers.
-                </motion.span>
-              </SkewOnScroll>
-              <SkewOnScroll className="block px-4">
-                <motion.span
-                  initial={{ opacity: 0, y: 40, filter: "blur(12px)" }}
-                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  viewport={{ once: true }}
-                  transition={{
-                    delay: 0.2,
-                    duration: 0.7,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="text-transparent bg-clip-text bg-linear-to-b from-neutral-950 via-neutral-800 to-neutral-600 dark:from-white dark:via-neutral-200 dark:to-neutral-500"
-                >
-                  Designed for speed.
-                </motion.span>
-              </SkewOnScroll>
-            </h3>
-
-            <SkewOnScroll>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-lg md:text-xl text-muted-foreground/80 max-w-2xl mx-auto font-medium leading-relaxed"
-              >
-                Stop reinventing the wheel. From copy-paste to CLI installation,
-                our workflow streamlines your UI development so you can focus on
-                building features.
-              </motion.p>
-            </SkewOnScroll>
+          <div className="text-left mb-24 space-y-8">
+            <h2 className="text-3xl md:text-5xl font-medium tracking-tighter text-neutral-900 mb-4">
+              Built for developers. <br /> Designed for speed.
+            </h2>
+            <p className="text-neutral-500 max-w-xl text-lg tracking-tight">
+              Stop reinventing the wheel. From copy-paste to CLI installation,
+              our workflow streamlines your UI development so you can focus on
+              building features.
+            </p>
           </div>
 
           {/* Glowing Grid Container */}
@@ -120,11 +47,6 @@ export default function HowItWorks() {
             transition={{ duration: 0.8 }}
             className="relative overflow-hidden"
           >
-            {/* Edge Masks */}
-            {/* <div className="absolute left-0 top-0 bottom-0 w-10 md:w-10 bg-gradient-to-r from-background to-transparent z-20 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-10 md:w-10 bg-gradient-to-l from-background to-transparent z-20 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-full h-10 md:h-10 bg-gradient-to-t from-background to-transparent z-20 pointer-events-none" /> */}
-
             {/* Inner Grid Content */}
             <motion.div
               initial="hidden"
@@ -139,7 +61,7 @@ export default function HowItWorks() {
                   },
                 },
               }}
-              className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-0 overflow-hidden"
+              className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-4 overflow-hidden p-4"
             >
               {/* Card 1: Browse Components */}
               <motion.div
@@ -147,9 +69,8 @@ export default function HowItWorks() {
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
                 }}
-                className="group relative p-8 md:p-10 h-auto md:h-[350px]"
+                className="group relative p-2 md:p-6 h-auto md:h-[350px] bg-[#FBFBFA] shadow-sm shadow-black/5 ring-1 ring-black/5 rounded-lg"
               >
-                <GridBrackets />
                 <div className="relative z-10 h-full flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-start gap-4">
@@ -171,8 +92,8 @@ export default function HowItWorks() {
                   {/* Visual: Dynamic Component Search (Interactive) */}
                   <div className="mt-4 space-y-3 group-hover:translate-y-[-5px] transition-transform duration-500">
                     {/* Dynamic Search Bar */}
-                    <div className="bg-white/50 dark:bg-black/20 backdrop-blur-sm border border-black/5 dark:border-white/5 rounded-xl p-2.5 flex items-center gap-2 shadow-sm">
-                      <Search className="w-3.5 h-3.5 text-muted-foreground/70" />
+                    <div className="bg-white/50 dark:bg-black/20 shadow-sm shadow-black/5 ring-1 ring-black/5 dark:ring-white/5 border border-neutral-200/50 dark:border-white/5 rounded-md p-4 flex items-center gap-2">
+                      <Search className="w-5 h-5 text-muted-foreground/70" />
                       <div className="h-4 w-32 relative overflow-hidden">
                         <AnimatePresence mode="wait">
                           <motion.div
@@ -181,7 +102,7 @@ export default function HowItWorks() {
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: -20, opacity: 0 }}
                             transition={{ duration: 0.3 }}
-                            className="text-[10px] text-muted-foreground font-medium flex items-center h-full"
+                            className="text-[14px] text-muted-foreground font-medium flex items-center h-full"
                           >
                             {
                               ["Button", "Switch", "Profile Card"][
@@ -194,7 +115,7 @@ export default function HowItWorks() {
                     </div>
 
                     {/* Component Showcase Stage */}
-                    <div className="h-28 rounded-lg bg-muted/20 border border-border/30 flex items-center justify-center relative overflow-hidden">
+                    <div className="h-28 rounded-md shadow-sm shadow-black/5 ring-1 ring-black/5 dark:ring-white/5 bg-muted/20 border border-border/30 flex items-center justify-center relative overflow-hidden">
                       <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] pointer-events-none" />
                       <AnimatePresence mode="wait">
                         {/* State 0: Button */}
@@ -241,7 +162,7 @@ export default function HowItWorks() {
                             transition={{ type: "spring", bounce: 0.5 }}
                             className="w-40 p-3 rounded-xl bg-background border border-border shadow-xl flex items-center gap-3"
                           >
-                            <div className="w-8 h-8 rounded-full bg-linear-to-tr from-purple-500 to-pink-500" />
+                            <div className="w-8 h-8 rounded-full bg-linear-to-tr from-neutral-500 to-neutral-200" />
                             <div className="space-y-1">
                               <div className="h-1.5 w-16 bg-muted-foreground/30 rounded-full" />
                               <div className="h-1.5 w-10 bg-muted-foreground/10 rounded-full" />
@@ -260,9 +181,8 @@ export default function HowItWorks() {
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
                 }}
-                className="group relative p-8 md:p-10 h-[320px] md:h-[350px]"
+                className="group relative p-2 md:p-6 h-[320px] md:h-[350px] bg-[#FBFBFA] shadow-sm shadow-black/5 ring-1 ring-black/5 rounded-lg"
               >
-                <GridBrackets />
                 <div className="relative z-10 h-full flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-start gap-4">
@@ -282,11 +202,11 @@ export default function HowItWorks() {
 
                   {/* Visual: Animated Terminal (Interactive) */}
                   <div className="mt-8 group-hover:scale-[1.02] transition-transform duration-500 cursor-default">
-                    <div className="bg-white/40 dark:bg-black/40 backdrop-blur-md border border-black/5 dark:border-white/10 rounded-2xl p-5 font-mono text-[10px] shadow-xl min-h-[120px] flex flex-col">
+                    <div className="bg-white/40 dark:bg-black/40  border border-neutral-200/80 dark:border-white/10 rounded-md p-5 font-mono text-[10px] shadow-md shadow-black/5 dark:shadow-white/5 ring-1 ring-black/5 dark:ring-white/5 min-h-[120px] flex flex-col">
                       <div className="flex gap-1.5 mb-3 opacity-50">
-                        <div className="w-2 h-2 rounded-full bg-red-500" />
-                        <div className="w-2 h-2 rounded-full bg-yellow-500" />
-                        <div className="w-2 h-2 rounded-full bg-green-500" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-red-600" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-600" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-green-600" />
                       </div>
                       <div
                         className="space-y-1.5 flex-1 font-mono"
@@ -342,9 +262,8 @@ export default function HowItWorks() {
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
                 }}
-                className="group relative p-8 md:p-10 h-[320px] md:h-[350px]"
+                className="group relative p-2 md:p-6 h-[320px] md:h-[350px] bg-[#FBFBFA] shadow-sm shadow-black/5 ring-1 ring-black/5 rounded-lg"
               >
-                <GridBrackets />
                 <div className="relative z-10 h-full flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-start gap-4">
@@ -372,7 +291,7 @@ export default function HowItWorks() {
                     key={terminalStep}
                   >
                     {/* Terminal Command */}
-                    <div className="bg-white/40 dark:bg-black/40 backdrop-blur-md rounded-xl p-4 font-mono text-[10px] shadow-lg border border-black/5 dark:border-white/5">
+                    <div className="bg-white/40 dark:bg-black/40 rounded-md border border-neutral-200/80 dark:border-white/10 p-4 font-mono text-[10px] shadow-md shadow-black/5 dark:shadow-white/5 ring-1 ring-black/5 dark:ring-white/5">
                       <div className="flex items-center gap-2 text-foreground/90 dark:text-white/90">
                         <span className="text-blue-500 dark:text-blue-400">
                           ~
@@ -402,11 +321,11 @@ export default function HowItWorks() {
                       initial={{ opacity: 0, scale: 0.8, y: 10 }}
                       animate={{ opacity: 1, scale: 1, y: 0 }}
                       transition={{ delay: 1.5, type: "spring", bounce: 0.5 }}
-                      className="bg-white/60 dark:bg-white/3 backdrop-blur-md border border-black/5 dark:border-white/10 p-4 rounded-xl shadow-lg flex items-center justify-between"
+                      className="bg-white/60 dark:bg-white/3 border border-neutral-200/80 dark:border-white/10 p-4 rounded-md shadow-md shadow-black/5 dark:shadow-white/5 ring-1 ring-black/5 dark:ring-white/5 flex items-center justify-between"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-[10px] font-bold shadow-sm">
-                          <Zap className="w-4 h-4 fill-current" />
+                        <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center text-[10px] font-bold shadow-sm">
+                          <ZapIcon className="w-4 h-4 fill-current" />
                         </div>
                         <div className="space-y-1">
                           <div className="text-[11px] font-medium text-foreground">
@@ -417,7 +336,7 @@ export default function HowItWorks() {
                           </div>
                         </div>
                       </div>
-                      <div className="px-2 py-1 bg-green-500/10 text-green-600 dark:text-green-400 text-[9px] font-medium rounded">
+                      <div className="px-2 py-1 bg-black text-white dark:text-white text-[9px] font-medium rounded">
                         Added
                       </div>
                     </motion.div>
@@ -431,9 +350,8 @@ export default function HowItWorks() {
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
                 }}
-                className="group relative p-8 md:p-10 h-[300px] md:h-[340px]"
+                className="group relative p-2 md:p-6 h-[320px] md:h-[350px] bg-[#FBFBFA] shadow-sm shadow-black/5 ring-1 ring-black/5 rounded-lg"
               >
-                <GridBrackets />
                 <div className="relative z-10 h-full flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-start gap-4">
@@ -455,7 +373,7 @@ export default function HowItWorks() {
                   {/* Visual: Live Code Customization (Interactive) */}
                   <div className="mt-8 flex flex-col gap-4 group-hover:-translate-y-1 transition-transform duration-300">
                     {/* Live Code Block */}
-                    <div className="bg-muted dark:bg-neutral-950 rounded-md p-3 font-mono text-[10px] shadow-sm border border-border/10 relative overflow-hidden flex flex-col gap-0.5">
+                    <div className="bg-muted dark:bg-neutral-950 rounded-md p-3 font-mono text-[10px] shadow-sm shadow-black/5 dark:shadow-white/5 ring-1 ring-black/5 dark:ring-white/5 border border-neutral-200/80 dark:border-white/10 relative overflow-hidden flex flex-col gap-0.5">
                       <div className="flex items-center gap-1.5 text-blue-600 dark:text-blue-400">
                         <span>&lt;Card</span>
                         <span className="text-purple-600 dark:text-purple-400">
@@ -503,7 +421,7 @@ export default function HowItWorks() {
                           exit={{ opacity: 0, scale: 0.95, rotateX: 10 }}
                           transition={{ duration: 0.4 }}
                           className={`
-                                        w-24 h-16 rounded-xl flex items-center justify-center
+                                        w-24 h-16 rounded-md flex items-center justify-center
                                         ${terminalStep % 3 === 0 ? "border-2 border-dashed border-muted-foreground/30 bg-muted/20" : ""}
                                         ${terminalStep % 3 === 1 ? "bg-white/10 dark:bg-white/5 backdrop-blur-lg border border-white/20 shadow-sm" : ""}
                                         ${terminalStep % 3 === 2 ? "bg-background border border-primary text-primary" : ""}
@@ -517,7 +435,6 @@ export default function HowItWorks() {
                                         ${terminalStep % 3 === 2 ? "bg-primary/20" : ""}
                                     `}
                           >
-                            <Palette className="w-4 h-4 opacity-70" />
                           </div>
                         </motion.div>
                       </AnimatePresence>
@@ -532,9 +449,8 @@ export default function HowItWorks() {
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
                 }}
-                className="group relative p-8 md:p-12 transition-all duration-300 md:col-span-2"
+                className="group relative p-2 md:p-6 transition-all duration-300 md:col-span-2 bg-[#FBFBFA] shadow-sm shadow-black/5 ring-1 ring-black/5 rounded-lg"
               >
-                <GridBrackets />
                 <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
                   <div className="space-y-4 max-w-md">
                     <div className="flex items-start gap-4">
@@ -783,20 +699,5 @@ export default function HowItWorks() {
         </div>
       </div>
     </section>
-  );
-}
-
-function GridBrackets() {
-  return (
-    <div className="absolute inset-0 pointer-events-none z-0">
-      {/* Precision corner markers */}
-      <div className="absolute top-1 left-1 w-1.5 h-1.5 border-t border-l border-primary/30" />
-      <div className="absolute top-1 right-1 w-1.5 h-1.5 border-t border-r border-primary/30" />
-      <div className="absolute bottom-1 left-1 w-1.5 h-1.5 border-b border-l border-primary/30" />
-      <div className="absolute bottom-1 right-1 w-1.5 h-1.5 border-b border-r border-primary/30" />
-
-      {/* Ghost layout line */}
-      <div className="absolute inset-0 border border-primary/2 dark:border-white/2 opacity-20" />
-    </div>
   );
 }

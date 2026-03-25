@@ -5,6 +5,7 @@ import { RootProvider } from "fumadocs-ui/provider/next";
 import { ThemeProvider } from "next-themes";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import { ClickSpark } from "@/components/internal/ClickSpark";
+import { ViewTransitions } from "next-view-transitions";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -225,7 +226,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
+    <ViewTransitions>
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* Favicons - Multiple sizes for best compatibility */}
         <link rel="icon" href="/favicon.ico" sizes="48x48" />
@@ -421,18 +423,19 @@ export default function RootLayout({
             storageKey: "theme",
           }}
         >
-          <ClickSpark
+          {/* <ClickSpark
             sparkColor={undefined}
             sparkSize={10}
             sparkRadius={15}
             sparkCount={8}
             duration={400}
-          />
+          /> */}
           <div className="flex flex-col min-h-screen">
             {children}
           </div>
         </RootProvider>
       </body>
     </html>
+    </ViewTransitions>
   );
 }

@@ -1,15 +1,15 @@
 "use client";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import Image from "next/image";
 import { motion } from "motion/react";
 import SkewOnScroll from "@/components/ui/SkewOnScroll";
 
 export default function Footer() {
   return (
-    <footer className="w-[98%] max-w-[1600px] mx-auto pb-12 px-4 md:px-8 relative overflow-hidden rounded-b-4xl md:rounded-b-[3.5rem] mt-0">
+    <footer className="w-[98%] max-w-[1600px] mx-auto pb-12 px-4 relative overflow-hidden mt-0 bg-neutral-50/50">
       <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0">
         {/* 1. Base Gradient Foundation */}
-        <div className="absolute inset-0 transition-opacity duration-700 bg-linear-to-b from-[#d8e8f0] via-[#e8f2f6]/50 to-[#d8e8f0] dark:from-black dark:via-[#0d2a36]/15 dark:to-black" />
+        <div className="absolute inset-0 transition-opacity duration-700 bg-linear-to-b from-neutral-100/50 via-neutral-200/50 to-neutral-100/50 dark:from-black dark:via-[#0d2a36]/15 dark:to-black" />
 
         {/* 2. Vertical Technical Lines (Match Hero) */}
         <div
@@ -30,7 +30,7 @@ export default function Footer() {
       {/* Footer Blueprint Container */}
       <div className="max-w-fd-container w-full mx-auto overflow-hidden relative group/footer py-12">
         {/* Main Content */}
-        <div className="p-8 md:p-12 lg:p-16 relative z-10">
+        <div className=" relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 mb-16">
             {/* Left: Brand & Socials */}
             <div className="flex flex-col gap-4">
@@ -42,13 +42,14 @@ export default function Footer() {
                   <Image
                     src="/logo/whiteTransparent.png"
                     alt="RareUI"
-                    width={60}
+                    width={100}
                     height={100}
                     style={{ width: "auto", height: "auto" }}
                     className="object-cover transition-transform duration-500 group-hover/brand:scale-110 group-hover/brand:rotate-12 brightness-0 dark:invert"
                   />
+                  
                 </div>
-                <SkewOnScroll>
+                {/* <SkewOnScroll>
                   <motion.span
                     initial={{ opacity: 0, filter: "blur(5px)" }}
                     whileInView={{ opacity: 1, filter: "blur(0px)" }}
@@ -58,9 +59,9 @@ export default function Footer() {
                   >
                     RareUI
                   </motion.span>
-                </SkewOnScroll>
+                </SkewOnScroll> */}
               </Link>
-              <p className="text-muted-foreground max-w-sm text-base leading-relaxed">
+              <p className="text-muted-foreground max-w-md text-base leading-relaxed">
                 RareUI empowers developers to build premium, motion-rich
                 interfaces with ease. Transform your raw ideas into compelling
                 visuals.

@@ -70,8 +70,11 @@ export default function SoundText({
     // Cleanup
     useEffect(() => {
         return () => {
-            if (audioContextRef.current) {
-                audioContextRef.current.close();
+            const ctx = audioContextRef.current;
+            if (ctx && ctx.state !== "closed") {
+                ctx.close().catch(() => {
+                    // Ignore already closed errors or others
+                });
             }
         };
     }, []);

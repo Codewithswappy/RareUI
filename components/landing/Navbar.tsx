@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { useTheme } from "next-themes";
@@ -17,17 +17,21 @@ export default function Navbar() {
 
   const logoSrc = isMobileMenuOpen && resolvedTheme === "light"
     ? "/logo/blackTransparent.png"
-    : "/logo/whiteTransparent.png";
+    : "/logo/blackTransparent.png";
 
   useEffect(() => {
+    let isMounted = true;
     fetch("https://api.github.com/repos/Codewithswappy/RareUI")
       .then((res) => res.json())
       .then((data) => {
-        if (data.stargazers_count !== undefined) {
+        if (isMounted && data.stargazers_count !== undefined) {
           setStars(data.stargazers_count);
         }
       })
       .catch((err) => console.error("Error fetching stars:", err));
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const navLinks = [
@@ -54,7 +58,7 @@ export default function Navbar() {
             width={100}
             height={100}
             style={{ width: "auto", height: "auto" }}
-            className="object-contain transition-transform duration-300 group-hover:scale-105 md:size-18 lg:size-28"
+            className="object-contain transition-transform duration-300 invert-0 dark:invert-1 group-hover:scale-105 md:size-18 lg:size-28"
           />
         </Link>
       </div>
@@ -62,7 +66,7 @@ export default function Navbar() {
       {/* Right Side / CTA */}
       <div className="flex items-center justify-start md:flex-1 ">
         {/* Links (Hidden on mobile) */}
-        <div className="hidden md:flex items-center justify-center flex-1  gap-8">
+        <div className="hidden md:flex items-center justify-center  flex-1  gap-8">
           {navLinks.map((link) => (
             <WavyLink key={link.name} href={link.href} name={link.name} />
           ))}
@@ -75,7 +79,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-300 group text-white border border-transparent hover:bg-white/10 hover:border-white/20"
+            className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-300 group text-neutral-800 dark:text-white border border-transparent hover:bg-black/5 dark:hover:bg-white/10 hover:border-black/5 dark:hover:border-white/20"
             aria-label="GitHub Repository"
           >
             <motion.svg
@@ -119,7 +123,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.1, rotate: 10 }}
             whileTap={{ scale: 0.9 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            className="p-2 rounded-full transition-all duration-300 hidden md:block text-white border border-transparent hover:bg-white/10 hover:border-white/20"
+            className="p-2 rounded-full transition-all duration-300 hidden md:block text-neutral-800 dark:text-white border border-transparent hover:bg-black/5 dark:hover:bg-white/10 hover:border-black/5 dark:hover:border-white/20"
             aria-label="Twitter Profile"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -127,17 +131,17 @@ export default function Navbar() {
             </svg>
           </motion.a>
 
-          <div>
+          {/* <div>
             <SmartThemeToggle 
               enableSound={false} 
               lightIconColor={isMobileMenuOpen ? "#000000" : "#ffffff"}
             />
-          </div>
+          </div> */}
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2 text-white z-50 relative"
+          className="md:hidden p-2 text-neutral-800 dark:text-white z-50 relative"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? (
@@ -282,7 +286,7 @@ const WavyLink = ({ href, name }: { href: string; name: string }) => {
               damping: 15,
               delay: 0.015 * i,
             }}
-            className="inline-block transition-colors duration-300 text-zinc-100 dark:text-zinc-400 group-hover:text-white"
+            className="inline-block transition-colors duration-300 text-neutral-800 dark:text-zinc-400 group-hover:text-black dark:group-hover:text-white"
           >
             {l === " " ? "\u00A0" : l}
           </motion.span>

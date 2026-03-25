@@ -45,6 +45,14 @@ export default function GlassSearchBar() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   const filteredComponents = query
     ? COMPONENTS.filter((c) =>
@@ -92,13 +100,13 @@ export default function GlassSearchBar() {
   };
 
   return (
-    <div className="relative z-50 flex flex-col items-center md:items-start w-[90%] md:w-[360px]">
+    <div className="relative z-50 flex flex-col items-start w-full md:w-[360px]">
       {/* Search Input - Glass Wrapper */}
       <div
-        className={`relative w-full p-2 bg-white/10 backdrop-blur-3xl border border-white/20 rounded-lg shadow-2xl overflow-hidden transition-all duration-300 ${isFocused ? "ring-2 ring-white/30" : ""}`}
+        className={`relative w-full p-1 bg-neutral-50  border border-neutral-200/80 rounded-md shadow-lg shadow-black/10 overflow-hidden transition-all duration-300 ${isFocused ? "ring-1 ring-black/10" : ""}`}
       >
         {/* Inner Solid Core */}
-        <div className="relative flex items-center justify-between gap-3 px-4 py-3 rounded-lg transition-all w-full bg-[#e8e8ed]">
+        <div className="relative flex items-center justify-between gap-3 px-4 py-3 rounded-sm transition-all w-full bg-neutral-200 shadow shadow-black/5 ring-1 ring-black/5">
           <div className="flex items-center gap-3 w-full">
             <Search className="w-5 h-5 text-neutral-500" />
             <input
@@ -109,17 +117,19 @@ export default function GlassSearchBar() {
                 setQuery(e.target.value);
                 setSelectedIndex(0);
               }}
-              placeholder="What would you like to find today?"
+              placeholder={typeof window !== "undefined" && window.innerWidth < 450 ? "Search components..." : "Search components..."}
               className="bg-transparent border-none outline-none text-sm w-full transition-colors text-neutral-800 placeholder:text-neutral-500 font-medium"
               onFocus={() => setIsFocused(true)}
               onBlur={() => {
                 // Delay blur to allow clicks on items
-                setTimeout(() => setIsFocused(false), 200);
+                setTimeout(() => {
+                  if (isMounted.current) setIsFocused(false);
+                }, 200);
               }}
             />
           </div>
 
-          {/* Keyboard Shortcut Hint */}
+          {/* Keyboard Shortcut Hint - Hidden on mobile for space */}
           <div className="flex items-center gap-1.5 text-neutral-400">
             <Command className="w-4 h-4" />
             <span className="text-xs font-medium">+</span>
@@ -132,16 +142,16 @@ export default function GlassSearchBar() {
       <AnimatePresence>
         {isFocused && (filteredComponents.length > 0 || query) && (
           <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.98 }}
-            animate={{ opacity: 1, y: 16, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.98 }}
+            initial={{ opacity: 0, y: 5, scale: 0.98 }}
+            animate={{ opacity: 1, y: 8, scale: 1 }}
+            exit={{ opacity: 0, y: 5, scale: 0.98 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute top-full left-0 w-full p-2 bg-white/10 backdrop-blur-3xl border border-white/20 rounded-[28px] shadow-2xl mt-1.5"
+            className="absolute top-full left-0 w-full p-1 bg-neutral-50 border border-neutral-200/80 rounded-md shadow-md shadow-black/5 ring-1 ring-black/5 mt-1.5 z-100"
           >
             {/* Inner List Core with Max Height */}
-            <div className="rounded-[20px] overflow-hidden bg-[#e8e8ed]">
+            <div className="rounded-sm overflow-hidden bg-neutral-200">
               <div
-                className="max-h-[280px] overflow-y-auto p-2 flex flex-col gap-1 custom-scrollbar"
+                className="max-h-[280px] overflow-y-auto p-1 flex flex-col gap-1 custom-scrollbar"
                 style={{
                   scrollbarWidth: "none",
                   msOverflowStyle: "none",
@@ -153,7 +163,7 @@ export default function GlassSearchBar() {
                       key={item.href}
                       onClick={() => handleItemClick(item.href)}
                       onMouseEnter={() => setSelectedIndex(i)}
-                      className={`group flex items-center justify-between px-4 py-3 rounded-xl cursor-pointer transition-colors ${
+                      className={`group flex items-center justify-between px-4 py-3 rounded-sm cursor-pointer transition-colors ${
                         selectedIndex === i
                           ? "bg-white/80 shadow-sm"
                           : "hover:bg-white/60"
