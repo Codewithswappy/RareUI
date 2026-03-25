@@ -49,7 +49,7 @@ export const FeaturesList = ({ features }: FeaturesListProps) => {
   });
 
   return (
-    <div className="flex flex-col gap-8 mt-16 mb-24 max-w-full">
+    <div className="flex flex-col gap-8   max-w-full">
       <h2 className="text-4xl font-semibold text-neutral-400 dark:text-neutral-800 font-mono tracking-tight">
         Features
       </h2>
@@ -59,7 +59,7 @@ export const FeaturesList = ({ features }: FeaturesListProps) => {
           <div
             key={index}
             className={cn(
-              "group rounded-lg transition-all duration-500 overflow-hidden",
+              "group rounded-md transition-all duration-500 overflow-hidden",
               activeIndex === index
                 ? "bg-neutral-50 dark:bg-neutral-900/40 "
                 : "bg-white dark:bg-neutral-950"

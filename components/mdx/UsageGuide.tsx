@@ -17,7 +17,7 @@ interface UsageGuideProps {
 
 export const UsageGuide = ({ steps, title = "Usage" }: UsageGuideProps) => {
   return (
-    <div className="flex flex-col gap-12 mt-12">
+    <div className="flex flex-col gap-12 ">
       <div className="flex items-center gap-3">
         <h2 className="text-4xl font-bold text-neutral-400 dark:text-neutral-800 font-mono tracking-tight">
           {title}

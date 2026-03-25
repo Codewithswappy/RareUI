@@ -27,7 +27,7 @@ export const InstallationGuide = ({
   const [isManualCodeExpanded, setIsManualCodeExpanded] = useState(false);
 
   return (
-    <div className="flex flex-col gap-6 mb-12">
+    <div className="flex flex-col gap-6">
       <div className="flex items-center gap-3">
         <h2 className="text-xl font-bold text-neutral-400 dark:text-neutral-800 font-inter">
           Installation

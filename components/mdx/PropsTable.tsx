@@ -15,15 +15,15 @@ interface PropsTableProps {
 
 export const PropsTable = ({ props }: PropsTableProps) => {
   return (
-    <div className="flex flex-col gap-6 mt-16 mb-24 max-w-full overflow-hidden">
+    <div className="flex flex-col gap-6 mb-24 max-w-full overflow-hidden">
       <h2 className="text-4xl font-semibold text-neutral-400 dark:text-neutral-800 font-mono tracking-tight">
         Props
       </h2>
 
-      <div className="rounded-lg border border-neutral-200 dark:border-neutral-800 bg-[#fafafa] dark:bg-neutral-900/10 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse min-w-[600px]">
-            <thead>
+      <div className="rounded-md  dark:border-neutral-800 bg-[#fafafa] dark:bg-neutral-900/10 overflow-hidden">
+        <div className="overflow-x-auto border border-neutral-200 dark:border-neutral-800 rounded-md shadow shadow-black/10 ring-1 ring-black/10">
+          <table className="w-full text-left border-collapse min-w-[600px] ">
+            <thead >
               <tr className="bg-white/40 dark:bg-neutral-900/40 border-b border-neutral-200 dark:border-neutral-800">
                 <th className="px-4 py-2.5 text-[13px] font-medium text-neutral-800 dark:text-neutral-200 border-r border-neutral-200 dark:border-neutral-800 w-[140px]">
                   Prop
