@@ -89,7 +89,7 @@ const FEEDBACK_WALL: Testimonial[] = [
 ];
 
 const PremiumTweetCard = ({ item }: { item: Testimonial }) => (
- <div className="bg-neutral-200/5 rounded-xl p-1 shadow-sm shadow-black/10 ring-1 ring-black/10 ">
+ <div className="bg-neutral-200/50 rounded-xl p-1 shadow-sm shadow-black/10 ring-1 ring-black/10 ">
    <div className="  relative p-4 bg-white rounded-lg shadow-sm shadow-black/10 border border-neutral-100 ring-1 ring-black/10 flex flex-col gap-2 group transition-all duration-300 h-full min-h-[120px]">
    
     {/* Inner Highlight Layer */}
@@ -142,7 +142,7 @@ export default function Testimonials() {
   }, []);
 
   return (
-    <section className="py-10 bg-neutral-50/50 relative overflow-hidden">
+    <section className="py-10 bg-neutral-50 relative overflow-hidden">
       <div className="w-[98%] max-w-[1600px] mx-auto px-4 relative z-10">
         <div className="mb-16">
           <h2 className="text-3xl md:text-5xl font-medium tracking-tighter text-neutral-900 mb-4">

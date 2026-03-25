@@ -6,8 +6,8 @@ import ThreeDButton from "../internal/ThreeDButton";
 
 export default function CTASection() {
   return (
-    <section className="py-4 relative overflow-hidden">
-      <div className="w-[98%] max-w-[1600px] mx-auto bg-neutral-50/50 p-4 md:p-10 relative z-10 md:flex flex-col rounded-lg border border-neutral-100/80 shadow-sm shadow-black/5 ring-1 ring-black/5 ">
+    <section className="py-4 relative overflow-hidden bg-neutral-50">
+      <div className="w-[98%] max-w-[1600px] mx-auto bg-neutral-50 p-4 md:p-10 relative z-10 md:flex flex-col rounded-lg border border-neutral-100/80 shadow-sm shadow-black/5 ring-1 ring-black/5 ">
         <div>
           {/* Headline */}
           <motion.h2

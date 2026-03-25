@@ -6,14 +6,14 @@ import SkewOnScroll from "@/components/ui/SkewOnScroll";
 
 export default function Footer() {
   return (
-    <footer className="w-[98%] max-w-[1600px] mx-auto pb-12 px-4 relative overflow-hidden mt-0 bg-neutral-50/50">
+    <footer className="w-[98%] max-w-[1600px] mx-auto pb-12 px-4 relative overflow-hidden mt-0 bg-neutral-50">
       <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0">
         {/* 1. Base Gradient Foundation */}
-        <div className="absolute inset-0 transition-opacity duration-700 bg-linear-to-b from-neutral-100/50 via-neutral-200/50 to-neutral-100/50 dark:from-black dark:via-[#0d2a36]/15 dark:to-black" />
+        <div className="absolute inset-0 transition-opacity duration-700 bg-linear-to-b from-neutral-100/50 via-neutral-200/50 to-neutral-100/50" />
 
         {/* 2. Vertical Technical Lines (Match Hero) */}
         <div
-          className="absolute inset-0 opacity-[0.012] dark:opacity-[0.025] pointer-events-none"
+          className="absolute inset-0 opacity-[0.012] pointer-events-none"
           style={{
             backgroundImage:
               "linear-gradient(90deg, currentColor 1px, transparent 1px)",
@@ -22,10 +22,10 @@ export default function Footer() {
         />
 
         {/* 2.5 Top Blend Glow (Match CTA Bottom) */}
-        <div className="absolute inset-0 pointer-events-none transition-colors duration-700 bg-linear-to-b from-white/60 via-transparent to-transparent dark:from-black dark:via-transparent" />
+        <div className="absolute inset-0 pointer-events-none transition-colors duration-700 bg-linear-to-b from-white/60 via-transparent to-transparent" />
 
         {/* 3. Radial Depth Glow */}
-        <div className="absolute inset-0 pointer-events-none transition-colors duration-700 bg-linear-to-t from-white/60 via-transparent to-transparent dark:from-black dark:via-transparent" />
+        <div className="absolute inset-0 pointer-events-none transition-colors duration-700 bg-linear-to-t from-white/60 via-transparent to-transparent" />
       </div>
       {/* Footer Blueprint Container */}
       <div className="max-w-fd-container w-full mx-auto overflow-hidden relative group/footer py-12">
@@ -42,10 +42,10 @@ export default function Footer() {
                   <Image
                     src="/logo/whiteTransparent.png"
                     alt="RareUI"
-                    width={100}
-                    height={100}
+                    width={80}
+                    height={80}
                     style={{ width: "auto", height: "auto" }}
-                    className="object-cover transition-transform duration-500 group-hover/brand:scale-110 group-hover/brand:rotate-12 brightness-0 dark:invert"
+                    className="object-cover transition-transform duration-500 group-hover/brand:scale-110 group-hover/brand:rotate-12 brightness-0"
                   />
                   
                 </div>
@@ -91,22 +91,20 @@ export default function Footer() {
                     whileHover={{
                       scale: 1.1,
                       rotate: 5,
-                      backgroundColor: "var(--foreground)",
-                      color: "var(--background)",
                     }}
                     whileTap={{ scale: 0.95 }}
-                    className="rounded-full"
+                    className="rounded-full pl-4"
                   >
                     <a
                       href={href}
                       target={href !== "#" ? "_blank" : "_self"}
                       rel={href !== "#" ? "noopener noreferrer" : ""}
-                      className="w-10 h-10 flex items-center justify-center rounded-full bg-background border border-border text-muted-foreground transition-all duration-300 shadow-sm hover:border-foreground"
+                      className="w-10 h-10 flex items-center justify-center rounded-lg border border-neutral-200 text-muted-foreground transition-all duration-300 shadow-sm  "
                       aria-label={name}
                     >
                       <svg
                         className="w-5 h-5"
-                        fill="currentColor"
+                        fill="gray"
                         viewBox="0 0 24 24"
                       >
                         <path d={icon} />
@@ -130,15 +128,6 @@ export default function Footer() {
                     style={{ width: "250px", height: "54px" }}
                     width="250"
                     height="54"
-                    className="dark:hidden"
-                  />
-                  <img
-                    src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1047809&theme=dark"
-                    alt="RareUI - Build beautiful interfaces with ready-made components | Product Hunt"
-                    style={{ width: "250px", height: "54px" }}
-                    width="250"
-                    height="54"
-                    className="hidden dark:block"
                   />
                 </a>
               </div>
@@ -177,11 +166,11 @@ export default function Footer() {
                       <li key={link.name}>
                         <Link
                           href={link.href}
-                          className="text-sm text-muted-foreground hover:text-foreground inline-flex items-center gap-1 group/link transition-colors"
+                          className="text-sm text-muted-foreground hover:text-black inline-flex items-center gap-1 group/link transition-colors"
                         >
                           <span className="relative">
                             {link.name}
-                            <span className="absolute bottom-0 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover/link:w-full" />
+                            <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover/link:w-full" />
                           </span>
                         </Link>
                       </li>

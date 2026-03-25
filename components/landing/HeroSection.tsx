@@ -7,7 +7,6 @@ import AvatarGroup from "@/components/rareui/AvatarGroup";
 import GlassSearchBar from "@/components/rareui/GlassSearchBar";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "next-themes";
 
 export default function Hero() {
   const words = ["Better.", "Fast.", "Rare."];
@@ -21,7 +20,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <div className="w-full flex justify-center items-start pt-4 bg-neutral-50/50">
+    <div className="w-full flex justify-center items-start pt-4 bg-neutral-50">
       <div 
         style={{ 
           maskImage: 'linear-gradient(to bottom, black 90%, transparent 100%)',
@@ -32,11 +31,11 @@ export default function Hero() {
         <Navbar />
 
         {/* Main Mesh Gradient: Matching ComponentBrowser */}
-        <div className="absolute inset-0 transition-opacity duration-500 bg-linear-to-t from-[#FBFBFA] via-[#F5F5F3] to-[#F2F2F0] dark:from-black dark:via-zinc-900 dark:to-zinc-950" />
+        <div className="absolute inset-0 transition-opacity duration-500 bg-linear-to-t from-[#FBFBFA] via-[#F5F5F3] to-[#F2F2F0] " />
 
         {/* Custom Diamond Grid Pattern */}
         <div
-          className="absolute inset-0 opacity-[0.04] dark:opacity-[0.1] pointer-events-none"
+          className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 L50 0 L100 50 L50 100 Z' fill='none' stroke='black' stroke-width='1' stroke-dasharray='2 2'/%3E%3Ccircle cx='0' cy='50' r='1.5' fill='black'/%3E%3Ccircle cx='50' cy='0' r='1.5' fill='black'/%3E%3Ccircle cx='100' cy='50' r='1.5' fill='black'/%3E%3Ccircle cx='50' cy='100' r='1.5' fill='black'/%3E%3C/svg%3E")`,
             backgroundSize: "80px 80px",
@@ -54,7 +53,7 @@ export default function Hero() {
                 New Component every week
               </FeatureBadge>
             </div>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-clip text-transparent bg-clip-text px-1.8 pr-2 pb-3 bg-linear-to-r from-neutral-900 via-neutral-800 to-neutral-900 dark:from-neutral-50 dark:via-neutral-100 dark:to-neutral-50">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-clip text-transparent bg-clip-text px-1.8 pr-2 pb-3 bg-linear-to-r from-neutral-900 via-neutral-800 to-neutral-900 ">
               Design Less <br /> Ship{" "}
               <span className="inline-flex min-w-[200px] perspective-[1000px]">
                 <div className="inline-flex h-[1.5em] relative items-center justify-start pr-4">
@@ -94,7 +93,7 @@ export default function Hero() {
                             ease: [0.22, 1, 0.36, 1],
                             delay: i * 0.04,
                           }}
-                          className="inline-block text-neutral-900 dark:text-neutral-50"
+                          className="inline-block text-neutral-900 "
                         >
                           {letter}
                         </motion.span>
@@ -132,7 +131,7 @@ export default function Hero() {
         </div>
 
         <div className="w-full h-[3vh] absolute md:bottom-16 bottom-4 flex items-center justify-center pointer-events-none ">
-          <h1 className="text-[80px] sm:text-[120px] md:text-[230px] lg:text-[300px] z-5 tracking-tighter text-center text-clip text-transparent bg-clip-text bg-linear-to-r transition-colors duration-500 from-black/20 via-black/10 to-black/3 dark:from-white/10 dark:via-white/5 dark:to-transparent font-medium">
+          <h1 className="text-[80px] sm:text-[120px] md:text-[230px] lg:text-[300px] z-5 tracking-tighter text-center text-clip text-transparent bg-clip-text bg-linear-to-r transition-colors duration-500 from-black/20 via-black/10 to-black/3 font-medium">
             RareUI
           </h1>
         </div>

@@ -4,20 +4,14 @@ import React, { useState, useEffect } from "react";
 import { Link } from "next-view-transitions";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
-import { useTheme } from "next-themes";
-import SmartThemeToggle from "../internal/SmartThemeToggle";
-import { ThemeToggle } from "../theme-toggle";
+
 
 import { Menu03Icon, Cancel01Icon } from "hugeicons-react";
 
 export default function Navbar() {
   const [stars, setStars] = useState<number | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { resolvedTheme } = useTheme();
-
-  const logoSrc = isMobileMenuOpen && resolvedTheme === "light"
-    ? "/logo/blackTransparent.png"
-    : "/logo/blackTransparent.png";
+  const logoSrc = "/logo/blackTransparent.png";
 
   useEffect(() => {
     let isMounted = true;
@@ -58,7 +52,7 @@ export default function Navbar() {
             width={100}
             height={100}
             style={{ width: "auto", height: "auto" }}
-            className="object-contain transition-transform duration-300 invert-0 dark:invert-1 group-hover:scale-105 md:size-18 lg:size-28"
+            className="object-contain transition-transform duration-300 group-hover:scale-105 md:size-18 lg:size-28"
           />
         </Link>
       </div>
@@ -79,7 +73,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-300 group text-neutral-800 dark:text-white border border-transparent hover:bg-black/5 dark:hover:bg-white/10 hover:border-black/5 dark:hover:border-white/20"
+            className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-300 group text-neutral-800 border border-transparent hover:bg-black/5 hover:border-black/5"
             aria-label="GitHub Repository"
           >
             <motion.svg
@@ -123,7 +117,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.1, rotate: 10 }}
             whileTap={{ scale: 0.9 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            className="p-2 rounded-full transition-all duration-300 hidden md:block text-neutral-800 dark:text-white border border-transparent hover:bg-black/5 dark:hover:bg-white/10 hover:border-black/5 dark:hover:border-white/20"
+            className="p-2 rounded-full transition-all duration-300 hidden md:block text-neutral-800 border border-transparent hover:bg-black/5 hover:border-black/5"
             aria-label="Twitter Profile"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -131,21 +125,16 @@ export default function Navbar() {
             </svg>
           </motion.a>
 
-          {/* <div>
-            <SmartThemeToggle 
-              enableSound={false} 
-              lightIconColor={isMobileMenuOpen ? "#000000" : "#ffffff"}
-            />
-          </div> */}
+          <div />
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2 text-neutral-800 dark:text-white z-50 relative"
+          className="md:hidden p-2 text-neutral-800 z-50 relative"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? (
-            <Cancel01Icon className="w-6 h-6 text-black dark:text-white" />
+            <Cancel01Icon className="w-6 h-6 text-black" />
           ) : (
             <Menu03Icon className="w-6 h-6" />
           )}
@@ -171,7 +160,7 @@ export default function Navbar() {
             transition: { duration: 0.4, ease: "easeInOut" },
           }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-40 bg-white/90 dark:bg-black/95 backdrop-blur-3xl md:hidden flex flex-col items-center justify-center gap-8 overflow-hidden"
+          className="fixed inset-0 z-40 bg-white/90 backdrop-blur-3xl md:hidden flex flex-col items-center justify-center gap-8 overflow-hidden"
         >
           {/* Background Gradient Element */}
           <div className="absolute inset-0 bg-radial-gradient from-white/10 to-transparent opacity-20 pointer-events-none" />
@@ -210,7 +199,7 @@ export default function Navbar() {
               >
                 <Link
                   href={link.href}
-                  className="text-4xl font-bold text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white transition-colors tracking-tight"
+                  className="text-4xl font-bold text-black/90 hover:text-black transition-colors tracking-tight"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
@@ -229,7 +218,7 @@ export default function Navbar() {
               href="https://x.com/heyyswap"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-white/10 rounded-full text-black hover:bg-white/80 transition-all border border-white/90 dark:bg-black/10 dark:text-white dark:hover:bg-black/80 "
+              className="p-3 bg-white/10 rounded-full text-black hover:bg-white/80 transition-all border border-white/90  "
             >
               <svg
                 className="w-6 h-6"
@@ -243,7 +232,7 @@ export default function Navbar() {
               href="https://github.com/Codewithswappy/RareUI"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-white/10 rounded-full text-black hover:bg-white/80 transition-all border border-white/90 dark:bg-black/10 dark:text-white dark:hover:bg-black/80 "
+              className="p-3 bg-white/10 rounded-full text-black hover:bg-white/80 transition-all border border-white/90  "
             >
               <svg
                 className="w-6 h-6"
@@ -286,7 +275,7 @@ const WavyLink = ({ href, name }: { href: string; name: string }) => {
               damping: 15,
               delay: 0.015 * i,
             }}
-            className="inline-block transition-colors duration-300 text-neutral-800 dark:text-zinc-400 group-hover:text-black dark:group-hover:text-white"
+            className="inline-block transition-colors duration-300 text-neutral-800  group-hover:text-black "
           >
             {l === " " ? "\u00A0" : l}
           </motion.span>

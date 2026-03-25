@@ -27,9 +27,9 @@ const ComponentBrowser = dynamic(() => import("@/components/landing/ComponentBro
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen w-full max-w-[100vw] flex-col overflow-x-hidden bg-neutral-50/50 text-foreground">
+    <main className="flex min-h-screen w-full max-w-[100vw] flex-col overflow-x-hidden bg-neutral-50 text-foreground">
       <HeroSection />  
-      <div className=" bg-neutral-50/50">
+      <div className=" bg-neutral-50">
         <ComponentBrowser />
       </div>
       {/* <HowItWorks /> */}
