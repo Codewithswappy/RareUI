@@ -47,7 +47,7 @@ export default function Hero() {
         <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,rgba(245,245,243,0.4)_100%)]" />
 
         {/* Hero Content */}
-        <div className="w-full max-w-6xl z-10 flex flex-col md:flex-row items-center justify-center mb-12">
+        <div className="w-full max-w-7xl z-10 flex flex-col md:flex-row items-center justify-center mb-12">
           <div className="flex flex-col items-start justify-center w-full md:w-1/2 px-6 py-12 md:p-12 md:pt-0 z-10 text-pretty">
             <div className="mb-1">
               <FeatureBadge badgeText="RareUI">
