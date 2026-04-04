@@ -103,12 +103,12 @@ export default function GlassSearchBar() {
     <div className="relative z-50 flex flex-col items-start w-full md:w-[360px]">
       {/* Search Input - Glass Wrapper */}
       <div
-        className={`relative w-full p-1 bg-neutral-50  border border-neutral-200/80 rounded-md shadow-lg shadow-black/10 overflow-hidden transition-all duration-300 ${isFocused ? "ring-1 ring-black/10" : ""}`}
+        className={`relative w-full p-1 bg-neutral-50 dark:bg-neutral-950  border border-neutral-200/80 dark:border-neutral-800/80 rounded-md shadow-lg shadow-black/10 dark:shadow-black/30 overflow-hidden transition-all duration-300 ${isFocused ? "ring-1 ring-black/10 dark:ring-white/10" : ""}`}
       >
         {/* Inner Solid Core */}
-        <div className="relative flex items-center justify-between gap-3 px-4 py-3 rounded-sm transition-all w-full bg-neutral-200 shadow shadow-black/5 ring-1 ring-black/5">
+        <div className="relative flex items-center justify-between gap-3 px-4 py-3 rounded-sm transition-all w-full bg-neutral-200 dark:bg-neutral-900 shadow shadow-black/5 dark:shadow-black/20 ring-1 ring-black/5 dark:ring-white/5">
           <div className="flex items-center gap-3 w-full">
-            <Search className="w-5 h-5 text-neutral-500" />
+            <Search className="w-5 h-5 text-neutral-500 dark:text-neutral-400" />
             <input
               ref={inputRef}
               type="text"
@@ -118,7 +118,7 @@ export default function GlassSearchBar() {
                 setSelectedIndex(0);
               }}
               placeholder={typeof window !== "undefined" && window.innerWidth < 450 ? "Search components..." : "Search components..."}
-              className="bg-transparent border-none outline-none text-sm w-full transition-colors text-neutral-800 placeholder:text-neutral-500 font-medium"
+              className="bg-transparent border-none outline-none text-sm w-full transition-colors text-neutral-800 dark:text-neutral-100 placeholder:text-neutral-500 dark:placeholder:text-neutral-500 font-medium"
               onFocus={() => setIsFocused(true)}
               onBlur={() => {
                 // Delay blur to allow clicks on items
@@ -130,7 +130,7 @@ export default function GlassSearchBar() {
           </div>
 
           {/* Keyboard Shortcut Hint - Hidden on mobile for space */}
-          <div className="flex items-center gap-1.5 text-neutral-400">
+          <div className="flex items-center gap-1.5 text-neutral-400 dark:text-neutral-500">
             <Command className="w-4 h-4" />
             <span className="text-xs font-medium">+</span>
             <span className="text-xs font-medium">/</span>
@@ -146,10 +146,10 @@ export default function GlassSearchBar() {
             animate={{ opacity: 1, y: 8, scale: 1 }}
             exit={{ opacity: 0, y: 5, scale: 0.98 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute top-full left-0 w-full p-1 bg-neutral-50 border border-neutral-200/80 rounded-md shadow-md shadow-black/5 ring-1 ring-black/5 mt-1.5 z-100"
+            className="absolute top-full left-0 w-full p-1 bg-neutral-50 dark:bg-neutral-950 border border-neutral-200/80 dark:border-neutral-800/80 rounded-md shadow-md shadow-black/5 dark:shadow-black/30 ring-1 ring-black/5 dark:ring-white/5 mt-1.5 z-100"
           >
             {/* Inner List Core with Max Height */}
-            <div className="rounded-sm overflow-hidden bg-neutral-200">
+            <div className="rounded-sm overflow-hidden bg-neutral-200 dark:bg-neutral-900">
               <div
                 className="max-h-[280px] overflow-y-auto p-1 flex flex-col gap-1 custom-scrollbar"
                 style={{
@@ -165,15 +165,15 @@ export default function GlassSearchBar() {
                       onMouseEnter={() => setSelectedIndex(i)}
                       className={`group flex items-center justify-between px-4 py-3 rounded-sm cursor-pointer transition-colors ${
                         selectedIndex === i
-                          ? "bg-white/80 shadow-sm"
-                          : "hover:bg-white/60"
+                          ? "bg-white/80 dark:bg-neutral-50/90 shadow-sm"
+                          : "hover:bg-white/60 dark:hover:bg-neutral-700/40"
                       }`}
                     >
                       <span
                         className={`text-sm font-medium transition-colors ${
                           selectedIndex === i
                             ? "text-black"
-                            : "text-neutral-700"
+                            : "text-neutral-700 dark:text-neutral-300"
                         }`}
                       >
                         {item.name}
@@ -184,8 +184,8 @@ export default function GlassSearchBar() {
                         <div
                           className={`h-7 w-7 flex items-center justify-center rounded-lg transition-all ${
                             selectedIndex === i
-                              ? "bg-white shadow-sm text-black"
-                              : "bg-black/5 text-neutral-400"
+                              ? "bg-white dark:bg-neutral-800 shadow-sm text-black dark:text-white"
+                              : "bg-black/5 dark:bg-white/5 text-neutral-400 dark:text-neutral-500"
                           }`}
                         >
                           <CornerUpRight className="w-3.5 h-3.5" />
@@ -194,7 +194,7 @@ export default function GlassSearchBar() {
                     </div>
                   ))
                 ) : (
-                  <div className="px-4 py-3 text-sm text-neutral-500 text-center font-medium">
+                  <div className="px-4 py-3 text-sm text-neutral-500 dark:text-neutral-400 text-center font-medium">
                     No components found for "{query}"
                   </div>
                 )}

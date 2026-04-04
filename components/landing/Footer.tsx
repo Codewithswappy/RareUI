@@ -6,14 +6,14 @@ import SkewOnScroll from "@/components/ui/SkewOnScroll";
 
 export default function Footer() {
   return (
-    <footer className="w-[98%] max-w-[1600px] mx-auto pb-12 px-4 relative overflow-hidden mt-0 bg-neutral-50">
+    <footer className="w-[98%] max-w-[1600px] mx-auto pb-12 px-4 relative overflow-hidden mt-0 bg-neutral-50 dark:bg-neutral-950 transition-colors duration-500">
       <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0">
         {/* 1. Base Gradient Foundation */}
-        <div className="absolute inset-0 transition-opacity duration-700 bg-linear-to-b from-neutral-100/50 via-neutral-200/50 to-neutral-100/50" />
+        <div className="absolute inset-0 transition-opacity duration-700 bg-linear-to-b from-neutral-100/50 via-neutral-200/50 to-neutral-100/50 dark:from-neutral-950/50 dark:via-neutral-950/50 dark:to-neutral-950/50" />
 
         {/* 2. Vertical Technical Lines (Match Hero) */}
         <div
-          className="absolute inset-0 opacity-[0.012] pointer-events-none"
+          className="absolute inset-0 opacity-[0.012] dark:opacity-[0.03] pointer-events-none"
           style={{
             backgroundImage:
               "linear-gradient(90deg, currentColor 1px, transparent 1px)",
@@ -22,10 +22,10 @@ export default function Footer() {
         />
 
         {/* 2.5 Top Blend Glow (Match CTA Bottom) */}
-        <div className="absolute inset-0 pointer-events-none transition-colors duration-700 bg-linear-to-b from-white/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 pointer-events-none transition-colors duration-700 bg-linear-to-b from-white/60 dark:from-neutral-800/60 via-transparent to-transparent" />
 
         {/* 3. Radial Depth Glow */}
-        <div className="absolute inset-0 pointer-events-none transition-colors duration-700 bg-linear-to-t from-white/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 pointer-events-none transition-colors duration-700 bg-linear-to-t from-white/60 dark:from-neutral-800/60 via-transparent to-transparent" />
       </div>
       {/* Footer Blueprint Container */}
       <div className="max-w-fd-container w-full mx-auto overflow-hidden relative group/footer py-12">
@@ -45,21 +45,10 @@ export default function Footer() {
                     width={80}
                     height={80}
                     style={{ width: "auto", height: "auto" }}
-                    className="object-cover transition-transform duration-500 group-hover/brand:scale-110 group-hover/brand:rotate-12 brightness-0"
+                    className="object-cover transition-transform duration-500 group-hover/brand:scale-110 group-hover/brand:rotate-12 brightness-0 dark:brightness-100"
                   />
                   
                 </div>
-                {/* <SkewOnScroll>
-                  <motion.span
-                    initial={{ opacity: 0, filter: "blur(5px)" }}
-                    whileInView={{ opacity: 1, filter: "blur(0px)" }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="text-xl font-bold tracking-tight group-hover/brand:text-foreground/80 transition-colors "
-                  >
-                    RareUI
-                  </motion.span>
-                </SkewOnScroll> */}
               </Link>
               <p className="text-muted-foreground max-w-md text-base leading-relaxed">
                 RareUI empowers developers to build premium, motion-rich
@@ -99,7 +88,7 @@ export default function Footer() {
                       href={href}
                       target={href !== "#" ? "_blank" : "_self"}
                       rel={href !== "#" ? "noopener noreferrer" : ""}
-                      className="w-10 h-10 flex items-center justify-center rounded-lg border border-neutral-200 text-muted-foreground transition-all duration-300 shadow-sm  "
+                      className="w-10 h-10 flex items-center justify-center rounded-lg border border-neutral-200 dark:border-neutral-700 text-muted-foreground transition-all duration-300 shadow-sm  "
                       aria-label={name}
                     >
                       <svg
@@ -139,10 +128,8 @@ export default function Footer() {
                 {
                   title: "Product",
                   links: [
-                    // { name: 'Features', href: '/#features' },
                     { name: "Components", href: "/docs" },
                     { name: "Templates", href: "/templates" },
-                    // { name: 'Pricing', href: '/pricing' }
                   ],
                 },
                 {
@@ -166,11 +153,11 @@ export default function Footer() {
                       <li key={link.name}>
                         <Link
                           href={link.href}
-                          className="text-sm text-muted-foreground hover:text-black inline-flex items-center gap-1 group/link transition-colors"
+                          className="text-sm text-muted-foreground hover:text-black dark:hover:text-white inline-flex items-center gap-1 group/link transition-colors"
                         >
                           <span className="relative">
                             {link.name}
-                            <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover/link:w-full" />
+                            <span className="absolute bottom-0 left-0 w-0 h-px bg-black dark:bg-white transition-all duration-300 group-hover/link:w-full" />
                           </span>
                         </Link>
                       </li>
@@ -180,9 +167,6 @@ export default function Footer() {
               ))}
             </div>
           </div>
-
-          {/* Divider */}
-          {/* <div className="w-full h-px bg-gradient-to-r from-transparent via-border to-transparent mb-8 opacity-50" /> */}
 
           {/* Bottom Bar */}
           <div className="flex justify-center items-center gap-4 text-sm text-muted-foreground">

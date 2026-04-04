@@ -20,30 +20,30 @@ export default function Hero() {
   }, []);
 
   return (
-    <div className="w-full flex justify-center items-start pt-4 bg-neutral-50">
+    <div className="w-full flex justify-center items-start pt-4 bg-neutral-50 dark:bg-neutral-950 transition-colors duration-500">
       <div 
         style={{ 
           maskImage: 'linear-gradient(to bottom, black 90%, transparent 100%)',
           WebkitMaskImage: 'linear-gradient(to bottom, black 90%, transparent 100%)'
         }}
-        className="relative z-20 h-[calc(100vh-2rem)] min-h-[600px] max-h-[900px] w-[98%] max-w-[1600px] mx-auto flex flex-col items-center justify-center transition-colors duration-500 border border-b-0 ring-b-0 shadow-b-0 rounded-b-none border-neutral-200/60 shadow-sm shadow-black/5 ring-1 ring-black/5 rounded-t-2xl"
+        className="relative z-20 h-[calc(100vh-2rem)] min-h-[600px] max-h-[900px] w-[98%] max-w-[1600px] mx-auto flex flex-col items-center justify-center transition-colors duration-500 border border-b-0 ring-b-0 shadow-b-0 rounded-b-none border-neutral-200/60 dark:border-neutral-700/40 shadow-sm shadow-black/5 dark:shadow-black/20 ring-1 ring-black/5 dark:ring-white/5 rounded-t-2xl"
       >
         <Navbar />
 
         {/* Main Mesh Gradient: Matching ComponentBrowser */}
-        <div className="absolute inset-0 transition-opacity duration-500 bg-linear-to-t from-[#FBFBFA] via-[#F5F5F3] to-[#F2F2F0] " />
+        <div className="absolute inset-0 transition-all duration-500 bg-linear-to-t from-[#FBFBFA] via-[#F5F5F3] to-[#F2F2F0] dark:from-neutral-950 dark:via-neutral-950 dark:to-neutral-950 rounded-t-2xl" />
 
         {/* Custom Diamond Grid Pattern */}
         <div
-          className="absolute inset-0 opacity-[0.04] pointer-events-none"
+          className="absolute inset-0 opacity-[0.04] dark:opacity-[0.06] pointer-events-none"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 L50 0 L100 50 L50 100 Z' fill='none' stroke='black' stroke-width='1' stroke-dasharray='2 2'/%3E%3Ccircle cx='0' cy='50' r='1.5' fill='black'/%3E%3Ccircle cx='50' cy='0' r='1.5' fill='black'/%3E%3Ccircle cx='100' cy='50' r='1.5' fill='black'/%3E%3Ccircle cx='50' cy='100' r='1.5' fill='black'/%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 L50 0 L100 50 L50 100 Z' fill='none' stroke='%23888' stroke-width='1' stroke-dasharray='2 2'/%3E%3Ccircle cx='0' cy='50' r='1.5' fill='%23888'/%3E%3Ccircle cx='50' cy='0' r='1.5' fill='%23888'/%3E%3Ccircle cx='100' cy='50' r='1.5' fill='%23888'/%3E%3Ccircle cx='50' cy='100' r='1.5' fill='%23888'/%3E%3C/svg%3E")`,
             backgroundSize: "80px 80px",
           }}
         />
 
         {/* Radial depth for premium look */}
-        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,rgba(245,245,243,0.4)_100%)]" />
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,rgba(245,245,243,0.4)_100%)] dark:bg-[radial-gradient(circle_at_center,transparent_0%,rgba(38,38,38,0.4)_100%)]" />
 
         {/* Hero Content */}
         <div className="w-full max-w-7xl z-10 flex flex-col md:flex-row items-center justify-center mb-12">
@@ -53,7 +53,7 @@ export default function Hero() {
                 New Component every week
               </FeatureBadge>
             </div>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-clip text-transparent bg-clip-text px-1.8 pr-2 pb-3 bg-linear-to-r from-neutral-900 via-neutral-800 to-neutral-900 ">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-clip text-transparent bg-clip-text px-1.8 pr-2 pb-3 bg-linear-to-r from-neutral-900 via-neutral-800 to-neutral-900 dark:from-white dark:via-neutral-200 dark:to-white">
               Design Less <br /> Ship{" "}
               <span className="inline-flex min-w-[200px] perspective-[1000px]">
                 <div className="inline-flex h-[1.5em] relative items-center justify-start pr-4">
@@ -93,7 +93,7 @@ export default function Hero() {
                             ease: [0.22, 1, 0.36, 1],
                             delay: i * 0.04,
                           }}
-                          className="inline-block text-neutral-900 "
+                          className="inline-block text-neutral-900 dark:text-white"
                         >
                           {letter}
                         </motion.span>
@@ -103,7 +103,7 @@ export default function Hero() {
                 </div>
               </span>
             </h1>
-            <h3 className="text-md font-normal tracking-tighter md:hidden text-neutral-600 mb-3">
+            <h3 className="text-md font-normal tracking-tighter md:hidden text-neutral-600 dark:text-neutral-400 mb-3">
               Spend less time designing and tweaking UI, and more time shipping
               reliable, visually refined interfaces.
             </h3>
@@ -119,7 +119,7 @@ export default function Hero() {
           </div>
 
           <div className="hidden md:flex flex-col items-start justify-center w-1/2 pl-0 p-12 z-10">
-            <h3 className="text-xl font-normal tracking-tighter text-neutral-600 mb-6">
+            <h3 className="text-xl font-normal tracking-tighter text-neutral-600 dark:text-neutral-400 mb-6">
               Spend less time designing and tweaking UI, and more time shipping
               reliable, visually refined interfaces.
             </h3>
@@ -131,7 +131,7 @@ export default function Hero() {
         </div>
 
         <div className="w-full h-[3vh] absolute md:bottom-16 bottom-4 flex items-center justify-center pointer-events-none ">
-          <h1 className="text-[80px] sm:text-[120px] md:text-[230px] lg:text-[300px] z-5 tracking-tighter text-center text-clip text-transparent bg-clip-text bg-linear-to-r transition-colors duration-500 from-black/20 via-black/10 to-black/3 font-medium">
+          <h1 className="text-[80px] sm:text-[120px] md:text-[230px] lg:text-[300px] z-5 tracking-tighter text-center text-clip text-transparent bg-clip-text bg-linear-to-r transition-colors duration-500 from-black/20 via-black/10 to-black/3 dark:from-white/15 dark:via-white/8 dark:to-white/3 font-medium">
             RareUI
           </h1>
         </div>

@@ -1,0 +1,107 @@
+{
+  "versions": [
+    {
+      "version": "1.4.0",
+      "date": "Apr 04, 2026",
+      "latest": true,
+      "highlights": ["5 New Features", "2 Improvements"],
+      "groups": [
+        {
+          "title": "Dark Mode Support",
+          "entries": [
+            "Added full dark/light theme toggle with view-transition circle animation across the entire landing page.",
+            "All sections (Hero, ComponentBrowser, Testimonials, CTA, Footer) now seamlessly adapt to dark mode.",
+            "Preview cards use theme-aware backgrounds so component previews render their own dark styles correctly."
+          ]
+        },
+        {
+          "title": "FAQ & Changelog",
+          "entries": [
+            "Added animated FAQ accordion section with smooth expand/collapse on the landing page.",
+            "Added changelog page with timeline layout for tracking all updates.",
+            "Added What's New preview section on the landing page with live data from changelog."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.3.0",
+      "date": "Mar 28, 2026",
+      "latest": false,
+      "highlights": ["4 New Components"],
+      "groups": [
+        {
+          "title": "Text Animations",
+          "entries": [
+            "Added Vapor Smoke Text — cinematic smoke-dissolve text effect with spring physics.",
+            "Added Magnetic Scatter Text — hover-triggered scatter animation with deterministic randomness.",
+            "Added Word Magnet — physics-based word repulsion on cursor proximity.",
+            "Added Sound Text — interactive text that plays pentatonic scale notes on letter hover."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.2.0",
+      "date": "Mar 20, 2026",
+      "latest": false,
+      "highlights": ["3 New Buttons", "1 Improvement"],
+      "groups": [
+        {
+          "title": "Premium Buttons",
+          "entries": [
+            "Added Glass Shimmer Button — premium glassmorphism button with animated shimmer highlight.",
+            "Added Retro Pixel Button — 8-bit style button with pixel-perfect press animation.",
+            "Added Neumorphism 3D Button — soft UI button with realistic depth and press feedback."
+          ]
+        },
+        {
+          "title": "Improvements",
+          "entries": [
+            "Refined Liquid Button spring physics for more natural bounce on hover."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.1.0",
+      "date": "Mar 10, 2026",
+      "latest": false,
+      "highlights": ["3 New Components"],
+      "groups": [
+        {
+          "title": "Interactive Backgrounds & 3D",
+          "entries": [
+            "Added Liquid Wave — canvas-based dynamic wave animation for hero sections.",
+            "Added Liquid Metal — WebGL metallic fluid effect with customizable text overlay.",
+            "Added 3D Interactive Book — perspective-tracking 3D book element with page flip animations."
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.0",
+      "date": "Mar 01, 2026",
+      "latest": false,
+      "highlights": ["4 Components", "CLI Tool"],
+      "groups": [
+        {
+          "title": "Core Components",
+          "entries": [
+            "Liquid Button — flagship morphing button with fluid motion transitions.",
+            "Crystal Soft Button — soft UI button with subtle glow effects.",
+            "Loading Spinner — elegant spinner with gradient text shimmer animation.",
+            "Glass Search Bar — glassmorphism search with keyboard navigation and command palette shortcut."
+          ]
+        },
+        {
+          "title": "Developer Experience",
+          "entries": [
+            "Shipped CLI tool for one-command installation: npx rareui add [component-name].",
+            "Full documentation site with copy-paste code blocks and live previews."
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -15,7 +15,7 @@ export default function FeatureBadge({
   return (
     <a
       href={href}
-      className="group relative inline-flex items-center gap-2 rounded-lg bg-white/5 border border-neutral-200/80 shadow-md shadow-black/5 ring-1 ring-black/5 pl-1 pr-3 py-1  cursor-pointer overflow-hidden transition-all "
+      className="group relative inline-flex items-center gap-2 rounded-lg bg-white/5 dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-700/80 shadow-md shadow-black/5 ring-1 ring-black/5 dark:ring-white/5 pl-1 pr-3 py-1  cursor-pointer overflow-hidden transition-all "
     >
       {/* Continuous Glare Effect */}
       <motion.div
@@ -34,7 +34,7 @@ export default function FeatureBadge({
       <span className="relative z-10 rounded-sm bg-white px-2.5 py-0.5 text-sm font-medium tracking-tight text-black shadow-sm shadow-black/10 ring-1 ring-black/10">
         {badgeText}
       </span>
-      <span className="relative z-10 text-sm font-normal text-neutral-600 group-hover:text-neutral-800 transition-colors">
+      <span className="relative z-10 text-sm font-normal text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-800 group-hover:dark:text-neutral-200 transition-colors">
         {children}
       </span>
     </a>

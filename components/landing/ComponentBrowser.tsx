@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -14,21 +14,30 @@ import {
 import { cn } from "@/lib/utils";
 import { PreviewCard } from "./PreviewCard";
 
-// --- Dynamic Imports for Real Components ---
-const LiquidButton = dynamic(() => import("@/components/rareui/LiquidButton").then(mod => mod.default), { ssr: false });
-const SoftButton = dynamic(() => import("@/components/rareui/SoftButton").then(mod => mod.default), { ssr: false });
-const Book3D = dynamic(() => import("@/components/rareui/3D elements/book-3d").then(mod => mod.Book3D), { ssr: false });
-const LiquidMetal = dynamic(() => import("@/components/rareui/LiquidMetal").then(mod => mod.default), { ssr: false });
-const LiquidWave = dynamic(() => import("@/components/rareui/interactive-background/LiquidWave").then(mod => mod.default), { ssr: false });
-const VaporSmokeText = dynamic(() => import("@/components/rareui/Text Animation/VaporSmokeText").then(mod => mod.VaporSmokeText), { ssr: false });
-const MagneticScatterText = dynamic(() => import("@/components/rareui/Text Animation/MagneticScatterText").then(mod => mod.MagneticScatterText), { ssr: false });
-const WordMagnet = dynamic(() => import("@/components/rareui/Text Animation/WordMagnet").then(mod => mod.default), { ssr: false });
-const SoundText = dynamic(() => import("@/components/rareui/Text Animation/SoundText").then(mod => mod.default), { ssr: false });
-const ImageExpandTestimonial = dynamic(() => import("@/components/rareui/Sections/imageExpandTestimonial").then(mod => mod.ImageExpandTestimonial), { ssr: false });
-const RetroPixelButton = dynamic(() => import("@/components/rareui/retro-pixel-button").then(mod => mod.default), { ssr: false });
-const GlassShimmerButton = dynamic(() => import("@/components/rareui/glass-shimmer-button").then(mod => mod.GlassShimmerButton), { ssr: false });
-const Neumorphism3DButton = dynamic(() => import("@/components/rareui/neumorphism3DButton").then(mod => mod.Neumorphism3DButton), { ssr: false });
-const LoadingSpinner = dynamic(() => import("@/components/rareui/LoadingSpinner").then(mod => mod.default), { ssr: false });
+// --- Dynamic Imports for Real Components (with lazy loading) ---
+const LiquidButton = dynamic(() => import("@/components/rareui/LiquidButton").then(mod => mod.default), { ssr: false, loading: () => <PreviewSkeleton /> });
+const SoftButton = dynamic(() => import("@/components/rareui/SoftButton").then(mod => mod.default), { ssr: false, loading: () => <PreviewSkeleton /> });
+const Book3D = dynamic(() => import("@/components/rareui/3D elements/book-3d").then(mod => mod.Book3D), { ssr: false, loading: () => <PreviewSkeleton /> });
+const LiquidMetal = dynamic(() => import("@/components/rareui/LiquidMetal").then(mod => mod.default), { ssr: false, loading: () => <PreviewSkeleton /> });
+const LiquidWave = dynamic(() => import("@/components/rareui/interactive-background/LiquidWave").then(mod => mod.default), { ssr: false, loading: () => <PreviewSkeleton /> });
+const VaporSmokeText = dynamic(() => import("@/components/rareui/Text Animation/VaporSmokeText").then(mod => mod.VaporSmokeText), { ssr: false, loading: () => <PreviewSkeleton /> });
+const MagneticScatterText = dynamic(() => import("@/components/rareui/Text Animation/MagneticScatterText").then(mod => mod.MagneticScatterText), { ssr: false, loading: () => <PreviewSkeleton /> });
+const WordMagnet = dynamic(() => import("@/components/rareui/Text Animation/WordMagnet").then(mod => mod.default), { ssr: false, loading: () => <PreviewSkeleton /> });
+const SoundText = dynamic(() => import("@/components/rareui/Text Animation/SoundText").then(mod => mod.default), { ssr: false, loading: () => <PreviewSkeleton /> });
+const ImageExpandTestimonial = dynamic(() => import("@/components/rareui/Sections/imageExpandTestimonial").then(mod => mod.ImageExpandTestimonial), { ssr: false, loading: () => <PreviewSkeleton /> });
+const RetroPixelButton = dynamic(() => import("@/components/rareui/retro-pixel-button").then(mod => mod.default), { ssr: false, loading: () => <PreviewSkeleton /> });
+const GlassShimmerButton = dynamic(() => import("@/components/rareui/glass-shimmer-button").then(mod => mod.GlassShimmerButton), { ssr: false, loading: () => <PreviewSkeleton /> });
+const Neumorphism3DButton = dynamic(() => import("@/components/rareui/neumorphism3DButton").then(mod => mod.Neumorphism3DButton), { ssr: false, loading: () => <PreviewSkeleton /> });
+const LoadingSpinner = dynamic(() => import("@/components/rareui/LoadingSpinner").then(mod => mod.default), { ssr: false, loading: () => <PreviewSkeleton /> });
+
+// --- Skeleton Loader for lazy-loaded components ---
+function PreviewSkeleton() {
+  return (
+    <div className="w-full h-full flex items-center justify-center">
+      <div className="w-8 h-8 rounded-full border-2 border-neutral-200 dark:border-neutral-700 border-t-neutral-400 dark:border-t-neutral-500 animate-spin" />
+    </div>
+  );
+}
 
 // --- Types ---
 interface ComponentItem {
@@ -120,7 +129,7 @@ const COMPONENT_DATA: ComponentItem[] = [
     name: "Word Magnet",
     category: "text",
     tag: "Physics",
-    preview: <div className="scale-50 opacity-80"><WordMagnet text="Magnet Effect" radius={80} /></div>,
+    preview: <div className="scale-50 opacity-80 text-black dark:text-white"><WordMagnet text="Magnet Effect" radius={80} textColor="currentColor" /></div>,
     slug: "text-animation/word-magnet"
   },
   {
@@ -200,10 +209,10 @@ const BrowserTab = ({
     <div 
       onClick={onClick}
       className={cn(
-        "flex items-center gap-1.5 px-2.5 py-1.5 md:px-3 md:py-1.5 cursor-pointer transition-all duration-300 rounded-md shadow-xs ring-1 ring-black/5 select-none shrink-0",
+        "flex items-center gap-1.5 px-2.5 py-1.5 md:px-3 md:py-1.5 cursor-pointer transition-all duration-300 rounded-md shadow-xs select-none shrink-0",
         active 
-          ? "bg-[#FEFEFE] border border-neutral-200/80 shadow-md shadow-black/5 ring-1 ring-black/5 text-[#111]" 
-          : "bg-[#EBEBEB] shadow-[inset_1px_1px_3px_rgba(0,0,0,0.04),inset_-1px_-1px_3px_rgba(255,255,255,0.8)] text-[#8E8E8E] hover:bg-[#EBEBEB]/80 opacity-60 hover:opacity-100"
+          ? "bg-[#FEFEFE] dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 shadow-md shadow-black/5 dark:shadow-black/20 ring-1 ring-black/5 dark:ring-white/5 text-[#111] dark:text-neutral-50" 
+          : "bg-[#EBEBEB] dark:bg-neutral-800/50 shadow-[inset_1px_1px_3px_rgba(0,0,0,0.1),inset_-1px_-1px_3px_rgba(255,255,255,0.2)] dark:shadow-[inset_1px_1px_3px_rgba(0,0,0,1),inset_-1px_-1px_3px_rgba(255,255,255,0.05)] text-[#8E8E8E] dark:text-neutral-400 hover:bg-[#EBEBEB]/80 dark:hover:bg-neutral-800/80 opacity-60 hover:opacity-100 ring-1 ring-black/5 dark:ring-white/5"
       )}
     >
       <span className={cn("shrink-0 transform scale-75 md:scale-90 transition-opacity", active ? "opacity-100" : "opacity-60")}>{icon}</span>
@@ -215,7 +224,7 @@ const BrowserTab = ({
 export function ComponentBrowser() {
   const [activeTab, setActiveTab] = useState("all");
 
-  const handleTabChange = (newTab: string) => {
+  const handleTabChange = useCallback((newTab: string) => {
     // @ts-ignore
     if (!document.startViewTransition) {
       setActiveTab(newTab);
@@ -225,18 +234,21 @@ export function ComponentBrowser() {
     document.startViewTransition(() => {
       setActiveTab(newTab);
     });
-  };
+  }, []);
 
-  const filteredItems = activeTab === "all" 
-    ? COMPONENT_DATA 
-    : COMPONENT_DATA.filter(item => item.category === activeTab);
+  const filteredItems = useMemo(() => 
+    activeTab === "all" 
+      ? COMPONENT_DATA 
+      : COMPONENT_DATA.filter(item => item.category === activeTab),
+    [activeTab]
+  );
 
   return (
     <div className="w-[98%] max-w-[1600px] mx-auto py-10 pt-20 relative group/browser-container">
-      <div className="relative w-full bg-[#f4f4f5] rounded-2xl border border-neutral-200/60 overflow-hidden flex flex-col z-10 shadow-md shadow-black/5 ring-1 ring-black/5 transition-transform duration-700">
+      <div className="relative w-full bg-[#f4f4f5] dark:bg-neutral-900 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 overflow-hidden flex flex-col z-10 shadow-md shadow-black/5 dark:shadow-black/20 ring-1 ring-black/5 dark:ring-white/5 transition-all duration-500">
         
         {/* Browser Toolbar - Compact Skeuomorphic */}
-        <div className="flex items-center px-4 py-2 bg-[#F5F5F3] border-b border-neutral-100 gap-4">
+        <div className="flex items-center px-4 py-2 bg-[#F5F5F3] dark:bg-neutral-900 border-b border-neutral-100 dark:border-neutral-800 gap-4">
           {/* macOS Control Dots - Hidden on mobile to save space */}
           <div className="hidden sm:flex items-center gap-1.5 shrink-0 px-1">
             <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] shadow-sm shadow-black/5 ring-1 ring-black/5" />
@@ -260,25 +272,36 @@ export function ComponentBrowser() {
         </div>
 
         {/* Browser Content Area - WITH INSET SHADOW */}
-        <div className="relative min-h-[500px] bg-[#FBFBFA] flex flex-col shadow-[inset_0_4px_24px_rgba(0,0,0,0.04)]">
+        <div className="relative min-h-[500px] bg-[#FBFBFA] dark:bg-neutral-900 flex flex-col shadow-[inset_0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-[inset_0_4px_24px_rgba(0,0,0,0.15)] transition-colors duration-500">
           {/* Inner Content Border Layer */}
-          <div className="absolute inset-3 rounded-xl border border-neutral-200/80 pointer-events-none z-0 shadow-[inset_0_1px_4px_rgba(0,0,0,0.02)]" />
+          <div className="absolute inset-3 rounded-xl border border-neutral-200/80 dark:border-neutral-700/40 pointer-events-none z-0 shadow-[inset_0_1px_4px_rgba(0,0,0,0.02)] dark:shadow-[inset_0_1px_4px_rgba(0,0,0,0.1)]" />
           
           <div className="flex-1 relative z-10 flex flex-col items-center justify-start py-6 md:py-12 px-4 md:px-8 overflow-auto">
              <AnimatePresence mode="popLayout" initial={false}>
                <motion.div
                  key={activeTab}
-                 initial={{ opacity: 0, scale: 0.98, y: 10 }}
-                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                 exit={{ opacity: 0, scale: 0.98, y: -10 }}
-                 transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+                 initial={{ opacity: 0, y: 10 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 exit={{ opacity: 0, y: -10 }}
+                 transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
                  className="w-full h-full flex items-start justify-center"
                >
                   {filteredItems.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 md:gap-6 w-full max-w-6xl mx-auto">
                        <AnimatePresence mode="popLayout">
-                         {filteredItems.map(item => (
-                            <PreviewCard key={item.id} item={item} />
+                         {filteredItems.map((item, index) => (
+                            <motion.div
+                              key={item.id}
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ 
+                                duration: 0.3, 
+                                ease: [0.23, 1, 0.32, 1],
+                                delay: index * 0.04 
+                              }}
+                            >
+                              <PreviewCard item={item} />
+                            </motion.div>
                          ))}
                        </AnimatePresence>
                     </div>

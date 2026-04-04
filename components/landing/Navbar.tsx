@@ -4,14 +4,25 @@ import React, { useState, useEffect } from "react";
 import { Link } from "next-view-transitions";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
-
-
+import { useTheme } from "next-themes";
 import { Menu03Icon, Cancel01Icon } from "hugeicons-react";
+import { Sun, Moon } from "lucide-react";
 
 export default function Navbar() {
   const [stars, setStars] = useState<number | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const logoSrc = "/logo/blackTransparent.png";
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted && resolvedTheme === "dark";
+
+  const logoSrc = isDark
+    ? "/logo/whiteTransparent.png"
+    : "/logo/blackTransparent.png";
 
   useEffect(() => {
     let isMounted = true;
@@ -27,6 +38,41 @@ export default function Navbar() {
       isMounted = false;
     };
   }, []);
+
+  const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!(document as any).startViewTransition) {
+      setTheme(isDark ? "light" : "dark");
+      return;
+    }
+
+    const x = e.clientX;
+    const y = e.clientY;
+
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = (document as any).startViewTransition(() => {
+      setTheme(isDark ? "light" : "dark");
+    });
+
+    transition.ready.then(() => {
+      const clipPath = [
+        `circle(0px at ${x}px ${y}px)`,
+        `circle(${endRadius}px at ${x}px ${y}px)`,
+      ];
+
+      document.documentElement.animate(
+        { clipPath },
+        {
+          duration: 750,
+          easing: "ease-in-out",
+          pseudoElement: "::view-transition-new(root)",
+        }
+      );
+    });
+  };
 
   const navLinks = [
     { name: "Docs", href: "/docs/installation/cli" },
@@ -65,7 +111,7 @@ export default function Navbar() {
             <WavyLink key={link.name} href={link.href} name={link.name} />
           ))}
         </div>
-        <div className="flex justify-end items-center">
+        <div className="flex justify-end items-center gap-1">
           <motion.a
             href="https://github.com/Codewithswappy/RareUI"
             target="_blank"
@@ -73,7 +119,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-300 group text-neutral-800 border border-transparent hover:bg-black/5 hover:border-black/5"
+            className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-300 group text-neutral-800 dark:text-neutral-200 border border-transparent hover:bg-black/5 dark:hover:bg-white/5 hover:border-black/5 dark:hover:border-white/5"
             aria-label="GitHub Repository"
           >
             <motion.svg
@@ -117,7 +163,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.1, rotate: 10 }}
             whileTap={{ scale: 0.9 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            className="p-2 rounded-full transition-all duration-300 hidden md:block text-neutral-800 border border-transparent hover:bg-black/5 hover:border-black/5"
+            className="p-2 rounded-full transition-all duration-300 hidden md:block text-neutral-800 dark:text-neutral-200 border border-transparent hover:bg-black/5 dark:hover:bg-white/5 hover:border-black/5 dark:hover:border-white/5"
             aria-label="Twitter Profile"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -125,16 +171,52 @@ export default function Navbar() {
             </svg>
           </motion.a>
 
+          {/* Theme Toggle */}
+          {mounted && (
+            <motion.button
+              onClick={toggleTheme}
+              whileHover={{ scale: 1.1, rotate: 15 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              className="p-2 rounded-full transition-all duration-300 hidden md:flex items-center justify-center text-neutral-800 dark:text-neutral-200 border border-transparent hover:bg-black/5 dark:hover:bg-white/5 hover:border-black/5 dark:hover:border-white/5 cursor-pointer"
+              aria-label="Toggle theme"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {isDark ? (
+                  <motion.div
+                    key="sun"
+                    initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
+                    animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                    exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Sun className="w-5 h-5" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="moon"
+                    initial={{ rotate: 90, opacity: 0, scale: 0.5 }}
+                    animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                    exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Moon className="w-5 h-5" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
+          )}
+
           <div />
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2 text-neutral-800 z-50 relative"
+          className="md:hidden p-2 text-neutral-800 dark:text-neutral-200 z-50 relative"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? (
-            <Cancel01Icon className="w-6 h-6 text-black" />
+            <Cancel01Icon className="w-6 h-6 text-black dark:text-white" />
           ) : (
             <Menu03Icon className="w-6 h-6" />
           )}
@@ -160,10 +242,10 @@ export default function Navbar() {
             transition: { duration: 0.4, ease: "easeInOut" },
           }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-40 bg-white/90 backdrop-blur-3xl md:hidden flex flex-col items-center justify-center gap-8 overflow-hidden"
+          className="fixed inset-0 z-40 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-3xl md:hidden flex flex-col items-center justify-center gap-8 overflow-hidden"
         >
           {/* Background Gradient Element */}
-          <div className="absolute inset-0 bg-radial-gradient from-white/10 to-transparent opacity-20 pointer-events-none" />
+          <div className="absolute inset-0 bg-radial-gradient from-white/10 dark:from-white/5 to-transparent opacity-20 pointer-events-none" />
 
           <motion.div
             initial="hidden"
@@ -199,13 +281,43 @@ export default function Navbar() {
               >
                 <Link
                   href={link.href}
-                  className="text-4xl font-bold text-black/90 hover:text-black transition-colors tracking-tight"
+                  className="text-4xl font-bold text-black/90 dark:text-white/90 hover:text-black dark:hover:text-white transition-colors tracking-tight"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
                 </Link>
               </motion.div>
             ))}
+
+            {/* Mobile Theme Toggle */}
+            {mounted && (
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 20,
+                    },
+                  },
+                }}
+              >
+                <button
+                  onClick={toggleTheme}
+                  className="p-3 bg-white/10 rounded-full text-black dark:text-white hover:bg-white/80 dark:hover:bg-white/10 transition-all border border-white/90 dark:border-white/20 cursor-pointer"
+                  aria-label="Toggle theme"
+                >
+                  {isDark ? (
+                    <Sun className="w-6 h-6" />
+                  ) : (
+                    <Moon className="w-6 h-6" />
+                  )}
+                </button>
+              </motion.div>
+            )}
           </motion.div>
 
           <motion.div
@@ -218,7 +330,7 @@ export default function Navbar() {
               href="https://x.com/heyyswap"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-white/10 rounded-full text-black hover:bg-white/80 transition-all border border-white/90  "
+              className="p-3 bg-white/10 rounded-full text-black dark:text-white hover:bg-white/80 dark:hover:bg-white/10 transition-all border border-white/90 dark:border-white/20"
             >
               <svg
                 className="w-6 h-6"
@@ -232,7 +344,7 @@ export default function Navbar() {
               href="https://github.com/Codewithswappy/RareUI"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-white/10 rounded-full text-black hover:bg-white/80 transition-all border border-white/90  "
+              className="p-3 bg-white/10 rounded-full text-black dark:text-white hover:bg-white/80 dark:hover:bg-white/10 transition-all border border-white/90 dark:border-white/20"
             >
               <svg
                 className="w-6 h-6"
@@ -275,7 +387,7 @@ const WavyLink = ({ href, name }: { href: string; name: string }) => {
               damping: 15,
               delay: 0.015 * i,
             }}
-            className="inline-block transition-colors duration-300 text-neutral-800  group-hover:text-black "
+            className="inline-block transition-colors duration-300 text-neutral-800 dark:text-neutral-200 group-hover:text-black dark:group-hover:text-white"
           >
             {l === " " ? "\u00A0" : l}
           </motion.span>

@@ -4,6 +4,14 @@ import dynamic from "next/dynamic";
 import HeroSection from "@/components/landing/HeroSection";
 // import RareUiBento from "@/components/landing/RareUiBento";
 
+const SectionDivider = dynamic(() => import("@/components/landing/SectionDivider").then(mod => mod.SectionDivider), {
+  loading: () => <div className="h-20 w-full" />,
+});
+
+const StatsBar = dynamic(() => import("@/components/landing/StatsBar"), {
+  loading: () => <div className="h-24 w-full animate-pulse bg-neutral-100/50 dark:bg-neutral-800/50" />,
+});
+
 const HowItWorks = dynamic(() => import("@/components/landing/HowItWorks"), {
   loading: () => <div className="h-[500px] w-full bg-background" />,
 });
@@ -17,24 +25,43 @@ const Footer = dynamic(() => import("@/components/landing/Footer"), {
 });
 
 const Testimonials = dynamic(() => import("@/components/landing/Testimonials"), {
-  loading: () => <div className="h-[500px] w-full bg-neutral-50/50" />,
+  loading: () => <div className="h-[500px] w-full bg-neutral-50 dark:bg-neutral-950" />,
 });
 
 const ComponentBrowser = dynamic(() => import("@/components/landing/ComponentBrowser").then(mod => mod.ComponentBrowser), {
   ssr: false,
-  loading: () => <div className="h-[800px] w-full bg-[#f4f4f5] rounded-2xl animate-pulse" />,
+  loading: () => <div className="h-[800px] w-full bg-[#f4f4f5] dark:bg-neutral-950 rounded-2xl animate-pulse" />,
+});
+
+const FAQSection = dynamic(() => import("@/components/landing/FAQSection"), {
+  loading: () => <div className="h-[400px] w-full bg-neutral-50 dark:bg-neutral-950" />,
+});
+
+const WhatsNew = dynamic(() => import("@/components/landing/WhatsNew"), {
+  loading: () => <div className="h-[400px] w-full bg-neutral-50 dark:bg-neutral-950" />,
 });
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen w-full max-w-[100vw] flex-col overflow-x-hidden bg-neutral-50 text-foreground">
-      <HeroSection />  
-      <div className=" bg-neutral-50">
+    <main className="flex min-h-screen w-full max-w-[100vw] flex-col overflow-x-hidden bg-neutral-50 dark:bg-neutral-950 text-foreground transition-colors duration-500">
+      <HeroSection />
+
+     
+
+      <div className="bg-neutral-50 dark:bg-neutral-950 transition-colors duration-500">
         <ComponentBrowser />
       </div>
-      {/* <HowItWorks /> */}
+
+      <HowItWorks />
+
       <Testimonials />
+
+      {/* <FAQSection />
+
+      <WhatsNew /> */}
+
       <CTASection />
+      
       <Footer />
     </main>
   );
