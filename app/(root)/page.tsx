@@ -56,9 +56,9 @@ export default function Home() {
 
       <Testimonials />
 
-      {/* <FAQSection />
+      <FAQSection />
 
-      <WhatsNew /> */}
+      <WhatsNew />
 
       <CTASection />
       

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Link } from "next-view-transitions";
 import { IconArrowRight } from "@tabler/icons-react";
 import changelogData from "@/data/changelog.json";
@@ -21,18 +21,7 @@ export default function WhatsNew() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-24">
           {/* Left: Heading */}
           <div>
-            {/* <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.05 }}
-              className="mb-5"
-            >
-              <span className="inline-flex items-center gap-2 text-[11px] font-mono font-semibold tracking-[0.12em] uppercase text-neutral-400 dark:text-neutral-500">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                {latestVersion.version}
-              </span>
-            </motion.div> */}
+        
             <motion.h2
               initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}

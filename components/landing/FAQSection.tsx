@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { IconChevronDown } from "@tabler/icons-react";
 
 const FAQ_DATA = [
@@ -137,15 +137,7 @@ export default function FAQSection() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-24">
           {/* Left: Heading */}
           <div className="lg:sticky lg:top-32 lg:self-start">
-            <motion.span
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.05 }}
-              className="text-[11px] font-mono tracking-[0.12em]  text-neutral-400 dark:text-neutral-500 mb-4 block"
-            >
-              Support
-            </motion.span>
+           
             <motion.h2
               initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}

@@ -209,10 +209,10 @@ const BrowserTab = ({
     <div 
       onClick={onClick}
       className={cn(
-        "flex items-center gap-1.5 px-2.5 py-1.5 md:px-3 md:py-1.5 cursor-pointer transition-all duration-300 rounded-md shadow-xs select-none shrink-0",
+        "flex items-center gap-1.5 px-2.5 py-1.5 md:px-4 md:py-2 cursor-pointer transition-all duration-300 rounded-md shadow-xs select-none shrink-0",
         active 
-          ? "bg-[#FEFEFE] dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 shadow-md shadow-black/5 dark:shadow-black/20 ring-1 ring-black/5 dark:ring-white/5 text-[#111] dark:text-neutral-50" 
-          : "bg-[#EBEBEB] dark:bg-neutral-800/50 shadow-[inset_1px_1px_3px_rgba(0,0,0,0.1),inset_-1px_-1px_3px_rgba(255,255,255,0.2)] dark:shadow-[inset_1px_1px_3px_rgba(0,0,0,1),inset_-1px_-1px_3px_rgba(255,255,255,0.05)] text-[#8E8E8E] dark:text-neutral-400 hover:bg-[#EBEBEB]/80 dark:hover:bg-neutral-800/80 opacity-60 hover:opacity-100 ring-1 ring-black/5 dark:ring-white/5"
+          ? "bg-[#FEFEFE] dark:bg-neutral-950 border border-neutral-200/80 dark:border-neutral-800 shadow-[0_0_0_1px_#0000000a,0_1px_1px_#00000029,0_2px_3px_#00000014] dark:shadow-[0_0_0_1px_#ffffff0a,0_1px_1px_#ffffff14,0_2px_4px_#00000040] ring-1 ring-black/5 dark:ring-white/5 text-[#111] dark:text-neutral-50" 
+          : "bg-[#EBEBEB] dark:bg-neutral-700/50 shadow-[inset_1px_1px_3px_rgba(0,0,0,0.1),inset_-1px_-1px_3px_rgba(255,255,255,0.2)] dark:shadow-[inset_1px_1px_3px_rgba(0,0,0,1),inset_-1px_-1px_3px_rgba(255,255,255,0.1)] text-[#8E8E8E] dark:text-neutral-400 hover:bg-[#EBEBEB]/80 dark:hover:bg-neutral-800/80 opacity-60 hover:opacity-100 ring-1 ring-black/5 dark:ring-white/5"
       )}
     >
       <span className={cn("shrink-0 transform scale-75 md:scale-90 transition-opacity", active ? "opacity-100" : "opacity-60")}>{icon}</span>
@@ -248,7 +248,7 @@ export function ComponentBrowser() {
       <div className="relative w-full bg-[#f4f4f5] dark:bg-neutral-900 rounded-2xl border border-neutral-200/60 dark:border-neutral-700/40 overflow-hidden flex flex-col z-10 shadow-md shadow-black/5 dark:shadow-black/20 ring-1 ring-black/5 dark:ring-white/5 transition-all duration-500">
         
         {/* Browser Toolbar - Compact Skeuomorphic */}
-        <div className="flex items-center px-4 py-2 bg-[#F5F5F3] dark:bg-neutral-900 border-b border-neutral-100 dark:border-neutral-800 gap-4">
+        <div className="flex items-center px-4 py-2 bg-[#F5F5F3] dark:bg-neutral-950 border-b border-neutral-100 dark:border-neutral-800 gap-4">
           {/* macOS Control Dots - Hidden on mobile to save space */}
           <div className="hidden sm:flex items-center gap-1.5 shrink-0 px-1">
             <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] shadow-sm shadow-black/5 ring-1 ring-black/5" />
@@ -257,7 +257,7 @@ export function ComponentBrowser() {
           </div>
 
           {/* Navigation Tabs - COMPACT NEUMORPHIC with Horizontal Scroll */}
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar flex-1 pb-1 md:pb-1">
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar p-1 flex-1 pb-1 md:pb-1">
             {CATEGORIES.map((cat) => (
               <BrowserTab 
                 key={cat.id} 
@@ -272,7 +272,7 @@ export function ComponentBrowser() {
         </div>
 
         {/* Browser Content Area - WITH INSET SHADOW */}
-        <div className="relative min-h-[500px] bg-[#FBFBFA] dark:bg-neutral-900 flex flex-col shadow-[inset_0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-[inset_0_4px_24px_rgba(0,0,0,0.15)] transition-colors duration-500">
+        <div className="relative min-h-[500px] bg-[#FBFBFA] dark:bg-neutral-950 flex flex-col shadow-[inset_0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-[inset_0_4px_24px_rgba(0,0,0,0.15)] transition-colors duration-500">
           {/* Inner Content Border Layer */}
           <div className="absolute inset-3 rounded-xl border border-neutral-200/80 dark:border-neutral-700/40 pointer-events-none z-0 shadow-[inset_0_1px_4px_rgba(0,0,0,0.02)] dark:shadow-[inset_0_1px_4px_rgba(0,0,0,0.1)]" />
           
