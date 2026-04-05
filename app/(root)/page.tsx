@@ -4,13 +4,7 @@ import dynamic from "next/dynamic";
 import HeroSection from "@/components/landing/HeroSection";
 // import RareUiBento from "@/components/landing/RareUiBento";
 
-const SectionDivider = dynamic(() => import("@/components/landing/SectionDivider").then(mod => mod.SectionDivider), {
-  loading: () => <div className="h-20 w-full" />,
-});
 
-const StatsBar = dynamic(() => import("@/components/landing/StatsBar"), {
-  loading: () => <div className="h-24 w-full animate-pulse bg-neutral-100/50 dark:bg-neutral-800/50" />,
-});
 
 const HowItWorks = dynamic(() => import("@/components/landing/HowItWorks"), {
   loading: () => <div className="h-[500px] w-full bg-background" />,
