@@ -169,9 +169,9 @@ function CustomizeVisual() {
   const spreadPct = ((spread + 4) / 8) * 100;
 
   return (
-    <div className="w-full h-full flex gap-4 p-1.5 font-sans">
+    <div className="w-full h-full flex flex-col lg:flex-row gap-4 p-1.5 font-sans">
       {/* ── Figma-style Panel ── */}
-      <div className={`w-[250px] shrink-0 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 flex flex-col overflow-hidden shadow-[0_0_0_1px_#0000000a,0_1px_1px_#00000029,0_2px_3px_#00000014] dark:shadow-[0_0_0_1px_#ffffff0a,0_1px_1px_#ffffff14,0_2px_4px_#00000040]`}>
+      <div className={`w-full lg:w-[260px] lg:shrink-0 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 flex flex-col overflow-hidden shadow-[0_0_0_1px_#0000000a,0_1px_1px_#00000029,0_2px_3px_#00000014] dark:shadow-[0_0_0_1px_#ffffff0a,0_1px_1px_#ffffff14,0_2px_4px_#00000040]`}>
         {/* Section Header */}
         <div className="flex items-center justify-between px-3 py-2 border-b border-neutral-100 dark:border-neutral-800">
           <div className="flex items-center gap-1.5">
@@ -281,7 +281,7 @@ function CustomizeVisual() {
       </div>
 
       {/* ── Live Preview ── */}
-      <div className={`flex-1 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 flex flex-col overflow-hidden shadow-[0_0_0_1px_#0000000a,0_1px_1px_#00000029,0_2px_3px_#00000014] dark:shadow-[0_0_0_1px_#ffffff0a,0_1px_1px_#ffffff14,0_2px_4px_#00000040]`}>
+      <div className={`flex-1  bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 flex flex-col overflow-hidden shadow-[0_0_0_1px_#0000000a,0_1px_1px_#00000029,0_2px_3px_#00000014] dark:shadow-[0_0_0_1px_#ffffff0a,0_1px_1px_#ffffff14,0_2px_4px_#00000040]`}>
         <div className="flex items-center justify-between px-3 py-1.5 border-b border-neutral-100 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-950/50">
           <div className="flex items-center gap-2">
             <div className="flex gap-0.5">
@@ -293,7 +293,7 @@ function CustomizeVisual() {
           </div>
           <div className="w-1.5 h-1.5 rounded-full bg-neutral-300 dark:bg-neutral-600 animate-pulse" />
         </div>
-        <div className="flex-1 flex items-center justify-center relative overflow-hidden bg-white dark:bg-neutral-950">
+        <div className="flex-1 flex items-center justify-center relative overflow-hidden bg-white dark:bg-neutral-950 py-4 shadow-[0_0_0_1px_#0000000a,0_1px_1px_#00000029,0_2px_3px_#00000014] dark:shadow-[0_0_0_1px_#ffffff0a,0_1px_1px_#ffffff14,0_2px_4px_#00000040]">
           {/* Subtle Grid */}
           <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle, rgb(0 0 0 / 0.05) 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
           <div className="absolute inset-0 dark:block hidden" style={{ backgroundImage: 'radial-gradient(circle, rgb(255 255 255 / 0.03) 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
@@ -302,14 +302,15 @@ function CustomizeVisual() {
           <motion.div
             animate={{
               borderRadius: `${radius}px`,
-              boxShadow: `0 ${shadowY}px ${blur}px ${spread}px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.05) `,
+              boxShadow: `0 ${shadowY}px ${blur}px ${spread}px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.05) ` ,
+              
             }}
             transition={{ type: "spring", stiffness: active ? 180 : 100, damping: 16 }}
             className="w-[185px] bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 overflow-hidden relative z-10 flex flex-col shadow-[0_0_0_1px_#0000000a,0_1px_1px_#00000029,0_2px_3px_#00000014] dark:shadow-[0_0_0_1px_#ffffff0a,0_1px_1px_#ffffff14,0_2px_4px_#00000040]"
           >
             {/* Dialog Header */}
-            <div className="px-3.5 pt-4 pb-3">
-              <div className="flex items-center justify-between mb-0.5">
+            <div className="px-3.5 pt-4 pb-3 ">
+              <div className="flex items-center justify-between mb-0.5 ">
                 <h4 className="text-[10px] font-bold text-neutral-900 dark:text-white tracking-tight uppercase">Settings</h4>
                 <div className="w-3.5 h-3.5 rounded-md border border-neutral-200 dark:border-neutral-800 flex items-center justify-center hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors">
                   <span className="text-[8px] text-neutral-500 font-bold leading-none">×</span>
@@ -510,7 +511,7 @@ export default function HowItWorks() {
               <h3 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">Customize Everything</h3>
               <p className="text-[14px] text-neutral-500 leading-relaxed">Full design control at your fingertips. Adjust shadows, radii, colors, and spring physics — watch your component update in real time.</p>
             </div>
-            <div className="flex-1 h-64 lg:h-auto rounded-xl bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 overflow-hidden">
+            <div className="flex-1 h-[530px] lg:h-80 rounded-xl bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 overflow-hidden">
               <CustomizeVisual />
             </div>
           </div>
