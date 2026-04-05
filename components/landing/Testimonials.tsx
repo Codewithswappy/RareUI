@@ -89,8 +89,8 @@ const FEEDBACK_WALL: Testimonial[] = [
 ];
 
 const PremiumTweetCard = ({ item }: { item: Testimonial }) => (
- <div className="bg-neutral-200/50 dark:bg-neutral-800/30 rounded-xl p-1 shadow-sm shadow-black/10 dark:shadow-black/20 ring-1 ring-black/10 dark:ring-white/10">
-   <div className="relative p-4 bg-white dark:bg-neutral-900 rounded-lg shadow-sm shadow-black/10 dark:shadow-black/20 border border-neutral-100 dark:border-neutral-800/60 ring-1 ring-black/10 dark:ring-white/5 flex flex-col gap-2 group transition-all duration-300 h-full min-h-[120px]">
+ <div className="bg-neutral-200/50 dark:bg-neutral-800/30 rounded-xl p-0.5 shadow-sm shadow-black/10 dark:shadow-black/20 ring-1 ring-black/10 dark:ring-white/10">
+   <div className="relative p-4 bg-white dark:bg-neutral-900 rounded-lg shadow-sm shadow-black/10 dark:shadow-black/20 border border-neutral-100 dark:border-neutral-800/60 ring-1 ring-black/10 dark:ring-white/5 flex flex-col gap-2 group transition-all duration-300 min-h-[150px] justify-between h-[180px]">
    
     {/* Inner Highlight Layer */}
     <div className="flex items-start justify-between">
