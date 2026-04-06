@@ -1,5 +1,5 @@
 {
-  "name": "arcui",
+  "name": "rare-ui",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,11 +14,10 @@
     "format": "prettier --write \"**/*.{ts,tsx,md,mdx,css,json}\"",
     "test": "vitest run",
     "format:check": "prettier --check \"**/*.{ts,tsx,md,mdx,css,json}\"",
-    "create-component": "tsx scripts/create-component.ts",
-    "prepare": "husky || true"
+    "create-component": "tsx scripts/create-component.ts"
   },
   "engines": {
-    "node": ">=20.9.0"
+    "node": "24.x"
   },
   "tailwind": {
     "content": [
