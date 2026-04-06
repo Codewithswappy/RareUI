@@ -24,9 +24,12 @@
     "content": [
       "./app/**/*.{ts,tsx,mdx}",
       "./content/**/*.{ts,tsx,mdx}",
-      "../../rareui/components/**/*.{ts,tsx}"
+      "./components/**/*.{ts,tsx}"
     ]
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@number-flow/react": "^0.5.10",
