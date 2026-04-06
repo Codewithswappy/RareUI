@@ -1,8 +1,4 @@
 {
-    "title": "Text Animation",
-    "pages": [
-        "vapor-smokeText",
-        "magnetic-scatterText",
-        "word-magnet"
-    ]
+  "title": "Text Animation",
+  "pages": ["vapor-smokeText", "magnetic-scatterText", "word-magnet"]
 }

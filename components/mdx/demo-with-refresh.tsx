@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import { RefreshCw } from 'lucide-react';
@@ -15,19 +15,19 @@ export function DemoWithRefresh({ children }: DemoWithRefreshProps) {
   };
 
   return (
-    <div className="relative w-full h-full">
-      <div key={key} className="w-full h-full">
+    <div className="relative h-full w-full">
+      <div key={key} className="h-full w-full">
         {children}
       </div>
-      
+
       {/* Refresh Button - Positioned in Preview Container Top Right */}
       <button
         onClick={handleRefresh}
-        className="absolute top-0 right-0 p-2 rounded-lg bg-background/90 backdrop-blur-sm border border-border hover:bg-accent transition-all duration-200 group shadow-sm z-20"
+        className="bg-background/90 border-border hover:bg-accent group absolute top-0 right-0 z-20 rounded-lg border p-2 shadow-sm backdrop-blur-sm transition-all duration-200"
         title="Replay animation"
         aria-label="Replay animation"
       >
-        <RefreshCw className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-all group-hover:rotate-180 duration-500" />
+        <RefreshCw className="text-muted-foreground group-hover:text-foreground h-4 w-4 transition-all duration-500 group-hover:rotate-180" />
       </button>
     </div>
   );

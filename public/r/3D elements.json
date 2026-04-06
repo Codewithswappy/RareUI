@@ -1,0 +1,16 @@
+{
+  "name": "3D elements",
+  "type": "registry:ui",
+  "dependencies": [
+    "typescript"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "book-3d.tsx",
+      "content": "export * from '../Book3D/index';\n",
+      "type": "registry:ui",
+      "target": "components/rareui/3D elements/book-3d.tsx"
+    }
+  ]
+}

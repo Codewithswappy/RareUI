@@ -1,0 +1,16 @@
+{
+  "name": "Sections",
+  "type": "registry:ui",
+  "dependencies": [
+    "typescript"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "imageExpandTestimonial.tsx",
+      "content": "export * from '../ImageExpandTestimonial/index';\n",
+      "type": "registry:ui",
+      "target": "components/rareui/Sections/imageExpandTestimonial.tsx"
+    }
+  ]
+}

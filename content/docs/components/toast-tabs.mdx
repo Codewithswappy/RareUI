@@ -3,24 +3,24 @@ title: Toast Tabs
 description: A unique tab switching component that displays content like a toast message, with an animated avatar switcher.
 ---
 
-import ToastTabs from "@/components/rareui/ToastTabs";
-import { Preview } from "@/components/mdx/preview";
-import { PropsTable } from "@/components/mdx/PropsTable";
-import { UsageGuide } from "@/components/mdx/UsageGuide";
-import { FeaturesList } from "@/components/mdx/FeaturesList";
+import ToastTabs from '@/components/rareui/ToastTabs';
+import { Preview } from '@/components/mdx/preview';
+import { PropsTable } from '@/components/mdx/PropsTable';
+import { UsageGuide } from '@/components/mdx/UsageGuide';
+import { FeaturesList } from '@/components/mdx/FeaturesList';
 
 <Preview
   code={`"use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   motion,
   AnimatePresence,
   useMotionValue,
   useTransform,
   useAnimationFrame,
-} from "framer-motion";
-import { cn } from "@/lib/utils";
+} from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 export interface TabData {
   id: string | number;
@@ -30,38 +30,38 @@ export interface TabData {
 }
 
 interface ToastTabsProps {
-  tabs?: TabData[];
-  autoplay?: boolean;
-  autoplayDelay?: number; // ms
-  ringColor?: string;
-  className?: string;
+tabs?: TabData[];
+autoplay?: boolean;
+autoplayDelay?: number; // ms
+ringColor?: string;
+className?: string;
 }
 
 const defaultTabs: TabData[] = [
-  {
-    id: 1,
-    image:
-      "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=200&auto=format&fit=crop",
-    title: "Sarah Jenkins",
-    description:
-      "The workflow integration is simply seamless. It has completely transformed.",
-  },
-  {
-    id: 2,
-    image:
-      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200&auto=format&fit=crop",
-    title: "Mark Thompson",
-    description:
-      "I was skeptical at first, but the performance gains are undeniable. The snappy animations and clean UI make it a joy to use daily.",
-  },
-  {
-    id: 3,
-    image:
-      "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200&auto=format&fit=crop",
-    title: "Alex Riviera",
-    description:
-      "Finally, a solution that actually considers dark mode as a first-class citizen. The attention to detail in the design system is outstanding.",
-  },
+{
+id: 1,
+image:
+"https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=200&auto=format&fit=crop",
+title: "Sarah Jenkins",
+description:
+"The workflow integration is simply seamless. It has completely transformed.",
+},
+{
+id: 2,
+image:
+"https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200&auto=format&fit=crop",
+title: "Mark Thompson",
+description:
+"I was skeptical at first, but the performance gains are undeniable. The snappy animations and clean UI make it a joy to use daily.",
+},
+{
+id: 3,
+image:
+"https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200&auto=format&fit=crop",
+title: "Alex Riviera",
+description:
+"Finally, a solution that actually considers dark mode as a first-class citizen. The attention to detail in the design system is outstanding.",
+},
 ];
 
 export default function ToastTabs({
@@ -74,21 +74,21 @@ export default function ToastTabs({
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Use Motion Value for high-performance animation (no react re-renders)
-  const progressMv = useMotionValue(0);
-  const CIRCUMFERENCE = 175.929; // 2 * pi * 28
+// Use Motion Value for high-performance animation (no react re-renders)
+const progressMv = useMotionValue(0);
+const CIRCUMFERENCE = 175.929; // 2 _ pi _ 28
 
-  // Map progress (0 -> autoplayDelay) to dashoffset (CIRCUMFERENCE -> 0)
-  const strokeDashoffset = useTransform(
-    progressMv,
-    [0, autoplayDelay],
-    [CIRCUMFERENCE, 0]
-  );
+// Map progress (0 -> autoplayDelay) to dashoffset (CIRCUMFERENCE -> 0)
+const strokeDashoffset = useTransform(
+progressMv,
+[0, autoplayDelay],
+[CIRCUMFERENCE, 0]
+);
 
-  // Handle Autoplay Loop
-  useAnimationFrame((time, delta) => {
-    if (!isPaused && autoplay) {
-      let newProgress = progressMv.get() + delta;
+// Handle Autoplay Loop
+useAnimationFrame((time, delta) => {
+if (!isPaused && autoplay) {
+let newProgress = progressMv.get() + delta;
 
       if (newProgress >= autoplayDelay) {
         newProgress = 0;
@@ -96,70 +96,70 @@ export default function ToastTabs({
       }
       progressMv.set(newProgress);
     }
-  });
 
-  // Refs for keyboard navigation logic
-  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+});
 
-  useEffect(() => {
-    // Adjust refs array size if tabs change
-    buttonRefs.current = buttonRefs.current.slice(0, tabs.length);
-  }, [tabs]);
+// Refs for keyboard navigation logic
+const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-  // Reset progress when manually changing tabs
-  const handleTabClick = (index: number) => {
-    setActiveIndex(index);
-    progressMv.set(0);
-  };
+useEffect(() => {
+// Adjust refs array size if tabs change
+buttonRefs.current = buttonRefs.current.slice(0, tabs.length);
+}, [tabs]);
 
-  // Keyboard Navigation
-  const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
-    if (e.key === "ArrowRight") {
-      e.preventDefault(); // Prevent scroll
-      const nextIndex = (index + 1) % tabs.length;
-      setActiveIndex(nextIndex);
-      buttonRefs.current[nextIndex]?.focus();
-      progressMv.set(0);
-    } else if (e.key === "ArrowLeft") {
-      e.preventDefault(); // Prevent scroll
-      const prevIndex = (index - 1 + tabs.length) % tabs.length;
-      setActiveIndex(prevIndex);
-      buttonRefs.current[prevIndex]?.focus();
-      progressMv.set(0);
-    }
-  };
+// Reset progress when manually changing tabs
+const handleTabClick = (index: number) => {
+setActiveIndex(index);
+progressMv.set(0);
+};
 
-  return (
-    <div
-      className={cn(
-        "w-full max-w-2xl mx-auto flex flex-col items-center gap-8 [--beam-color:var(--custom-color)] dark:[--beam-color:#ffffff]",
-        className
-      )}
-      style={{ "--custom-color": ringColor } as React.CSSProperties}
+// Keyboard Navigation
+const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
+if (e.key === "ArrowRight") {
+e.preventDefault(); // Prevent scroll
+const nextIndex = (index + 1) % tabs.length;
+setActiveIndex(nextIndex);
+buttonRefs.current[nextIndex]?.focus();
+progressMv.set(0);
+} else if (e.key === "ArrowLeft") {
+e.preventDefault(); // Prevent scroll
+const prevIndex = (index - 1 + tabs.length) % tabs.length;
+setActiveIndex(prevIndex);
+buttonRefs.current[prevIndex]?.focus();
+progressMv.set(0);
+}
+};
+
+return (
+
+<div
+className={cn(
+"w-full max-w-2xl mx-auto flex flex-col items-center gap-8 [--beam-color:var(--custom-color)] dark:[--beam-color:#ffffff]",
+className
+)}
+style={{ "--custom-color": ringColor } as React.CSSProperties}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => {
         setIsPaused(false);
-      }}
-    >
-      {/* --- Content Area (Toast) --- */}
-      <div className="relative w-full text-center px-4 mb-4 flex items-center justify-center min-h-[110px]">
-        <AnimatePresence mode="popLayout">
-          <motion.div
-            key={activeIndex}
-            initial={{ opacity: 0, y: 20, scale: 0.9, filter: "blur(4px)" }}
-            animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0, y: -20, scale: 0.9, filter: "blur(4px)" }}
-            transition={{
+      }} >
+{/* --- Content Area (Toast) --- */}
+<div className="relative w-full text-center px-4 mb-4 flex items-center justify-center min-h-[110px]">
+<AnimatePresence mode="popLayout">
+<motion.div
+key={activeIndex}
+initial={{ opacity: 0, y: 20, scale: 0.9, filter: "blur(4px)" }}
+animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+exit={{ opacity: 0, y: -20, scale: 0.9, filter: "blur(4px)" }}
+transition={{
               duration: 0.4,
               type: "spring",
               stiffness: 260,
               damping: 20,
             }}
-            className="bg-neutral-100 dark:bg-neutral-800 border-2 border-dotted border-neutral-300 dark:border-neutral-600 rounded-2xl p-3 shadow-sm max-w-xs relative cursor-default select-none"
-          >
-            <p className="text-sm leading-relaxed text-neutral-900 dark:text-white font-medium">
-              "{tabs[activeIndex].description}"
-            </p>
+className="bg-neutral-100 dark:bg-neutral-800 border-2 border-dotted border-neutral-300 dark:border-neutral-600 rounded-2xl p-3 shadow-sm max-w-xs relative cursor-default select-none" >
+<p className="text-sm leading-relaxed text-neutral-900 dark:text-white font-medium">
+"{tabs[activeIndex].description}"
+</p>
 
             <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-neutral-100 dark:bg-neutral-800 border-b-2 border-r-2 border-dotted border-neutral-300 dark:border-neutral-600 rotate-45" />
           </motion.div>
@@ -252,81 +252,90 @@ export default function ToastTabs({
         })}
       </div>
     </div>
-  );
+
+);
 }`}
-  cliCommand="npx rareui add toast-tabs"
+cliCommand="npx rareui add toast-tabs"
+
 >
+
   <div className="w-full flex items-center justify-center py-10">
     <ToastTabs />
   </div>
 </Preview>
 
-<UsageGuide steps={[
-  {
-    title: "Import the component",
-    code: `import ToastTabs from "@/components/rareui/ToastTabs";`
-  },
-  {
-    title: "Use in your application",
-    code: `export default function MyComponent() {
+<UsageGuide
+  steps={[
+    {
+      title: 'Import the component',
+      code: `import ToastTabs from "@/components/rareui/ToastTabs";`,
+    },
+    {
+      title: 'Use in your application',
+      code: `export default function MyComponent() {
   return (
     <ToastTabs />
   );
-}`
-  }
-]} />
+}`,
+    },
+  ]}
+/>
 
-<FeaturesList features={[
-  {
-    title: "Toast-style Content",
-    description: "Displays tab content in a compact, toast-like notification card."
-  },
-  {
-    title: "Animated Progress Ring",
-    description: "Visual indicator for autoplay progress around the active tab."
-  },
-  {
-    title: "Autoplay",
-    description: "Automatically cycles through tabs with pause-on-hover."
-  },
-  {
-    title: "Keyboard Navigation",
-    description: "Full arrow key support for accessible tab switching."
-  },
-  {
-    title: "Responsive",
-    description: "Adapts to different screen sizes and themes."
-  }
-]} />
+<FeaturesList
+  features={[
+    {
+      title: 'Toast-style Content',
+      description: 'Displays tab content in a compact, toast-like notification card.',
+    },
+    {
+      title: 'Animated Progress Ring',
+      description: 'Visual indicator for autoplay progress around the active tab.',
+    },
+    {
+      title: 'Autoplay',
+      description: 'Automatically cycles through tabs with pause-on-hover.',
+    },
+    {
+      title: 'Keyboard Navigation',
+      description: 'Full arrow key support for accessible tab switching.',
+    },
+    {
+      title: 'Responsive',
+      description: 'Adapts to different screen sizes and themes.',
+    },
+  ]}
+/>
 
-<PropsTable props={[
-  {
-    name: "tabs",
-    type: "TabData[]",
-    default: "defaultTabs",
-    description: "Array of tab data objects (id, image, title, description)."
-  },
-  {
-    name: "autoplay",
-    type: "boolean",
-    default: "true",
-    description: "Whether to automatically cycle through tabs."
-  },
-  {
-    name: "autoplayDelay",
-    type: "number",
-    default: "3000",
-    description: "Duration (ms) for each tab slide."
-  },
-  {
-    name: "ringColor",
-    type: "string",
-    default: '"#f97316"',
-    description: "Color of the progress ring."
-  },
-  {
-    name: "className",
-    type: "string",
-    description: "Additional styles for the container."
-  }
-]} />
+<PropsTable
+  props={[
+    {
+      name: 'tabs',
+      type: 'TabData[]',
+      default: 'defaultTabs',
+      description: 'Array of tab data objects (id, image, title, description).',
+    },
+    {
+      name: 'autoplay',
+      type: 'boolean',
+      default: 'true',
+      description: 'Whether to automatically cycle through tabs.',
+    },
+    {
+      name: 'autoplayDelay',
+      type: 'number',
+      default: '3000',
+      description: 'Duration (ms) for each tab slide.',
+    },
+    {
+      name: 'ringColor',
+      type: 'string',
+      default: '"#f97316"',
+      description: 'Color of the progress ring.',
+    },
+    {
+      name: 'className',
+      type: 'string',
+      description: 'Additional styles for the container.',
+    },
+  ]}
+/>

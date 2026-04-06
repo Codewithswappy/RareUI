@@ -3,11 +3,11 @@ title: Liquid Button
 description: A button with a liquid gooey effect on hover.
 ---
 
-import LiquidButton from "@/components/rareui/LiquidButton";
-import { Preview } from "@/components/mdx/preview";
-import { PropsTable } from "@/components/mdx/PropsTable";
-import { UsageGuide } from "@/components/mdx/UsageGuide";
-import { FeaturesList } from "@/components/mdx/FeaturesList";
+import LiquidButton from '@/components/rareui/LiquidButton';
+import { Preview } from '@/components/mdx/preview';
+import { PropsTable } from '@/components/mdx/PropsTable';
+import { UsageGuide } from '@/components/mdx/UsageGuide';
+import { FeaturesList } from '@/components/mdx/FeaturesList';
 
 <Preview
   code={`'use client'
@@ -18,7 +18,7 @@ import { twMerge } from 'tailwind-merge'
 import { useRef } from 'react'
 
 function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+return twMerge(clsx(inputs))
 }
 
 export default function LiquidButton({ 
@@ -38,43 +38,43 @@ export default function LiquidButton({
   const mouseX = useMotionValue(0)
   const springX = useSpring(mouseX, { stiffness: 300, damping: 30 })
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!ref.current) return
-    const rect = ref.current.getBoundingClientRect()
-    const x = e.clientX - rect.left - rect.width / 2
-    mouseX.set(x)
-  }
+const handleMouseMove = (e: React.MouseEvent) => {
+if (!ref.current) return
+const rect = ref.current.getBoundingClientRect()
+const x = e.clientX - rect.left - rect.width / 2
+mouseX.set(x)
+}
 
-  const handleMouseLeave = () => {
-    mouseX.set(0)
-  }
+const handleMouseLeave = () => {
+mouseX.set(0)
+}
 
-  return (
-    <div 
-      ref={ref}
-      className={cn("relative inline-block p-4", className)}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
-      {/* SVG Filter for the Gooey Effect */}
-      <svg className="absolute w-0 h-0">
-        <defs>
-          <filter id="goo">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-            <feColorMatrix 
+return (
+
+<div
+ref={ref}
+className={cn("relative inline-block p-4", className)}
+onMouseMove={handleMouseMove}
+onMouseLeave={handleMouseLeave} >
+{/* SVG Filter for the Gooey Effect */}
+<svg className="absolute w-0 h-0">
+<defs>
+<filter id="goo">
+<feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+<feColorMatrix 
               in="blur" 
               mode="matrix" 
               values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" 
               result="goo" 
             />
-            <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-          </filter>
-        </defs>
-      </svg>
+<feComposite in="SourceGraphic" in2="goo" operator="atop" />
+</filter>
+</defs>
+</svg>
 
       {/* Container with the filter applied */}
-      <motion.div 
-        className="relative z-10 inline-block" 
+      <motion.div
+        className="relative z-10 inline-block"
         style={{ filter: 'url(#goo)' }}
         whileHover="hover"
         initial="initial"
@@ -107,31 +107,32 @@ export default function LiquidButton({
         <Drop left="75%" size="w-3 h-3 md:w-4 md:h-4" delay={0.9} duration={2.3} mouseX={springX} backgroundColor={backgroundColor} isDripping={isDripping} />
         <Drop left="80%" size="w-4 h-4 md:w-5 md:h-5" delay={0.2} duration={2.2} mouseX={springX} backgroundColor={backgroundColor} isDripping={isDripping} />
         <Drop left="90%" size="w-3 h-3 md:w-4 md:h-4" delay={0.5} duration={2.8} mouseX={springX} backgroundColor={backgroundColor} isDripping={isDripping} />
-        
+
       </motion.div>
     </div>
-  )
+
+)
 }
 
-function Drop({ 
-    left, 
-    size, 
-    delay, 
-    duration,
-    mouseX,
-    backgroundColor,
-    isDripping
-}: { 
-    left: string, 
-    size: string, 
-    delay: number, 
-    duration: number,
-    mouseX: MotionValue,
-    backgroundColor: string,
-    isDripping?: boolean
+function Drop({
+left,
+size,
+delay,
+duration,
+mouseX,
+backgroundColor,
+isDripping
+}: {
+left: string,
+size: string,
+delay: number,
+duration: number,
+mouseX: MotionValue,
+backgroundColor: string,
+isDripping?: boolean
 }) {
-    const factor = duration * 10
-    const x = useTransform(mouseX, [-200, 200], [-factor, factor])
+const factor = duration \* 10
+const x = useTransform(mouseX, [-200, 200], [-factor, factor])
 
     return (
         <motion.div
@@ -140,113 +141,123 @@ function Drop({
           animate={isDripping ? "hover" : undefined}
           variants={{
             initial: { y: 0, scale: 1, opacity: 1 },
-            hover: { 
-              y: [0, 20, 140], 
-              scale: [1, 1.1, 0], 
+            hover: {
+              y: [0, 20, 140],
+              scale: [1, 1.1, 0],
               opacity: 1,
-              transition: { 
-                duration: duration, 
-                repeat: Infinity, 
-                ease: ["easeIn", "easeIn"], 
+              transition: {
+                duration: duration,
+                repeat: Infinity,
+                ease: ["easeIn", "easeIn"],
                 times: [0, 0.3, 1],
-                delay: delay 
-              } 
+                delay: delay
+              }
             }
           }}
         />
     )
+
 }`}
-  cliCommand="npx rareui add liquid-button"
+cliCommand="npx rareui add liquid-button"
+
 >
+
   <LiquidButton />
 </Preview>
 
-<UsageGuide steps={[
-  {
-    title: "Import the component",
-    code: `import LiquidButton from '@/components/rareui/LiquidButton';`
-  },
-  {
-    title: "Use in your application",
-    code: `export default function App() {
+<UsageGuide
+  steps={[
+    {
+      title: 'Import the component',
+      code: `import LiquidButton from '@/components/rareui/LiquidButton';`,
+    },
+    {
+      title: 'Use in your application',
+      code: `export default function App() {
   return (
     <LiquidButton text="Hover me" />
   );
-}`
-  }
-]} />
+}`,
+    },
+  ]}
+/>
 
-<FeaturesList features={[
-  {
-    title: "Liquid Physics",
-    description: "Realistic dripping effect using SVG filters and Framer Motion."
-  },
-  {
-    title: "Interactive Hover",
-    description: "Drops react to mouse position and movement speed."
-  },
-  {
-    title: "Customizable Colors",
-    description: "Easily change background and text colors via props."
-  },
-  {
-    title: "Dripping Mode",
-    description: "Optional continuous dripping mode for attention-grabbing effects."
-  },
-  {
-    title: "Responsive",
-    description: "Scales gracefully across different device sizes."
-  }
-]} />
+<FeaturesList
+  features={[
+    {
+      title: 'Liquid Physics',
+      description: 'Realistic dripping effect using SVG filters and Framer Motion.',
+    },
+    {
+      title: 'Interactive Hover',
+      description: 'Drops react to mouse position and movement speed.',
+    },
+    {
+      title: 'Customizable Colors',
+      description: 'Easily change background and text colors via props.',
+    },
+    {
+      title: 'Dripping Mode',
+      description: 'Optional continuous dripping mode for attention-grabbing effects.',
+    },
+    {
+      title: 'Responsive',
+      description: 'Scales gracefully across different device sizes.',
+    },
+  ]}
+/>
 
-
-
-<UsageGuide title="Examples" steps={[
-  {
-    title: "Custom Colors",
-    code: `<LiquidButton 
+<UsageGuide
+  title="Examples"
+  steps={[
+    {
+      title: 'Custom Colors',
+      code: `<LiquidButton 
   text="Click me"
   backgroundColor="bg-blue-500"
   textColor="text-white"
-/>`
-  },
-  {
-    title: "Continuous Dripping",
-    code: `<LiquidButton 
+/>`,
+    },
+    {
+      title: 'Continuous Dripping',
+      code: `<LiquidButton 
   text="Always Dripping"
   isDripping={true}
-/>`
-  }
-]} />
+/>`,
+    },
+  ]}
+/>
 
-<PropsTable props={[
-  {
-    name: "text",
-    type: "string",
-    default: "Hover me",
-    description: "The text to display inside the button."
-  },
-  {
-    name: "className",
-    type: "string",
-    description: "Additional CSS classes for the container."
-  },
-  {
-    name: "backgroundColor",
-    type: "string",
-    default: "bg-black dark:bg-white",
-    description: "Tailwind class for the background color."
-  },
-  {
-    name: "textColor",
-    type: "string",
-    default: "text-white dark:text-black",
-    description: "Tailwind class for the text color."
-  },
-  {
-    name: "isDripping",
-    type: "boolean",
-    default: "false",
-    description: "If true, liquid drops will continuously animate without needing hover."
-  }
-]} />
+<PropsTable
+  props={[
+    {
+      name: 'text',
+      type: 'string',
+      default: 'Hover me',
+      description: 'The text to display inside the button.',
+    },
+    {
+      name: 'className',
+      type: 'string',
+      description: 'Additional CSS classes for the container.',
+    },
+    {
+      name: 'backgroundColor',
+      type: 'string',
+      default: 'bg-black dark:bg-white',
+      description: 'Tailwind class for the background color.',
+    },
+    {
+      name: 'textColor',
+      type: 'string',
+      default: 'text-white dark:text-black',
+      description: 'Tailwind class for the text color.',
+    },
+    {
+      name: 'isDripping',
+      type: 'boolean',
+      default: 'false',
+      description: 'If true, liquid drops will continuously animate without needing hover.',
+    },
+  ]}
+/>

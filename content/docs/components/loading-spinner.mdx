@@ -3,28 +3,28 @@ title: Loading Spinner
 description: A customizable loading spinner with light and dark mode support and smooth animations.
 ---
 
-import { Preview } from "@/components/mdx/preview";
-import LoadingSpinner from "@/components/rareui/LoadingSpinner";
-import { PropsTable } from "@/components/mdx/PropsTable";
-import { UsageGuide } from "@/components/mdx/UsageGuide";
-import { FeaturesList } from "@/components/mdx/FeaturesList";
+import { Preview } from '@/components/mdx/preview';
+import LoadingSpinner from '@/components/rareui/LoadingSpinner';
+import { PropsTable } from '@/components/mdx/PropsTable';
+import { UsageGuide } from '@/components/mdx/UsageGuide';
+import { FeaturesList } from '@/components/mdx/FeaturesList';
 
 <Preview
   cliCommand="npx rareui add LoadingSpinner"
   code={`"use client";
 
-import React from "react";
-import { motion, Transition } from "framer-motion";
-import { cn } from "@/lib/utils";
+import React from 'react';
+import { motion, Transition } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 interface LoadingSpinnerProps {
-    className?: string; // Allow custom classes
+className?: string; // Allow custom classes
 }
 
 const spinTransition: Transition = {
-    repeat: Infinity,
-    ease: "linear",
-    duration: 1, // continuous spin
+repeat: Infinity,
+ease: "linear",
+duration: 1, // continuous spin
 };
 
 export default function LoadingSpinner({ className }: LoadingSpinnerProps) {
@@ -107,8 +107,10 @@ export default function LoadingSpinner({ className }: LoadingSpinnerProps) {
             </div>
         </div>
     );
+
 }
 `}>
+
   <div className="flex h-full w-full min-h-[200px] items-center justify-center p-8">
     <LoadingSpinner />
   </div>
@@ -116,52 +118,57 @@ export default function LoadingSpinner({ className }: LoadingSpinnerProps) {
 
 ## Usage
 
-<UsageGuide steps={[
-  {
-    title: "Import the component",
-    code: `import LoadingSpinner from "@/components/rareui/LoadingSpinner";`
-  },
-  {
-    title: "Use in your application",
-    code: `export default function MyComponent() {
+<UsageGuide
+  steps={[
+    {
+      title: 'Import the component',
+      code: `import LoadingSpinner from "@/components/rareui/LoadingSpinner";`,
+    },
+    {
+      title: 'Use in your application',
+      code: `export default function MyComponent() {
   return (
     <div className="flex items-center justify-center h-screen">
       <LoadingSpinner />
     </div>
   );
-}`
-  }
-]} />
+}`,
+    },
+  ]}
+/>
 
-<FeaturesList features={[
-  {
-    title: "Smooth Animation",
-    description: "Fluid continuous rotation using Framer Motion."
-  },
-  {
-    title: "SVG-based",
-    description: "Crisp, scalable vector graphics for the spinner."
-  },
-  {
-    title: "Lightweight",
-    description: "Minimal dependencies and optimized performance."
-  },
-  {
-    title: "Customizable",
-    description: "Easily adjust size and colors via className."
-  },
-  {
-    title: "Dark Mode Support",
-    description: "Automatically adapts color for light and dark themes."
-  }
-]} />
+<FeaturesList
+  features={[
+    {
+      title: 'Smooth Animation',
+      description: 'Fluid continuous rotation using Framer Motion.',
+    },
+    {
+      title: 'SVG-based',
+      description: 'Crisp, scalable vector graphics for the spinner.',
+    },
+    {
+      title: 'Lightweight',
+      description: 'Minimal dependencies and optimized performance.',
+    },
+    {
+      title: 'Customizable',
+      description: 'Easily adjust size and colors via className.',
+    },
+    {
+      title: 'Dark Mode Support',
+      description: 'Automatically adapts color for light and dark themes.',
+    },
+  ]}
+/>
 
-<PropsTable props={[
-  {
-    name: "className",
-    type: "string",
-    default: "undefined",
-    description: "Additional class names for styling the container"
-  }
-]} />
-
+<PropsTable
+  props={[
+    {
+      name: 'className',
+      type: 'string',
+      default: 'undefined',
+      description: 'Additional class names for styling the container',
+    },
+  ]}
+/>

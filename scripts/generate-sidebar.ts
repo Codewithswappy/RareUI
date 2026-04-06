@@ -1,63 +1,61 @@
-import fs from "fs";
-import path from "path";
-import chalk from "chalk";
-import matter from "gray-matter";
+import fs from 'fs';
+import path from 'path';
+import chalk from 'chalk';
+import matter from 'gray-matter';
 
-const ROOT = path.resolve(process.cwd(), "content/docs/components");
-const OUTPUT = path.resolve(process.cwd(), "lib/sidebar-data.ts");
-const PUBLIC_OUTPUT = path.resolve(process.cwd(), "public/sidebar.json");
+const ROOT = path.resolve(process.cwd(), 'content/docs/components');
+const OUTPUT = path.resolve(process.cwd(), 'lib/sidebar-data.ts');
+const PUBLIC_OUTPUT = path.resolve(process.cwd(), 'public/sidebar.json');
 
 // Custom ordered static sections
 const STATIC_SECTIONS = [
   {
-    title: "Getting Started",
-    items: [
-      { title: "Introduction", href: "/docs/introduction" },
-    ],
+    title: 'Getting Started',
+    items: [{ title: 'Introduction', href: '/docs/introduction' }],
   },
   {
-    title: "Installation",
+    title: 'Installation',
     items: [
-      { title: "Install Next.js", href: "/docs/installation/install-nextjs" },
-      { title: "Install Tailwind CSS", href: "/docs/installation/install-tailwind" },
-      { title: "Add utilities", href: "/docs/installation/add-utilities" },
-      { title: "CLI", href: "/docs/installation/cli" },
+      { title: 'Install Next.js', href: '/docs/installation/install-nextjs' },
+      { title: 'Install Tailwind CSS', href: '/docs/installation/install-tailwind' },
+      { title: 'Add utilities', href: '/docs/installation/add-utilities' },
+      { title: 'CLI', href: '/docs/installation/cli' },
     ],
   },
 ];
 
 const CATEGORY_LABELS: Record<string, string> = {
-  "background-circles": "Backgrounds & Effects",
-  "background-paths": "Backgrounds & Effects",
-  "beams-background": "Backgrounds & Effects",
-  "particles-background": "Backgrounds & Effects",
-  card: "Card Components",
-  button: "Buttons",
-  btn: "Buttons",
-  tabs: "Tabs",
-  input: "Inputs & Forms",
-  "ai-input": "Inputs & Forms",
-  text: "Text Components",
-  alert: "Overlays & Popovers",
-  modal: "Overlays & Popovers",
-  faq: "Sections & Blocks",
-  list: "Layout & Grid",
-  pricing: "Sections & Blocks",
-  profile: "Sections & Blocks",
-  toolbar: "Navigation",
-  "tweet-card": "Sections & Blocks",
-  "vercel-v0-chat": "3D",
-  "matrix-text": "Text Components",
-  "particle-button": "Buttons",
-  "hand-written-title": "Text Components",
-  "hero-geometric": "Sections & Blocks",
-  "bento-grid": "Layout & Grid",
-  "checkout-interaction": "Inputs & Forms",
-  "currency-transfer": "Inputs & Forms",
-  "avatar-picker": "Inputs & Forms",
-  "action-search-bar": "Navigation",
-  "loading-spinner": "UI Elements",
-  "liquid-metal": "Backgrounds & Effects",
+  'background-circles': 'Backgrounds & Effects',
+  'background-paths': 'Backgrounds & Effects',
+  'beams-background': 'Backgrounds & Effects',
+  'particles-background': 'Backgrounds & Effects',
+  card: 'Card Components',
+  button: 'Buttons',
+  btn: 'Buttons',
+  tabs: 'Tabs',
+  input: 'Inputs & Forms',
+  'ai-input': 'Inputs & Forms',
+  text: 'Text Components',
+  alert: 'Overlays & Popovers',
+  modal: 'Overlays & Popovers',
+  faq: 'Sections & Blocks',
+  list: 'Layout & Grid',
+  pricing: 'Sections & Blocks',
+  profile: 'Sections & Blocks',
+  toolbar: 'Navigation',
+  'tweet-card': 'Sections & Blocks',
+  'vercel-v0-chat': '3D',
+  'matrix-text': 'Text Components',
+  'particle-button': 'Buttons',
+  'hand-written-title': 'Text Components',
+  'hero-geometric': 'Sections & Blocks',
+  'bento-grid': 'Layout & Grid',
+  'checkout-interaction': 'Inputs & Forms',
+  'currency-transfer': 'Inputs & Forms',
+  'avatar-picker': 'Inputs & Forms',
+  'action-search-bar': 'Navigation',
+  'loading-spinner': 'UI Elements',
+  'liquid-metal': 'Backgrounds & Effects',
 };
 
 async function buildSidebar() {
@@ -66,12 +64,11 @@ async function buildSidebar() {
     return;
   }
 
-
   const files = getAllMdxFiles(ROOT);
   const grouped: Record<string, { title: string; items: any[] }> = {};
 
   for (const file of files) {
-    const name = path.basename(file, ".mdx");
+    const name = path.basename(file, '.mdx');
     const category = getCategoryFromPath(file, name);
 
     if (!grouped[category]) grouped[category] = { title: category, items: [] };
@@ -91,11 +88,11 @@ async function buildSidebar() {
   }
 
   // Create a single "Components" section with all component categories as subsections
-  const componentItems = Object.values(grouped).flatMap(group => group.items);
+  const componentItems = Object.values(grouped).flatMap((group) => group.items);
 
   const componentsSection = {
-    title: "Components",
-    items: componentItems
+    title: 'Components',
+    items: componentItems,
   };
 
   // Build Text Animation section
@@ -132,7 +129,6 @@ async function buildSidebar() {
     sidebar.push(sectionsSection);
   }
 
-
   try {
     // Ensure lib directory exists
     const libDir = path.dirname(OUTPUT);
@@ -152,7 +148,6 @@ async function buildSidebar() {
     }
     fs.writeFileSync(PUBLIC_OUTPUT, JSON.stringify(sidebar, null, 2));
     console.log(chalk.gray(`📄 Copy created for Command Palette → ${PUBLIC_OUTPUT}`));
-
   } catch (error) {
     console.error(chalk.red(`❌ Failed to write sidebar files:`), error);
   }
@@ -170,7 +165,7 @@ function getAllMdxFiles(dir: string): string[] {
 
       if (stat.isDirectory()) {
         traverse(fullPath);
-      } else if (item.endsWith(".mdx")) {
+      } else if (item.endsWith('.mdx')) {
         files.push(fullPath);
       }
     }
@@ -191,20 +186,18 @@ function getCategoryFromPath(filePath: string, fileName: string): string {
   }
 
   // Check direct file mapping
-  return CATEGORY_LABELS[fileName] || "Miscellaneous";
+  return CATEGORY_LABELS[fileName] || 'Miscellaneous';
 }
 
 function formatTitle(folderName: string): string {
   return folderName
     .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 }
 
 function formatComponentTitle(fileName: string): string {
-  return fileName
-    .replace(/-/g, ' ')
-    .replace(/\b\w/g, l => l.toUpperCase());
+  return fileName.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
 }
 
 function getBadgeFromFrontmatter(filePath: string): string | undefined {
@@ -218,7 +211,7 @@ function getBadgeFromFrontmatter(filePath: string): string | undefined {
 }
 
 function buildTextAnimationSection() {
-  const TEXT_ANIMATION_ROOT = path.resolve(process.cwd(), "content/docs/text-animation");
+  const TEXT_ANIMATION_ROOT = path.resolve(process.cwd(), 'content/docs/text-animation');
 
   if (!fs.existsSync(TEXT_ANIMATION_ROOT)) {
     return null;
@@ -228,7 +221,7 @@ function buildTextAnimationSection() {
   const items: any[] = [];
 
   for (const file of files) {
-    const name = path.basename(file, ".mdx");
+    const name = path.basename(file, '.mdx');
     const prettyTitle = formatComponentTitle(name);
     const relativePath = path.relative(TEXT_ANIMATION_ROOT, file);
     const urlPath = relativePath.replace(/\.mdx$/, '').replace(/\\/g, '/');
@@ -247,13 +240,13 @@ function buildTextAnimationSection() {
   }
 
   return {
-    title: "Text Animation",
-    items
+    title: 'Text Animation',
+    items,
   };
 }
 
 function build3DElementsSection() {
-  const THREE_D_ROOT = path.resolve(process.cwd(), "content/docs/3d-elements");
+  const THREE_D_ROOT = path.resolve(process.cwd(), 'content/docs/3d-elements');
 
   if (!fs.existsSync(THREE_D_ROOT)) {
     return null;
@@ -263,7 +256,7 @@ function build3DElementsSection() {
   const items: any[] = [];
 
   for (const file of files) {
-    const name = path.basename(file, ".mdx");
+    const name = path.basename(file, '.mdx');
     const prettyTitle = formatComponentTitle(name);
     const relativePath = path.relative(THREE_D_ROOT, file);
     const urlPath = relativePath.replace(/\.mdx$/, '').replace(/\\/g, '/');
@@ -282,13 +275,13 @@ function build3DElementsSection() {
   }
 
   return {
-    title: "3D Elements",
-    items
+    title: '3D Elements',
+    items,
   };
 }
 
 function buildInteractiveBackgroundSection() {
-  const INTERACTIVE_BG_ROOT = path.resolve(process.cwd(), "content/docs/interactive-background");
+  const INTERACTIVE_BG_ROOT = path.resolve(process.cwd(), 'content/docs/interactive-background');
 
   if (!fs.existsSync(INTERACTIVE_BG_ROOT)) {
     return null;
@@ -298,7 +291,7 @@ function buildInteractiveBackgroundSection() {
   const items: any[] = [];
 
   for (const file of files) {
-    const name = path.basename(file, ".mdx");
+    const name = path.basename(file, '.mdx');
     const prettyTitle = formatComponentTitle(name);
     const relativePath = path.relative(INTERACTIVE_BG_ROOT, file);
     const urlPath = relativePath.replace(/\.mdx$/, '').replace(/\\/g, '/');
@@ -317,13 +310,13 @@ function buildInteractiveBackgroundSection() {
   }
 
   return {
-    title: "Interactive Background",
-    items
+    title: 'Interactive Background',
+    items,
   };
 }
 
 function buildSectionsSection() {
-  const SECTIONS_ROOT = path.resolve(process.cwd(), "content/docs/sections");
+  const SECTIONS_ROOT = path.resolve(process.cwd(), 'content/docs/sections');
 
   if (!fs.existsSync(SECTIONS_ROOT)) {
     return null;
@@ -333,7 +326,7 @@ function buildSectionsSection() {
   const items: any[] = [];
 
   for (const file of files) {
-    const name = path.basename(file, ".mdx");
+    const name = path.basename(file, '.mdx');
     const prettyTitle = formatComponentTitle(name);
     const relativePath = path.relative(SECTIONS_ROOT, file);
     const urlPath = relativePath.replace(/\.mdx$/, '').replace(/\\/g, '/');
@@ -352,11 +345,10 @@ function buildSectionsSection() {
   }
 
   return {
-    title: "Sections",
-    items
+    title: 'Sections',
+    items,
   };
 }
-
 
 // function buildBlocksSection() {
 //   const BLOCKS_ROOT = path.resolve(process.cwd(), "content/docs/blocks");

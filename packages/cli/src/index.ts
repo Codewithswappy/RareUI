@@ -1,17 +1,19 @@
 #!/usr/bin/env node
-import { Command } from 'commander'
-import { init } from './commands/init.js'
-import { add } from './commands/add.js'
-import { diff } from './commands/diff.js'
-import chalk from 'chalk'
+import { Command } from 'commander';
+import { init } from './commands/init.js';
+import { add } from './commands/add.js';
+import { diff } from './commands/diff.js';
+import chalk from 'chalk';
 
-const program = new Command()
+const program = new Command();
 
 program
   .name('rareui')
   .description(chalk.bold('CLI for adding RareUI components to your project'))
   .version('0.1.6')
-  .addHelpText('after', `
+  .addHelpText(
+    'after',
+    `
 ${chalk.bold('Examples:')}
   ${chalk.dim('Initialize RareUI in your project')}
   ${chalk.cyan('$ npx rareui init')}
@@ -30,12 +32,15 @@ ${chalk.bold('Examples:')}
 
 ${chalk.bold('Documentation:')}
   ${chalk.dim('Visit')} ${chalk.cyan('https://rareui.in/docs')} ${chalk.dim('for more information')}
-`)
+`
+  );
 
 program
   .command('init')
   .description('Initialize RareUI configuration in your project')
-  .addHelpText('after', `
+  .addHelpText(
+    'after',
+    `
 ${chalk.bold('What this does:')}
   • Creates a ${chalk.cyan('components.json')} file
   • Configures the RareUI registry
@@ -43,8 +48,9 @@ ${chalk.bold('What this does:')}
 
 ${chalk.bold('Example:')}
   ${chalk.cyan('$ npx rareui init')}
-`)
-  .action(init)
+`
+  )
+  .action(init);
 
 program
   .command('add')
@@ -54,7 +60,9 @@ program
   .option('-o, --overwrite', 'overwrite existing files without asking')
   .option('-c, --cwd <cwd>', 'the working directory (default: current directory)')
   .option('-p, --path <path>', 'custom path to install components')
-  .addHelpText('after', `
+  .addHelpText(
+    'after',
+    `
 ${chalk.bold('Component Naming:')}
   You can use either format:
   • ${chalk.cyan('liquid-button')} ${chalk.dim('(kebab-case)')}
@@ -81,8 +89,9 @@ ${chalk.bold('What this does:')}
   • Installs to ${chalk.cyan('components/rareui/')} directory
   • Automatically installs required dependencies
   • Checks for file conflicts before overwriting
-`)
-  .action(add)
+`
+  )
+  .action(add);
 
 program
   .command('diff')
@@ -90,7 +99,9 @@ program
   .argument('[component]', 'specific component to check (optional)')
   .option('-y, --yes', 'update without confirmation')
   .option('-c, --cwd <cwd>', 'the working directory (default: current directory)')
-  .addHelpText('after', `
+  .addHelpText(
+    'after',
+    `
 ${chalk.bold('Examples:')}
   ${chalk.dim('Check all installed components for updates')}
   ${chalk.cyan('$ npx rareui diff')}
@@ -107,7 +118,8 @@ ${chalk.bold('What this does:')}
   • Shows detailed changes (additions, deletions, modifications)
   • Allows you to update components to latest versions
   • Updates dependencies if needed
-`)
-  .action(diff)
+`
+  )
+  .action(diff);
 
-program.parse()
+program.parse();

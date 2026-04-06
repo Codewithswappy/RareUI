@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
@@ -81,13 +81,13 @@
   * {
     @apply border-border;
   }
-  
+
   html {
     @apply scroll-smooth;
     overflow-x: hidden;
     overscroll-behavior-x: none;
   }
-  
+
   body {
     @apply bg-background text-foreground;
     font-synthesis-weight: none;
@@ -96,13 +96,20 @@
     overscroll-behavior-x: none;
     -webkit-overflow-scrolling: touch;
   }
-  
+
   /* Prevent text overflow on mobile */
-  p, li, h1, h2, h3, h4, h5, h6 {
+  p,
+  li,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     word-wrap: break-word;
     overflow-wrap: break-word;
   }
-  
+
   /* Make code blocks transparent and prevent overflow */
   pre {
     background: transparent !important;
@@ -111,52 +118,60 @@
     max-width: 100% !important;
     overflow-x: auto !important;
   }
-  
+
   pre code {
     background: transparent !important;
     text-shadow: none !important;
     border: none !important;
   }
-  
+
   pre code span {
     background: transparent !important;
   }
-  
+
   /* Prevent prose from affecting component previews - only reset spacing, not typography */
   .prose .not-prose {
     max-width: none !important;
   }
-  
+
   .prose .not-prose > * {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
-  
+
   /* Premium Profile Card - 3D Effects & Animations */
-  .perspective-1000 { 
-    perspective: 1000px; 
+  .perspective-1000 {
+    perspective: 1000px;
   }
-  
-  .preserve-3d { 
-    transform-style: preserve-3d; 
+
+  .preserve-3d {
+    transform-style: preserve-3d;
   }
-  
-  .backface-hidden { 
-    backface-visibility: hidden; 
+
+  .backface-hidden {
+    backface-visibility: hidden;
   }
-  
+
   @keyframes borderSpin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
-  
+
   .animate-border-spin {
     animation: borderSpin 4s linear infinite;
   }
-  
+
   @keyframes shrink {
-    from { transform: scaleX(1); }
-    to { transform: scaleX(0); }
+    from {
+      transform: scaleX(1);
+    }
+    to {
+      transform: scaleX(0);
+    }
   }
 
   /* Utility to hide scrollbar but keep functionality */
@@ -315,8 +330,8 @@ aside > div::-webkit-scrollbar-thumb:hover {
 }
 
 /* Code blocks inside Tabs - compact styling */
-[role="tabpanel"] pre,
-.prose [role="tabpanel"] pre {
+[role='tabpanel'] pre,
+.prose [role='tabpanel'] pre {
   margin: 0 !important;
   padding: 0.2rem 0rem !important;
   border: none !important;
@@ -324,7 +339,7 @@ aside > div::-webkit-scrollbar-thumb:hover {
   background-color: transparent !important;
 }
 
-[role="tabpanel"] pre code {
+[role='tabpanel'] pre code {
   font-size: 0.875rem;
 }
 
@@ -395,4 +410,3 @@ aside > div::-webkit-scrollbar-thumb:hover {
   gap: 0.5rem;
   transition: all 0.2s ease;
 }
-

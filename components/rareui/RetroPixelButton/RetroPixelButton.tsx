@@ -1,10 +1,9 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
-interface RetroPixelButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface RetroPixelButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
   className?: string;
   pixelColor?: string; // The color of the moving pixel block
@@ -13,9 +12,9 @@ interface RetroPixelButtonProps
 }
 
 export default function RetroPixelButton({
-  children = "TRY FOR FREE",
+  children = 'TRY FOR FREE',
   className,
-  pixelColor = "orange", // The color of the moving pixel block (can be a tailwind class like 'bg-orange-500')
+  pixelColor = 'orange', // The color of the moving pixel block (can be a tailwind class like 'bg-orange-500')
   baseColor, // Optional override, otherwise uses theme colors
   textColor, // Optional override
   ...props
@@ -24,7 +23,7 @@ export default function RetroPixelButton({
 
   return (
     <motion.button
-      className="relative flex items-center h-16 px-8 border border-orange-300 dark:border-orange-300 overflow-hidden font-mono font-medium rounded-lg cursor-pointer group bg-background dark:bg-neutral-900 transition-colors shadow-sm hover:shadow-md"
+      className="group bg-background relative flex h-16 cursor-pointer items-center overflow-hidden rounded-lg border border-orange-300 px-8 font-mono font-medium shadow-sm transition-colors hover:shadow-md dark:border-orange-300 dark:bg-neutral-900"
       whileTap={{ scale: 0.98 }}
       style={{
         backgroundColor: baseColor,
@@ -36,22 +35,22 @@ export default function RetroPixelButton({
     >
       {/* Sliding Icon Block */}
       <motion.div
-        className="absolute left-1 top-1 bottom-1 flex items-center justify-center rounded z-10 overflow-hidden"
+        className="absolute top-1 bottom-1 left-1 z-10 flex items-center justify-center overflow-hidden rounded"
         style={{ backgroundColor: pixelColor }}
         animate={{
-          width: isHovered ? "97%" : "55px",
+          width: isHovered ? '97%' : '55px',
         }}
         transition={{
-          type: "spring",
+          type: 'spring',
           stiffness: 400,
           damping: 30,
         }}
       >
         {/* Inner container for the icon */}
-        <motion.div className="absolute right-0 w-16 flex items-center justify-center h-full">
+        <motion.div className="absolute right-0 flex h-full w-16 items-center justify-center">
           <motion.svg
             animate={{ rotate: isHovered ? 180 : 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             width="40"
             height="40"
             viewBox="0 0 16 34"
@@ -71,18 +70,18 @@ export default function RetroPixelButton({
       {/* Text Label */}
       <motion.div
         className="relative z-20 w-full text-center whitespace-nowrap"
-        initial={{ paddingLeft: 64, paddingRight: 0, color: "currentColor" }}
+        initial={{ paddingLeft: 64, paddingRight: 0, color: 'currentColor' }}
         animate={{
           paddingLeft: isHovered ? 0 : 64,
           paddingRight: isHovered ? 64 : 0,
-          color: isHovered ? "#ffffff" : "currentColor",
+          color: isHovered ? '#ffffff' : 'currentColor',
           opacity: isHovered ? [1, 0.5, 1] : [1, 0.5, 1], // Subtle blink/morph effect during transit
           filter: isHovered
-            ? ["blur(0px)", "blur(2px)", "blur(0px)"]
-            : ["blur(0px)", "blur(2px)", "blur(0px)"],
+            ? ['blur(0px)', 'blur(2px)', 'blur(0px)']
+            : ['blur(0px)', 'blur(2px)', 'blur(0px)'],
         }}
         transition={{
-          type: "spring",
+          type: 'spring',
           stiffness: 200,
           damping: 25,
           mass: 1,
@@ -92,7 +91,7 @@ export default function RetroPixelButton({
           opacity: { duration: 0.3, times: [0, 0.5, 1] },
           filter: { duration: 0.3, times: [0, 0.5, 1] },
         }}
-        style={{ color: isHovered ? "#ffffff" : undefined }}
+        style={{ color: isHovered ? '#ffffff' : undefined }}
       >
         {children}
       </motion.div>

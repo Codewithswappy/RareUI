@@ -21,6 +21,7 @@ Install the necessary packages including the new CLI and PostCSS plugin.
 ```bash
 npm install tailwindcss @tailwindcss/postcss @tailwindcss/cli
 ```
+
 </Step>
 
 <Step>
@@ -31,11 +32,12 @@ Add a `postcss.config.mjs` (or `.js`) file to your project root.
 ```js title="postcss.config.mjs"
 const config = {
   plugins: {
-    "@tailwindcss/postcss": {},
+    '@tailwindcss/postcss': {},
   },
 };
 export default config;
 ```
+
 </Step>
 
 <Step>
@@ -44,14 +46,15 @@ export default config;
 Add the import to your main CSS file (e.g., `app/globals.css`).
 
 ```css title="app/globals.css"
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* Customize your theme here */
-  --font-sans: "Inter", sans-serif;
+  --font-sans: 'Inter', sans-serif;
   --color-primary: oklch(0.6 0.2 240);
 }
 ```
+
 </Step>
 
 <Step>
@@ -60,6 +63,7 @@ Add the import to your main CSS file (e.g., `app/globals.css`).
 ```bash
 npm run dev
 ```
+
 </Step>
 </Steps>
 
@@ -77,6 +81,7 @@ If you are using an older version, follow these steps.
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 ```
+
 </Step>
 
 <Step>
@@ -85,13 +90,13 @@ npx tailwindcss init -p
 Update your `tailwind.config.ts` to include all file paths that use Tailwind classes.
 
 ```ts title="tailwind.config.ts"
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {},
@@ -100,6 +105,7 @@ const config: Config = {
 };
 export default config;
 ```
+
 </Step>
 
 <Step>
@@ -112,6 +118,7 @@ Add the Tailwind directives to your `app/globals.css`.
 @tailwind components;
 @tailwind utilities;
 ```
+
 </Step>
 </Steps>
 

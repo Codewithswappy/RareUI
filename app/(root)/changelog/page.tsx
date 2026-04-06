@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React from "react";
-import { motion } from "framer-motion";
-import { IconCircuitChangeover, IconRocket } from "@tabler/icons-react";
-import changelogData from "@/data/changelog.json";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { IconCircuitChangeover, IconRocket } from '@tabler/icons-react';
+import changelogData from '@/data/changelog.json';
 
 // ─── Types ─────────────────────────────────────────────────────────
 interface ChangelogGroup {
@@ -22,27 +22,23 @@ interface ChangelogVersion {
 export default function ChangelogPage() {
   const versions: ChangelogVersion[] = changelogData.versions;
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="max-w-6xl mx-auto px-4 md:px-8">
+    <div className="mx-auto max-w-6xl px-4">
       {/* ─── Page Header ──────────────────────────────────────── */}
       <motion.div
-        initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
         transition={{ duration: 0.6 }}
         className="mb-10 md:mb-24"
       >
-        <div className="flex items-center gap-3 mb-5">
-          <div className="w-8 h-8 flex items-center justify-center text-orange-600 dark:text-orange-400">
-            <IconCircuitChangeover className="w-5 h-5" stroke={2} />
-          </div>
-          <span className="text-[11px] font-mono font-semibold tracking-[0.12em] uppercase text-neutral-400 dark:text-neutral-500">
-            Changelog
-          </span>
-        </div>
-        <h1 className="text-3xl md:text-6xl font-medium tracking-tighter text-neutral-900 dark:text-white mb-3">
+        <h1 className="mb-3 text-3xl font-medium tracking-tighter text-neutral-900 md:text-6xl dark:text-white">
           What we&apos;ve shipped
         </h1>
-        <p className="text-neutral-500 dark:text-neutral-400 text-base md:text-lg tracking-tight max-w-xl font-light">
+        <p className="max-w-xl text-base font-light tracking-tight text-neutral-500 md:text-lg dark:text-neutral-400">
           New components, improvements, and fixes — shipped every week.
         </p>
       </motion.div>
@@ -54,13 +50,13 @@ export default function ChangelogPage() {
             key={version.version}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
+            viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.5, delay: vi * 0.05 }}
-            className="relative grid grid-cols-[24px_1fr] md:grid-cols-[140px_24px_1fr] gap-x-4 md:gap-x-8 pb-12 md:pb-20 last:pb-8"
+            className="relative grid grid-cols-[24px_1fr] gap-x-4 pb-12 last:pb-8 md:grid-cols-[140px_24px_1fr] md:gap-x-8 md:pb-20"
           >
             {/* ─── Left: Date (Desktop Only) ─── */}
-            <div className="hidden md:block text-right pt-0.5">
-              <span className="text-[13px] font-mono font-medium text-neutral-400 dark:text-neutral-500 tracking-wide">
+            <div className="hidden pt-0.5 text-right md:block">
+              <span className="font-mono text-[13px] font-medium tracking-wide text-neutral-400 dark:text-neutral-500">
                 {version.date}
               </span>
             </div>
@@ -68,12 +64,15 @@ export default function ChangelogPage() {
             {/* ─── Center: Timeline Node + Line ─── */}
             <div className="flex flex-col items-center">
               {/* Node */}
-              <div className="relative z-10 w-[9px] h-[9px] mt-[6px] md:mt-[6px] rounded-full bg-neutral-300 dark:bg-neutral-600 ring-[3px] ring-neutral-50 dark:ring-neutral-950 shrink-0" />
+              <div className="relative z-10 mt-[6px] h-[9px] w-[9px] shrink-0 rounded-full bg-neutral-300 ring-[3px] ring-neutral-50 md:mt-[6px] dark:bg-neutral-600 dark:ring-neutral-950" />
               {/* Line */}
-              <div className="flex-1 w-px mt-2">
+              <div className="mt-2 w-px flex-1">
                 <svg width="1" height="100%" className="overflow-visible">
                   <line
-                    x1="0.5" y1="0" x2="0.5" y2="100%"
+                    x1="0.5"
+                    y1="0"
+                    x2="0.5"
+                    y2="100%"
                     stroke="currentColor"
                     strokeWidth="1"
                     strokeDasharray="3 5"
@@ -86,19 +85,19 @@ export default function ChangelogPage() {
             {/* ─── Right: Content ─── */}
             <div className="min-w-0">
               {/* Mobile Date */}
-              <div className="md:hidden mb-2">
-                <span className="text-[12px] font-mono font-medium text-neutral-400 dark:text-neutral-500 tracking-wide">
+              <div className="mb-2 md:hidden">
+                <span className="font-mono text-[12px] font-medium tracking-wide text-neutral-400 dark:text-neutral-500">
                   {version.date}
                 </span>
               </div>
 
               {/* Version + Latest Badge */}
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-[11px] md:text-[12px] font-mono font-semibold text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800/70 px-2 md:px-2.5 py-0.5 md:py-1 rounded border border-neutral-200/60 dark:border-neutral-700/50">
+              <div className="mb-3 flex items-center gap-2">
+                <span className="rounded border border-neutral-200/60 bg-neutral-100 px-2 py-0.5 font-mono text-[11px] font-semibold text-neutral-500 md:px-2.5 md:py-1 md:text-[12px] dark:border-neutral-700/50 dark:bg-neutral-800/70 dark:text-neutral-400">
                   {version.version}
                 </span>
                 {version.latest && (
-                  <span className="text-[9px] md:text-[10px] font-mono font-bold tracking-wide uppercase text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-950/40 px-1.5 md:px-2 py-0.5 rounded border border-orange-200/80 dark:border-orange-800/50">
+                  <span className="rounded border border-orange-200/80 bg-orange-50 px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-wide text-orange-600 uppercase md:px-2 md:text-[10px] dark:border-orange-800/50 dark:bg-orange-950/40 dark:text-orange-400">
                     Latest
                   </span>
                 )}
@@ -106,16 +105,16 @@ export default function ChangelogPage() {
 
               {/* Highlight Badges */}
               {version.highlights.length > 0 && (
-                <div className="flex flex-wrap items-center gap-1.5 md:gap-2 mb-5 md:mb-6">
+                <div className="mb-5 flex flex-wrap items-center gap-1.5 md:mb-6 md:gap-2">
                   {version.highlights.map((h, hi) => (
                     <span
                       key={hi}
-                      className="inline-flex items-center gap-1.5 text-[11px] md:text-[12px] font-mono text-neutral-500 dark:text-neutral-400 bg-neutral-50 dark:bg-neutral-900/50 px-2 md:px-2.5 py-0.5 md:py-1 rounded-md border border-neutral-200/60 dark:border-neutral-800/60"
+                      className="inline-flex items-center gap-1.5 rounded-md border border-neutral-200/60 bg-neutral-50 px-2 py-0.5 font-mono text-[11px] text-neutral-500 md:px-2.5 md:py-1 md:text-[12px] dark:border-neutral-800/60 dark:bg-neutral-900/50 dark:text-neutral-400"
                     >
                       <span className="font-bold text-neutral-700 dark:text-neutral-300">
-                        {h.split(" ")[0]}
-                      </span>{" "}
-                      {h.split(" ").slice(1).join(" ")}
+                        {h.split(' ')[0]}
+                      </span>{' '}
+                      {h.split(' ').slice(1).join(' ')}
                     </span>
                   ))}
                 </div>
@@ -123,9 +122,9 @@ export default function ChangelogPage() {
 
               {/* Grouped Entries */}
               {version.groups.map((group, gi) => (
-                <div key={gi} className="mb-6 md:mb-7 last:mb-0">
+                <div key={gi} className="mb-6 last:mb-0 md:mb-7">
                   {/* Group Title */}
-                  <h3 className="text-[16px] md:text-lg font-bold tracking-tight text-neutral-900 dark:text-white mb-2.5 md:mb-3">
+                  <h3 className="mb-2.5 text-[16px] font-bold tracking-tight text-neutral-900 md:mb-3 md:text-lg dark:text-white">
                     {group.title}
                   </h3>
 
@@ -134,8 +133,8 @@ export default function ChangelogPage() {
                     {group.entries.map((entry, ei) => (
                       <li key={ei} className="flex items-start gap-2.5 md:gap-3">
                         {/* Bullet dot */}
-                        <span className="mt-[8px] md:mt-[9px] w-[4px] md:w-[5px] h-[4px] md:h-[5px] rounded-full bg-neutral-300 dark:bg-neutral-700 shrink-0" />
-                        <span className="text-[13px] md:text-[15px] text-neutral-600 dark:text-neutral-400 leading-relaxed md:leading-relaxed">
+                        <span className="mt-[8px] h-[4px] w-[4px] shrink-0 rounded-full bg-neutral-300 md:mt-[9px] md:h-[5px] md:w-[5px] dark:bg-neutral-700" />
+                        <span className="text-[13px] leading-relaxed text-neutral-600 md:text-[15px] md:leading-relaxed dark:text-neutral-400">
                           {entry}
                         </span>
                       </li>
@@ -148,13 +147,13 @@ export default function ChangelogPage() {
         ))}
 
         {/* ─── End Marker ─── */}
-        <div className="relative grid grid-cols-[24px_1fr] md:grid-cols-[140px_24px_1fr] gap-x-4 md:gap-x-8">
+        <div className="relative grid grid-cols-[24px_1fr] gap-x-4 md:grid-cols-[140px_24px_1fr] md:gap-x-8">
           <div className="hidden md:block" />
           <div className="flex justify-center">
-            <div className="w-[9px] h-[9px] rounded-full bg-neutral-200 dark:bg-neutral-800 ring-[3px] ring-neutral-50 dark:ring-neutral-950" />
+            <div className="h-[9px] w-[9px] rounded-full bg-neutral-200 ring-[3px] ring-neutral-50 dark:bg-neutral-800 dark:ring-neutral-950" />
           </div>
           <div>
-            <span className="text-[11px] md:text-[12px] font-mono text-neutral-300 dark:text-neutral-700 tracking-wide">
+            <span className="font-mono text-[11px] tracking-wide text-neutral-300 md:text-[12px] dark:text-neutral-700">
               The beginning
             </span>
           </div>

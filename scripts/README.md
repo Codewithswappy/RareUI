@@ -5,17 +5,23 @@ This directory contains automated scripts for generating various data files used
 ## Scripts
 
 ### `generate-sidebar.ts`
+
 Generates the sidebar navigation structure from MDX frontmatter.
+
 - **Output**: `lib/sidebar-data.ts`
 - **Run**: `npm run build:sidebar`
 
 ### `generate-registry.ts`
+
 Creates component registry JSON files for CLI installation.
+
 - **Output**: `public/r/*.json`
 - **Run**: `npm run build:registry`
 
 ### `generate-latest-component.ts`
+
 **Automatically detects the newest component** based on file modification time.
+
 - **Output**: `lib/latest-component-data.json`
 - **Run**: `npm run build:latest`
 - **How it works**:
@@ -30,11 +36,13 @@ This script runs automatically during the build process, so the "NEW" badge on t
 ## Running All Scripts
 
 To run all build scripts at once:
+
 ```bash
 npm run build:all
 ```
 
 This command runs:
+
 1. `build:sidebar`
 2. `build:registry`
 3. `build:latest`

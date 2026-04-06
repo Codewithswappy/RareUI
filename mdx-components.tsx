@@ -4,10 +4,10 @@ import { Preview } from '@/components/mdx/preview';
 import { PreviewCode } from '@/components/mdx/preview-code';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
-    return {
-        ...defaultMdxComponents,
-        Preview,
-        PreviewCode,
-        ...components,
-    };
+  return {
+    ...defaultMdxComponents,
+    Preview,
+    PreviewCode,
+    ...components,
+  };
 }

@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   ChevronDown,
   Sparkles,
@@ -9,8 +9,8 @@ import {
   Leaf,
   MoveHorizontal,
   LineChart,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface FeatureItem {
   title: string;
@@ -23,22 +23,21 @@ interface FeaturesListProps {
 }
 
 const DEFAULT_ICONS = [
-  <MousePointer2 className="w-5 h-5" />,
-  <Sparkles className="w-5 h-5" />,
-  <Leaf className="w-5 h-5" />,
-  <MoveHorizontal className="w-5 h-5" />,
-  <LineChart className="w-5 h-5" />,
+  <MousePointer2 className="h-5 w-5" />,
+  <Sparkles className="h-5 w-5" />,
+  <Leaf className="h-5 w-5" />,
+  <MoveHorizontal className="h-5 w-5" />,
+  <LineChart className="h-5 w-5" />,
 ];
 
 export const FeaturesList = ({ features }: FeaturesListProps) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
   const items = features.map((f, i) => {
-    if (typeof f === "string") {
+    if (typeof f === 'string') {
       return {
         title: f,
-        description:
-          "Seamlessly integrated and optimized for high-performance React applications.",
+        description: 'Seamlessly integrated and optimized for high-performance React applications.',
         icon: DEFAULT_ICONS[i % DEFAULT_ICONS.length],
       };
     }
@@ -49,8 +48,8 @@ export const FeaturesList = ({ features }: FeaturesListProps) => {
   });
 
   return (
-    <div className="flex flex-col gap-8   max-w-full">
-      <h2 className="text-4xl font-semibold text-neutral-400 dark:text-neutral-800 font-mono tracking-tight">
+    <div className="flex max-w-full flex-col gap-8">
+      <h2 className="font-mono text-4xl font-semibold tracking-tight text-neutral-400 dark:text-neutral-800">
         Features
       </h2>
 
@@ -59,35 +58,33 @@ export const FeaturesList = ({ features }: FeaturesListProps) => {
           <div
             key={index}
             className={cn(
-              "group rounded-md transition-all duration-500 overflow-hidden",
+              'group overflow-hidden rounded-md transition-all duration-500',
               activeIndex === index
-                ? "bg-neutral-50 dark:bg-neutral-900/40 "
-                : "bg-white dark:bg-neutral-950"
+                ? 'bg-neutral-50 dark:bg-neutral-900/40'
+                : 'bg-white dark:bg-neutral-950'
             )}
           >
             <button
-              onClick={() =>
-                setActiveIndex(activeIndex === index ? null : index)
-              }
-              className="w-full flex items-center justify-between p-5 text-left transition-colors"
+              onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+              className="flex w-full items-center justify-between p-5 text-left transition-colors"
             >
               <div className="flex items-center gap-4">
                 <div
                   className={cn(
-                    "p-2 rounded-lg transition-colors duration-500",
+                    'rounded-lg p-2 transition-colors duration-500',
                     activeIndex === index
-                      ? "text-neutral-900 dark:text-neutral-100"
-                      : "text-neutral-400 dark:text-neutral-600 group-hover:text-neutral-600 dark:group-hover:text-neutral-400"
+                      ? 'text-neutral-900 dark:text-neutral-100'
+                      : 'text-neutral-400 group-hover:text-neutral-600 dark:text-neutral-600 dark:group-hover:text-neutral-400'
                   )}
                 >
                   {item.icon}
                 </div>
                 <span
                   className={cn(
-                    "text-[17px] font-semibold tracking-tight transition-colors duration-500",
+                    'text-[17px] font-semibold tracking-tight transition-colors duration-500',
                     activeIndex === index
-                      ? "text-neutral-900 dark:text-neutral-100"
-                      : "text-neutral-600 dark:text-neutral-400"
+                      ? 'text-neutral-900 dark:text-neutral-100'
+                      : 'text-neutral-600 dark:text-neutral-400'
                   )}
                 >
                   {item.title}
@@ -95,10 +92,10 @@ export const FeaturesList = ({ features }: FeaturesListProps) => {
               </div>
               <motion.div
                 animate={{ rotate: activeIndex === index ? 180 : 0 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 className="text-neutral-400"
               >
-                <ChevronDown className="w-5 h-5" />
+                <ChevronDown className="h-5 w-5" />
               </motion.div>
             </button>
 
@@ -107,11 +104,11 @@ export const FeaturesList = ({ features }: FeaturesListProps) => {
                 <motion.div
                   initial={{ height: 0, opacity: 0 }}
                   animate={{
-                    height: "auto",
+                    height: 'auto',
                     opacity: 1,
                     transition: {
                       height: {
-                        type: "spring",
+                        type: 'spring',
                         stiffness: 300,
                         damping: 30,
                         restDelta: 0.01,
@@ -124,7 +121,7 @@ export const FeaturesList = ({ features }: FeaturesListProps) => {
                     opacity: 0,
                     transition: {
                       height: {
-                        type: "spring",
+                        type: 'spring',
                         stiffness: 300,
                         damping: 30,
                       },
@@ -132,8 +129,8 @@ export const FeaturesList = ({ features }: FeaturesListProps) => {
                     },
                   }}
                 >
-                  <div className="px-5 pb-6 ml-14">
-                    <p className="text-[15px] leading-relaxed text-neutral-500 dark:text-neutral-400 max-w-[90%]">
+                  <div className="ml-14 px-5 pb-6">
+                    <p className="max-w-[90%] text-[15px] leading-relaxed text-neutral-500 dark:text-neutral-400">
                       {item.description}
                     </p>
                   </div>

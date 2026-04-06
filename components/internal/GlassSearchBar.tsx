@@ -1,0 +1,209 @@
+'use client';
+
+import React, { useState, useEffect, useRef } from 'react';
+import { Search, Command, CornerUpRight, MoreHorizontal } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useRouter } from 'next/navigation';
+
+const COMPONENTS = [
+  { name: 'Animated Tab', href: '/docs/components/animated-tab' },
+  { name: 'Floating Navigation', href: '/docs/components/floating-navigation' },
+  {
+    name: 'Glass Shimmer Button',
+    href: '/docs/components/glass-shimmer-button',
+  },
+  { name: 'Liquid Button', href: '/docs/components/liquid-button' },
+  { name: 'Liquid Metal', href: '/docs/components/liquid-metal' },
+  { name: 'Loading Spinner', href: '/docs/components/loading-spinner' },
+  {
+    name: 'Neumorphism 3D Button',
+    href: '/docs/components/neumorphism3DButton',
+  },
+  { name: 'Particle Card', href: '/docs/components/particle-card' },
+  { name: 'Premium Button', href: '/docs/components/premium-button' },
+  {
+    name: 'Premium Profile Card',
+    href: '/docs/components/premium-profile-card',
+  },
+  { name: 'Retro Pixel Button', href: '/docs/components/retro-pixel-button' },
+  { name: 'Soft Button', href: '/docs/components/soft-button' },
+  { name: 'Toast Tabs', href: '/docs/components/toast-tabs' },
+  {
+    name: 'Magnetic Scatter Text',
+    href: '/docs/text-animation/magnetic-scatterText',
+  },
+  { name: 'Sound Text', href: '/docs/text-animation/sound-text' },
+  { name: 'Vapor Smoke Text', href: '/docs/text-animation/vapor-smokeText' },
+  { name: 'Word Magnet', href: '/docs/text-animation/word-magnet' },
+  { name: 'Book 3D', href: '/docs/3d-elements/book-3d' },
+  { name: 'Liquid Wave', href: '/docs/interactive-background/liquid-wave' },
+];
+
+export default function GlassSearchBar() {
+  const [isFocused, setIsFocused] = useState(false);
+  const [query, setQuery] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
+  const filteredComponents = query
+    ? COMPONENTS.filter((c) => c.name.toLowerCase().includes(query.toLowerCase())).slice(0, 5)
+    : COMPONENTS.slice(0, 4);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === '/') {
+        e.preventDefault();
+        inputRef.current?.focus();
+      }
+
+      if (isFocused) {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          setSelectedIndex((prev) => (prev + 1) % filteredComponents.length);
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          setSelectedIndex(
+            (prev) => (prev - 1 + filteredComponents.length) % filteredComponents.length
+          );
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          if (filteredComponents[selectedIndex]) {
+            router.push(filteredComponents[selectedIndex].href);
+            setIsFocused(false);
+          }
+        } else if (e.key === 'Escape') {
+          setIsFocused(false);
+          inputRef.current?.blur();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isFocused, filteredComponents, selectedIndex, router]);
+
+  const handleItemClick = (href: string) => {
+    router.push(href);
+    setIsFocused(false);
+  };
+
+  return (
+    <div className="relative z-50 flex w-full flex-col items-start md:w-[360px]">
+      {/* Search Input - Glass Wrapper */}
+      <div
+        className={`relative w-full overflow-hidden rounded-md border border-neutral-200/80 bg-neutral-50 p-1 shadow-lg shadow-black/10 transition-all duration-300 dark:border-neutral-800/80 dark:bg-neutral-950 dark:shadow-black/30 ${isFocused ? 'ring-1 ring-black/10 dark:ring-white/10' : ''}`}
+      >
+        {/* Inner Solid Core */}
+        <div className="relative flex w-full items-center justify-between gap-3 rounded-sm bg-neutral-200 px-4 py-3 shadow ring-1 shadow-black/5 ring-black/5 transition-all dark:bg-neutral-900 dark:shadow-black/20 dark:ring-white/5">
+          <div className="flex w-full items-center gap-3">
+            <Search className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />
+            <input
+              ref={inputRef}
+              type="text"
+              value={query}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setSelectedIndex(0);
+              }}
+              placeholder={
+                typeof window !== 'undefined' && window.innerWidth < 450
+                  ? 'Search components...'
+                  : 'Search components...'
+              }
+              className="w-full border-none bg-transparent text-sm font-medium text-neutral-800 transition-colors outline-none placeholder:text-neutral-500 dark:text-neutral-100 dark:placeholder:text-neutral-500"
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => {
+                // Delay blur to allow clicks on items
+                setTimeout(() => {
+                  if (isMounted.current) setIsFocused(false);
+                }, 200);
+              }}
+            />
+          </div>
+
+          {/* Keyboard Shortcut Hint - Hidden on mobile for space */}
+          <div className="flex items-center gap-1.5 text-neutral-400 dark:text-neutral-500">
+            <Command className="h-4 w-4" />
+            <span className="text-xs font-medium">+</span>
+            <span className="text-xs font-medium">/</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Dropdown Suggestions - Separate Island */}
+      <AnimatePresence>
+        {isFocused && (filteredComponents.length > 0 || query) && (
+          <motion.div
+            initial={{ opacity: 0, y: 5, scale: 0.98 }}
+            animate={{ opacity: 1, y: 8, scale: 1 }}
+            exit={{ opacity: 0, y: 5, scale: 0.98 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="absolute top-full left-0 z-100 mt-1.5 w-full rounded-md border border-neutral-200/80 bg-neutral-50 p-1 shadow-md ring-1 shadow-black/5 ring-black/5 dark:border-neutral-800/80 dark:bg-neutral-950 dark:shadow-black/30 dark:ring-white/5"
+          >
+            {/* Inner List Core with Max Height */}
+            <div className="overflow-hidden rounded-sm bg-neutral-200 dark:bg-neutral-900">
+              <div
+                className="custom-scrollbar flex max-h-[280px] flex-col gap-1 overflow-y-auto p-1"
+                style={{
+                  scrollbarWidth: 'none',
+                  msOverflowStyle: 'none',
+                }}
+              >
+                {filteredComponents.length > 0 ? (
+                  filteredComponents.map((item, i) => (
+                    <div
+                      key={item.href}
+                      onClick={() => handleItemClick(item.href)}
+                      onMouseEnter={() => setSelectedIndex(i)}
+                      className={`group flex cursor-pointer items-center justify-between rounded-sm px-4 py-3 transition-colors ${
+                        selectedIndex === i
+                          ? 'bg-white/80 shadow-sm dark:bg-neutral-50/90'
+                          : 'hover:bg-white/60 dark:hover:bg-neutral-700/40'
+                      }`}
+                    >
+                      <span
+                        className={`text-sm font-medium transition-colors ${
+                          selectedIndex === i
+                            ? 'text-black'
+                            : 'text-neutral-700 dark:text-neutral-300'
+                        }`}
+                      >
+                        {item.name}
+                      </span>
+
+                      {/* Actions */}
+                      <div className="flex items-center gap-2">
+                        <div
+                          className={`flex h-7 w-7 items-center justify-center rounded-lg transition-all ${
+                            selectedIndex === i
+                              ? 'bg-white text-black shadow-sm dark:bg-neutral-800 dark:text-white'
+                              : 'bg-black/5 text-neutral-400 dark:bg-white/5 dark:text-neutral-500'
+                          }`}
+                        >
+                          <CornerUpRight className="h-3.5 w-3.5" />
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="px-4 py-3 text-center text-sm font-medium text-neutral-500 dark:text-neutral-400">
+                    No components found for "{query}"
+                  </div>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}

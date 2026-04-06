@@ -3,11 +3,11 @@ title: Vapor Smoke Text
 description: A smoky text animation with blur and spring effects that creates an ethereal appearance.
 ---
 
-import { VaporSmokeText } from "@/components/rareui/Text Animation/VaporSmokeText";
-import { Preview } from "@/components/mdx/preview";
-import { PropsTable } from "@/components/mdx/PropsTable";
-import { UsageGuide } from "@/components/mdx/UsageGuide";
-import { FeaturesList } from "@/components/mdx/FeaturesList";
+import { VaporSmokeText } from '@/components/rareui/VaporSmokeText';
+import { Preview } from '@/components/mdx/preview';
+import { PropsTable } from '@/components/mdx/PropsTable';
+import { UsageGuide } from '@/components/mdx/UsageGuide';
+import { FeaturesList } from '@/components/mdx/FeaturesList';
 
 <Preview
   code={`"use client";
@@ -16,9 +16,9 @@ import { motion, Variants } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 interface VaporSmokeTextProps {
-  text: string;
-  className?: string;
-  trigger?: boolean;
+text: string;
+className?: string;
+trigger?: boolean;
 }
 
 export const VaporSmokeText: React.FC<VaporSmokeTextProps> = ({ 
@@ -28,160 +28,165 @@ export const VaporSmokeText: React.FC<VaporSmokeTextProps> = ({
 }) => {
   const letters = text.split("");
 
-  const container: Variants = {
-    hidden: { opacity: 0 },
-    visible: (i = 1) => ({
-      opacity: 1,
-      transition: { staggerChildren: 0.08, delayChildren: 0.2 * i },
-    }),
-  };
+const container: Variants = {
+hidden: { opacity: 0 },
+visible: (i = 1) => ({
+opacity: 1,
+transition: { staggerChildren: 0.08, delayChildren: 0.2 \* i },
+}),
+};
 
-  const child: Variants = {
-    visible: {
-      opacity: 1,
-      filter: "blur(0px)",
-      y: 0,
-      scale: 1,
-      rotate: 0,
-      transition: {
-        type: "spring",
-        damping: 12,
-        stiffness: 100,
-        duration: 1.5,
-      },
-    },
-    hidden: {
-      opacity: 0,
-      filter: "blur(20px)",
-      y: 20,
-      scale: 1.5,
-      rotate: 5,
-      transition: {
-        type: "spring",
-        damping: 12,
-        stiffness: 100,
-      },
-    },
-  };
+const child: Variants = {
+visible: {
+opacity: 1,
+filter: "blur(0px)",
+y: 0,
+scale: 1,
+rotate: 0,
+transition: {
+type: "spring",
+damping: 12,
+stiffness: 100,
+duration: 1.5,
+},
+},
+hidden: {
+opacity: 0,
+filter: "blur(20px)",
+y: 20,
+scale: 1.5,
+rotate: 5,
+transition: {
+type: "spring",
+damping: 12,
+stiffness: 100,
+},
+},
+};
 
-  return (
-    <motion.div
-      className={cn("flex flex-wrap overflow-hidden", className)}
-      variants={container}
-      initial="hidden"
-      animate={trigger ? "visible" : "hidden"}
-    >
-      {letters.map((letter, index) => (
-        <motion.span
-          key={index}
-          variants={child}
-          className="inline-block origin-bottom font-serif italic"
-        >
-          {letter === " " ? "\\u00A0" : letter}
-        </motion.span>
-      ))}
-    </motion.div>
-  );
+return (
+
+<motion.div
+className={cn("flex flex-wrap overflow-hidden", className)}
+variants={container}
+initial="hidden"
+animate={trigger ? "visible" : "hidden"} >
+{letters.map((letter, index) => (
+<motion.span
+key={index}
+variants={child}
+className="inline-block origin-bottom font-serif italic" >
+{letter === " " ? "\\u00A0" : letter}
+</motion.span>
+))}
+</motion.div>
+);
 };`}
-  cliCommand="npx rareui add VaporSmokeText"
+cliCommand="npx rareui add VaporSmokeText"
+
 >
+
     <div className="w-full h-[300px] flex items-center justify-center">
       <VaporSmokeText text="Welcome To RareUI" className="text-6xl text-foreground" />
     </div>
+
 </Preview>
 
-<UsageGuide steps={[
-  {
-    title: "Import the component",
-    code: `import { VaporSmokeText } from "@/components/rareui/Text Animation/VaporSmokeText";`
-  },
-  {
-    title: "Use in your application",
-    code: `export default function MyComponent() {
+<UsageGuide
+  steps={[
+    {
+      title: 'Import the component',
+      code: `import { VaporSmokeText } from "@/components/rareui/VaporSmokeText";`,
+    },
+    {
+      title: 'Use in your application',
+      code: `export default function MyComponent() {
   return (
     <VaporSmokeText text="Your Text" className="text-6xl text-foreground" />
   );
-}`
-  }
-]} />
-
-
+}`,
+    },
+  ]}
+/>
 
 <UsageGuide title="Examples" steps={[
   {
     title: "With Trigger Control",
     code: `"use client";
 import { useState } from 'react';
-import { VaporSmokeText } from "@/components/rareui/Text Animation/VaporSmokeText";
+import { VaporSmokeText } from "@/components/rareui/VaporSmokeText";
 
 export default function ControlledAnimation() {
   const [show, setShow] = useState(false);
 
-  return (
-    <div>
-      <button onClick={() => setShow(!show)}>
-        Toggle Animation
-      </button>
-      
-      <VaporSmokeText 
-        text="Click to animate" 
+return (
+
+<div>
+<button onClick={() => setShow(!show)}>
+Toggle Animation
+</button>
+
+      <VaporSmokeText
+        text="Click to animate"
         trigger={show}
         className="text-6xl text-foreground"
       />
     </div>
-  );
-}`
-  },
+
+);
+}`  },
   {
     title: "Custom Styling",
-    code: `<VaporSmokeText 
+    code:`<VaporSmokeText 
   text="Ethereal" 
   className="text-9xl font-serif text-cyan-400"
 />`
-  }
+}
 ]} />
 
-<FeaturesList features={[
-  {
-    title: "Ethereal Blur",
-    description: "Combines opacity and blur filters for a smoky appearance."
-  },
-  {
-    title: "Spring Physics",
-    description: "Smooth, organic movement using Framer Motion springs."
-  },
-  {
-    title: "Staggered Entry",
-    description: "Characters animate sequentially for a cascading effect."
-  },
-  {
-    title: "Rotation Detail",
-    description: "Subtle rotation on entry adds natural disorder."
-  },
-  {
-    title: "Trigger Support",
-    description: "Fully controllable animation state via props."
-  }
-]} />
+<FeaturesList
+  features={[
+    {
+      title: 'Ethereal Blur',
+      description: 'Combines opacity and blur filters for a smoky appearance.',
+    },
+    {
+      title: 'Spring Physics',
+      description: 'Smooth, organic movement using Framer Motion springs.',
+    },
+    {
+      title: 'Staggered Entry',
+      description: 'Characters animate sequentially for a cascading effect.',
+    },
+    {
+      title: 'Rotation Detail',
+      description: 'Subtle rotation on entry adds natural disorder.',
+    },
+    {
+      title: 'Trigger Support',
+      description: 'Fully controllable animation state via props.',
+    },
+  ]}
+/>
 
-
-
-<PropsTable props={[
-  {
-    name: "text",
-    type: "string",
-    description: "The text content to animate"
-  },
-  {
-    name: "className",
-    type: "string",
-    default: "undefined",
-    description: "Additional styles for the container"
-  },
-  {
-    name: "trigger",
-    type: "boolean",
-    default: "true",
-    description: "Controls animation state (true = visible, false = hidden)"
-  }
-]} />
+<PropsTable
+  props={[
+    {
+      name: 'text',
+      type: 'string',
+      description: 'The text content to animate',
+    },
+    {
+      name: 'className',
+      type: 'string',
+      default: 'undefined',
+      description: 'Additional styles for the container',
+    },
+    {
+      name: 'trigger',
+      type: 'boolean',
+      default: 'true',
+      description: 'Controls animation state (true = visible, false = hidden)',
+    },
+  ]}
+/>

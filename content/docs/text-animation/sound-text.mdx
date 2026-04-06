@@ -3,34 +3,34 @@ title: Sound Text
 description: An interactive text animation that plays generated audio frequencies on hover.
 ---
 
-import SoundText from "@/components/rareui/Text Animation/SoundText";
-import { Preview } from "@/components/mdx/preview";
-import { PropsTable } from "@/components/mdx/PropsTable";
-import { UsageGuide } from "@/components/mdx/UsageGuide";
-import { FeaturesList } from "@/components/mdx/FeaturesList";
+import SoundText from '@/components/rareui/SoundText';
+import { Preview } from '@/components/mdx/preview';
+import { PropsTable } from '@/components/mdx/PropsTable';
+import { UsageGuide } from '@/components/mdx/UsageGuide';
+import { FeaturesList } from '@/components/mdx/FeaturesList';
 
 <Preview
   code={`"use client";
 
-import React, { useRef, useCallback, useEffect } from "react";
-import { motion, useAnimationControls } from "framer-motion";
-import { cn } from "@/lib/utils";
+import React, { useRef, useCallback, useEffect } from 'react';
+import { motion, useAnimationControls } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 interface SoundTextProps {
-    text: string;
-    className?: string;
-    basePitch?: number; // Base frequency in Hz
+text: string;
+className?: string;
+basePitch?: number; // Base frequency in Hz
 }
 
 // Simple Pentatonic Scale frequencies (approximate) relative to a base
 // We will just multiply the base freq by these ratios
 const SCALE_RATIOS = [
-    1,          // Root
-    1.125,      // Major 2nd
-    1.25,       // Major 3rd
-    1.5,        // Perfect 5th
-    1.667,      // Major 6th
-    2           // Octave
+1, // Root
+1.125, // Major 2nd
+1.25, // Major 3rd
+1.5, // Perfect 5th
+1.667, // Major 6th
+2 // Octave
 ];
 
 export default function SoundText({
@@ -121,11 +121,12 @@ export default function SoundText({
             })}
         </motion.div>
     );
+
 }
 
 // Individual Letter Component for cleaner animation isolation
 const Letter = ({ char, index, onHover }: { char: string; index: number; onHover: () => void }) => {
-    const controls = useAnimationControls();
+const controls = useAnimationControls();
 
     // Random subtle rotation for "organic" feel
     const randomRotate = Math.random() * 10 - 5;
@@ -164,71 +165,80 @@ const Letter = ({ char, index, onHover }: { char: string; index: number; onHover
             {char}
         </motion.span>
     );
+
 };`}
-  cliCommand="npx rareui add sound-text"
+cliCommand="npx rareui add sound-text"
+
 >
+
   <div className="w-full h-[200px] flex items-center justify-center">
     <SoundText text="Music to my ears" className="text-4xl md:text-6xl font-bold dark:text-white text-black" />
   </div>
 </Preview>
 
-<UsageGuide steps={[
-  {
-    title: "Import the component",
-    code: `import SoundText from "@/components/rareui/SoundText";`
-  },
-  {
-    title: "Use in your application",
-    code: `export default function MyComponent() {
+<UsageGuide
+  steps={[
+    {
+      title: 'Import the component',
+      code: `import SoundText from "@/components/rareui/SoundText";`,
+    },
+    {
+      title: 'Use in your application',
+      code: `export default function MyComponent() {
   return (
     <SoundText 
       text="Hover to play!" 
       className="text-5xl font-bold"
     />
   );
-}`
-  }
-]} />
+}`,
+    },
+  ]}
+/>
 
-<FeaturesList features={[
-  {
-    title: "Audio Feedback",
-    description: "Generates real-time audio frequencies on hover."
-  },
-  {
-    title: "Pentatonic Scale",
-    description: "Uses musical scales for harmonious sound generation."
-  },
-  {
-    title: "Interactive Animation",
-    description: "Letters jump and glow in sync with the sound."
-  },
-  {
-    title: "Web Audio API",
-    description: "Uses native Web Audio API for low-latency sound synthesis."
-  },
-  {
-    title: "Customizable Pitch",
-    description: "Adjust the base frequency to change the musical key."
-  }
-]} />
+<FeaturesList
+  features={[
+    {
+      title: 'Audio Feedback',
+      description: 'Generates real-time audio frequencies on hover.',
+    },
+    {
+      title: 'Pentatonic Scale',
+      description: 'Uses musical scales for harmonious sound generation.',
+    },
+    {
+      title: 'Interactive Animation',
+      description: 'Letters jump and glow in sync with the sound.',
+    },
+    {
+      title: 'Web Audio API',
+      description: 'Uses native Web Audio API for low-latency sound synthesis.',
+    },
+    {
+      title: 'Customizable Pitch',
+      description: 'Adjust the base frequency to change the musical key.',
+    },
+  ]}
+/>
 
-<PropsTable props={[
-  {
-    name: "text",
-    type: "string",
-    default: '"Hover over me"',
-    description: "The text content to display."
-  },
-  {
-    name: "basePitch",
-    type: "number",
-    default: "300",
-    description: "The base frequency in Hz for generating sound scale."
-  },
-  {
-    name: "className",
-    type: "string",
-    description: "Additional styles for the container."
-  }
-]} />
+<PropsTable
+  props={[
+    {
+      name: 'text',
+      type: 'string',
+      default: '"Hover over me"',
+      description: 'The text content to display.',
+    },
+    {
+      name: 'basePitch',
+      type: 'number',
+      default: '300',
+      description: 'The base frequency in Hz for generating sound scale.',
+    },
+    {
+      name: 'className',
+      type: 'string',
+      description: 'Additional styles for the container.',
+    },
+  ]}
+/>

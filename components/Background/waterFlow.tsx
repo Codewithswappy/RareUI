@@ -19,16 +19,16 @@ const useSmoothMouse = () => {
     const handleMouseMove = (event: MouseEvent) => {
       targetMouse.current = { x: event.clientX, y: event.clientY };
     };
-    
+
     const handleMouseDown = () => {
       isPressed.current = true;
       pressedTime.current = 0;
     };
-    
+
     const handleMouseUp = () => {
       isPressed.current = false;
     };
-    
+
     const handleMouseLeave = () => {
       targetMouse.current = { x: -9999, y: -9999 };
       isPressed.current = false;
@@ -38,18 +38,18 @@ const useSmoothMouse = () => {
       // Smooth linear interpolation for fluid cursor movement
       currentMouse.current.x += (targetMouse.current.x - currentMouse.current.x) * 0.15;
       currentMouse.current.y += (targetMouse.current.y - currentMouse.current.y) * 0.15;
-      
+
       // Calculate velocity
       const vx = currentMouse.current.x - prevMouse.current.x;
       const vy = currentMouse.current.y - prevMouse.current.y;
-      
+
       // Accumulate press time
       if (isPressed.current) {
         pressedTime.current = Math.min(pressedTime.current + 0.05, 3.0);
       } else {
         pressedTime.current = Math.max(pressedTime.current - 0.1, 0);
       }
-      
+
       prevMouse.current = { ...currentMouse.current };
       setMouse({ ...currentMouse.current, vx, vy, pressed: pressedTime.current });
       animationFrame.current = requestAnimationFrame(updateMouse);
@@ -86,7 +86,7 @@ const vertexShaderSource = `
   }
 `;
 
-  const fragmentShaderSource = `
+const fragmentShaderSource = `
   precision highp float;
   
   uniform float u_time;
@@ -280,26 +280,34 @@ const BackgroundShader = () => {
     if (!gl) return;
 
     // --- Shader Boilerplate ---
-    const createShader = (gl: WebGLRenderingContext, type: number, source: string): WebGLShader | null => {
+    const createShader = (
+      gl: WebGLRenderingContext,
+      type: number,
+      source: string
+    ): WebGLShader | null => {
       const shader = gl.createShader(type);
       if (!shader) return null;
       gl.shaderSource(shader, source);
       gl.compileShader(shader);
       if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        console.error("Shader Error:", gl.getShaderInfoLog(shader));
+        console.error('Shader Error:', gl.getShaderInfoLog(shader));
         gl.deleteShader(shader);
         return null;
       }
       return shader;
     };
 
-    const createProgram = (gl: WebGLRenderingContext, vs: WebGLShader, fs: WebGLShader): WebGLProgram | null => {
+    const createProgram = (
+      gl: WebGLRenderingContext,
+      vs: WebGLShader,
+      fs: WebGLShader
+    ): WebGLProgram | null => {
       const program = gl.createProgram();
       gl.attachShader(program, vs);
       gl.attachShader(program, fs);
       gl.linkProgram(program);
       if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-        console.error("Program Error:", gl.getProgramInfoLog(program));
+        console.error('Program Error:', gl.getProgramInfoLog(program));
         return null;
       }
       return program;
@@ -307,9 +315,9 @@ const BackgroundShader = () => {
 
     const vertShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
     const fragShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
-    
+
     if (!vertShader || !fragShader) return;
-    
+
     const program = createProgram(gl, vertShader, fragShader);
 
     if (!program) return;
@@ -317,10 +325,11 @@ const BackgroundShader = () => {
     // Create a full-screen triangle strip/quad
     const positionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
-      -1, -1, 1, -1, -1, 1,
-      -1, 1, 1, -1, 1, 1,
-    ]), gl.STATIC_DRAW);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]),
+      gl.STATIC_DRAW
+    );
 
     // Get Uniform Locations
     const positionLoc = gl.getAttribLocation(program, 'position');
@@ -339,7 +348,7 @@ const BackgroundShader = () => {
       // Handle Window Resize
       const displayWidth = window.innerWidth;
       const displayHeight = window.innerHeight;
-      
+
       if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
         canvas.width = displayWidth;
         canvas.height = displayHeight;
@@ -358,7 +367,7 @@ const BackgroundShader = () => {
       gl.uniform2f(mouseLoc, mouseRef.current.x, canvas.height - mouseRef.current.y);
       gl.uniform2f(velocityLoc, mouseRef.current.vx, -mouseRef.current.vy);
       gl.uniform1f(pressedLoc, mouseRef.current.pressed);
-      
+
       gl.drawArrays(gl.TRIANGLES, 0, 6);
       animationRef.current = requestAnimationFrame(render);
     };
@@ -377,17 +386,12 @@ const BackgroundShader = () => {
     };
   }, []);
 
-  return (
-    <canvas 
-      ref={canvasRef} 
-      className="absolute top-0 left-0 w-full h-full block bg-black"
-    />
-  );
+  return <canvas ref={canvasRef} className="absolute top-0 left-0 block h-full w-full bg-black" />;
 };
 
 export default function App() {
   return (
-    <div className="relative w-full h-full bg-black overflow-hidden">
+    <div className="relative h-full w-full overflow-hidden bg-black">
       <BackgroundShader />
     </div>
   );

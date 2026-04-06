@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import dynamic from 'next/dynamic';
 import React from 'react';
@@ -9,22 +9,22 @@ interface LazyLoadProps {
    * Example: () => import('@/components/MyComponent')
    */
   componentImport: () => Promise<{ default: React.ComponentType<any> }>;
-  
+
   /**
    * Props to pass to the lazy-loaded component
    */
   componentProps?: Record<string, any>;
-  
+
   /**
    * Custom loading component (optional)
    */
   loadingComponent?: React.ReactNode;
-  
+
   /**
    * Loading message to display (if no custom loading component)
    */
   loadingMessage?: string;
-  
+
   /**
    * Disable server-side rendering (useful for WebGL/Canvas components)
    */
@@ -33,7 +33,7 @@ interface LazyLoadProps {
 
 /**
  * Reusable lazy loading wrapper for heavy components
- * 
+ *
  * @example
  * ```tsx
  * <LazyLoad
@@ -48,7 +48,7 @@ export function LazyLoad({
   componentImport,
   componentProps = {},
   loadingComponent,
-  loadingMessage = "Loading...",
+  loadingMessage = 'Loading...',
   disableSSR = false,
 }: LazyLoadProps) {
   const DynamicComponent = React.useMemo(
@@ -56,9 +56,9 @@ export function LazyLoad({
       dynamic(componentImport, {
         loading: () =>
           loadingComponent || (
-            <div className="w-full h-full flex items-center justify-center bg-neutral-100 dark:bg-neutral-900">
+            <div className="flex h-full w-full items-center justify-center bg-neutral-100 dark:bg-neutral-900">
               <div className="animate-pulse text-center">
-                <div className="text-sm text-muted-foreground">{loadingMessage}</div>
+                <div className="text-muted-foreground text-sm">{loadingMessage}</div>
               </div>
             </div>
           ),

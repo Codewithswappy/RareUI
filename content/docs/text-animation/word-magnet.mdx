@@ -1,68 +1,67 @@
 ---
 title: Word Magnet
 description: A text component where words are repelled by the cursor and snap back with physics-based animations.
-
 ---
 
-import { Preview } from "@/components/mdx/preview";
-import WordMagnet from "@/components/rareui/Text Animation/WordMagnet";
-import { PropsTable } from "@/components/mdx/PropsTable";
-import { UsageGuide } from "@/components/mdx/UsageGuide";
-import { FeaturesList } from "@/components/mdx/FeaturesList";
+import { Preview } from '@/components/mdx/preview';
+import WordMagnet from '@/components/rareui/WordMagnet';
+import { PropsTable } from '@/components/mdx/PropsTable';
+import { UsageGuide } from '@/components/mdx/UsageGuide';
+import { FeaturesList } from '@/components/mdx/FeaturesList';
 
 <Preview
   cliCommand="npx rareui add WordMagnet"
   code={`"use client";
 
-import React, { useEffect, useRef, useState, startTransition } from "react";
-import { motion, useSpring, useMotionValue, MotionValue } from "framer-motion";
-import { cn } from "@/lib/utils";
+import React, { useEffect, useRef, useState, startTransition } from 'react';
+import { motion, useSpring, useMotionValue, MotionValue } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 interface WordMagnetProps {
-    /**
-     * The text content to display
-     */
-    text?: string;
-    /**
-     * Interaction radius in pixels
-     */
-    radius?: number;
-    /**
-     * Repulsion force (0.1 to 1.0)
-     */
-    force?: number;
-    /**
-     * Spring damping (5 to 50)
-     */
-    damping?: number;
-    /**
-     * Delay before returning to original position in ms
-     */
-    returnDelay?: number;
-    /**
-     * Text color
-     */
-    textColor?: string;
-    /**
-     * Font styling object
-     */
-    font?: React.CSSProperties;
-    /**
-     * Disable interaction on mobile devices
-     */
-    disableOnMobile?: boolean;
-    /**
-     * CSS overflow property
-     */
-    overflow?: "visible" | "hidden" | "scroll" | "auto";
-    /**
-     * Additional class names
-     */
-    className?: string;
-    /**
-     * Inline styles
-     */
-    style?: React.CSSProperties;
+/**
+_ The text content to display
+_/
+text?: string;
+/**
+_ Interaction radius in pixels
+_/
+radius?: number;
+/**
+_ Repulsion force (0.1 to 1.0)
+_/
+force?: number;
+/**
+_ Spring damping (5 to 50)
+_/
+damping?: number;
+/**
+_ Delay before returning to original position in ms
+_/
+returnDelay?: number;
+/**
+_ Text color
+_/
+textColor?: string;
+/**
+_ Font styling object
+_/
+font?: React.CSSProperties;
+/**
+_ Disable interaction on mobile devices
+_/
+disableOnMobile?: boolean;
+/**
+_ CSS overflow property
+_/
+overflow?: "visible" | "hidden" | "scroll" | "auto";
+/**
+_ Additional class names
+_/
+className?: string;
+/\*\*
+_ Inline styles
+_/
+style?: React.CSSProperties;
 }
 
 export default function WordMagnet({
@@ -163,30 +162,31 @@ export default function WordMagnet({
             ))}
         </div>
     );
+
 }
 
 interface WordProps {
-    word: string;
-    mouseX: MotionValue<number>;
-    mouseY: MotionValue<number>;
-    radius: number;
-    force: number;
-    damping: number;
-    returnDelay: number;
-    disabled: boolean;
+word: string;
+mouseX: MotionValue<number>;
+mouseY: MotionValue<number>;
+radius: number;
+force: number;
+damping: number;
+returnDelay: number;
+disabled: boolean;
 }
 
 function Word({
-    word,
-    mouseX,
-    mouseY,
-    radius,
-    force,
-    damping,
-    returnDelay,
-    disabled,
+word,
+mouseX,
+mouseY,
+radius,
+force,
+damping,
+returnDelay,
+disabled,
 }: WordProps) {
-    const wordRef = useRef<HTMLSpanElement>(null);
+const wordRef = useRef<HTMLSpanElement>(null);
 
     // Spring animations for x and y displacement
     const x = useSpring(0, { damping, stiffness: 200 });
@@ -300,8 +300,10 @@ function Word({
             {word}
         </motion.span>
     );
+
 }
 `}>
+
   <div className="flex h-full w-full items-center justify-center p-8 bg-white dark:bg-black rounded-xl">
     <WordMagnet 
       text="Hover over these words and watch them dance across the screen with physics-based interaction"
@@ -311,109 +313,115 @@ function Word({
   </div>
 </Preview>
 
-<UsageGuide steps={[
-  {
-    title: "Import the component",
-    code: `import WordMagnet from "@/components/rareui/Text Animation/WordMagnet";`
-  },
-  {
-    title: "Use in your application",
-    code: `export default function MyComponent() {
+<UsageGuide
+  steps={[
+    {
+      title: 'Import the component',
+      code: `import WordMagnet from "@/components/rareui/WordMagnet";`,
+    },
+    {
+      title: 'Use in your application',
+      code: `export default function MyComponent() {
   return (
     <WordMagnet 
       text="Hover over these words and watch them dance across the screen with physics-based interaction"
     />
   );
-}`
-  }
-]} />
+}`,
+    },
+  ]}
+/>
 
-<FeaturesList features={[
-  {
-    title: "Physics Repulsion",
-    description: "Words are pushed away by the mouse cursor using spring physics."
-  },
-  {
-    title: "Smart Recovery",
-    description: "Words smoothly snap back to their original position after interaction."
-  },
-  {
-    title: "Interaction Radius",
-    description: "Configurable zone of influence for the magnetic effect."
-  },
-  {
-    title: "Performance Optimized",
-    description: "Uses throttling and efficient DOM calculations for smooth 60fps."
-  },
-  {
-    title: "Mobile Aware",
-    description: "Optional setting to disable effects on touch devices."
-  }
-]} />
+<FeaturesList
+  features={[
+    {
+      title: 'Physics Repulsion',
+      description: 'Words are pushed away by the mouse cursor using spring physics.',
+    },
+    {
+      title: 'Smart Recovery',
+      description: 'Words smoothly snap back to their original position after interaction.',
+    },
+    {
+      title: 'Interaction Radius',
+      description: 'Configurable zone of influence for the magnetic effect.',
+    },
+    {
+      title: 'Performance Optimized',
+      description: 'Uses throttling and efficient DOM calculations for smooth 60fps.',
+    },
+    {
+      title: 'Mobile Aware',
+      description: 'Optional setting to disable effects on touch devices.',
+    },
+  ]}
+/>
 
-<PropsTable props={[
-  {
-    name: "text",
-    type: "string",
-    default: '"Hover over..."',
-    description: "The text content to display"
-  },
-  {
-    name: "radius",
-    type: "number",
-    default: "130",
-    description: "Interaction radius in pixels"
-  },
-  {
-    name: "force",
-    type: "number",
-    default: "0.45",
-    description: "Repulsion force (0.1 to 1.0)"
-  },
-  {
-    name: "damping",
-    type: "number",
-    default: "28",
-    description: "Spring damping (5 to 50)"
-  },
-  {
-    name: "returnDelay",
-    type: "number",
-    default: "400",
-    description: "Delay before returning to original position in ms"
-  },
-  {
-    name: "textColor",
-    type: "string",
-    default: '"#000000"',
-    description: "Text color"
-  },
-  {
-    name: "font",
-    type: "object",
-    default: "{ fontSize: '32px', ... }",
-    description: "Font styling object"
-  },
-  {
-    name: "disableOnMobile",
-    type: "boolean",
-    default: "false",
-    description: "Disable interaction on mobile devices"
-  },
-  {
-    name: "overflow",
-    type: "string",
-    default: '"visible"',
-    description: "CSS overflow property"
-  },
-  {
-    name: "className",
-    type: "string",
-    description: "Additional class names"
-  },
-  {
-    name: "style",
-    type: "object",
-    description: "Inline styles"
-  }
-]} />
+<PropsTable
+  props={[
+    {
+      name: 'text',
+      type: 'string',
+      default: '"Hover over..."',
+      description: 'The text content to display',
+    },
+    {
+      name: 'radius',
+      type: 'number',
+      default: '130',
+      description: 'Interaction radius in pixels',
+    },
+    {
+      name: 'force',
+      type: 'number',
+      default: '0.45',
+      description: 'Repulsion force (0.1 to 1.0)',
+    },
+    {
+      name: 'damping',
+      type: 'number',
+      default: '28',
+      description: 'Spring damping (5 to 50)',
+    },
+    {
+      name: 'returnDelay',
+      type: 'number',
+      default: '400',
+      description: 'Delay before returning to original position in ms',
+    },
+    {
+      name: 'textColor',
+      type: 'string',
+      default: '"#000000"',
+      description: 'Text color',
+    },
+    {
+      name: 'font',
+      type: 'object',
+      default: "{ fontSize: '32px', ... }",
+      description: 'Font styling object',
+    },
+    {
+      name: 'disableOnMobile',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disable interaction on mobile devices',
+    },
+    {
+      name: 'overflow',
+      type: 'string',
+      default: '"visible"',
+      description: 'CSS overflow property',
+    },
+    {
+      name: 'className',
+      type: 'string',
+      description: 'Additional class names',
+    },
+    {
+      name: 'style',
+      type: 'object',
+      description: 'Inline styles',
+    },
+  ]}
+/>

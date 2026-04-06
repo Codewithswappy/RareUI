@@ -1,0 +1,34 @@
+{
+  "name": "Text Animation",
+  "type": "registry:ui",
+  "dependencies": [
+    "typescript"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "MagneticScatterText.tsx",
+      "content": "export * from '../MagneticScatterText/index';\n",
+      "type": "registry:ui",
+      "target": "components/rareui/Text Animation/MagneticScatterText.tsx"
+    },
+    {
+      "path": "SoundText.tsx",
+      "content": "export { default } from '../SoundText/index';\nexport * from '../SoundText/index';\n",
+      "type": "registry:ui",
+      "target": "components/rareui/Text Animation/SoundText.tsx"
+    },
+    {
+      "path": "VaporSmokeText.tsx",
+      "content": "export * from '../VaporSmokeText/index';\n",
+      "type": "registry:ui",
+      "target": "components/rareui/Text Animation/VaporSmokeText.tsx"
+    },
+    {
+      "path": "WordMagnet.tsx",
+      "content": "export { default } from '../WordMagnet/index';\nexport * from '../WordMagnet/index';\n",
+      "type": "registry:ui",
+      "target": "components/rareui/Text Animation/WordMagnet.tsx"
+    }
+  ]
+}

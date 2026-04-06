@@ -1,9 +1,26 @@
 {
   "versions": [
     {
+      "version": "1.5.0",
+      "date": "Apr 07, 2026",
+      "latest": true,
+      "highlights": ["1 New Feature", "3 Improvements"],
+      "groups": [
+        {
+          "title": "Animated Tab & UI Polish",
+          "entries": [
+            "Added new 'Services' navigation link to the Animated Tab component.",
+            "Improved layout responsiveness by preventing text wrapping in tab items, ensuring a consistent single-row appearance.",
+            "Enhanced mobile responsiveness for the main navigation and documentation layouts.",
+            "Polished Component Browser previews for better consistency and accessibility."
+          ]
+        }
+      ]
+    },
+    {
       "version": "1.4.0",
       "date": "Apr 04, 2026",
-      "latest": true,
+      "latest": false,
       "highlights": ["5 New Features", "2 Improvements"],
       "groups": [
         {
@@ -57,9 +74,7 @@
         },
         {
           "title": "Improvements",
-          "entries": [
-            "Refined Liquid Button spring physics for more natural bounce on hover."
-          ]
+          "entries": ["Refined Liquid Button spring physics for more natural bounce on hover."]
         }
       ]
     },

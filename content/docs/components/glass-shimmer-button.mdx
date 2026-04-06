@@ -3,11 +3,11 @@ title: Glass Shimmer Button
 description: A premium glassmorphism button with continuous shimmer animation and hover effects.
 ---
 
-import { Preview } from "@/components/mdx/preview";
-import { GlassShimmerButton } from "@/components/rareui/glass-shimmer-button";
-import { PropsTable } from "@/components/mdx/PropsTable";
-import { UsageGuide } from "@/components/mdx/UsageGuide";
-import { FeaturesList } from "@/components/mdx/FeaturesList";
+import { Preview } from '@/components/mdx/preview';
+import { GlassShimmerButton } from '@/components/rareui/GlassShimmerButton';
+import { PropsTable } from '@/components/mdx/PropsTable';
+import { UsageGuide } from '@/components/mdx/UsageGuide';
+import { FeaturesList } from '@/components/mdx/FeaturesList';
 
 <Preview
   code={`"use client"
@@ -16,8 +16,8 @@ import type React from "react"
 import { cn } from "@/lib/utils"
 
 interface GlassShimmerButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode
+extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+children: React.ReactNode
 }
 
 export function GlassShimmerButton({
@@ -63,7 +63,7 @@ export function GlassShimmerButton({
 
         {/* Static Glass Gloss Top */}
         <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/40 to-transparent opacity-50" />
-        
+
         {/* Static Glass Gloss Bottom */}
         <div className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-white/10 to-transparent opacity-30" />
 
@@ -71,72 +71,81 @@ export function GlassShimmerButton({
         <span className="relative z-10 tracking-wide drop-shadow-sm">
           {children}
         </span>
-        
+
         {/* Local Glow on Hover */}
         <div className="absolute inset-0 -z-10 bg-white/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       </button>
     </>
-  )
+
+)
 }`}
-  cliCommand="npx rareui add glass-shimmer-button"
+cliCommand="npx rareui add glass-shimmer-button"
+
 >
+
   <GlassShimmerButton>Hover Me</GlassShimmerButton>
 </Preview>
 
-<UsageGuide steps={[
-  {
-    title: "Import the component",
-    code: `import { GlassShimmerButton } from '@/components/rareui/glass-shimmer-button';`
-  },
-  {
-    title: "Use in your application",
-    code: `export default function App() {
+<UsageGuide
+  steps={[
+    {
+      title: 'Import the component',
+      code: `import { GlassShimmerButton } from '@/components/rareui/GlassShimmerButton';`,
+    },
+    {
+      title: 'Use in your application',
+      code: `export default function App() {
   return (
     <GlassShimmerButton onClick={() => alert('Clicked!')}>
       Click Me
     </GlassShimmerButton>
   );
-}`
-  }
-]} />
+}`,
+    },
+  ]}
+/>
 
-<FeaturesList features={[
-  {
-    title: "Continuous Shimmer Animation",
-    description: "Self-contained animated shimmer effect that runs continuously."
-  },
-  {
-    title: "Glassmorphism Design",
-    description: "Premium frosted glass aesthetic with backdrop blur."
-  },
-  {
-    title: "Hover Effects",
-    description: "Scale animation and enhanced glow on hover."
-  },
-  {
-    title: "Dark Mode Support",
-    description: "Optimized colors for both light and dark themes."
-  },
-  {
-    title: "Fully Self-Contained",
-    description: "No global CSS required - animations defined inline."
-  }
-]} />
+<FeaturesList
+  features={[
+    {
+      title: 'Continuous Shimmer Animation',
+      description: 'Self-contained animated shimmer effect that runs continuously.',
+    },
+    {
+      title: 'Glassmorphism Design',
+      description: 'Premium frosted glass aesthetic with backdrop blur.',
+    },
+    {
+      title: 'Hover Effects',
+      description: 'Scale animation and enhanced glow on hover.',
+    },
+    {
+      title: 'Dark Mode Support',
+      description: 'Optimized colors for both light and dark themes.',
+    },
+    {
+      title: 'Fully Self-Contained',
+      description: 'No global CSS required - animations defined inline.',
+    },
+  ]}
+/>
 
-<PropsTable props={[
-  {
-    name: "children",
-    type: "React.ReactNode",
-    description: "The content to display inside the button."
-  },
-  {
-    name: "className",
-    type: "string",
-    description: "Additional CSS classes to merge with default styles."
-  },
-  {
-    name: "...props",
-    type: "ButtonHTMLAttributes",
-    description: "Any additional HTML button attributes (onClick, disabled, etc.)."
-  }
-]} />
+<PropsTable
+  props={[
+    {
+      name: 'children',
+      type: 'React.ReactNode',
+      description: 'The content to display inside the button.',
+    },
+    {
+      name: 'className',
+      type: 'string',
+      description: 'Additional CSS classes to merge with default styles.',
+    },
+    {
+      name: '...props',
+      type: 'ButtonHTMLAttributes',
+      description: 'Any additional HTML button attributes (onClick, disabled, etc.).',
+    },
+  ]}
+/>

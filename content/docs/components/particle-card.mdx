@@ -3,11 +3,11 @@ title: Particle Card
 description: An interactive card with particle explosion effect on hover, perfect for team member profiles.
 ---
 
-import { Preview } from "@/components/mdx/preview";
-import ParticleCard from "@/components/rareui/ParticleCard";
-import { PropsTable } from "@/components/mdx/PropsTable";
-import { UsageGuide } from "@/components/mdx/UsageGuide";
-import { FeaturesList } from "@/components/mdx/FeaturesList";
+import { Preview } from '@/components/mdx/preview';
+import ParticleCard from '@/components/rareui/ParticleCard';
+import { PropsTable } from '@/components/mdx/PropsTable';
+import { UsageGuide } from '@/components/mdx/UsageGuide';
+import { FeaturesList } from '@/components/mdx/FeaturesList';
 
 <Preview
   code={`'use client'
@@ -18,55 +18,58 @@ import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
 function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+return twMerge(clsx(inputs))
 }
 
 interface ParticleData {
-  x: number
-  y: number
-  posX: number
-  posY: number
-  randX: number
-  randY: number
-  rotate: number
-  scale: number
-  delay: number
-  blur: number
+x: number
+y: number
+posX: number
+posY: number
+randX: number
+randY: number
+rotate: number
+scale: number
+delay: number
+blur: number
 }
 
 interface ParticleCardProps {
-  name?: string
-  role?: string
-  bio?: string
-  img?: string
-  tags?: string[]
-  cols?: number
-  rows?: number
+name?: string
+role?: string
+bio?: string
+img?: string
+tags?: string[]
+cols?: number
+rows?: number
 }
 
 // ... rest of component code`}
-  cliCommand="npx rareui add particle-card"
+cliCommand="npx rareui add particle-card"
+
 >
+
   <div className="[&_img]:m-0 [&_img]:p-0 [&_img]:block [&_h3]:m-0 [&_p]:m-0 [&_button]:block [&_button]:visible">
     <ParticleCard />
   </div>
 </Preview>
 
-<UsageGuide steps={[
-  {
-    title: "Import the component",
-    code: `import ParticleCard from '@/components/rareui/ParticleCard';`
-  },
-  {
-    title: "Use in your application",
-    code: `export default function App() {
+<UsageGuide
+  steps={[
+    {
+      title: 'Import the component',
+      code: `import ParticleCard from '@/components/rareui/ParticleCard';`,
+    },
+    {
+      title: 'Use in your application',
+      code: `export default function App() {
   return (
     <ParticleCard />
   );
-}`
-  }
-]} />
-
+}`,
+    },
+  ]}
+/>
 
 <UsageGuide title="Examples" steps={[
   {
@@ -106,76 +109,78 @@ export default function Team() {
   }
 ]} />
 
+<FeaturesList
+  features={[
+    {
+      title: 'Particle Explosion Effect',
+      description: 'Image breaks into animated particles on hover.',
+    },
+    {
+      title: 'Smooth Transitions',
+      description: 'Framer Motion powered animations.',
+    },
+    {
+      title: 'Dual-Sided Content',
+      description: 'Front shows preview, back shows detailed info.',
+    },
+    {
+      title: 'Fully Customizable',
+      description: 'Control particle density, content, and styling.',
+    },
+    {
+      title: 'Responsive Design',
+      description: 'Adapts to different screen sizes.',
+    },
+    {
+      title: 'Performance Optimized',
+      description: 'Uses useMemo for particle calculations.',
+    },
+  ]}
+/>
 
-<FeaturesList features={[
-  {
-    title: "Particle Explosion Effect",
-    description: "Image breaks into animated particles on hover."
-  },
-  {
-    title: "Smooth Transitions",
-    description: "Framer Motion powered animations."
-  },
-  {
-    title: "Dual-Sided Content",
-    description: "Front shows preview, back shows detailed info."
-  },
-  {
-    title: "Fully Customizable",
-    description: "Control particle density, content, and styling."
-  },
-  {
-    title: "Responsive Design",
-    description: "Adapts to different screen sizes."
-  },
-  {
-    title: "Performance Optimized",
-    description: "Uses useMemo for particle calculations."
-  }
-]} />
-
-
-<PropsTable props={[
-  {
-    name: "name",
-    type: "string",
-    default: '"Sam Jenkins"',
-    description: "Name displayed on the card front"
-  },
-  {
-    name: "role",
-    type: "string",
-    default: '"Product Designer"',
-    description: "Role or title displayed"
-  },
-  {
-    name: "bio",
-    type: "string",
-    default: '"Default bio..."',
-    description: "Biography shown on card back"
-  },
-  {
-    name: "img",
-    type: "string",
-    default: "Unsplash URL",
-    description: "Background image URL"
-  },
-  {
-    name: "tags",
-    type: "string[]",
-    default: "['UI/UX', ...]",
-    description: "Array of skill/tag labels"
-  },
-  {
-    name: "cols",
-    type: "number",
-    default: "20",
-    description: "Particle grid columns (affects particle size)"
-  },
-  {
-    name: "rows",
-    type: "number",
-    default: "24",
-    description: "Particle grid rows (affects particle density)"
-  }
-]} />
+<PropsTable
+  props={[
+    {
+      name: 'name',
+      type: 'string',
+      default: '"Sam Jenkins"',
+      description: 'Name displayed on the card front',
+    },
+    {
+      name: 'role',
+      type: 'string',
+      default: '"Product Designer"',
+      description: 'Role or title displayed',
+    },
+    {
+      name: 'bio',
+      type: 'string',
+      default: '"Default bio..."',
+      description: 'Biography shown on card back',
+    },
+    {
+      name: 'img',
+      type: 'string',
+      default: 'Unsplash URL',
+      description: 'Background image URL',
+    },
+    {
+      name: 'tags',
+      type: 'string[]',
+      default: "['UI/UX', ...]",
+      description: 'Array of skill/tag labels',
+    },
+    {
+      name: 'cols',
+      type: 'number',
+      default: '20',
+      description: 'Particle grid columns (affects particle size)',
+    },
+    {
+      name: 'rows',
+      type: 'number',
+      default: '24',
+      description: 'Particle grid rows (affects particle density)',
+    },
+  ]}
+/>

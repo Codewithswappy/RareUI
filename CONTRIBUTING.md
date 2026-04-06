@@ -30,10 +30,12 @@ This project adheres to a Code of Conduct that all contributors are expected to 
 ### 🐛 Reporting Bugs
 
 Before creating a bug report:
+
 1. Check the [existing issues](https://github.com/Codewithswappy/RareUI/issues)
 2. Ensure you're using the latest version
 
 When reporting bugs, include:
+
 - Clear, descriptive title
 - Steps to reproduce
 - Expected vs actual behavior
@@ -41,11 +43,13 @@ When reporting bugs, include:
 - Environment details (OS, browser, React version)
 
 **Example:**
+
 ```markdown
 **Bug Description**
 The Glass Shimmer Button doesn't animate on hover in Safari.
 
 **Steps to Reproduce**
+
 1. Open https://rareui.in/docs/components/buttons/glass-shimmer-button
 2. Hover over the button
 3. No shimmer effect appears
@@ -54,6 +58,7 @@ The Glass Shimmer Button doesn't animate on hover in Safari.
 Shimmer animation should play on hover
 
 **Environment**
+
 - OS: macOS 14.0
 - Browser: Safari 17.0
 - React: 19.0.0
@@ -62,6 +67,7 @@ Shimmer animation should play on hover
 ### 💡 Suggesting Features
 
 We love new ideas! When suggesting features:
+
 - Check if it already exists or has been requested
 - Explain the use case
 - Provide visual examples if possible
@@ -141,6 +147,7 @@ rareui/
 ```
 
 **Key Directories:**
+
 - `components/rareui/` - All public components live here
 - `components/landing/` - Website-specific components
 - `app/docs/` - Documentation pages
@@ -176,16 +183,16 @@ export default function MyButton({
   children,
   className,
   onClick,
-  variant = 'default'
+  variant = 'default',
 }: MyButtonProps) {
   return (
     <motion.button
       className={cn(
         // Base styles
-        'px-6 py-3 rounded-lg font-medium',
+        'rounded-lg px-6 py-3 font-medium',
         // Variants
         variant === 'default' && 'bg-primary text-primary-foreground',
-        variant === 'outline' && 'border border-border',
+        variant === 'outline' && 'border-border border',
         // Custom classes
         className
       )}
@@ -229,12 +236,14 @@ Before submitting, ensure your component:
 1. **Fork the repository**
    - Click "Fork" button on GitHub
    - Clone your fork locally
+
    ```bash
    git clone https://github.com/YOUR_USERNAME/RareUI.git
    cd RareUI
    ```
 
 2. **Create a branch**
+
    ```bash
    git checkout -b feature/my-new-component
    ```
@@ -245,6 +254,7 @@ Before submitting, ensure your component:
    - Test thoroughly
 
 4. **Test everything**
+
    ```bash
    npm run lint        # Check for linting errors
    npm run type-check  # Check for type errors
@@ -269,6 +279,7 @@ type(scope): description
 ```
 
 **Types:**
+
 - `feat`: New feature or component
 - `fix`: Bug fix
 - `docs`: Documentation changes
@@ -279,6 +290,7 @@ type(scope): description
 - `chore`: Maintenance tasks
 
 **Examples:**
+
 ```
 feat(buttons): add neon glow button component
 fix(cards): resolve particle animation in Safari
@@ -289,6 +301,7 @@ style: format code with prettier
 ### Submitting Pull Request
 
 1. **Push your branch to your fork**
+
    ```bash
    git push origin feature/my-new-component
    ```
@@ -302,18 +315,22 @@ style: format code with prettier
    - Click "Create Pull Request"
 
 3. **PR Template:**
+
    ```markdown
    ## Description
+
    Brief description of what this PR does
 
    ## Type of Change
+
    - [ ] New component
-   - [ ] Bug fix  
+   - [ ] Bug fix
    - [ ] Documentation update
    - [ ] Performance improvement
    - [ ] Other (please specify)
 
    ## Checklist
+
    - [ ] Code follows project style
    - [ ] Self-reviewed my code
    - [ ] Documentation updated
@@ -323,6 +340,7 @@ style: format code with prettier
    - [ ] Mobile responsive
 
    ## Screenshots
+
    (Add screenshots if applicable)
    ```
 
@@ -354,8 +372,8 @@ interface ButtonProps {
 
 // ❌ Bad
 interface ButtonProps {
-  variant: string;  // Too broad
-  size: any;        // Never use 'any'
+  variant: string; // Too broad
+  size: any; // Never use 'any'
 }
 ```
 
@@ -397,6 +415,7 @@ interface ButtonProps {
 ## 🏆 Recognition
 
 Contributors will be:
+
 - Listed in our Contributors section
 - Mentioned in release notes
 - Credited in component documentation

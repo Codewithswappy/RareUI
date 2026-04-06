@@ -7,7 +7,7 @@
 import latestData from './latest-component-data.json';
 
 export const latestComponent = {
-    name: latestData.name,
-    href: latestData.href,
-    dateAdded: latestData.dateAdded,
+  name: latestData.name,
+  href: latestData.href,
+  dateAdded: latestData.dateAdded,
 };

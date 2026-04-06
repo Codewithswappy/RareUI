@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useRef, useEffect, useCallback } from "react";
-import { useTheme } from "next-themes";
+import React, { useRef, useEffect, useCallback } from 'react';
+import { useTheme } from 'next-themes';
 
 interface Spark {
   x: number;
@@ -16,7 +16,7 @@ interface ClickSparkProps {
   sparkRadius?: number;
   sparkCount?: number;
   duration?: number;
-  easing?: "linear" | "ease-in" | "ease-out" | "ease-in-out";
+  easing?: 'linear' | 'ease-in' | 'ease-out' | 'ease-in-out';
   extraScale?: number;
 }
 
@@ -26,15 +26,15 @@ export const ClickSpark = ({
   sparkRadius = 15,
   sparkCount = 8,
   duration = 400,
-  easing = "ease-out",
+  easing = 'ease-out',
   extraScale = 1,
 }: ClickSparkProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sparksRef = useRef<Spark[]>([]);
   const startTimeRef = useRef<number | null>(null);
   const { theme, resolvedTheme } = useTheme();
-  
-  const effectiveColor = sparkColor || (resolvedTheme === "dark" ? "#fff" : "#000");
+
+  const effectiveColor = sparkColor || (resolvedTheme === 'dark' ? '#fff' : '#000');
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -43,25 +43,25 @@ export const ClickSpark = ({
     let resizeTimeout: NodeJS.Timeout;
 
     const resizeCanvas = () => {
-      if (typeof window !== "undefined") {
+      if (typeof window !== 'undefined') {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
       }
     };
 
     const handleResize = () => {
-      if (typeof window !== "undefined") {
+      if (typeof window !== 'undefined') {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(resizeCanvas, 100);
       }
     };
 
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       resizeCanvas();
-      window.addEventListener("resize", handleResize);
+      window.addEventListener('resize', handleResize);
 
       return () => {
-        window.removeEventListener("resize", handleResize);
+        window.removeEventListener('resize', handleResize);
         clearTimeout(resizeTimeout);
       };
     }
@@ -70,13 +70,13 @@ export const ClickSpark = ({
   const easeFunc = useCallback(
     (t: number) => {
       switch (easing) {
-        case "linear":
+        case 'linear':
           return t;
-        case "ease-in":
+        case 'ease-in':
           return t * t;
-        case "ease-in-out":
+        case 'ease-in-out':
           return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-        case "ease-out":
+        case 'ease-out':
         default:
           return t * (2 - t);
       }
@@ -87,7 +87,7 @@ export const ClickSpark = ({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     let animationId: number;
@@ -134,7 +134,16 @@ export const ClickSpark = ({
     return () => {
       cancelAnimationFrame(animationId);
     };
-  }, [sparkColor, effectiveColor, sparkSize, sparkRadius, sparkCount, duration, easeFunc, extraScale]);
+  }, [
+    sparkColor,
+    effectiveColor,
+    sparkSize,
+    sparkRadius,
+    sparkCount,
+    duration,
+    easeFunc,
+    extraScale,
+  ]);
 
   const handleClick = (e: MouseEvent) => {
     const x = e.clientX;
@@ -151,10 +160,10 @@ export const ClickSpark = ({
   };
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    document.addEventListener("click", handleClick);
+    if (typeof window === 'undefined') return;
+    document.addEventListener('click', handleClick);
     return () => {
-      document.removeEventListener("click", handleClick);
+      document.removeEventListener('click', handleClick);
     };
   }, [sparkCount]);
 
@@ -162,12 +171,12 @@ export const ClickSpark = ({
     <canvas
       ref={canvasRef}
       style={{
-        width: "100%",
-        height: "100%",
-        position: "fixed",
+        width: '100%',
+        height: '100%',
+        position: 'fixed',
         top: 0,
         left: 0,
-        pointerEvents: "none",
+        pointerEvents: 'none',
         zIndex: 9999,
       }}
     />

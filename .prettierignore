@@ -1,0 +1,10 @@
+node_modules
+.next
+out
+build
+public/r
+public/sidebar.json
+lib/sidebar-data.ts
+lib/latest-component-data.json
+*.log
+.DS_Store

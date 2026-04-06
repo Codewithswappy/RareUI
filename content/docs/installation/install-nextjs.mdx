@@ -18,6 +18,7 @@ npx create-next-app@latest my-app --yes
 ```
 
 `--yes` skips prompts using saved preferences or defaults. The default setup enables TypeScript, Tailwind, ESLint, App Router, and Turbopack, with import alias `@/*`.
+
 </Step>
 
 <Step>
@@ -29,12 +30,14 @@ Navigate to the project directory and start the development server.
 cd my-app
 npm run dev
 ```
+
 </Step>
 
 <Step>
 ### Visit your app
 
 Open `http://localhost:3000` in your browser to see the result.
+
 </Step>
 </Steps>
 
@@ -60,6 +63,7 @@ The quickest way to create a new Next.js app is using the automatic setup tool.
 ```bash
 npx create-next-app@latest
 ```
+
 </Step>
 <Step>
 ### Answer Prompts
@@ -75,6 +79,7 @@ Would you like to use the recommended Next.js defaults?
 ```
 
 If you choose to `customize settings`, ensure you select **Tailwind CSS** as `Yes`.
+
 </Step>
 </Steps>
 
@@ -91,6 +96,7 @@ To manually create a new Next.js app, follow these steps:
 ```bash
 npm i next@latest react@latest react-dom@latest
 ```
+
 </Step>
 
 <Step>
@@ -109,6 +115,7 @@ Add the following scripts to your `package.json` file:
   }
 }
 ```
+
 </Step>
 
 <Step>
@@ -117,16 +124,12 @@ Add the following scripts to your `package.json` file:
 Next.js uses file-system routing. Create an `app` folder and add a `layout.tsx` file:
 
 ```tsx
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -134,9 +137,10 @@ Then create a `page.tsx`:
 
 ```tsx
 export default function Page() {
-  return <h1>Hello, Next.js!</h1>
+  return <h1>Hello, Next.js!</h1>;
 }
 ```
+
 </Step>
 </Steps>
 
@@ -149,6 +153,7 @@ RareUI components are written in TypeScript. We strongly recommend using TypeScr
 ### Install TypeScript
 
 Rename any `.js` file to `.tsx` and run `next dev`. Next.js will automatically detect TypeScript and create a `tsconfig.json` file.
+
 </Step>
 
 <Step>
@@ -166,5 +171,6 @@ Ensure your `tsconfig.json` has the following paths configured for clean imports
   }
 }
 ```
+
 </Step>
 </Steps>

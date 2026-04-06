@@ -3,64 +3,79 @@ title: Premium Profile Card
 description: A high-end, interactive profile card with 3D tilt, flip animation, and premium styling.
 ---
 
-import { Preview } from "@/components/mdx/preview";
-import PremiumProfileCard from "@/components/rareui/premiumProfileCard";
-import { UsageGuide } from "@/components/mdx/UsageGuide";
-import { FeaturesList } from "@/components/mdx/FeaturesList";
+import { Preview } from '@/components/mdx/preview';
+import PremiumProfileCard from '@/components/rareui/PremiumProfileCard';
+import { UsageGuide } from '@/components/mdx/UsageGuide';
+import { FeaturesList } from '@/components/mdx/FeaturesList';
 
 <Preview
   code={`"use client";
 
 import React, { useState, useRef } from 'react';
-import { ArrowUpRight, Mail, Globe, Layers, MapPin, Feather, PenTool, Hash, MoveRight, Palette, Cpu, Ruler, Zap } from 'lucide-react';
+import {
+  ArrowUpRight,
+  Mail,
+  Globe,
+  Layers,
+  MapPin,
+  Feather,
+  PenTool,
+  Hash,
+  MoveRight,
+  Palette,
+  Cpu,
+  Ruler,
+  Zap,
+} from 'lucide-react';
 
 const PremiumProfileCard = () => {
-  const [rotation, setRotation] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-  const [isFlipped, setIsFlipped] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
+const [rotation, setRotation] = useState({ x: 0, y: 0 });
+const [isHovered, setIsHovered] = useState(false);
+const [isFlipped, setIsFlipped] = useState(false);
+const cardRef = useRef<HTMLDivElement>(null);
 
-  // Configuration for the tilt effect
-  const friction = 1 / 32; 
-  const maxRotation = 10;
+// Configuration for the tilt effect
+const friction = 1 / 32;
+const maxRotation = 10;
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    
+const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+if (!cardRef.current) return;
+
     const card = cardRef.current;
     const rect = card.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    
+
     const mouseX = e.clientX - centerX;
     const mouseY = e.clientY - centerY;
 
-    const rotateX = -mouseY * friction; 
+    const rotateX = -mouseY * friction;
     const rotateY = mouseX * friction;
 
     const clampedX = Math.max(-maxRotation, Math.min(maxRotation, rotateX));
     const clampedY = Math.max(-maxRotation, Math.min(maxRotation, rotateY));
 
     setRotation({ x: clampedX, y: clampedY });
-  };
 
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    setRotation({ x: 0, y: 0 });
-  };
+};
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
+const handleMouseLeave = () => {
+setIsHovered(false);
+setRotation({ x: 0, y: 0 });
+};
 
-  const toggleFlip = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsFlipped(!isFlipped);
-  };
+const handleMouseEnter = () => {
+setIsHovered(true);
+};
 
-  return (
-    // ... component implementation
-  );
+const toggleFlip = (e: React.MouseEvent) => {
+e.stopPropagation();
+setIsFlipped(!isFlipped);
+};
+
+return (
+// ... component implementation
+);
 };
 
 export default PremiumProfileCard;`}
@@ -69,22 +84,22 @@ export default PremiumProfileCard;`}
   <PremiumProfileCard />
 </Preview>
 
-<UsageGuide steps={[
-  {
-    title: "Import the component",
-    code: `import PremiumProfileCard from '@/components/rareui/premiumProfileCard';`
-  },
-  {
-    title: "Use in your application",
-    code: `export default function App() {
+<UsageGuide
+  steps={[
+    {
+      title: 'Import the component',
+      code: `import PremiumProfileCard from '@/components/rareui/PremiumProfileCard';`,
+    },
+    {
+      title: 'Use in your application',
+      code: `export default function App() {
   return (
     <PremiumProfileCard />
   );
-}`
-  }
-]} />
-
-
+}`,
+    },
+  ]}
+/>
 
 ## Customization
 
@@ -93,8 +108,8 @@ export default PremiumProfileCard;`}
 Adjust the `friction` and `maxRotation` constants inside the component:
 
 ```tsx
-const friction = 1 / 32;  // Lower = more sensitive
-const maxRotation = 10;   // Maximum degrees of rotation
+const friction = 1 / 32; // Lower = more sensitive
+const maxRotation = 10; // Maximum degrees of rotation
 ```
 
 ### Colors & Styling
@@ -115,8 +130,6 @@ Replace the demo content with your own:
 - Skills list
 - Contact information
 
-
-
 ## Notes
 
 - The component is fully self-contained with inline CSS for animations.
@@ -124,28 +137,30 @@ Replace the demo content with your own:
 - Works out of the box after CLI installation.
 - All images use Unsplash URLs - replace with your own in production.
 
-<FeaturesList features={[
-  {
-    title: "3D Tilt Effect",
-    description: "Smooth, mouse-tracking rotation creates a realistic depth effect."
-  },
-  {
-    title: "Flip Animation",
-    description: "Interactive card flip to reveal contact details and skills."
-  },
-  {
-    title: "Interactive Border",
-    description: "Spinning gradient border and sheen effects on hover."
-  },
-  {
-    title: "Dark Mode Support",
-    description: "Colors automatically adapt to system theme preferences."
-  },
-  {
-    title: "Self-Contained",
-    description: "All styles and animations are encapsulated within the component."
-  }
-]} />
+<FeaturesList
+  features={[
+    {
+      title: '3D Tilt Effect',
+      description: 'Smooth, mouse-tracking rotation creates a realistic depth effect.',
+    },
+    {
+      title: 'Flip Animation',
+      description: 'Interactive card flip to reveal contact details and skills.',
+    },
+    {
+      title: 'Interactive Border',
+      description: 'Spinning gradient border and sheen effects on hover.',
+    },
+    {
+      title: 'Dark Mode Support',
+      description: 'Colors automatically adapt to system theme preferences.',
+    },
+    {
+      title: 'Self-Contained',
+      description: 'All styles and animations are encapsulated within the component.',
+    },
+  ]}
+/>
 
 ## Props
 

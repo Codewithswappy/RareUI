@@ -3,11 +3,11 @@ title: Magnetic Scatter Text
 description: An interactive text animation that scatters on hover with magnetic spring effects.
 ---
 
-import { MagneticScatterText } from "@/components/rareui/Text Animation/MagneticScatterText";
-import { Preview } from "@/components/mdx/preview";
-import { PropsTable } from "@/components/mdx/PropsTable";
-import { UsageGuide } from "@/components/mdx/UsageGuide";
-import { FeaturesList } from "@/components/mdx/FeaturesList";
+import { MagneticScatterText } from '@/components/rareui/MagneticScatterText';
+import { Preview } from '@/components/mdx/preview';
+import { PropsTable } from '@/components/mdx/PropsTable';
+import { UsageGuide } from '@/components/mdx/UsageGuide';
+import { FeaturesList } from '@/components/mdx/FeaturesList';
 
 <Preview
   code={`"use client"
@@ -17,57 +17,57 @@ import { motion, useAnimation } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 interface MagneticScatterTextProps {
-  text: string;
-  className?: string;
-  trigger?: boolean;
+text: string;
+className?: string;
+trigger?: boolean;
 }
 
 export const MagneticScatterText: React.FC<MagneticScatterTextProps> = ({ text, className, trigger = true }) => {
   const controls = useAnimation();
   const [isHovering, setIsHovering] = useState(false);
 
-  useEffect(() => {
-    if (trigger) {
-      controls.start("visible");
-    } else {
-      controls.start("hidden");
-    }
-  }, [trigger, controls]);
+useEffect(() => {
+if (trigger) {
+controls.start("visible");
+} else {
+controls.start("hidden");
+}
+}, [trigger, controls]);
 
-  useEffect(() => {
-    if (isHovering) {
-      controls.start("scatter");
-    } else {
-      controls.start("visible");
-    }
-  }, [isHovering, controls]);
+useEffect(() => {
+if (isHovering) {
+controls.start("scatter");
+} else {
+controls.start("visible");
+}
+}, [isHovering, controls]);
 
-  const letters = text.split("");
+const letters = text.split("");
 
-  // Deterministic random for consistent scattering based on index
-  const getRandom = (index: number) => {
-    const seed = index * 42;
-    const x = Math.sin(seed) * 100; // -100 to 100
-    const y = Math.cos(seed) * 100; // -100 to 100
-    const rotate = Math.sin(seed * 2) * 180; // -180 to 180
-    return { x, y, rotate };
-  };
+// Deterministic random for consistent scattering based on index
+const getRandom = (index: number) => {
+const seed = index _ 42;
+const x = Math.sin(seed) _ 100; // -100 to 100
+const y = Math.cos(seed) _ 100; // -100 to 100
+const rotate = Math.sin(seed _ 2) \* 180; // -180 to 180
+return { x, y, rotate };
+};
 
-  return (
-    <motion.div
-      className={cn("flex cursor-default select-none", className)}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
-    >
-      {letters.map((letter, index) => {
-        const randoms = getRandom(index);
-        return (
-          <motion.span
-            key={index}
-            className="inline-block font-sans font-bold text-black dark:text-white"
-            initial="hidden"
-            animate={controls}
-            variants={{
+return (
+
+<motion.div
+className={cn("flex cursor-default select-none", className)}
+onMouseEnter={() => setIsHovering(true)}
+onMouseLeave={() => setIsHovering(false)} >
+{letters.map((letter, index) => {
+const randoms = getRandom(index);
+return (
+<motion.span
+key={index}
+className="inline-block font-sans font-bold text-black dark:text-white"
+initial="hidden"
+animate={controls}
+variants={{
               hidden: {
                 x: randoms.x * 5,
                 y: randoms.y * 5,
@@ -100,115 +100,120 @@ export const MagneticScatterText: React.FC<MagneticScatterTextProps> = ({ text, 
                   stiffness: 200,
                 },
               },
-            }}
-          >
-            {letter === " " ? "\\u00A0" : letter}
-          </motion.span>
-        );
-      })}
-    </motion.div>
-  );
+            }} >
+{letter === " " ? "\\u00A0" : letter}
+</motion.span>
+);
+})}
+</motion.div>
+);
 };`}
-  cliCommand="npx rareui add MagneticScatterText"
+cliCommand="npx rareui add MagneticScatterText"
+
 >
+
     <div className="w-full h-[300px] flex items-center justify-center">
       <MagneticScatterText text="Hover Me" className="text-6xl" />
     </div>
+
 </Preview>
 
-<UsageGuide steps={[
-  {
-    title: "Import the component",
-    code: `import { MagneticScatterText } from "@/components/rareui/Text Animation/MagneticScatterText";`
-  },
-  {
-    title: "Use in your application",
-    code: `export default function MyComponent() {
+<UsageGuide
+  steps={[
+    {
+      title: 'Import the component',
+      code: `import { MagneticScatterText } from "@/components/rareui/MagneticScatterText";`,
+    },
+    {
+      title: 'Use in your application',
+      code: `export default function MyComponent() {
   return (
     <MagneticScatterText text="Your Text" className="text-6xl" />
   );
-}`
-  }
-]} />
-
-
+}`,
+    },
+  ]}
+/>
 
 <UsageGuide title="Examples" steps={[
   {
     title: "Controlled Animation",
     code: `"use client";
 import { useState } from 'react';
-import { MagneticScatterText } from "@/components/rareui/Text Animation/MagneticScatterText";
+import { MagneticScatterText } from "@/components/rareui/MagneticScatterText";
 
 export default function ControlledAnimation() {
   const [show, setShow] = useState(false);
 
-  return (
-    <div className="flex flex-col items-center gap-4">
-      <button 
-        onClick={() => setShow(!show)} 
-        className="px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium"
-      >
-        Toggle Animation
-      </button>
-      
-      <MagneticScatterText 
-        text="Click button" 
+return (
+
+<div className="flex flex-col items-center gap-4">
+<button
+onClick={() => setShow(!show)}
+className="px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium" >
+Toggle Animation
+</button>
+
+      <MagneticScatterText
+        text="Click button"
         trigger={show}
         className="text-4xl text-foreground"
       />
     </div>
-  );
-}`
-  },
+
+);
+}`  },
   {
     title: "Custom Styling",
-    code: `<MagneticScatterText 
+    code:`<MagneticScatterText 
   text="Magnetic" 
   className="text-8xl font-black text-blue-500 tracking-tighter"
 />`
-  }
+}
 ]} />
 
-<FeaturesList features={[
-  {
-    title: "Magnetic Scattering",
-    description: "Text scatters in random directions on hover with physics-based movement."
-  },
-  {
-    title: "Deterministic Randomness",
-    description: "Consistent scattering patterns based on character index."
-  },
-  {
-    title: "Trigger Control",
-    description: "Programmatically control the visibility state."
-  },
-  {
-    title: "Spring Animations",
-    description: "Fluid entry and exit animations using Framer Motion springs."
-  },
-  {
-    title: "Customizable",
-    description: "Easily style text size, color, and font via className."
-  }
-]} />
+<FeaturesList
+  features={[
+    {
+      title: 'Magnetic Scattering',
+      description: 'Text scatters in random directions on hover with physics-based movement.',
+    },
+    {
+      title: 'Deterministic Randomness',
+      description: 'Consistent scattering patterns based on character index.',
+    },
+    {
+      title: 'Trigger Control',
+      description: 'Programmatically control the visibility state.',
+    },
+    {
+      title: 'Spring Animations',
+      description: 'Fluid entry and exit animations using Framer Motion springs.',
+    },
+    {
+      title: 'Customizable',
+      description: 'Easily style text size, color, and font via className.',
+    },
+  ]}
+/>
 
-
-<PropsTable props={[
-  {
-    name: "text",
-    type: "string",
-    description: "The text content to animate."
-  },
-  {
-    name: "trigger",
-    type: "boolean",
-    default: "true",
-    description: "Controls animation state (true = visible, false = hidden)."
-  },
-  {
-    name: "className",
-    type: "string",
-    description: "Additional styles for the container."
-  }
-]} />
+<PropsTable
+  props={[
+    {
+      name: 'text',
+      type: 'string',
+      description: 'The text content to animate.',
+    },
+    {
+      name: 'trigger',
+      type: 'boolean',
+      default: 'true',
+      description: 'Controls animation state (true = visible, false = hidden).',
+    },
+    {
+      name: 'className',
+      type: 'string',
+      description: 'Additional styles for the container.',
+    },
+  ]}
+/>

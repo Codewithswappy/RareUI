@@ -1,27 +1,26 @@
 ---
 title: Retro Pixel Button
 description: A retro-styled animated button with a sliding pixel block, smooth transitions, and customizable colors.
-
 ---
 
-import { Preview } from "@/components/mdx/preview";
-import RetroPixelButton from "@/components/rareui/retro-pixel-button";
-import { PropsTable } from "@/components/mdx/PropsTable";
-import { UsageGuide } from "@/components/mdx/UsageGuide";
-import { FeaturesList } from "@/components/mdx/FeaturesList";
+import { Preview } from '@/components/mdx/preview';
+import RetroPixelButton from '@/components/rareui/RetroPixelButton';
+import { PropsTable } from '@/components/mdx/PropsTable';
+import { UsageGuide } from '@/components/mdx/UsageGuide';
+import { FeaturesList } from '@/components/mdx/FeaturesList';
 
 <Preview
   code={`"use client";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 interface RetroPixelButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: React.ReactNode;
-  className?: string;
-  pixelColor?: string; // The color of the moving pixel block
-  baseColor?: string;  // The background of the button
-  textColor?: string;
+children?: React.ReactNode;
+className?: string;
+pixelColor?: string; // The color of the moving pixel block
+baseColor?: string; // The background of the button
+textColor?: string;
 }
 
 export default function RetroPixelButton({
@@ -34,68 +33,65 @@ export default function RetroPixelButton({
 }: RetroPixelButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
 
-  return (
-    <motion.button
-      className="relative flex items-center h-16 px-8 border border-orange-300 dark:border-orange-300 overflow-hidden font-mono font-medium rounded-lg cursor-pointer group bg-background dark:bg-neutral-900 transition-colors shadow-sm hover:shadow-md"
-      whileTap={{ scale: 0.98 }}
-      style={{ 
-        backgroundColor: baseColor, 
+return (
+
+<motion.button
+className="relative flex items-center h-16 px-8 border border-orange-300 dark:border-orange-300 overflow-hidden font-mono font-medium rounded-lg cursor-pointer group bg-background dark:bg-neutral-900 transition-colors shadow-sm hover:shadow-md"
+whileTap={{ scale: 0.98 }}
+style={{
+        backgroundColor: baseColor,
         color: textColor,
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      {...props as any}
-    >
-      {/* Sliding Icon Block */}
-      <motion.div
-        className="absolute left-1 top-1 bottom-1 flex items-center justify-center rounded z-10 overflow-hidden"
-        style={{ backgroundColor: pixelColor }}
-        animate={{
+onMouseEnter={() => setIsHovered(true)}
+onMouseLeave={() => setIsHovered(false)}
+{...props as any} >
+{/* Sliding Icon Block */}
+<motion.div
+className="absolute left-1 top-1 bottom-1 flex items-center justify-center rounded z-10 overflow-hidden"
+style={{ backgroundColor: pixelColor }}
+animate={{
           width: isHovered ? "97%" : "55px",
         }}
-        transition={{
+transition={{
             type: "spring",
             stiffness: 400,
             damping: 30
-        }}
-      >
-          {/* Inner container for the icon */}
-          <motion.div
-            className="absolute right-0 w-16 flex items-center justify-center h-full" 
-          >
-           <motion.svg 
-             animate={{ rotate: isHovered ? 180 : 0 }}
-             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-             width="40" 
-             height="40" 
-             viewBox="0 0 16 34" 
-             fill="currentColor"
-             xmlns="http://www.w3.org/2000/svg"
-             className="text-white"
-           >
-             <rect x="7" y="6" width="5" height="5" />
-             <rect x="11" y="10" width="5" height="5" />
-             <rect x="15" y="14" width="5" height="5" />
-             <rect x="11" y="18" width="5" height="5" />
-             <rect x="7" y="22" width="5" height="5" />
-           </motion.svg>
-          </motion.div>
-      </motion.div>
+        }} >
+{/* Inner container for the icon */}
+<motion.div
+className="absolute right-0 w-16 flex items-center justify-center h-full" >
+<motion.svg
+animate={{ rotate: isHovered ? 180 : 0 }}
+transition={{ type: "spring", stiffness: 300, damping: 20 }}
+width="40"
+height="40"
+viewBox="0 0 16 34"
+fill="currentColor"
+xmlns="http://www.w3.org/2000/svg"
+className="text-white" >
+<rect x="7" y="6" width="5" height="5" />
+<rect x="11" y="10" width="5" height="5" />
+<rect x="15" y="14" width="5" height="5" />
+<rect x="11" y="18" width="5" height="5" />
+<rect x="7" y="22" width="5" height="5" />
+</motion.svg>
+</motion.div>
+</motion.div>
 
       {/* Text Label */}
-      <motion.div 
+      <motion.div
         className="relative z-20 w-full text-center whitespace-nowrap"
         initial={{ paddingLeft: 64, paddingRight: 0, color: "currentColor" }}
-        animate={{ 
+        animate={{
             paddingLeft: isHovered ? 0 : 64,
             paddingRight: isHovered ? 64 : 0,
             color: isHovered ? "#ffffff" : "currentColor",
             opacity: isHovered ? [1, 0.5, 1] : [1, 0.5, 1],
             filter: isHovered ? ["blur(0px)", "blur(2px)", "blur(0px)"] : ["blur(0px)", "blur(2px)", "blur(0px)"]
         }}
-        transition={{ 
-            type: "spring", 
-            stiffness: 200, 
+        transition={{
+            type: "spring",
+            stiffness: 200,
             damping: 25,
             mass: 1,
             paddingLeft: { duration: 0.4 },
@@ -104,84 +100,93 @@ export default function RetroPixelButton({
             opacity: { duration: 0.3, times: [0, 0.5, 1] },
             filter: { duration: 0.3, times: [0, 0.5, 1] }
         }}
-        style={{ color: isHovered ? "#ffffff" : undefined }} 
+        style={{ color: isHovered ? "#ffffff" : undefined }}
       >
         {children}
       </motion.div>
     </motion.button>
-  );
+
+);
 }`}
-  cliCommand="npx rareui add retro-pixel-button"
+cliCommand="npx rareui add retro-pixel-button"
+
 >
+
   <RetroPixelButton />
 </Preview>
 
-<UsageGuide steps={[
-  {
-    title: "Import the component",
-    code: `import RetroPixelButton from '@/components/rareui/retro-pixel-button';`
-  },
-  {
-    title: "Use in your application",
-    code: `export default function App() {
+<UsageGuide
+  steps={[
+    {
+      title: 'Import the component',
+      code: `import RetroPixelButton from '@/components/rareui/RetroPixelButton';`,
+    },
+    {
+      title: 'Use in your application',
+      code: `export default function App() {
   return (
     <RetroPixelButton onClick={() => alert('Clicked!')}>
       CLICK ME
     </RetroPixelButton>
   );
-}`
-  }
-]} />
+}`,
+    },
+  ]}
+/>
 
-<FeaturesList features={[
-  {
-    title: "Retro Aesthetic",
-    description: "Font-mono styling with pixelated arrow icon."
-  },
-  {
-    title: "Sliding Animation",
-    description: "Smooth spring-based expansion of the pixel block on hover."
-  },
-  {
-    title: "Icon Rotation",
-    description: "Pixelated arrow rotates 180° during the hover transition."
-  },
-  {
-    title: "Text Morphing",
-    description: "Text subtly blurs and shifts with a glitch-like effect."
-  },
-  {
-    title: "Fully Customizable",
-    description: "Control pixel block, base, and text colors independently."
-  }
-]} />
+<FeaturesList
+  features={[
+    {
+      title: 'Retro Aesthetic',
+      description: 'Font-mono styling with pixelated arrow icon.',
+    },
+    {
+      title: 'Sliding Animation',
+      description: 'Smooth spring-based expansion of the pixel block on hover.',
+    },
+    {
+      title: 'Icon Rotation',
+      description: 'Pixelated arrow rotates 180° during the hover transition.',
+    },
+    {
+      title: 'Text Morphing',
+      description: 'Text subtly blurs and shifts with a glitch-like effect.',
+    },
+    {
+      title: 'Fully Customizable',
+      description: 'Control pixel block, base, and text colors independently.',
+    },
+  ]}
+/>
 
-<PropsTable props={[
-  {
-    name: "children",
-    type: "React.ReactNode",
-    default: '"TRY..."',
-    description: "The button text content."
-  },
-  {
-    name: "pixelColor",
-    type: "string",
-    default: '"orange"',
-    description: "Color of the sliding pixel block."
-  },
-  {
-    name: "baseColor",
-    type: "string",
-    description: "Optional background color override."
-  },
-  {
-    name: "textColor",
-    type: "string",
-    description: "Optional text color override."
-  },
-  {
-    name: "className",
-    type: "string",
-    description: "Additional CSS classes."
-  }
-]} />
+<PropsTable
+  props={[
+    {
+      name: 'children',
+      type: 'React.ReactNode',
+      default: '"TRY..."',
+      description: 'The button text content.',
+    },
+    {
+      name: 'pixelColor',
+      type: 'string',
+      default: '"orange"',
+      description: 'Color of the sliding pixel block.',
+    },
+    {
+      name: 'baseColor',
+      type: 'string',
+      description: 'Optional background color override.',
+    },
+    {
+      name: 'textColor',
+      type: 'string',
+      description: 'Optional text color override.',
+    },
+    {
+      name: 'className',
+      type: 'string',
+      description: 'Additional CSS classes.',
+    },
+  ]}
+/>

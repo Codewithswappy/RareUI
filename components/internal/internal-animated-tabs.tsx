@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
@@ -22,14 +22,14 @@ export const InternalAnimatedTabs: React.FC<InternalAnimatedTabsProps> = ({
   activeTab,
   onChange,
   className,
-  layoutId = "active-pill"
+  layoutId = 'active-pill',
 }) => {
   const [hoveredTab, setHoveredTab] = useState<string | null>(null);
 
   return (
     <div
       className={cn(
-        'flex flex-row items-center p-1 rounded-lg bg-muted/50 border border-border/50',
+        'bg-muted/50 border-border/50 flex flex-row items-center rounded-lg border p-1',
         className
       )}
     >
@@ -44,10 +44,8 @@ export const InternalAnimatedTabs: React.FC<InternalAnimatedTabsProps> = ({
             onMouseEnter={() => setHoveredTab(tab.id)}
             onMouseLeave={() => setHoveredTab(null)}
             className={cn(
-              'relative z-10 px-4 py-1.5 text-sm font-medium rounded-md transition-colors duration-200 outline-none cursor-pointer flex-1 text-center',
-              isActive
-                ? 'text-foreground'
-                : 'text-muted-foreground hover:text-foreground'
+              'relative z-10 flex-1 cursor-pointer rounded-md px-4 py-1.5 text-center text-sm font-medium transition-colors duration-200 outline-none',
+              isActive ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
             )}
             style={{
               WebkitTapHighlightColor: 'transparent',
@@ -57,7 +55,7 @@ export const InternalAnimatedTabs: React.FC<InternalAnimatedTabsProps> = ({
             {isActive && (
               <motion.div
                 layoutId={layoutId}
-                className="absolute inset-0 bg-background rounded-md shadow-sm border border-border/50 z-[-1]"
+                className="bg-background border-border/50 absolute inset-0 z-[-1] rounded-md border shadow-sm"
                 transition={{
                   type: 'spring',
                   stiffness: 300,
@@ -70,7 +68,7 @@ export const InternalAnimatedTabs: React.FC<InternalAnimatedTabsProps> = ({
             {isHovered && !isActive && (
               <motion.div
                 layoutId={`${layoutId}-hover`}
-                className="absolute inset-0 bg-muted/50 rounded-md z-[-1]"
+                className="bg-muted/50 absolute inset-0 z-[-1] rounded-md"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}

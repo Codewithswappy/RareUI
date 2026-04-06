@@ -1,0 +1,25 @@
+{
+  "name": "RetroPixelButton",
+  "type": "registry:ui",
+  "dependencies": [
+    "react",
+    "framer-motion",
+    "@types/react",
+    "typescript"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "index.ts",
+      "content": "export { default } from './RetroPixelButton';\nexport * from './RetroPixelButton';\n",
+      "type": "registry:ui",
+      "target": "components/rareui/RetroPixelButton/index.ts"
+    },
+    {
+      "path": "RetroPixelButton.tsx",
+      "content": "'use client';\n\nimport React, { useState } from 'react';\nimport { motion } from 'framer-motion';\n\ninterface RetroPixelButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  children?: React.ReactNode;\n  className?: string;\n  pixelColor?: string; // The color of the moving pixel block\n  baseColor?: string; // The background of the button\n  textColor?: string;\n}\n\nexport default function RetroPixelButton({\n  children = 'TRY FOR FREE',\n  className,\n  pixelColor = 'orange', // The color of the moving pixel block (can be a tailwind class like 'bg-orange-500')\n  baseColor, // Optional override, otherwise uses theme colors\n  textColor, // Optional override\n  ...props\n}: RetroPixelButtonProps) {\n  const [isHovered, setIsHovered] = useState(false);\n\n  return (\n    <motion.button\n      className=\"group bg-background relative flex h-16 cursor-pointer items-center overflow-hidden rounded-lg border border-orange-300 px-8 font-mono font-medium shadow-sm transition-colors hover:shadow-md dark:border-orange-300 dark:bg-neutral-900\"\n      whileTap={{ scale: 0.98 }}\n      style={{\n        backgroundColor: baseColor,\n        color: textColor,\n      }}\n      onMouseEnter={() => setIsHovered(true)}\n      onMouseLeave={() => setIsHovered(false)}\n      {...(props as any)}\n    >\n      {/* Sliding Icon Block */}\n      <motion.div\n        className=\"absolute top-1 bottom-1 left-1 z-10 flex items-center justify-center overflow-hidden rounded\"\n        style={{ backgroundColor: pixelColor }}\n        animate={{\n          width: isHovered ? '97%' : '55px',\n        }}\n        transition={{\n          type: 'spring',\n          stiffness: 400,\n          damping: 30,\n        }}\n      >\n        {/* Inner container for the icon */}\n        <motion.div className=\"absolute right-0 flex h-full w-16 items-center justify-center\">\n          <motion.svg\n            animate={{ rotate: isHovered ? 180 : 0 }}\n            transition={{ type: 'spring', stiffness: 300, damping: 20 }}\n            width=\"40\"\n            height=\"40\"\n            viewBox=\"0 0 16 34\"\n            fill=\"currentColor\" // Uses current text color (which is forced to white inside this block)\n            xmlns=\"http://www.w3.org/2000/svg\"\n            className=\"text-white\"\n          >\n            <rect x=\"7\" y=\"6\" width=\"5\" height=\"5\" />\n            <rect x=\"11\" y=\"10\" width=\"5\" height=\"5\" />\n            <rect x=\"15\" y=\"14\" width=\"5\" height=\"5\" />\n            <rect x=\"11\" y=\"18\" width=\"5\" height=\"5\" />\n            <rect x=\"7\" y=\"22\" width=\"5\" height=\"5\" />\n          </motion.svg>\n        </motion.div>\n      </motion.div>\n\n      {/* Text Label */}\n      <motion.div\n        className=\"relative z-20 w-full text-center whitespace-nowrap\"\n        initial={{ paddingLeft: 64, paddingRight: 0, color: 'currentColor' }}\n        animate={{\n          paddingLeft: isHovered ? 0 : 64,\n          paddingRight: isHovered ? 64 : 0,\n          color: isHovered ? '#ffffff' : 'currentColor',\n          opacity: isHovered ? [1, 0.5, 1] : [1, 0.5, 1], // Subtle blink/morph effect during transit\n          filter: isHovered\n            ? ['blur(0px)', 'blur(2px)', 'blur(0px)']\n            : ['blur(0px)', 'blur(2px)', 'blur(0px)'],\n        }}\n        transition={{\n          type: 'spring',\n          stiffness: 200,\n          damping: 25,\n          mass: 1,\n          paddingLeft: { duration: 0.4 },\n          paddingRight: { duration: 0.4 },\n          color: { duration: 0.2 },\n          opacity: { duration: 0.3, times: [0, 0.5, 1] },\n          filter: { duration: 0.3, times: [0, 0.5, 1] },\n        }}\n        style={{ color: isHovered ? '#ffffff' : undefined }}\n      >\n        {children}\n      </motion.div>\n    </motion.button>\n  );\n}\n",
+      "type": "registry:ui",
+      "target": "components/rareui/RetroPixelButton/RetroPixelButton.tsx"
+    }
+  ]
+}

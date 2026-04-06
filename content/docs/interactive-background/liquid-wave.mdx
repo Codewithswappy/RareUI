@@ -1,43 +1,42 @@
 ---
 title: Liquid Wave
 description: A mesmerizing fluid dynamics background with interactive mouse-driven waves and customizable colors.
-
 ---
 
-import { Preview } from "@/components/mdx/preview";
-import LiquidWave from "@/components/rareui/interactive-background/LiquidWaveLazy";
-import { PropsTable } from "@/components/mdx/PropsTable";
-import { UsageGuide } from "@/components/mdx/UsageGuide";
-import { FeaturesList } from "@/components/mdx/FeaturesList";
+import { Preview } from '@/components/mdx/preview';
+import LiquidWave from '@/components/rareui/LiquidWaveLazy';
+import { PropsTable } from '@/components/mdx/PropsTable';
+import { UsageGuide } from '@/components/mdx/UsageGuide';
+import { FeaturesList } from '@/components/mdx/FeaturesList';
 
 <Preview
   code={`"use client";
 
-import React, { useEffect, useRef } from "react";
-import * as THREE from "three";
+import React, { useEffect, useRef } from 'react';
+import * as THREE from 'three';
 
 interface LiquidWaveProps {
-  color1?: string;
-  color2?: string;
-  color3?: string;
-  mouseForce?: number;
-  cursorSize?: number;
-  isViscous?: boolean;
-  viscous?: number;
-  iterationsViscous?: number;
-  iterationsPoisson?: number;
-  dt?: number;
-  BFECC?: boolean;
-  resolution?: number;
-  isBounce?: boolean;
-  autoDemo?: boolean;
-  autoSpeed?: number;
-  autoIntensity?: number;
-  takeoverDuration?: number;
-  autoResumeDelay?: number;
-  autoRampDuration?: number;
-  style?: React.CSSProperties;
-  className?: string;
+color1?: string;
+color2?: string;
+color3?: string;
+mouseForce?: number;
+cursorSize?: number;
+isViscous?: boolean;
+viscous?: number;
+iterationsViscous?: number;
+iterationsPoisson?: number;
+dt?: number;
+BFECC?: boolean;
+resolution?: number;
+isBounce?: boolean;
+autoDemo?: boolean;
+autoSpeed?: number;
+autoIntensity?: number;
+takeoverDuration?: number;
+autoResumeDelay?: number;
+autoRampDuration?: number;
+style?: React.CSSProperties;
+className?: string;
 }
 
 export default function LiquidWave({
@@ -71,15 +70,15 @@ export default function LiquidWave({
   const isVisibleRef = useRef<boolean>(true);
   const resizeRafRef = useRef<number | null>(null);
 
-  useEffect(() => {
-    if (!mountRef.current) return;
+useEffect(() => {
+if (!mountRef.current) return;
 
     // --- 1. Global / Common Classes ---
     // We recreate the classes inside useEffect or outside to avoid global state issues in React HMR/strict mode
     // Ideally, these should be separate, but for a port, keeping them scoped or module-level is fine.
-    // Given the complexity, I'll instantiate helpers inside a closure or keep them module-level 
-    // IF we are sure only one instance corresponds to one canvas. 
-    // The original code used a singleton \`Common\` and \`Mouse\`. 
+    // Given the complexity, I'll instantiate helpers inside a closure or keep them module-level
+    // IF we are sure only one instance corresponds to one canvas.
+    // The original code used a singleton \`Common\` and \`Mouse\`.
     // We should make them instance-specific to allow multiple LiquidWaves on one page.
 
     class CommonClass {
@@ -127,7 +126,7 @@ export default function LiquidWave({
         this.delta = this.clock.getDelta();
         this.time += this.delta;
       }
-      
+
       dispose() {
           if (this.renderer) {
               this.renderer.dispose();
@@ -535,7 +534,7 @@ export default function LiquidWave({
     // --- 3. Instances inside component scope ---
     const Common = new CommonClass();
     const Mouse = new MouseClass();
-    
+
     // --- 4. Simulation Classes ---
     class ShaderPass {
       props: any;
@@ -666,7 +665,7 @@ export default function LiquidWave({
           Math.max(Mouse.coords.y, -1 + cursorSizeY + props.cellScale.y * 2),
           1 - cursorSizeY - props.cellScale.y * 2
         );
-        
+
         if (this.mouse) {
           const uniforms = (this.mouse.material as THREE.RawShaderMaterial).uniforms;
           uniforms.force.value.set(forceX, forceY);
@@ -808,186 +807,196 @@ export default function LiquidWave({
     }
 
     // ... (rest of the file content matches existing, skipping lines for brevity but keeping structure valid)
-    // IMPORTANT: The original file content was truncated, but for the purpose of this replacement, 
+    // IMPORTANT: The original file content was truncated, but for the purpose of this replacement,
     // we must ensure we are replacing the Usage section or adding it.
-    // Since the previous read was truncated, I will proceed by adding the Usage section at the bottom, 
+    // Since the previous read was truncated, I will proceed by adding the Usage section at the bottom,
     // assuming the Preview block ends properly or I can append after it.
     // However, replace_file_content is mostly for full replacement or chunks.
     // Given the file size (1200+ lines), I should be careful not to overwrite the complex logic.
     // But since I can't see the full file, I'll rely on the structure I see:
-    
+
     // Usage section is missing. I'll add it before Examples.
-    
+
     // I will use multi_replace to insert the Usage section before "### Custom Colors".
     // I need to be exact.
-    
-    return () => {};
-  }, []); // End of main effect
 
-  return (
-    <div ref={mountRef} className={className} style={{ width: "100%", height: "100%", ...style }} />
-  );
+    return () => {};
+
+}, []); // End of main effect
+
+return (
+
+<div ref={mountRef} className={className} style={{ width: "100%", height: "100%", ...style }} />
+);
 }
 `}
-  cliCommand="npx rareui add LiquidWave"
+cliCommand="npx rareui add LiquidWave"
+
 >
+
   <div className="w-full h-[400px] rounded-lg overflow-hidden relative">
       <LiquidWave />
   </div>
 </Preview>
 
-
-<UsageGuide steps={[
-  {
-    title: "Import the component",
-    code: `import LiquidWave from "@/components/rareui/interactive-background/LiquidWave";`
-  },
-  {
-    title: "Use in your application",
-    code: `export default function App() {
+<UsageGuide
+  steps={[
+    {
+      title: 'Import the component',
+      code: `import LiquidWave from "@/components/rareui/LiquidWave";`,
+    },
+    {
+      title: 'Use in your application',
+      code: `export default function App() {
   return (
     <div style={{ width: '100%', height: '500px', position: 'relative' }}>
         <LiquidWave />
     </div>
   );
-}`
-  }
-]} />
+}`,
+    },
+  ]}
+/>
 
-
-<UsageGuide title="Examples" steps={[
-  {
-    title: "Custom Colors",
-    code: `<LiquidWave 
+<UsageGuide
+  title="Examples"
+  steps={[
+    {
+      title: 'Custom Colors',
+      code: `<LiquidWave 
   color1="#5227FF"
   color2="#FF9FFC"
   color3="#B19EEF"
-/>`
-  },
-  {
-    title: "Custom Force and Cursor Size",
-    code: `<LiquidWave 
+/>`,
+    },
+    {
+      title: 'Custom Force and Cursor Size',
+      code: `<LiquidWave 
   mouseForce={30}
   cursorSize={150}
-/>`
-  },
-  {
-    title: "With Viscosity",
-    code: `<LiquidWave 
+/>`,
+    },
+    {
+      title: 'With Viscosity',
+      code: `<LiquidWave 
   isViscous={true}
   viscous={50}
-/>`
-  }
-]} />
+/>`,
+    },
+  ]}
+/>
 
+<FeaturesList
+  features={[
+    {
+      title: 'Fluid Simulation',
+      description:
+        'High-performance WebGL fluid dynamics with advection, diffusion, and pressure handling.',
+    },
+    {
+      title: 'Interactive',
+      description: 'Reacts to mouse movements with force and velocity injection.',
+    },
+    {
+      title: 'Customizable Colors',
+      description: 'Supports multi-color gradients that blend dynamically within the fluid.',
+    },
+    {
+      title: 'Viscosity Support',
+      description: 'Optional viscosity simulation for thicker, slower-moving fluid effects.',
+    },
+    {
+      title: 'Auto-Demo Mode',
+      description: 'Built-in autonomous movement when idle.',
+    },
+  ]}
+/>
 
-<FeaturesList features={[
-  {
-    title: "Fluid Simulation",
-    description: "High-performance WebGL fluid dynamics with advection, diffusion, and pressure handling."
-  },
-  {
-    title: "Interactive",
-    description: "Reacts to mouse movements with force and velocity injection."
-  },
-  {
-    title: "Customizable Colors",
-    description: "Supports multi-color gradients that blend dynamically within the fluid."
-  },
-  {
-    title: "Viscosity Support",
-    description: "Optional viscosity simulation for thicker, slower-moving fluid effects."
-  },
-  {
-    title: "Auto-Demo Mode",
-    description: "Built-in autonomous movement when idle."
-  }
-]} />
-
-
-<PropsTable props={[
-  {
-    name: "color1",
-    type: "string",
-    default: '"orange"',
-    description: "Primary gradient color (any CSS color format)"
-  },
-  {
-    name: "color2",
-    type: "string",
-    default: '"orange"',
-    description: "Secondary gradient color (optional)"
-  },
-  {
-    name: "color3",
-    type: "string",
-    default: '"orange"',
-    description: "Tertiary gradient color (optional)"
-  },
-  {
-    name: "mouseForce",
-    type: "number",
-    default: "20",
-    description: "Strength of mouse interaction (0-100)"
-  },
-  {
-    name: "cursorSize",
-    type: "number",
-    default: "100",
-    description: "Size of the interaction cursor in pixels"
-  },
-  {
-    name: "isViscous",
-    type: "boolean",
-    default: "false",
-    description: "Enable viscous fluid behavior"
-  },
-  {
-    name: "viscous",
-    type: "number",
-    default: "30",
-    description: "Viscosity strength (only when isViscous is true)"
-  },
-  {
-    name: "isBounce",
-    type: "boolean",
-    default: "false",
-    description: "Enable boundary bounce effect"
-  },
-  {
-    name: "dt",
-    type: "number",
-    default: "0.014",
-    description: "Time delta for simulation step"
-  },
-  {
-    name: "resolution",
-    type: "number",
-    default: "0.5",
-    description: "Simulation resolution (0.1-1.0, higher = better quality)"
-  },
-  {
-    name: "iterationsPoisson",
-    type: "number",
-    default: "32",
-    description: "Pressure solver iterations (higher = more accurate)"
-  },
-  {
-    name: "iterationsViscous",
-    type: "number",
-    default: "32",
-    description: "Viscosity solver iterations"
-  },
-  {
-    name: "BFECC",
-    type: "boolean",
-    default: "true",
-    description: "Use BFECC advection for better stability"
-  },
-  {
-    name: "className",
-    type: "string",
-    default: '""',
-    description: "Additional CSS classes for the canvas"
-  }
-]} />
+<PropsTable
+  props={[
+    {
+      name: 'color1',
+      type: 'string',
+      default: '"orange"',
+      description: 'Primary gradient color (any CSS color format)',
+    },
+    {
+      name: 'color2',
+      type: 'string',
+      default: '"orange"',
+      description: 'Secondary gradient color (optional)',
+    },
+    {
+      name: 'color3',
+      type: 'string',
+      default: '"orange"',
+      description: 'Tertiary gradient color (optional)',
+    },
+    {
+      name: 'mouseForce',
+      type: 'number',
+      default: '20',
+      description: 'Strength of mouse interaction (0-100)',
+    },
+    {
+      name: 'cursorSize',
+      type: 'number',
+      default: '100',
+      description: 'Size of the interaction cursor in pixels',
+    },
+    {
+      name: 'isViscous',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enable viscous fluid behavior',
+    },
+    {
+      name: 'viscous',
+      type: 'number',
+      default: '30',
+      description: 'Viscosity strength (only when isViscous is true)',
+    },
+    {
+      name: 'isBounce',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enable boundary bounce effect',
+    },
+    {
+      name: 'dt',
+      type: 'number',
+      default: '0.014',
+      description: 'Time delta for simulation step',
+    },
+    {
+      name: 'resolution',
+      type: 'number',
+      default: '0.5',
+      description: 'Simulation resolution (0.1-1.0, higher = better quality)',
+    },
+    {
+      name: 'iterationsPoisson',
+      type: 'number',
+      default: '32',
+      description: 'Pressure solver iterations (higher = more accurate)',
+    },
+    {
+      name: 'iterationsViscous',
+      type: 'number',
+      default: '32',
+      description: 'Viscosity solver iterations',
+    },
+    {
+      name: 'BFECC',
+      type: 'boolean',
+      default: 'true',
+      description: 'Use BFECC advection for better stability',
+    },
+    {
+      name: 'className',
+      type: 'string',
+      default: '""',
+      description: 'Additional CSS classes for the canvas',
+    },
+  ]}
+/>

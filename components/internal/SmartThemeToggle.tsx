@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
+import React, { useEffect, useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Moon, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 interface SmartThemeToggleProps {
   // Dimensions & Appearance
@@ -29,21 +29,21 @@ interface SmartThemeToggleProps {
   volume?: number; // 0 to 1
 
   // External Control
-  onThemeChange?: (theme: "light" | "dark") => void;
+  onThemeChange?: (theme: 'light' | 'dark') => void;
 }
 
 export default function SmartThemeToggle({
   size = 48,
   borderRadius = 999,
-  lightBg = "transparent",
-  lightIconColor = "#ffffff",
-  darkBg = "transparent",
-  darkIconColor = "#ffffff",
-  shadow = "0 1px 1px rgba(0,0,0,0.1)",
+  lightBg = 'transparent',
+  lightIconColor = '#ffffff',
+  darkBg = 'transparent',
+  darkIconColor = '#ffffff',
+  shadow = '0 1px 1px rgba(0,0,0,0.1)',
   hoverScale = 1.05,
   tapScale = 0.9,
   enableSound = true,
-  soundUrl = "/sounds/switch-click.mp3",
+  soundUrl = '/sounds/switch-click.mp3',
   volume = 0.5,
   onThemeChange,
 }: SmartThemeToggleProps) {
@@ -53,13 +53,13 @@ export default function SmartThemeToggle({
 
   // Initialize Audio
   useEffect(() => {
-    if (enableSound && typeof window !== "undefined") {
+    if (enableSound && typeof window !== 'undefined') {
       const actualSound =
-        soundUrl === "/sounds/switch-click.mp3"
-          ? "data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU..."
+        soundUrl === '/sounds/switch-click.mp3'
+          ? 'data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU...'
           : soundUrl;
 
-      if (soundUrl !== "/sounds/switch-click.mp3") {
+      if (soundUrl !== '/sounds/switch-click.mp3') {
         audioRef.current = new Audio(actualSound);
         audioRef.current.volume = Math.max(0, Math.min(1, volume));
       }
@@ -71,7 +71,7 @@ export default function SmartThemeToggle({
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = resolvedTheme === "light" ? "dark" : "light";
+    const newTheme = resolvedTheme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
 
     if (onThemeChange) onThemeChange(newTheme);
@@ -81,10 +81,9 @@ export default function SmartThemeToggle({
       if (audioRef.current) {
         audioRef.current.currentTime = 0;
         audioRef.current.play().catch(() => {});
-      } else if (soundUrl === "/sounds/switch-click.mp3") {
+      } else if (soundUrl === '/sounds/switch-click.mp3') {
         try {
-          const AudioContext =
-            window.AudioContext || (window as any).webkitAudioContext;
+          const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
           if (AudioContext) {
             const ctx = new AudioContext();
             const osc = ctx.createOscillator();
@@ -93,12 +92,9 @@ export default function SmartThemeToggle({
             osc.connect(gain);
             gain.connect(ctx.destination);
 
-            osc.type = "sine";
+            osc.type = 'sine';
             osc.frequency.setValueAtTime(800, ctx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(
-              100,
-              ctx.currentTime + 0.1
-            );
+            osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.1);
 
             gain.gain.setValueAtTime(volume * 0.5, ctx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
@@ -107,7 +103,7 @@ export default function SmartThemeToggle({
             osc.stop(ctx.currentTime + 0.1);
           }
         } catch (e) {
-          console.error("Audio fallback failed", e);
+          console.error('Audio fallback failed', e);
         }
       }
     }
@@ -115,13 +111,13 @@ export default function SmartThemeToggle({
 
   if (!mounted) return <div style={{ width: size, height: size }} />;
 
-  const isDark = resolvedTheme === "dark";
+  const isDark = resolvedTheme === 'dark';
   const iconSize = size * 0.5;
 
   return (
     <motion.button
       onClick={toggleTheme}
-      className="relative flex items-center justify-center overflow-hidden z-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+      className="relative z-50 flex items-center justify-center overflow-hidden focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
       style={{
         width: size,
         height: size,
@@ -131,7 +127,7 @@ export default function SmartThemeToggle({
       }}
       whileHover={{ scale: hoverScale }}
       whileTap={{ scale: tapScale }}
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 17 }}
       aria-label="Toggle Theme"
     >
       <AnimatePresence mode="wait" initial={false}>
@@ -143,12 +139,7 @@ export default function SmartThemeToggle({
             exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
             transition={{ duration: 0.2 }}
           >
-            <Moon
-              size={iconSize}
-              color={darkIconColor}
-              fill={darkIconColor}
-              strokeWidth={1.5}
-            />
+            <Moon size={iconSize} color={darkIconColor} fill={darkIconColor} strokeWidth={1.5} />
           </motion.div>
         ) : (
           <motion.div
@@ -158,12 +149,7 @@ export default function SmartThemeToggle({
             exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
             transition={{ duration: 0.2 }}
           >
-            <Sun
-              size={iconSize}
-              color={lightIconColor}
-              fill={lightIconColor}
-              strokeWidth={1.5}
-            />
+            <Sun size={iconSize} color={lightIconColor} fill={lightIconColor} strokeWidth={1.5} />
           </motion.div>
         )}
       </AnimatePresence>

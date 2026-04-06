@@ -1,0 +1,18 @@
+{
+  "name": "LoadingSpinner.test",
+  "type": "registry:ui",
+  "dependencies": [
+    "@testing-library/react",
+    "vitest",
+    "typescript"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/rareui/LoadingSpinner/LoadingSpinner.test.tsx",
+      "content": "import { render } from '@testing-library/react';\nimport { expect, test } from 'vitest';\nimport LoadingSpinner from './LoadingSpinner';\n\ntest('LoadingSpinner matches snapshot', () => {\n  const { asFragment } = render(<LoadingSpinner />);\n  expect(asFragment()).toMatchSnapshot();\n});\n",
+      "type": "registry:ui",
+      "target": "components/rareui/LoadingSpinner/LoadingSpinner.test.tsx"
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 {
-    "title": "Documentation",
-    "description": "RareUI Component Library",
-    "folders": [
-        "installation",
-        "components",
-        "text-animation",
-        "interactive-background",
-        "3d-elements"
-    ]
+  "title": "Documentation",
+  "description": "RareUI Component Library",
+  "folders": [
+    "installation",
+    "components",
+    "text-animation",
+    "interactive-background",
+    "3d-elements"
+  ]
 }

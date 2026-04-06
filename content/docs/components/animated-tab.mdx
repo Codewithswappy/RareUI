@@ -3,11 +3,11 @@ title: Animated Tab
 description: A smooth, animated tab component with glassmorphism design and spring animations.
 ---
 
-import { AnimatedTabsDemo } from "@/components/rareui/AnimatedTabsDemo";
-import { Preview } from "@/components/mdx/preview";
-import { PropsTable } from "@/components/mdx/PropsTable";
-import { UsageGuide } from "@/components/mdx/UsageGuide";
-import { FeaturesList } from "@/components/mdx/FeaturesList";
+import { InteractiveAnimatedTabs } from '@/components/mdx/InteractiveAnimatedTabs';
+import { Preview } from '@/components/mdx/preview';
+import { PropsTable } from '@/components/mdx/PropsTable';
+import { UsageGuide } from '@/components/mdx/UsageGuide';
+import { FeaturesList } from '@/components/mdx/FeaturesList';
 
 <Preview
   code={`'use client';
@@ -22,10 +22,10 @@ export interface Tab {
 }
 
 interface AnimatedTabsProps {
-  tabs: Tab[];
-  activeTab: string;
-  onChange: (id: string) => void;
-  className?: string;
+tabs: Tab[];
+activeTab: string;
+onChange: (id: string) => void;
+className?: string;
 }
 
 export const AnimatedTabs: React.FC<AnimatedTabsProps> = ({
@@ -36,20 +36,20 @@ export const AnimatedTabs: React.FC<AnimatedTabsProps> = ({
 }) => {
   const [hoveredTab, setHoveredTab] = useState<string | null>(null);
 
-  return (
-    <div
-      className={cn(
-        'flex flex-row items-center justify-center p-1.5 rounded-full',
-        'bg-white/60 dark:bg-zinc-900/60', // Light/Dark glass effect
-        'border border-black/5 dark:border-white/10', // Border adaptation
-        'backdrop-blur-xl', // Strong glass effect
-        'shadow-2xl', // Container shadow
-        className
-      )}
-    >
-      {tabs.map((tab) => {
-        const isActive = activeTab === tab.id;
-        const isHovered = hoveredTab === tab.id;
+return (
+
+<div
+className={cn(
+'flex flex-row items-center justify-center p-1.5 rounded-full',
+'bg-white/60 dark:bg-zinc-900/60', // Light/Dark glass effect
+'border border-black/5 dark:border-white/10', // Border adaptation
+'backdrop-blur-xl', // Strong glass effect
+'shadow-2xl', // Container shadow
+className
+)} >
+{tabs.map((tab) => {
+const isActive = activeTab === tab.id;
+const isHovered = hoveredTab === tab.id;
 
         return (
           <motion.button
@@ -99,11 +99,14 @@ export const AnimatedTabs: React.FC<AnimatedTabsProps> = ({
         );
       })}
     </div>
-  );
+
+);
 };`}
-  cliCommand="npx rareui add animated-tab"
+cliCommand="npx rareui add animated-tab"
+
 >
-  <AnimatedTabsDemo />
+
+  <InteractiveAnimatedTabs />
 </Preview>
 
 <UsageGuide steps={[
@@ -118,65 +121,71 @@ import { AnimatedTabs } from '@/components/rareui/AnimatedTab';`
     code: `const tabs = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
+  { id: 'services', label: 'Services' },
   { id: 'contact', label: 'Contact' },
 ];
 
 export default function MyComponent() {
   const [activeTab, setActiveTab] = useState('home');
 
-  return (
-    <AnimatedTabs 
+return (
+
+<AnimatedTabs 
       tabs={tabs}
       activeTab={activeTab}
       onChange={setActiveTab}
     />
-  );
+);
 }`
-  }
+}
 ]} />
 
-<FeaturesList features={[
-  {
-    title: "Smooth Animations",
-    description: "Fluid spring-based transitions using Framer Motion."
-  },
-  {
-    title: "Glassmorphism",
-    description: "Premium frosted glass effect with backdrop blur."
-  },
-  {
-    title: "Dark Mode",
-    description: "Fully adaptable colors for light and dark themes."
-  },
-  {
-    title: "Interactive",
-    description: "Detailed hover states and tap feedback."
-  },
-  {
-    title: "Responsive",
-    description: "Scales perfectly across different device sizes."
-  }
-]} />
+<FeaturesList
+  features={[
+    {
+      title: 'Smooth Animations',
+      description: 'Fluid spring-based transitions using Framer Motion.',
+    },
+    {
+      title: 'Glassmorphism',
+      description: 'Premium frosted glass effect with backdrop blur.',
+    },
+    {
+      title: 'Dark Mode',
+      description: 'Fully adaptable colors for light and dark themes.',
+    },
+    {
+      title: 'Interactive',
+      description: 'Detailed hover states and tap feedback.',
+    },
+    {
+      title: 'Responsive',
+      description: 'Scales perfectly across different device sizes.',
+    },
+  ]}
+/>
 
-<PropsTable props={[
-  {
-    name: "tabs",
-    type: "Tab[]",
-    description: "Array of tab objects."
-  },
-  {
-    name: "activeTab",
-    type: "string",
-    description: "The ID of the currently active tab."
-  },
-  {
-    name: "onChange",
-    type: "(id: string) => void",
-    description: "Callback function triggered when a tab is clicked."
-  },
-  {
-    name: "className",
-    type: "string",
-    description: "Additional CSS classes for the container."
-  }
-]} />
+<PropsTable
+  props={[
+    {
+      name: 'tabs',
+      type: 'Tab[]',
+      description: 'Array of tab objects.',
+    },
+    {
+      name: 'activeTab',
+      type: 'string',
+      description: 'The ID of the currently active tab.',
+    },
+    {
+      name: 'onChange',
+      type: '(id: string) => void',
+      description: 'Callback function triggered when a tab is clicked.',
+    },
+    {
+      name: 'className',
+      type: 'string',
+      description: 'Additional CSS classes for the container.',
+    },
+  ]}
+/>

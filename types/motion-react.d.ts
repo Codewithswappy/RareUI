@@ -19,8 +19,6 @@ declare module 'motion-react' {
   }
 
   export const motion: {
-    [K in keyof JSX.IntrinsicElements]: ComponentType<
-      JSX.IntrinsicElements[K] & MotionProps
-    >;
+    [K in keyof JSX.IntrinsicElements]: ComponentType<JSX.IntrinsicElements[K] & MotionProps>;
   };
 }

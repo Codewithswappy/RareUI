@@ -46,32 +46,18 @@ Initialize RareUI in your project. This creates a `components.json` file and con
 Add a specific component to your project. This downloads the source code to your `components/rareui` directory.
 
 <Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
-  <Tab value="npm">
-    ```bash
-    npx rareui@latest add [component-name]
-    ```
-  </Tab>
-  <Tab value="pnpm">
-    ```bash
-    pnpm dlx rareui@latest add [component-name]
-    ```
-  </Tab>
-  <Tab value="yarn">
-    ```bash
-    yarn dlx rareui@latest add [component-name]
-    ```
-  </Tab>
-  <Tab value="bun">
-    ```bash
-    bunx rareui@latest add [component-name]
-    ```
-  </Tab>
+  <Tab value="npm">```bash npx rareui@latest add [component-name] ```</Tab>
+  <Tab value="pnpm">```bash pnpm dlx rareui@latest add [component-name] ```</Tab>
+  <Tab value="yarn">```bash yarn dlx rareui@latest add [component-name] ```</Tab>
+  <Tab value="bun">```bash bunx rareui@latest add [component-name] ```</Tab>
 </Tabs>
 
 **Example:**
+
 ```bash
 npx rareui@latest add liquid-button
 ```
+
 </Step>
 
 <Step>
@@ -106,13 +92,13 @@ Check for differences between your local components and the registry versions.
 
 ## Options
 
-| Option | Description |
-| :--- | :--- |
-| `-y`, `--yes` | Skip confirmation prompts. |
-| `-o`, `--overwrite` | Overwrite existing files. |
-| `-c`, `--cwd <cwd>` | The current working directory. |
+| Option                | Description                           |
+| :-------------------- | :------------------------------------ |
+| `-y`, `--yes`         | Skip confirmation prompts.            |
+| `-o`, `--overwrite`   | Overwrite existing files.             |
+| `-c`, `--cwd <cwd>`   | The current working directory.        |
 | `-p`, `--path <path>` | The path to install the component to. |
-| `-h`, `--help` | Display help for command. |
+| `-h`, `--help`        | Display help for command.             |
 
 ## FAQ
 
@@ -120,10 +106,12 @@ Check for differences between your local components and the registry versions.
 <summary>Does it work with other frameworks?</summary>
 
 Currently, the CLI is optimized for React/Next.js and Tailwind CSS. Support for other frameworks is planned.
+
 </details>
 
 <details>
 <summary>Can I use it without the CLI?</summary>
 
 Yes! The CLI is purely for convenience. You can always manually copy the code from the documentation.
+
 </details>

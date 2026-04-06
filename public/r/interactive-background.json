@@ -1,0 +1,22 @@
+{
+  "name": "interactive-background",
+  "type": "registry:ui",
+  "dependencies": [
+    "typescript"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "LiquidWave.tsx",
+      "content": "export { default } from '../LiquidWave/index';\nexport * from '../LiquidWave/index';\n",
+      "type": "registry:ui",
+      "target": "components/rareui/interactive-background/LiquidWave.tsx"
+    },
+    {
+      "path": "LiquidWaveLazy.tsx",
+      "content": "export { default } from '../LiquidWaveLazy/index';\nexport * from '../LiquidWaveLazy/index';\n",
+      "type": "registry:ui",
+      "target": "components/rareui/interactive-background/LiquidWaveLazy.tsx"
+    }
+  ]
+}

@@ -1,13 +1,10 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { cn } from "@/lib/utils";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import {
-  materialDark,
-  vs,
-} from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { useTheme } from "next-themes";
+import * as React from 'react';
+import { cn } from '@/lib/utils';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { materialDark, vs } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { useTheme } from 'next-themes';
 
 const cleanTheme = (theme: any) => {
   const newTheme = { ...theme };
@@ -35,15 +32,15 @@ import {
   Sparkles,
   Code2,
   Eye,
-} from "lucide-react";
-import { InternalAnimatedTabs } from "@/components/internal/internal-animated-tabs";
-import { motion, AnimatePresence } from "motion/react";
-import { InstallationGuide } from "@/components/mdx/InstallationGuide";
+} from 'lucide-react';
+import { InternalAnimatedTabs } from '@/components/internal/internal-animated-tabs';
+import { motion, AnimatePresence } from 'motion/react';
+import { InstallationGuide } from '@/components/mdx/InstallationGuide';
 
 // --- Icons ---
 const ICONS = {
   npm: (
-    <svg className="w-3.5 h-3.5" viewBox="0 0 128 128" fill="currentColor">
+    <svg className="h-3.5 w-3.5" viewBox="0 0 128 128" fill="currentColor">
       <path
         fill="#cb3837"
         d="M2 38.5h124v43.71H64v7.29H36.44v-7.29H2zm6.89 36.43h13.78V53.07h6.89v21.86h6.89V45.79H8.89zm34.44-29.14v36.42h13.78v-7.28h13.78V45.79zm13.78 7.29H64v14.56h-6.89zm20.67-7.29v29.14h13.78V53.07h6.89v21.86h6.89V53.07h6.89v21.86h6.89V45.79z"
@@ -51,7 +48,7 @@ const ICONS = {
     </svg>
   ),
   pnpm: (
-    <svg className="w-3.5 h-3.5" viewBox="0 0 128 128" fill="currentColor">
+    <svg className="h-3.5 w-3.5" viewBox="0 0 128 128" fill="currentColor">
       <path
         fill="#f9ad00"
         d="M32.287 14.902v30.685h29.908V14.902Zm32.899 0v30.685h29.909V14.902Zm32.905 0v30.685H128V14.902Zm0 33.754v30.688H128V48.656z"
@@ -63,7 +60,7 @@ const ICONS = {
     </svg>
   ),
   yarn: (
-    <svg className="w-3.5 h-3.5" viewBox="0 0 512 512" fill="currentColor">
+    <svg className="h-3.5 w-3.5" viewBox="0 0 512 512" fill="currentColor">
       <path
         d="M256 0c141.344 0 256 114.656 256 256S397.344 512 256 512 0 397.344 0 256 114.656 0 256 0z"
         fill="#2c8ebb"
@@ -77,7 +74,7 @@ const ICONS = {
     </svg>
   ),
   bun: (
-    <svg className="w-3.5 h-3.5" viewBox="0 0 128 128" fill="currentColor">
+    <svg className="h-3.5 w-3.5" viewBox="0 0 128 128" fill="currentColor">
       <path d="M113.744 41.999a18.558 18.558 0 0 0-.8-.772c-.272-.246-.528-.524-.8-.771s-.528-.525-.8-.771c-.272-.247-.528-.525-.8-.772s-.528-.524-.8-.771-.528-.525-.8-.772-.528-.524-.8-.771c7.936 7.52 12.483 17.752 12.656 28.481 0 25.565-26.912 46.363-60 46.363-18.528 0-35.104-6.526-46.128-16.756l.8.772.8.771.8.772.8.771.8.772.8.771.8.771c11.008 10.662 27.952 17.527 46.928 17.527 33.088 0 60-20.797 60-46.285 0-10.893-4.864-21.215-13.456-29.33z" />
       <path
         fill="#fbf0df"
@@ -108,7 +105,7 @@ const ICONS = {
     </svg>
   ),
   ts: (
-    <svg className="w-4 h-4" viewBox="0 0 48 48">
+    <svg className="h-4 w-4" viewBox="0 0 48 48">
       <rect width="36" height="36" x="6" y="6" fill="#1976d2"></rect>
       <polygon
         fill="#fff"
@@ -121,7 +118,7 @@ const ICONS = {
     </svg>
   ),
   js: (
-    <svg className="w-4 h-4" viewBox="0 0 48 48">
+    <svg className="h-4 w-4" viewBox="0 0 48 48">
       <path fill="#ffd600" d="M6,42V6h36v36H6z"></path>
       <path
         fill="#000001"
@@ -135,6 +132,7 @@ interface PreviewProps {
   children: React.ReactNode;
   className?: string;
   code?: string;
+  exampleCode?: string;
   cliCommand?: string;
   hideCodeTab?: boolean;
   previewClassName?: string;
@@ -144,15 +142,14 @@ export function Preview({
   children,
   className,
   code,
+  exampleCode,
   cliCommand,
   hideCodeTab = false,
   previewClassName,
 }: PreviewProps) {
   const { theme } = useTheme();
-  const [activeTab, setActiveTab] = React.useState<"preview" | "code">(
-    "preview"
-  );
-  const [installTab, setInstallTab] = React.useState<"cli" | "manual">("cli");
+  const [activeTab, setActiveTab] = React.useState<'preview' | 'code'>('preview');
+  const [installTab, setInstallTab] = React.useState<'cli' | 'manual'>('cli');
   const [copied, setCopied] = React.useState(false);
   const [copiedCli, setCopiedCli] = React.useState(false);
   const [mounted, setMounted] = React.useState(false);
@@ -160,52 +157,73 @@ export function Preview({
   React.useEffect(() => {
     setMounted(true);
   }, []);
-  const [language, setLanguage] = React.useState<"tsx" | "jsx">("tsx");
+  const [language, setLanguage] = React.useState<'tsx' | 'jsx'>('tsx');
   const [expanded, setExpanded] = React.useState(false);
   const [expandedManual, setExpandedManual] = React.useState(false);
   const [showPromptDropdown, setShowPromptDropdown] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [showToast, setShowToast] = React.useState(false);
-  const [toastPlatform, setToastPlatform] = React.useState("");
-  const [packageManager, setPackageManager] = React.useState<
-    "npm" | "pnpm" | "yarn" | "bun"
-  >("npm");
-  const [previewWidth, setPreviewWidth] = React.useState<string | number>(
-    "100%"
+  const [toastPlatform, setToastPlatform] = React.useState('');
+  const [packageManager, setPackageManager] = React.useState<'npm' | 'pnpm' | 'yarn' | 'bun'>(
+    'npm'
   );
+  const [previewWidth, setPreviewWidth] = React.useState<string | number>('100%');
   const [renderKey, setRenderKey] = React.useState(0);
 
   const getPackageManagerCommand = () => {
-    if (!cliCommand) return "";
+    if (!cliCommand) return '';
     const commands = {
       npm: cliCommand,
-      pnpm: cliCommand.replace("npx", "pnpm dlx"),
-      yarn: cliCommand.replace("npx", "yarn dlx"),
-      bun: cliCommand.replace("npx", "bunx"),
+      pnpm: cliCommand.replace('npx', 'pnpm dlx'),
+      yarn: cliCommand.replace('npx', 'yarn dlx'),
+      bun: cliCommand.replace('npx', 'bunx'),
     };
     return commands[packageManager];
   };
 
-  const convertToJSX = (tsxCode: string) => {
-    return tsxCode
-      .replace(/: React\.ReactNode/g, "")
-      .replace(/: ReactNode/g, "")
-      .replace(/: string/g, "")
-      .replace(/: number/g, "")
-      .replace(/: boolean/g, "")
-      .replace(/: any/g, "")
-      .replace(/interface\s+\w+\s*{[^}]*}/g, "")
-      .replace(/type\s+\w+\s*=\s*[^;]+;/g, "")
-      .replace(/<[^>]+>\s*\(/g, "(")
-      .replace(/\)\s*:\s*\w+(\[\])?(\s*=>)/g, ")$2")
-      .replace(/const\s+(\w+):\s*\w+(\[\])?(\s*=)/g, "const $1$3")
-      .replace(/let\s+(\w+):\s*\w+(\[\])?(\s*=)/g, "let $1$3")
-      .replace(/\s+as\s+\w+/g, "")
-      .replace(/\.tsx/g, ".jsx")
-      .replace(/\.ts/g, ".js");
+  const getGeneratedExample = () => {
+    if (!cliCommand) return '';
+    const nameStr = cliCommand.split(' ').pop() || '';
+    const componentName = nameStr
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join('');
+
+    return `"use client";
+
+import { ${componentName} } from "@/components/rareui/${componentName}";
+
+export default function MyComponent() {
+  return (
+    <div className="flex w-full items-center justify-center p-8">
+      <${componentName} />
+    </div>
+  );
+}`;
   };
 
-  const displayCode = language === "jsx" && code ? convertToJSX(code) : code;
+  const convertToJSX = (tsxCode: string) => {
+    return tsxCode
+      .replace(/: React\.ReactNode/g, '')
+      .replace(/: ReactNode/g, '')
+      .replace(/: string/g, '')
+      .replace(/: number/g, '')
+      .replace(/: boolean/g, '')
+      .replace(/: any/g, '')
+      .replace(/interface\s+\w+\s*{[^}]*}/g, '')
+      .replace(/type\s+\w+\s*=\s*[^;]+;/g, '')
+      .replace(/<[^>]+>\s*\(/g, '(')
+      .replace(/\)\s*:\s*\w+(\[\])?(\s*=>)/g, ')$2')
+      .replace(/const\s+(\w+):\s*\w+(\[\])?(\s*=)/g, 'const $1$3')
+      .replace(/let\s+(\w+):\s*\w+(\[\])?(\s*=)/g, 'let $1$3')
+      .replace(/\s+as\s+\w+/g, '')
+      .replace(/\.tsx/g, '.jsx')
+      .replace(/\.ts/g, '.js');
+  };
+
+  const finalExampleCode = exampleCode || getGeneratedExample() || code;
+  const displayCode =
+    language === 'jsx' && finalExampleCode ? convertToJSX(finalExampleCode) : finalExampleCode;
 
   const handleReload = () => {
     setRenderKey((prev) => prev + 1);
@@ -246,7 +264,7 @@ export function Preview({
   };
 
   return (
-    <div className={cn("flex flex-col gap-4 my-8 w-full", className)}>
+    <div className={cn('my-8 flex w-full flex-col gap-4', className)}>
       {/* Toast */}
       <AnimatePresence>
         {showToast && (
@@ -254,38 +272,36 @@ export function Preview({
             initial={{ opacity: 0, y: 10, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.98 }}
-            transition={{ type: "spring", duration: 0.3 }}
-            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-100 flex items-center gap-3 px-4 py-2.5 bg-zinc-950 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-950 rounded-lg shadow-2xl border border-zinc-800 dark:border-zinc-200"
+            transition={{ type: 'spring', duration: 0.3 }}
+            className="fixed bottom-8 left-1/2 z-100 flex -translate-x-1/2 items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-950 px-4 py-2.5 text-zinc-50 shadow-2xl dark:border-zinc-200 dark:bg-zinc-50 dark:text-zinc-950"
           >
-            <Check className="w-4 h-4 text-emerald-500" />
-            <span className="text-xs font-medium">
-              Prompt copied to clipboard
-            </span>
+            <Check className="h-4 w-4 text-emerald-500" />
+            <span className="text-xs font-medium">Prompt copied to clipboard</span>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <div className="flex  items-center justify-between gap-4 ">
+      <div className="flex items-center justify-between gap-4">
         {/* Tabs */}
         {!hideCodeTab ? (
-          <div className="relative inline-flex p-[4px] gap-1 rounded-lg bg-zinc-100/50 dark:bg-zinc-800/50 border border-zinc-200/50 dark:border-zinc-700/50 shadow-xs">
-            {["preview", "code"].map((tab) => (
+          <div className="relative inline-flex gap-1 rounded-lg border border-zinc-200/50 bg-zinc-100/50 p-[4px] shadow-xs dark:border-zinc-700/50 dark:bg-zinc-800/50">
+            {['preview', 'code'].map((tab) => (
               <button
                 key={tab}
-                onClick={() => setActiveTab(tab as "preview" | "code")}
+                onClick={() => setActiveTab(tab as 'preview' | 'code')}
                 className={cn(
-                  "relative flex items-center justify-center min-w-[80px] px-4 py-1.5 text-xs font-bold rounded-md transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] z-10 capitalize cursor-pointer",
+                  'relative z-10 flex min-w-[80px] cursor-pointer items-center justify-center rounded-md px-4 py-1.5 text-xs font-bold capitalize transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]',
                   activeTab === tab
-                    ? "text-zinc-900 dark:text-zinc-100 "
-                    : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+                    ? 'text-zinc-900 dark:text-zinc-100'
+                    : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100'
                 )}
               >
-                <span className="relative z-10 ">{tab}</span>
+                <span className="relative z-10">{tab}</span>
                 {activeTab === tab && (
                   <motion.div
                     layoutId="previewActiveTab"
-                    className="absolute inset-0 bg-white dark:bg-zinc-700/80 rounded-md -z-10 shadow-sm"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    className="absolute inset-0 -z-10 rounded-md bg-white shadow-sm dark:bg-zinc-700/80"
+                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                   />
                 )}
               </button>
@@ -325,35 +341,35 @@ export function Preview({
             </button>
           </div> */}
 
-          <div className="w-px h-4 bg-zinc-200 dark:bg-zinc-800 mx-1" />
+          <div className="mx-1 h-4 w-px bg-zinc-200 dark:bg-zinc-800" />
 
           {/* Reload */}
           <button
             onClick={handleReload}
             className={cn(
-              "p-2 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200 bg-zinc-100/50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors",
-              isLoading && "animate-spin"
+              'rounded-lg bg-zinc-100/50 p-2 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:bg-zinc-800/50 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200',
+              isLoading && 'animate-spin'
             )}
             title="Reload Component"
           >
-            <RotateCcw className="w-4 h-4" />
+            <RotateCcw className="h-4 w-4" />
           </button>
 
-          <div className="w-px h-4 bg-zinc-200 dark:bg-zinc-800 mx-1" />
+          <div className="mx-1 h-4 w-px bg-zinc-200 dark:bg-zinc-800" />
 
           {/* AI Prompt */}
           <div className="relative">
             <button
               onClick={() => setShowPromptDropdown(!showPromptDropdown)}
-              className="flex items-center gap-2 px-3 py-2 bg-zinc-900 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-900 rounded-md text-xs font-medium hover:opacity-90 transition-opacity shadow-md shadow-black/10 ring-1 ring-black/10 cursor-pointer"
+              className="flex cursor-pointer items-center gap-2 rounded-md bg-zinc-900 px-3 py-2 text-xs font-medium text-zinc-100 shadow-md ring-1 shadow-black/10 ring-black/10 transition-opacity hover:opacity-90 dark:bg-zinc-100 dark:text-zinc-900"
             >
-              <Sparkles className="w-4 h-4" />
+              <Sparkles className="h-4 w-4" />
               <span className="hidden sm:inline">AI Prompt</span>
               <motion.div
                 animate={{ rotate: showPromptDropdown ? 180 : 0 }}
                 transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
               >
-                <ChevronDown className="w-4 h-4" />
+                <ChevronDown className="h-4 w-4" />
               </motion.div>
             </button>
             <AnimatePresence>
@@ -362,12 +378,12 @@ export function Preview({
                   initial={{ opacity: 0, scale: 0.95, y: -10 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                  transition={{ 
-                    type: "spring", 
-                    duration: 0.3, 
-                    bounce: 0.2 
+                  transition={{
+                    type: 'spring',
+                    duration: 0.3,
+                    bounce: 0.2,
                   }}
-                  className="absolute right-0 top-full mt-2 w-32 bg-popover border border-border rounded-md shadow-lg shadow-black/10 ring-1 ring-black/10 z-50 overflow-hidden py-1"
+                  className="bg-popover border-border absolute top-full right-0 z-50 mt-2 w-32 overflow-hidden rounded-md border py-1 shadow-lg ring-1 shadow-black/10 ring-black/10"
                 >
                   <motion.div
                     initial="hidden"
@@ -382,7 +398,7 @@ export function Preview({
                       },
                     }}
                   >
-                    {["Claude", "v0", "Lovable", "Bolt"].map((platform) => (
+                    {['Claude', 'v0', 'Lovable', 'Bolt'].map((platform) => (
                       <motion.button
                         key={platform}
                         variants={{
@@ -390,7 +406,7 @@ export function Preview({
                           visible: { opacity: 1, x: 0 },
                         }}
                         onClick={() => copyPrompt(platform)}
-                        className="w-full px-4 py-2 text-left text-xs hover:bg-accent hover:text-accent-foreground transition-colors cursor-pointer"
+                        className="hover:bg-accent hover:text-accent-foreground w-full cursor-pointer px-4 py-2 text-left text-xs transition-colors"
                       >
                         {platform}
                       </motion.button>
@@ -405,31 +421,31 @@ export function Preview({
 
       <div
         className={cn(
-          "relative min-h-[450px] flex bg-zinc-50/50 dark:bg-zinc-900/20 overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 transition-all",
-          activeTab === "preview" ? "p-0 items-center justify-center" : "p-0"
+          'relative flex min-h-[450px] overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50/50 transition-all dark:border-zinc-800 dark:bg-zinc-900/20',
+          activeTab === 'preview' ? 'items-center justify-center p-0' : 'p-0'
         )}
       >
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-size-[20px_20px]"></div>
 
         <AnimatePresence mode="wait">
-          {activeTab === "preview" ? (
+          {activeTab === 'preview' ? (
             <motion.div
               key="preview"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, width: previewWidth }}
               exit={{ opacity: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               className={cn(
-                "relative z-10 overflow-hidden m-auto bg-transparent",
-                previewWidth === "100%"
-                  ? "w-full h-full"
-                  : "border border-zinc-200 dark:border-zinc-800 shadow-xl rounded-xl bg-background my-8"
+                'relative z-10 m-auto overflow-hidden bg-transparent',
+                previewWidth === '100%'
+                  ? 'h-full w-full'
+                  : 'bg-background my-8 rounded-xl border border-zinc-200 shadow-xl dark:border-zinc-800'
               )}
             >
               <div
                 key={renderKey}
                 className={cn(
-                  "min-h-[450px] w-full h-full flex items-center justify-center",
+                  'flex h-full min-h-[450px] w-full items-center justify-center',
                   previewClassName
                 )}
               >
@@ -442,34 +458,32 @@ export function Preview({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 z-10 w-full h-full"
+              className="absolute inset-0 z-10 h-full w-full"
             >
-              <div className="w-full h-full bg-white dark:bg-zinc-950/50 flex flex-col">
-                <div className="flex items-center justify-between px-4 h-10 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 shrink-0">
+              <div className="flex h-full w-full flex-col bg-white dark:bg-zinc-950/50">
+                <div className="flex h-10 shrink-0 items-center justify-between border-b border-zinc-200 bg-zinc-50/50 px-4 dark:border-zinc-800 dark:bg-zinc-900/50">
                   <div className="flex items-center gap-2">
-                    <Code2 className="w-3.5 h-3.5 text-zinc-400" />
-                    <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
+                    <Code2 className="h-3.5 w-3.5 text-zinc-400" />
+                    <span className="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">
                       Example
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={() =>
-                        setLanguage(language === "tsx" ? "jsx" : "tsx")
-                      }
-                      className="text-[10px] font-medium text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 uppercase"
+                      onClick={() => setLanguage(language === 'tsx' ? 'jsx' : 'tsx')}
+                      className="text-[10px] font-medium text-zinc-400 uppercase hover:text-zinc-600 dark:hover:text-zinc-200"
                     >
                       {language}
                     </button>
-                    <div className="w-px h-3 bg-zinc-200 dark:bg-zinc-800" />
+                    <div className="h-3 w-px bg-zinc-200 dark:bg-zinc-800" />
                     <button
                       onClick={copyToClipboard}
-                      className="p-1.5 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-colors"
+                      className="rounded p-1.5 text-zinc-400 transition-colors hover:bg-zinc-200 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
                     >
                       {copied ? (
-                        <Check className="w-3.5 h-3.5 text-emerald-500" />
+                        <Check className="h-3.5 w-3.5 text-emerald-500" />
                       ) : (
-                        <Copy className="w-3.5 h-3.5" />
+                        <Copy className="h-3.5 w-3.5" />
                       )}
                     </button>
                   </div>
@@ -478,15 +492,15 @@ export function Preview({
                   {mounted ? (
                     <SyntaxHighlighter
                       language={language}
-                      style={theme === "light" ? vsClean : materialDarkClean}
+                      style={theme === 'light' ? vsClean : materialDarkClean}
                       customStyle={{
                         margin: 0,
-                        padding: "1.5rem",
-                        background: "transparent",
-                        fontSize: "0.875rem",
+                        padding: '1.5rem',
+                        background: 'transparent',
+                        fontSize: '0.875rem',
                       }}
                     >
-                      {displayCode || ""}
+                      {displayCode || ''}
                     </SyntaxHighlighter>
                   ) : (
                     <pre className="p-6 text-sm opacity-0">{displayCode}</pre>
@@ -502,10 +516,10 @@ export function Preview({
       {/* Installation Section */}
       {cliCommand && code && (
         <InstallationGuide
-          componentName={cliCommand.split(" ").pop() || ""}
+          componentName={cliCommand.split(' ').pop() || ''}
           dependencies="framer-motion clsx tailwind-merge"
           componentCode={code}
-          componentPath={`components/rareui/${cliCommand.split(" ").pop() || ""}.tsx`}
+          componentPath={`components/rareui/${cliCommand.split(' ').pop() || ''}.tsx`}
         />
       )}
     </div>

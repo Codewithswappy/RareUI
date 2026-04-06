@@ -1,20 +1,19 @@
 ---
 title: Liquid Metal
 description: A shader-based liquid metal effect that transforms images or text into fluid, metallic flows.
-
 ---
 
-import { Preview } from "@/components/mdx/preview";
-import LiquidMetal from "@/components/rareui/LiquidMetalLazy";
-import { PropsTable } from "@/components/mdx/PropsTable";
-import { UsageGuide } from "@/components/mdx/UsageGuide";
-import { FeaturesList } from "@/components/mdx/FeaturesList";
+import { Preview } from '@/components/mdx/preview';
+import LiquidMetal from '@/components/rareui/LiquidMetalLazy';
+import { PropsTable } from '@/components/mdx/PropsTable';
+import { UsageGuide } from '@/components/mdx/UsageGuide';
+import { FeaturesList } from '@/components/mdx/FeaturesList';
 
 <Preview
   cliCommand="npx rareui add LiquidMetal"
   code={`"use client";
 
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 
 // Shader Source Code
 const vertexShaderSource = \`#version 300 es
@@ -24,15 +23,20 @@ in vec2 a_position;
 out vec2 vUv;
 
 void main() {
-    vUv = .5 * (a_position + 1.);
-    gl_Position = vec4(a_position, 0.0, 1.0);
+vUv = .5 \* (a_position + 1.);
+gl_Position = vec4(a_position, 0.0, 1.0);
 }\`;
 
 const liquidFragSource = \`#version 300 es
+
 # ifdef GL_ES
+
 precision highp float;
+
 # else
+
 precision mediump float;
+
 # endif
 
 in vec2 vUv;
@@ -50,56 +54,56 @@ uniform float u_liquid;
 
 #define PI 3.14159265358979323846
 
-vec3 mod289(vec3 x) { return x - floor(x * (1. / 289.)) * 289.; }
-vec2 mod289(vec2 x) { return x - floor(x * (1. / 289.)) * 289.; }
+vec3 mod289(vec3 x) { return x - floor(x _ (1. / 289.)) _ 289.; }
+vec2 mod289(vec2 x) { return x - floor(x _ (1. / 289.)) _ 289.; }
 vec3 permute(vec3 x) { return mod289(((x*34.)+1.)*x); }
 float snoise(vec2 v) {
-    const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
-    vec2 i = floor(v + dot(v, C.yy));
-    vec2 x0 = v - i + dot(i, C.xx);
-    vec2 i1;
-    i1 = (x0.x > x0.y) ? vec2(1., 0.) : vec2(0., 1.);
-    vec4 x12 = x0.xyxy + C.xxzz;
-    x12.xy -= i1;
-    i = mod289(i);
-    vec3 p = permute(permute(i.y + vec3(0., i1.y, 1.)) + i.x + vec3(0., i1.x, 1.));
-    vec3 m = max(0.5 - vec3(dot(x0, x0), dot(x12.xy, x12.xy), dot(x12.zw, x12.zw)), 0.);
-    m = m*m;
-    m = m*m;
-    vec3 x = 2. * fract(p * C.www) - 1.;
-    vec3 h = abs(x) - 0.5;
-    vec3 ox = floor(x + 0.5);
-    vec3 a0 = x - ox;
-    m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
-    vec3 g;
-    g.x = a0.x * x0.x + h.x * x0.y;
-    g.yz = a0.yz * x12.xz + h.yz * x12.yw;
-    return 130. * dot(m, g);
+const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+vec2 i = floor(v + dot(v, C.yy));
+vec2 x0 = v - i + dot(i, C.xx);
+vec2 i1;
+i1 = (x0.x > x0.y) ? vec2(1., 0.) : vec2(0., 1.);
+vec4 x12 = x0.xyxy + C.xxzz;
+x12.xy -= i1;
+i = mod289(i);
+vec3 p = permute(permute(i.y + vec3(0., i1.y, 1.)) + i.x + vec3(0., i1.x, 1.));
+vec3 m = max(0.5 - vec3(dot(x0, x0), dot(x12.xy, x12.xy), dot(x12.zw, x12.zw)), 0.);
+m = m*m;
+m = m*m;
+vec3 x = 2. _ fract(p _ C.www) - 1.;
+vec3 h = abs(x) - 0.5;
+vec3 ox = floor(x + 0.5);
+vec3 a0 = x - ox;
+m _= 1.79284291400159 - 0.85373472095314 _ (a0*a0 + h*h);
+vec3 g;
+g.x = a0.x _ x0.x + h.x _ x0.y;
+g.yz = a0.yz _ x12.xz + h.yz _ x12.yw;
+return 130. \* dot(m, g);
 }
 
-vec2 get_img_uv() {
-    vec2 img_uv = vUv;
-    img_uv -= .5;
-    if (u_ratio > u_img_ratio) {
-        img_uv.x = img_uv.x * u_ratio / u_img_ratio;
-    } else {
-        img_uv.y = img_uv.y * u_img_ratio / u_ratio;
-    }
-    float scale_factor = 1.;
-    img_uv *= scale_factor;
-    img_uv += .5;
-    img_uv.y = 1. - img_uv.y;
-    return img_uv;
+vec2 get*img_uv() {
+vec2 img_uv = vUv;
+img_uv -= .5;
+if (u_ratio > u_img_ratio) {
+img_uv.x = img_uv.x * u*ratio / u_img_ratio;
+} else {
+img_uv.y = img_uv.y * u_img_ratio / u_ratio;
+}
+float scale_factor = 1.;
+img_uv \*= scale_factor;
+img_uv += .5;
+img_uv.y = 1. - img_uv.y;
+return img_uv;
 }
 
 vec2 rotate(vec2 uv, float th) {
-    return mat2(cos(th), sin(th), -sin(th), cos(th)) * uv;
+return mat2(cos(th), sin(th), -sin(th), cos(th)) \* uv;
 }
 
 float get_color_channel(float c1, float c2, float stripe_p, vec3 w, float extra_blur, float b) {
-    float ch = c2;
-    float border = 0.;
-    float blur = u_patternBlur + extra_blur;
+float ch = c2;
+float border = 0.;
+float blur = u_patternBlur + extra_blur;
 
     ch = mix(ch, c1, smoothstep(.0, blur, stripe_p));
 
@@ -121,18 +125,19 @@ float get_color_channel(float c1, float c2, float stripe_p, vec3 w, float extra_
     ch = mix(ch, gradient, smoothstep(border - blur, border + blur, stripe_p));
 
     return ch;
+
 }
 
-float get_img_frame_alpha(vec2 uv, float img_frame_width) {
-    float img_frame_alpha = smoothstep(0., img_frame_width, uv.x) * smoothstep(1., 1. - img_frame_width, uv.x);
-    img_frame_alpha *= smoothstep(0., img_frame_width, uv.y) * smoothstep(1., 1. - img_frame_width, uv.y);
-    return img_frame_alpha;
+float get*img_frame_alpha(vec2 uv, float img_frame_width) {
+float img_frame_alpha = smoothstep(0., img_frame_width, uv.x) * smoothstep(1., 1. - img*frame_width, uv.x);
+img_frame_alpha *= smoothstep(0., img_frame_width, uv.y) \* smoothstep(1., 1. - img_frame_width, uv.y);
+return img_frame_alpha;
 }
 
 void main() {
-    vec2 uv = vUv;
-    uv.y = 1. - uv.y;
-    uv.x *= u_ratio;
+vec2 uv = vUv;
+uv.y = 1. - uv.y;
+uv.x \*= u_ratio;
 
     float diagonal = uv.x - uv.y;
 
@@ -217,6 +222,7 @@ void main() {
     color *= opacity;
 
     fragColor = vec4(color, opacity);
+
 }
 \`;
 
@@ -435,11 +441,11 @@ export default function LiquidMetal({
                                 font-size: \${fontSize}px;
                                 fill: black;
                                 stroke: black;
-                                stroke-width: 5px; 
+                                stroke-width: 5px;
                                 letter-spacing: -5px;
                             }
                         </style>
-                        <rect width="\${width}" height="\${height}" fill="white" fill-opacity="0"/> 
+                        <rect width="\${width}" height="\${height}" fill="white" fill-opacity="0"/>
                         <text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle">
                             \${text}
                         </text>
@@ -649,8 +655,10 @@ export default function LiquidMetal({
             />
         </div>
     );
+
 }
 `}>
+
   <div className="w-full h-[600px] flex items-center justify-center rounded-lg overflow-hidden relative">
     <LiquidMetal
       text="RareUI"
@@ -681,7 +689,7 @@ export default function LiquidMetal({
         />
 
         {/* Custom Configuration */}
-        <LiquidMetal 
+        <LiquidMetal
             text="Chrome"
             speed={0.5}
             dispersion={0.02}
@@ -689,82 +697,86 @@ export default function LiquidMetal({
             patternScale={3}
         />
     </div>
-  );
+
+);
 }`
-  }
+}
 ]} />
 
-<FeaturesList features={[
-  {
-    title: "WebGL Flow",
-    description: "High-performance liquid metal effect powered by WebGL shaders."
-  },
-  {
-    title: "Shader-based",
-    description: "Complex fragment shaders create realistic fluid deformations."
-  },
-  {
-    title: "Interactive",
-    description: "Reacts to mouse movement and time for dynamic visualizations."
-  },
-  {
-    title: "Image Support",
-    description: "Can liquefy both text and images for versatile effects."
-  },
-  {
-    title: "Customizable Physics",
-    description: "Fine-tune speed, dispersion, and liquid viscosity."
-  }
-]} />
+<FeaturesList
+  features={[
+    {
+      title: 'WebGL Flow',
+      description: 'High-performance liquid metal effect powered by WebGL shaders.',
+    },
+    {
+      title: 'Shader-based',
+      description: 'Complex fragment shaders create realistic fluid deformations.',
+    },
+    {
+      title: 'Interactive',
+      description: 'Reacts to mouse movement and time for dynamic visualizations.',
+    },
+    {
+      title: 'Image Support',
+      description: 'Can liquefy both text and images for versatile effects.',
+    },
+    {
+      title: 'Customizable Physics',
+      description: 'Fine-tune speed, dispersion, and liquid viscosity.',
+    },
+  ]}
+/>
 
-<PropsTable props={[
-  {
-    name: "text",
-    type: "string",
-    default: "RareUI",
-    description: "Text to transform into liquid metal"
-  },
-  {
-    name: "imageSource",
-    type: "string",
-    default: "undefined",
-    description: "Optional image URL to use instead of text"
-  },
-  {
-    name: "speed",
-    type: "number",
-    default: "0.3",
-    description: "Animation speed"
-  },
-  {
-    name: "dispersion",
-    type: "number",
-    default: "0.005",
-    description: "Refraction/dispersion amount (chromatic aberration)"
-  },
-  {
-    name: "edge",
-    type: "number",
-    default: "0.5",
-    description: "Sharpness of the edges"
-  },
-  {
-    name: "patternBlur",
-    type: "number",
-    default: "0.005",
-    description: "Blur amount for the pattern"
-  },
-  {
-    name: "liquify",
-    type: "number",
-    default: "0.08",
-    description: "Intensity of the liquid distortion effect"
-  },
-  {
-    name: "patternScale",
-    type: "number",
-    default: "2",
-    description: "Scale of the metallic pattern"
-  }
-]} />
-
+<PropsTable
+  props={[
+    {
+      name: 'text',
+      type: 'string',
+      default: 'RareUI',
+      description: 'Text to transform into liquid metal',
+    },
+    {
+      name: 'imageSource',
+      type: 'string',
+      default: 'undefined',
+      description: 'Optional image URL to use instead of text',
+    },
+    {
+      name: 'speed',
+      type: 'number',
+      default: '0.3',
+      description: 'Animation speed',
+    },
+    {
+      name: 'dispersion',
+      type: 'number',
+      default: '0.005',
+      description: 'Refraction/dispersion amount (chromatic aberration)',
+    },
+    {
+      name: 'edge',
+      type: 'number',
+      default: '0.5',
+      description: 'Sharpness of the edges',
+    },
+    {
+      name: 'patternBlur',
+      type: 'number',
+      default: '0.005',
+      description: 'Blur amount for the pattern',
+    },
+    {
+      name: 'liquify',
+      type: 'number',
+      default: '0.08',
+      description: 'Intensity of the liquid distortion effect',
+    },
+    {
+      name: 'patternScale',
+      type: 'number',
+      default: '2',
+      description: 'Scale of the metallic pattern',
+    },
+  ]}
+/>
